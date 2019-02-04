@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>advancedGbuffers.frag</file>
+        <file>advancedGbuffers.vert</file>
+    </qresource>
+</RCC>
