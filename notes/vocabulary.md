@@ -4,3 +4,11 @@
 * flickering: vacillant, qui tremble
 * salience: saillance (qui retient l'attention)
 * popping: éclater
+* ink: encre
+* depict: représenter
+* clutter: désordre
+* a scaffold: un échafaud
+* swept: balayé
+* seamlessly: parfaitement
+* LOD: level of detail
+* rotoscopy: metho that consist to draw the shape of a figure by frame.
