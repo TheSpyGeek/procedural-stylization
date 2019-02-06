@@ -29,10 +29,17 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 
 ## Motion-coherent stylization with screen-space image filters
 
-* a plausible painted fur should extend outside the silhouette of the object.
+* a **plausible painted fur** should extend outside the silhouette of the object.
 * image space: to compute the object motion we need to compute the ___optical flow___ of the animation
     * but complicated to compute a correct and noise-free optical flow
-* G-buffers in screen-space = 2.5D
+* **G-buffers** in screen-space = 2.5D
+* use **segmentation** to detect overlapping (use K-means algorithm)
+
+## Perlin noise
+
+* for each vertices generate **pseudorandom gradient vector**
+* compute dot product between these 4 vectors
+* Interpolate the values obtained with fade function (ease curve: 6t^5 - 15t^4 + 10t^3)
 
 
 ## Personal Search
