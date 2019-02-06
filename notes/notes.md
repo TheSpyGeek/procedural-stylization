@@ -13,12 +13,26 @@
 opacity, ...) to draw <span style="color:blue;font-weight:bold;">2D primitives</span> (points, lines and regions)
 * Temporal Coherence: <span style="color:blue;font-weight:bold;">Flatness, Motion coherence, Temporal continuity</span>
 
-* Flatness: <span style="font-weight:bold;">size</span> and <span style="font-weight:bold;">distribution</span> of marks should be <span style="font-weight:bold;">independent</span> of the
+* Flatness: ___size___ and ___distribution___ of marks should be
+___independent___ of the
 underlying geometry of the scene (marks size do not increase during zoom)
 * bad Motion coherence gives the impression to see the scene through a shower door
-* <span style="font-weight:bold;">depth peeling</span> solve transparency with two Z buffers
+* **Depth peeling** solve transparency with two Z buffers
 * parametrization frame to frame can helps to temporally coherence
 * <span style="color:blue;font-weight:bold;">SLAM</span> (Self-Similar ine Artmap) solve the problem of resizing an object without creating artifacts. Cost few minutes of preprocessing.
+* Bénard et al. extend the **Gabor noise** to create
+complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basilic/2009/LLDD09/LLDD09PNSGC_paper.pdf" style="font-weight:bold;">source</a> and <a href="http://graphics.cs.kuleuven.be/publications/LLDD09PNSGC/" style="font-weight:bold;">example</a>)
+* <span style="color:blue;font-weight:bold;">Applying texture</span> in the image space:
+    * planar methods that deform the texture with global as-rigid-as-possible transformations
+    * texture advection and filtering approaches that work at the pixel level
+* Fractalization => inifinite zoom ( -- modify the brushes, strokes)
+
+## Motion-coherent stylization with screen-space image filters
+
+* a plausible painted fur should extend outside the silhouette of the object.
+* image space: to compute the object motion we need to compute the ___optical flow___ of the animation
+    * but complicated to compute a correct and noise-free optical flow
+* G-buffers in screen-space = 2.5D
 
 
 ## Personal Search

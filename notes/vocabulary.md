@@ -12,3 +12,5 @@
 * seamlessly: parfaitement
 * LOD: level of detail
 * rotoscopy: metho that consist to draw the shape of a figure by frame.
+* stippling: pointillé
+* advection: transport of quantity par the movement
