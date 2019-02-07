@@ -14,7 +14,7 @@
     <uint val="0" name="nodeId-0"/>
     <uint val="0" name="nodeGraphId-0"/>
     <vector2f name="nodePos-0">
-     <float val="-3661.02" name="0"/>
+     <float val="-3671.53" name="0"/>
      <float val="2689.36" name="1"/>
     </vector2f>
     <int val="0" name="nodeInputNameSize-0"/>
@@ -108,17 +108,17 @@
     <int val="1" name="nodeOutputNameSize-5"/>
     <string val="inBuffer0" name="nodeInputName-5-0"/>
     <string val="proceduralTex" name="nodeOutputName-5-0"/>
-    <string val="coherentStyle01Id" name="nodeStringId-6"/>
+    <string val="proceduralStyle01Id" name="nodeStringId-6"/>
     <uint val="1" name="nodeVersion-6"/>
-    <string val="coherentStyle01" name="nodeName-6"/>
+    <string val="proceduralStyle01" name="nodeName-6"/>
     <string val="Imaging/" name="nodePath-6"/>
-    <string val="Coherent style" name="nodeDesc-6"/>
-    <string val="Coherent style.&#xa;TODO" name="nodeHelp-6"/>
+    <string val="procedural stylisation" name="nodeDesc-6"/>
+    <string val="procedural stylisation.&#xa;TODO" name="nodeHelp-6"/>
     <uint val="6" name="nodeId-6"/>
     <uint val="0" name="nodeGraphId-6"/>
     <vector2f name="nodePos-6">
-     <float val="969.462" name="0"/>
-     <float val="6451.26" name="1"/>
+     <float val="1435.22" name="0"/>
+     <float val="5270.39" name="1"/>
     </vector2f>
     <int val="6" name="nodeInputNameSize-6"/>
     <int val="1" name="nodeOutputNameSize-6"/>
@@ -222,10 +222,10 @@
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float val="-0.855055" name="0"/>
-        <float val="-0.271013" name="1"/>
-        <float val="0.384794" name="2"/>
-        <float val="0.217649" name="3"/>
+        <float val="-0.763494" name="0"/>
+        <float val="-0.310508" name="1"/>
+        <float val="0.554222" name="2"/>
+        <float val="0.116209" name="3"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float val="256" name="0"/>
@@ -1192,7 +1192,7 @@
       <int val="1" name="intAttribMinVal"/>
       <int val="100" name="intAttribMaxVal"/>
       <IOData name="intAttribCurve">
-       <int val="40" name="currentVal"/>
+       <int val="14" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1203,7 +1203,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="40" name="1"/>
+          <float val="14" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1215,7 +1215,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.936" name="currentVal"/>
+       <float val="0.883" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1226,7 +1226,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.936" name="1"/>
+          <float val="0.883" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1263,10 +1263,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="10.3493" name="scale"/>
+   <float val="5.15136" name="scale"/>
    <vector2f name="offset">
-    <float val="-813.87" name="0"/>
-    <float val="5060.57" name="1"/>
+    <float val="-77.0627" name="0"/>
+    <float val="5055.09" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>

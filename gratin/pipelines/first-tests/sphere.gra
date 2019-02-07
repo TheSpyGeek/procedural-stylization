@@ -802,7 +802,7 @@
     <uint val="0" name="nbConnections-21-22"/>
     <bool val="1" name="nodeHasWidget-0"/>
     <IOData name="node-0">
-     <string val="../../../../home/artis/home/artis/home/artis/vergne/projects/data/models/roundedcube.obj" name="filename"/>
+     <string val="/home/misnel/gratin/build/data/objs/sphere.obj" name="filename"/>
      <IOData name="camera">
       <int val="0" name="projType"/>
       <int val="0" name="rotType"/>
