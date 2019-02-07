@@ -6,16 +6,17 @@
 * [ ] regarder la technique de rendu de Gris (jeux vidéo)
 * [ ] regarder code shaderToy (https://www.shadertoy.com/view/XsfGWN)
 
-# Papiers à lire
+# Papiers
 * [x] State-of-the-Art Report on Temporal Coherence for Stylized Animations
-* [ ] Motion-coherent stylization with screen-
+* [x] Motion-coherent stylization with screen-
 space image filters
-* [ ] Overcoat: An implicit canvas
-for 3d painting.
+* [ ] Overcoat: An implicit canvas for 3d painting.
 * [ ] Implicit Brushes for Stylized Line-based Rendering.
-* [ ] Stylized Rendering in Games
+* [x] Stylized Rendering in Games
 * [ ] https://onlinelibrary.wiley.com/doi/full/10.1002/cav.1435
 * [ ] E. Praun, H. Hoppe, M. Webb, and A. Finkelstein. Real-time hatching. Proceedings of SIGGRAPH 2001, page 581, 2001.
 * [ ] Weighted Blended Order-Independent Transparency
 * [ ] PERLIN,K., ACM SIGGRAPH 84 conference, course in "Advanced Image Synthesis."
-* [ ] Gradient noise [https://www.cs.utah.edu/~aek/research/noise.pdf]
+* [ ] Gradient noise
+* [x] [Improving noise](http://delivery.acm.org/10.1145/570000/566636/p681-perlin.pdf?ip=194.199.26.179&id=566636&acc=ACTIVE%20SERVICE&key=7EBF6E77E86B478F%2E9B0CC472860F67C6%2E4D4702B0C3E38B35%2E4D4702B0C3E38B35&__acm__=1549531095_def3c5ea54bdaeeb229e68a4bf87bdd7)
+* [ ] A Survey of Stroke-Based Rendering
