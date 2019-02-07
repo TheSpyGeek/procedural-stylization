@@ -1,0 +1,5 @@
+# Hashes of file build rules.
+9b9c93030bf1ba58d463f93363794d6f proceduralStyle01/moc_coherentStyle01.cpp
+ed200826747d51e939d672f9a6ce5d90 proceduralStyle01/moc_proceduralStyle01.cpp
+4d7cf8141cbd1aa557dfb2fb040a85ea proceduralStyle01/qrc_coherentStyle01.cpp
+50621c28c0a2423c03d0de6fae2b8dac proceduralStyle01/qrc_proceduralStyle01.cpp
