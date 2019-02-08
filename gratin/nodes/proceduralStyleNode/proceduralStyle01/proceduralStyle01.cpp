@@ -118,7 +118,7 @@ void ProceduralStyleNode::apply() {
 
 
 
-/*
+
 void ProceduralStyleNode::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
@@ -132,29 +132,7 @@ void ProceduralStyleNode::initSprites() {
       vertices.push_back(Vector2f(x,y));
     }
 }
-*/
 
-
-void ProceduralStyleNode::initSprites() {
-  vector<Vector2f> vertices;
-  unsigned int w = _sw;
-  unsigned int h = _sh;
-
-  float x,y;
-
-  int width = 4;
-
-  for(unsigned int i=0;i<h;++i) {
-
-    for(unsigned int j=0;j<w;++j){
-
-
-        x = 0.5 + sin(i)/4.0;
-        y = 0.5 + cos(j)/4.0;
-
-        vertices.push_back(Vector2f(x,y));
-    }
-}
 
 
   delete _vaoSplat;

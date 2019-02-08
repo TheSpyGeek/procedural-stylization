@@ -218,14 +218,14 @@
       <vector3f name="shift">
        <float val="0" name="0"/>
        <float val="0" name="1"/>
-       <float val="3.02643" name="2"/>
+       <float val="2.42135" name="2"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float val="-0.763494" name="0"/>
-        <float val="-0.310508" name="1"/>
-        <float val="0.554222" name="2"/>
-        <float val="0.116209" name="3"/>
+        <float val="-0.523561" name="0"/>
+        <float val="0.407658" name="1"/>
+        <float val="-0.706996" name="2"/>
+        <float val="-0.244661" name="3"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float val="256" name="0"/>
@@ -1215,7 +1215,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.883" name="currentVal"/>
+       <float val="0.976" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1226,7 +1226,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.883" name="1"/>
+          <float val="0.976" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1263,10 +1263,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="5.15136" name="scale"/>
+   <float val="0.462753" name="scale"/>
    <vector2f name="offset">
-    <float val="-77.0627" name="0"/>
-    <float val="5055.09" name="1"/>
+    <float val="1772.95" name="0"/>
+    <float val="5610.95" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>

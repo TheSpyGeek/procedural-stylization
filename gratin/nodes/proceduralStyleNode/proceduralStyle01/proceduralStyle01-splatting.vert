@@ -1,4 +1,4 @@
-// This file is part of Gratin, a programmable Node-based System 
+// This file is part of Gratin, a programmable Node-based System
 // for GPU-friendly Applications.
 //
 // Copyright (C) 2013-2014 Romain Vergne <romain.vergne@inria.fr>
@@ -7,7 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#version 430 core 
+#version 430 core
 
 layout(location = 0) in vec2 vertex;
 
@@ -48,7 +48,7 @@ vec4 p1 = texelFetch(matrices, ivec2(1, 2), 0);
 vec4 p2 = texelFetch(matrices, ivec2(2, 2), 0);
 vec4 p3 = texelFetch(matrices, ivec2(3, 2), 0);
 
-// model, view and projection matrices 
+// model, view and projection matrices
 mat4 model = mat4(m0,m1,m2,m3);
 mat4 view = mat4(v0,v1,v2,v3);
 mat4 proj = mat4(p0,p1,p2,p3);
@@ -58,8 +58,8 @@ float hash12(vec2 p) {
 }
 
 void main() {
-  //float test = 0.99; // to be removed 
-  vec2 p = vertex;  // vertex coord 
+  //float test = 0.99; // to be removed
+  vec2 p = vertex;  // vertex coord
   vec2 c = p*.5+.5; // texture coordinates
   mat4 projected = proj*view*model;
   vec4 posW = texture(positionWMap,c);
@@ -73,11 +73,11 @@ void main() {
   vec4 nC = texture(noiseTex1,c);
   //if(nC.y<0.8) l = 0.;
   //nC.x = (nC.x-0.8)*5.;
-  
+
   // the z position of the splat should be the one of the (projected) object
   //gl_Position  = vec4(p,(projected*posW).z,length(nW.xyz));
   vec4 pP = projected*posW;
-  
+
   gl_Position  = vec4(p.xy,pP.z/pP.w,length(nW.xyz)*l);
   //gl_PointSize = 11.0;
   gl_PointSize = 40.;//texture(noiseTex1,c).x*40.0;

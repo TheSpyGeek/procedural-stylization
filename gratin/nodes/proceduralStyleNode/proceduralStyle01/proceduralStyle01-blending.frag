@@ -1,4 +1,4 @@
-// This file is part of Gratin, a programmable Node-based System 
+// This file is part of Gratin, a programmable Node-based System
 // for GPU-friendly Applications.
 //
 // Copyright (C) 2013-2014 Romain Vergne <romain.vergne@inria.fr>
@@ -37,7 +37,7 @@ int count = 0;
 void loadFrags() {
   // Get the index of the head of the list
   uint n = imageLoad(headPointers, ivec2(gl_FragCoord.xy)).r;
-  
+
   // Copy the linked list for this fragment into an array
   while( n != 0xffffffff && count < MAX_FRAGMENTS) {
     frags[count] = nodes[n];
@@ -66,7 +66,7 @@ void bubbleSort() {
 void main() {
   loadFrags();
   bubbleSort();
-  
+
   vec4 color = vec4(0);//.5, 0.5, 0.5, 1.0);
   for( int i = 0; i < count; i++ )
     {
@@ -74,8 +74,8 @@ void main() {
     }
 
 
-  float f = float(count)/3;
-  rendering = vec4(f,f,f,1);
+ // float f = float(count)/3;
+ // rendering = vec4(f,f,f,1);
   rendering = color;
 
   // if(count>0)
@@ -84,7 +84,7 @@ void main() {
   //    rendering = vec4(color);
 
   //rendering = texture(image,texcoord);
-  
+
   // vec4 d = texture(image,texcoord);
 
   // if(d.w>1.)
