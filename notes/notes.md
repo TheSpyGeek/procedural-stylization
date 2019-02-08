@@ -44,8 +44,14 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 
 ## OverCoat: An Implicit Canvas for 3D Painting
 
+**OverCoat** is a software to draw strokes from a 3D model using a method that the artists can 'inflate' the 3D model to change where they draw in depth. It also allow to draw hair or leaves starting from a point on the 3D mesh.
 
 
+## Maya Painter Effect ([video](https://www.youtube.com/watch?v=ybCqeHklt0M))
+
+* from a 3D mesh
+* and brushes (in the video: grass (in the png format i think))
+* they create of grass on the 3D model
 
 ## Personal Search
 
