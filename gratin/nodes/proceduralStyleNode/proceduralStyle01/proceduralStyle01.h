@@ -22,21 +22,29 @@ class ProceduralStyleWidget : public NodeWidget {
  ProceduralStyleWidget(NodeInterface *node) :
   NodeWidget(node),
     _halfsize(new IntSliderWidget(node,"size",1,100,0)),
-    _test(new FloatSliderWidget(node,"test",0,1,0)) {
+    _width(new FloatSliderWidget(node,"width",0,1,0.6)),
+    _height(new FloatSliderWidget(node,"height",0,1,0.3)),
+    _test(new FloatSliderWidget(node,"test",0,1,0.99)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
+    l->addWidget(_width);
+    l->addWidget(_height);
     l->addWidget(_test);
     setLayout(l);
     addChildWidget(_halfsize);
+    addChildWidget(_width);
+    addChildWidget(_height);
     addChildWidget(_test);
   }
 
   inline IntSliderWidget *halfsize() const {return _halfsize;}
   inline FloatSliderWidget *test() const {return _test;}
+  inline FloatSliderWidget *width() const {return _width;}
+  inline FloatSliderWidget *height() const {return _height;}
 
  private:
   IntSliderWidget *_halfsize;
-  FloatSliderWidget *_test;
+  FloatSliderWidget *_test, *_height, *_width;
 };
 
 

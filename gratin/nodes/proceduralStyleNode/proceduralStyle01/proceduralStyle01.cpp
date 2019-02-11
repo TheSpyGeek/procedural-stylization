@@ -39,6 +39,8 @@ ProceduralStyleNode::ProceduralStyleNode(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
+    _pSplat.addUniform("width");
+    _pSplat.addUniform("height");
 
     _pBlend.addUniform("image");
 
@@ -87,6 +89,8 @@ void ProceduralStyleNode::apply() {
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
   _pSplat.setUniform1i("size",_w->halfsize()->val());
+  _pSplat.setUniform1f("width",_w->width()->val());
+  _pSplat.setUniform1f("height",_w->height()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);

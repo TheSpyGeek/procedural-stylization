@@ -35,6 +35,8 @@ uniform sampler2D shadingMap;
 uniform sampler2D depthMap;
 uniform sampler2D noiseTex1;
 uniform int size;
+uniform float width;
+uniform float height;
 
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
@@ -94,7 +96,7 @@ float W(float d,float s) {
 
 float fragDepth = 1e+10;
 
-vec4 displayRectangle(in vec2 pos, in float width, in float height){
+vec4 displayRectangle(in vec2 pos){
 
     vec4 color = vec4(shadingCenter.rgba);
 
@@ -177,7 +179,7 @@ vec4 computeStyle() {
 
     // return displaySplatWithShadingColorAndVariableRadius(0.1);
 
-    return displayRectangle(gl_PointCoord.xy, 0.6, 0.3);
+    return displayRectangle(gl_PointCoord.xy);
     // return displayFur();
 
 
