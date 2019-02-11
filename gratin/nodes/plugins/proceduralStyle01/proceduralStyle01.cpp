@@ -12,7 +12,7 @@
 #include "proceduralStyle01.h"
 
 //QString ProceduralStyleNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString ProceduralStyleNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyleNode/proceduralStyle01/");
+QString ProceduralStyleNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/plugins/proceduralStyle01/");
 
 ProceduralStyleNode::ProceduralStyleNode(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
