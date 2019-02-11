@@ -1,0 +1,6 @@
+ <!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+      <file alias="CNSPLAT.vert">proceduralStyleIMG-splatting.vert</file>
+      <file alias="CNSPLAT.frag">proceduralStyleIMG-splatting.vert</file>
+ </qresource>
+ </RCC>

@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef PROCEDURALSTYLE01_H
-#define PROCEDURALSTYLE01_H
+#ifndef COHERENTSTYLE01_H
+#define COHERENTSTYLE01_H
 
 #include <QVBoxLayout>
 #include "view/nodeWidget.h"
@@ -17,44 +17,36 @@
 #include "core/nodeTexture2D.h"
 
 // **** a widget containing a keyframed slider ****
-class ProceduralStyleWidget : public NodeWidget {
+class ProceduralStyleIMGWidget : public NodeWidget {
  public:
- ProceduralStyleWidget(NodeInterface *node) :
+ ProceduralStyleIMGWidget(NodeInterface *node) :
   NodeWidget(node),
     _halfsize(new IntSliderWidget(node,"size",1,100,0)),
-    _width(new FloatSliderWidget(node,"width",0,1,0.6)),
-    _height(new FloatSliderWidget(node,"height",0,1,0.3)),
-    _test(new FloatSliderWidget(node,"test",0,1,0.99)) {
+    _test(new FloatSliderWidget(node,"test",0,1,0)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
-    l->addWidget(_width);
-    l->addWidget(_height);
     l->addWidget(_test);
     setLayout(l);
     addChildWidget(_halfsize);
-    addChildWidget(_width);
-    addChildWidget(_height);
     addChildWidget(_test);
   }
 
   inline IntSliderWidget *halfsize() const {return _halfsize;}
   inline FloatSliderWidget *test() const {return _test;}
-  inline FloatSliderWidget *width() const {return _width;}
-  inline FloatSliderWidget *height() const {return _height;}
 
  private:
   IntSliderWidget *_halfsize;
-  FloatSliderWidget *_test, *_height, *_width;
+  FloatSliderWidget *_test;
 };
 
 
 
 
 // **** the node itself, containing the shader and the widget ****
-class ProceduralStyleNode : public NodeTexture2D {
+class ProceduralStyleIMGNode : public NodeTexture2D {
  public:
-  ProceduralStyleNode(PbGraph *parent=NULL,NodeHandle *handle=NULL);
-  ~ProceduralStyleNode();
+  ProceduralStyleIMGNode(PbGraph *parent=NULL,NodeHandle *handle=NULL);
+  ~ProceduralStyleIMGNode();
   void apply();
 
   inline NodeWidget  *widget() {return _w;}
@@ -86,7 +78,7 @@ class ProceduralStyleNode : public NodeTexture2D {
 
   GPUProgram       _pSplat;
   GPUProgram       _pBlend;
-  ProceduralStyleWidget *_w;
+  ProceduralStyleIMGWidget *_w;
 
   VertexarrayObject   *_vaoSplat;
   unsigned int         _nbElements;
@@ -106,26 +98,26 @@ class ProceduralStyleNode : public NodeTexture2D {
 
 
 // **** the node handle, containing information displayed in the interface ****
-class ProceduralStyleHandle : public QObject, public NodeHandleInterface {
+class CoherentStyleHandle : public QObject, public NodeHandleInterface {
   Q_OBJECT
     Q_INTERFACES(NodeHandleInterface)
-    Q_PLUGIN_METADATA(IID "Gratin.ProceduralStyle01")
+    Q_PLUGIN_METADATA(IID "Gratin.ProceduralStyleIMG")
 
     public:
-  const QString     stringId() const {return "proceduralStyle01Id";}
+  const QString     stringId() const {return "proceduralStyleIMGId";}
   unsigned int      version () const {return 1;}
 
-  const QString     name    () const {return "proceduralStyle01";}
+  const QString     name    () const {return "proceduralStyleIMG";}
   const QString     path    () const {return "Custom/";}
-  const QString     desc    () const {return "procedural stylisation";}
-  const QString     help    () const {return tr("procedural stylisation.\n"
+  const QString     desc    () const {return "procedural stylisation with image as splat";}
+  const QString     help    () const {return tr("procedural style.\n"
 						"TODO");}
 
   const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "shadingMap" << "depthMap" << "noiseTex1"; }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {
-    return new ProceduralStyleNode(parent,new NodeHandle(this));
+    return new ProceduralStyleIMGNode(parent,new NodeHandle(this));
   }
 
   NodeInterface *createInstance(PbGraph *parent,
@@ -135,7 +127,7 @@ class ProceduralStyleHandle : public QObject, public NodeHandleInterface {
 				const QString &help,
 				const QStringList &inputNames,
 				const QStringList &outputNames) {
-    return new ProceduralStyleNode(parent,new NodeHandle(stringId(),version(),name,path,desc,help,
+    return new ProceduralStyleIMGNode(parent,new NodeHandle(stringId(),version(),name,path,desc,help,
 						   inputNames,outputNames));
   }
 };
