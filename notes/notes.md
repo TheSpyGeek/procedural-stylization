@@ -53,6 +53,15 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 * and brushes (in the video: grass (in the png format i think))
 * they create of grass on the 3D model
 
+## Software
+
+* Maya with Painter Effects
+* OverCoat
+* Disney's Deep canvas
+* [Freestyle](freestyle.sourceforge.net) (Stéphane Grabli)
+* RenderMan Pixar
+
+
 ## Personal Search
 
 * <a href="https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742" style="color:red;font-weight:bold;">Dithering process</a> (example: Return of the Obra Dinn). Thanks to a Dither Pattern on applied on the 3D scene (like Real time hatching) and next bayer matrix and blue noise. They add motion warping. Then use spherically-mapped dither pattern to reduce popping artifacts but it still has problem of time coherence.
