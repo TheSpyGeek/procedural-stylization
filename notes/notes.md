@@ -53,6 +53,17 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 * and brushes (in the video: grass (in the png format i think))
 * they create of grass on the 3D model
 
+## MNPR: a framework for real-time expressive non-photorealistic rendering of 3D computer graphics
+#### Questions
+* how to build higher levels of control on top of the locally painted parameters to cover the full interaction spectrum?
+* how to design sufficiently generic, yet semantically meaningful parameters to allow cross-stylistic art-direction?
+
+#### Notes
+
+* They use noise (RGB) to control the UV inclination, the substracte distortion, pigments density .
+* Mapped control considered like most useful level of control
+* three distinct stylizations: watercolor, oil paint and charcoal.
+
 ## Software
 
 * Maya with Painter Effects

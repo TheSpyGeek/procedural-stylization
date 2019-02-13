@@ -23,7 +23,9 @@ space image filters
 * [ ] A Survey of Stroke-Based Rendering
 * [ ] Deep Canvas technology from Disney to tarzan rendering from artist drawings (cf: [video from youtube](https://www.youtube.com/watch?v=RZA6nitNeYw))
 * [ ] Meier' procedural generated particules ([PDF](https://graphics.ethz.ch/Downloads/Publications/Dissertations/Schm12.pdf))
-* [ ] MNPR: A Framework for Real-Time ExpressiveNon-Photorealistic Rendering of 3D Computer Graphics
+* [x] MNPR: A Framework for Real-Time ExpressiveNon-Photorealistic Rendering of 3D Computer Graphics
+* [ ] Active Strokes: Coherent Line Stylization for Animated 3D Models
+* [ ] OPENNPAR: a system for developing, programming, and designing non-photorealistic animation and rendering
 
 # Videos
 

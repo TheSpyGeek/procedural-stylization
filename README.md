@@ -6,7 +6,8 @@
 * ```cd trunk && mkdir build && cd build && cmake .. && make -j8```
 
 # Compile gratin nodes:
-* edit gratin/nodes/plugins/CMakeLists.txt
+* edit ```gratin/nodes/plugins/CMakeLists.txt```
 * modify the path so that it links to your gratin build directory
+* edit QString  of the node contained in the file <nodeName.cpp> to your path to this node
 * in plugins, do ```mkdir build && cd build && cmake .. && make -j8```
 * add the path  gratin/nodes/plugins/nodes/lib to your gratin settings
