@@ -98,12 +98,36 @@ vec4 displaySplatFromStroke(){
     fragDepth = test2.z/test2.w;
 
     float splatIMG = texture(imgSplat, gl_PointCoord.xy).a;
+    if(texture(imgSplat, gl_PointCoord.xy).xyz == vec3(1)){
+        splatIMG = 0;
+    }
+
     return vec4(shadingCenter.rgb,splatIMG);
 }
 
 vec4 computeStyle() {
 
+    /*vec4 pW = mvp*vec4(positionWCenter.xyz,1);
+
+    if(texture(noiseTex1,pW.xy).r > 0){
+
+        return displaySplatFromStroke();
+    } else {
+        discard;
+    }*/
+
     return displaySplatFromStroke();
+
+    // fragDepth = depth.z/depth.w;
+    //
+    // vec4 coordCenterSplat = mvpInv*vec4(2.)
+
+    /*vec4 coordCenterSplat = mvpInv*vec4(0.5, 0.5, 0, 0);
+    if(texture(noiseTex1,coordCenterSplat.xy).r > 0){
+    } else {
+        discard;
+    }*/
+
 
 }
 
