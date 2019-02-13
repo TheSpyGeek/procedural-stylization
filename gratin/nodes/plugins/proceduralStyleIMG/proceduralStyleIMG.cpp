@@ -87,18 +87,7 @@ void ProceduralStyleIMGNode::apply() {
   _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
-
-  /* le problème est la !!! */
-  /* si tu commentes le bloc tout marche */
-  cout << __LINE__ << endl;
-  if(inputTex(6) == NULL){
-      cout << "\n\nTexture(6) == NULL !\n\n" << endl;
-  } else {
-      cout << "Texture(6) Okay !" << endl;
-  }
-  cout << __LINE__ << endl;
   _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
-  // fin du bloc
 
 
   _pSplat.setUniform1i("size",_w->halfsize()->val());
@@ -136,6 +125,8 @@ void ProceduralStyleIMGNode::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
+
+  cout << "width: " << w << " height: "<< h << endl;
 
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {

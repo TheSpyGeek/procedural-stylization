@@ -1,4 +1,4 @@
-// This file is part of Gratin, a programmable Node-based System 
+// This file is part of Gratin, a programmable Node-based System
 // for GPU-friendly Applications.
 //
 // Copyright (C) 2013-2014 Romain Vergne <romain.vergne@inria.fr>
@@ -7,7 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#version 430 core 
+#version 430 core
 
 //layout (early_fragment_tests) in;
 
@@ -34,6 +34,7 @@ uniform sampler2D normalWMap;
 uniform sampler2D shadingMap;
 uniform sampler2D depthMap;
 uniform sampler2D noiseTex1;
+uniform sampler2D imgSplat;
 uniform int size;
 
 in vec2 texcoordCenter;
@@ -83,6 +84,8 @@ vec3 modifDirection(in vec3 nV,in float i,in float size) {
 }
 
 
+
+
 float W(float d,float s) {
   // simple gaussian for the weight
   return exp(-(d*d)/(2.*s*s));
@@ -90,63 +93,40 @@ float W(float d,float s) {
 
 float fragDepth = 1e+10;
 
+vec4 displaySplatFromStroke(){
+    vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
+    fragDepth = test2.z/test2.w;
+
+    float splatIMG = texture(imgSplat, gl_PointCoord.xy).a;
+    return vec4(shadingCenter.rgb,splatIMG);
+}
+
 vec4 computeStyle() {
 
-  vec4 col = vec4(vec3(0.),1.);
-  vec3 pW = positionWCenter.xyz;
-  vec3 nW = normalWCenter.xyz;
-  vec2 fc = gl_FragCoord.xy; // current pixel coordinate
+    return displaySplatFromStroke();
 
-  float sig = 1.2; // sigma for distance to the curve
-  float vs = 0.005; // the volumetric step
-  float d = 1e+10;
-
-  // ideally, we should make sure that we never go beyond the size of the square...
-  int ss = size;//int(float(size)*noiseCenter.x);
-  float s = 0.;
-
-  for(int i=0;i<=ss;++i) {
-    vec3 nV = normalMat*nW;
-    nV = modifDirection(nV,float(i),float(ss));
-    vec3 nWN = normalMatInv*nV;
-
-    vec4 pW = vec4(pW+float(i)*nWN*vs,1.); // modified pos in world space
-    vec4 pP = mvp*pW; // position in clip space
-    vec2 pS = .5*((pP.xy/pP.w)+1.)*ts; // normalized position in screen space
-
-    float dt = distance(pS,fc);
-    if(dt<d) {
-      s = 1.-float(i)/float(ss+ss/1.5);
-      d = dt;
-      fragDepth = pP.z/pP.w;
-    }
-  }
-
-  float w = W(d,sig*s);
-  vec4 c = vec4(shadingCenter.xyz+vec3(noiseCenter.x-.5),1.);
-  return vec4(c.xyz,w*noiseCenter.y);
 }
 
 void main() {
   vec4 test = vec4(1,0,0,1);
-  
+
   vec2 splatCoord = gl_PointCoord.xy;
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
   if(length(centeredSplatCoord)>0.5) discard;
 
   vec4 color = computeStyle();
-  
+
   if(color.w<0.01) discard;
-    
-  
+
+
   uint nodeIdx = atomicCounterIncrement(nextNodeCounter);
 
   if( nodeIdx < maxNodes ) {
     test = vec4(0,1,0,1);
 
     uint prevHead = imageAtomicExchange(headPointers, ivec2(gl_FragCoord.xy), nodeIdx);
-    
+
     // Here we set the color and depth of this new node to the color
     // and depth of the fragment.  The next pointer, points to the
     // previous head of the list.
@@ -158,7 +138,7 @@ void main() {
 
   }
 
-  // should not be necessary 
+  // should not be necessary
   //rendering = computeStyle();
   rendering = test;
   //vec2 c = vec2(gl_PointCoord.x,1.-gl_PointCoord.y); // position in splat space
