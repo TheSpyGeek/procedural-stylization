@@ -7,8 +7,8 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#ifndef COHERENTSTYLE01_H
-#define COHERENTSTYLE01_H
+#ifndef PROCEDURALSTYLEIMG_H
+#define PROCEDURALSTYLEIMG_H
 
 #include <QVBoxLayout>
 #include "view/nodeWidget.h"
@@ -21,8 +21,8 @@ class ProceduralStyleIMGWidget : public NodeWidget {
  public:
  ProceduralStyleIMGWidget(NodeInterface *node) :
   NodeWidget(node),
-    _halfsize(new IntSliderWidget(node,"size",1,100,0)),
-    _test(new FloatSliderWidget(node,"test",0,1,0)) {
+    _halfsize(new IntSliderWidget(node,"size",1,100,32)),
+    _test(new FloatSliderWidget(node,"test",0,1,0.95)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
     l->addWidget(_test);
@@ -113,7 +113,7 @@ class CoherentStyleHandle : public QObject, public NodeHandleInterface {
   const QString     help    () const {return tr("procedural style.\n"
 						"TODO");}
 
-  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "shadingMap" << "depthMap" << "noiseTex1"; }
+  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "shadingMap" << "depthMap" << "noiseTex1" << "imgSplat";  }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {
@@ -132,4 +132,4 @@ class CoherentStyleHandle : public QObject, public NodeHandleInterface {
   }
 };
 
-#endif // COHERENTSTYLE01
+#endif // PROCEDURALSTYLEIMG

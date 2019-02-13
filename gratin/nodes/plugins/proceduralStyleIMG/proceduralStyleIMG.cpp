@@ -36,6 +36,7 @@ ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handl
     _pSplat.addUniform("shadingMap");
     _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
+    _pSplat.addUniform("imgSplat");
     _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
@@ -86,6 +87,15 @@ void ProceduralStyleIMGNode::apply() {
   _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
+  cout << __LINE__ << endl;
+  if(inputTex(6) == NULL){
+      cout << "\n\nTexture(6) == NULL !\n\n" << endl;
+  } else {
+      cout << "Texture(6) Okay !" << endl;
+  }
+  cout << __LINE__ << endl;
+
+  // _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
   _pSplat.setUniform1i("size",_w->halfsize()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
