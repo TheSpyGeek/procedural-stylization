@@ -69,15 +69,11 @@ void main() {
   bubbleSort();
 
   vec4 color = vec4(0);//.5, 0.5, 0.5, 1.0);
-  /*for( int i = 0; i < count; i++ )
+  for( int i = 0; i < count; i++ )
     {
       color = mix( color, frags[i].color, frags[i].color.a);
-    }*/
-
-    for(int i=0; i<count && i<nbPixelAverage; i++){
-        color = mix( color, frags[count-i-1].color, frags[count-i-1].color.a);
-        // color = vec4(1,0,0,1);
     }
+
     rendering = color;
 
   // if(count>0)

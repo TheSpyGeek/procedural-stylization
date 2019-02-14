@@ -106,28 +106,28 @@ vec4 displaySplatFromStroke(){
     return vec4(shadingCenter.rgb, alphaFactor*splatIMG);
 }
 
+vec4 testNoise(){
+    vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
+    fragDepth = test2.z/test2.w;
+
+    float splatIMG = texture(imgSplat, gl_PointCoord.xy).a;
+    if(texture(imgSplat, gl_PointCoord.xy).xyz == vec3(1)){
+        splatIMG = 0;
+    }
+
+    if(texture(noiseTex1, texcoordCenter).x > 0){
+        return vec4(shadingCenter.rgb, alphaFactor*splatIMG);
+    } else {
+        discard;
+    }
+}
+
 vec4 computeStyle() {
 
-    /*vec4 pW = mvp*vec4(positionWCenter.xyz,1);
 
-    if(texture(noiseTex1,pW.xy).r > 0){
 
-        return displaySplatFromStroke();
-    } else {
-        discard;
-    }*/
+    return testNoise();
 
-    return displaySplatFromStroke();
-
-    // fragDepth = depth.z/depth.w;
-    //
-    // vec4 coordCenterSplat = mvpInv*vec4(2.)
-
-    /*vec4 coordCenterSplat = mvpInv*vec4(0.5, 0.5, 0, 0);
-    if(texture(noiseTex1,coordCenterSplat.xy).r > 0){
-    } else {
-        discard;
-    }*/
 
 
 }
