@@ -36,6 +36,7 @@ uniform sampler2D depthMap;
 uniform sampler2D noiseTex1;
 uniform sampler2D imgSplat;
 uniform int size;
+uniform float alphaFactor;
 
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
@@ -102,7 +103,7 @@ vec4 displaySplatFromStroke(){
         splatIMG = 0;
     }
 
-    return vec4(shadingCenter.rgb,splatIMG);
+    return vec4(shadingCenter.rgb, alphaFactor*splatIMG);
 }
 
 vec4 computeStyle() {

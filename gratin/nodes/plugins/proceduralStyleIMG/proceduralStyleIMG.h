@@ -22,10 +22,12 @@ class ProceduralStyleIMGWidget : public NodeWidget {
  ProceduralStyleIMGWidget(NodeInterface *node) :
   NodeWidget(node),
     _halfsize(new IntSliderWidget(node,"size",1,100,32)),
-    _test(new FloatSliderWidget(node,"test",0,1,0.95)) {
+    _test(new FloatSliderWidget(node,"test",0,1,0.95)),
+    _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
     l->addWidget(_test);
+    l->addWidget(_alphaFactor);
     setLayout(l);
     addChildWidget(_halfsize);
     addChildWidget(_test);
@@ -33,10 +35,11 @@ class ProceduralStyleIMGWidget : public NodeWidget {
 
   inline IntSliderWidget *halfsize() const {return _halfsize;}
   inline FloatSliderWidget *test() const {return _test;}
+  inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
 
  private:
   IntSliderWidget *_halfsize;
-  FloatSliderWidget *_test;
+  FloatSliderWidget *_test, *_alphaFactor;
 };
 
 

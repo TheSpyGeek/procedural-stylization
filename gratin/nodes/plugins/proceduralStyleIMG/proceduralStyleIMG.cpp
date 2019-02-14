@@ -40,6 +40,7 @@ ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handl
     _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
+    _pSplat.addUniform("alphaFactor");
 
     _pBlend.addUniform("image");
 
@@ -92,6 +93,7 @@ void ProceduralStyleIMGNode::apply() {
 
   _pSplat.setUniform1i("size",_w->halfsize()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
+  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -126,7 +128,6 @@ void ProceduralStyleIMGNode::initSprites() {
   unsigned int w = _sw;
   unsigned int h = _sh;
 
-  cout << "width: " << w << " height: "<< h << endl;
 
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {
