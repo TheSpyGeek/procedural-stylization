@@ -23,22 +23,27 @@ class ProceduralStyleIMGWidget : public NodeWidget {
   NodeWidget(node),
     _halfsize(new IntSliderWidget(node,"size",1,100,32)),
     _test(new FloatSliderWidget(node,"test",0,1,0.95)),
-    _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)) {
+    _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)),
+    _nbPixelAverage(new IntSliderWidget(node,"nbPixelAverage", 1,100,1)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
     l->addWidget(_test);
     l->addWidget(_alphaFactor);
+    l->addWidget(_nbPixelAverage);
     setLayout(l);
     addChildWidget(_halfsize);
     addChildWidget(_test);
+    addChildWidget(_alphaFactor);
+    addChildWidget(_nbPixelAverage);
   }
 
   inline IntSliderWidget *halfsize() const {return _halfsize;}
   inline FloatSliderWidget *test() const {return _test;}
   inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
+  inline IntSliderWidget *nbPixelAverage() const {return _nbPixelAverage;}
 
  private:
-  IntSliderWidget *_halfsize;
+  IntSliderWidget *_halfsize, *_nbPixelAverage;
   FloatSliderWidget *_test, *_alphaFactor;
 };
 

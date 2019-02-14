@@ -30,6 +30,7 @@ layout( binding = 0, std430 ) buffer linkedLists {
 in vec2 texcoord;
 
 uniform sampler2D image;
+uniform int nbPixelAverage;
 
 NodeType frags[MAX_FRAGMENTS];
 int count = 0;
@@ -68,15 +69,16 @@ void main() {
   bubbleSort();
 
   vec4 color = vec4(0);//.5, 0.5, 0.5, 1.0);
-  for( int i = 0; i < count; i++ )
+  /*for( int i = 0; i < count; i++ )
     {
       color = mix( color, frags[i].color, frags[i].color.a);
+    }*/
+
+    for(int i=0; i<count && i<nbPixelAverage; i++){
+        color = mix( color, frags[count-i-1].color, frags[count-i-1].color.a);
+        // color = vec4(1,0,0,1);
     }
-
-
-  float f = float(count)/3;
-  rendering = vec4(f,f,f,1);
-  rendering = color;
+    rendering = color;
 
   // if(count>0)
   //    rendering = mix(color,frags[count-1].color,frags[count-1].color.a);

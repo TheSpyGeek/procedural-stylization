@@ -43,6 +43,7 @@ ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handl
     _pSplat.addUniform("alphaFactor");
 
     _pBlend.addUniform("image");
+    _pBlend.addUniform("nbPixelAverage");
 
     initSprites();
 }
@@ -108,6 +109,7 @@ void ProceduralStyleIMGNode::apply() {
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
+  _pBlend.setUniform1i("nbPixelAverage",_w->nbPixelAverage()->val());
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
