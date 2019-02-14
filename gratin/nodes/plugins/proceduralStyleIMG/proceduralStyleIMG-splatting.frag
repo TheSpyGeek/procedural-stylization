@@ -115,12 +115,14 @@ vec4 testNoise(){
         splatIMG = 0;
     }
 
+    // if the center of the splat is in a possitive point of the noise
     if(texture(noiseTex1, texcoordCenter).x > 0){
         return vec4(shadingCenter.rgb, alphaFactor*splatIMG);
     } else {
         discard;
     }
 }
+
 
 vec4 computeStyle() {
 

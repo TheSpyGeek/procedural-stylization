@@ -30,7 +30,6 @@ layout( binding = 0, std430 ) buffer linkedLists {
 in vec2 texcoord;
 
 uniform sampler2D image;
-uniform int nbPixelAverage;
 
 NodeType frags[MAX_FRAGMENTS];
 int count = 0;

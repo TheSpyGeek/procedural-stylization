@@ -1431,11 +1431,11 @@
       <uint name="nbChildren" val="0"/>
      </IOData>
      <IOData name="childWidget-3">
-      <bool name="intAttribKeyframed" val="1"/>
-      <int name="intAttribMinVal" val="1"/>
-      <int name="intAttribMaxVal" val="100"/>
-      <IOData name="intAttribCurve">
-       <int name="currentVal" val="100"/>
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="1"/>
+      <float name="floatAttribMaxVal" val="100"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="35.056"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -1446,7 +1446,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="100"/>
+          <float name="1" val="35.056"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1542,8 +1542,8 @@
   <IOData name="interactionWidget">
    <float name="scale" val="0.955837"/>
    <vector2f name="offset">
-    <float name="0" val="684.411"/>
-    <float name="1" val="292.512"/>
+    <float name="0" val="496.111"/>
+    <float name="1" val="310.673"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>

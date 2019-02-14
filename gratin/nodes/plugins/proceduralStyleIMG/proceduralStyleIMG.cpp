@@ -41,9 +41,9 @@ ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handl
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
     _pSplat.addUniform("alphaFactor");
+    _pSplat.addUniform("splatSize");
 
     _pBlend.addUniform("image");
-    _pBlend.addUniform("nbPixelAverage");
 
     initSprites();
 }
@@ -95,6 +95,7 @@ void ProceduralStyleIMGNode::apply() {
   _pSplat.setUniform1i("size",_w->halfsize()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
+  _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -109,7 +110,7 @@ void ProceduralStyleIMGNode::apply() {
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
-  _pBlend.setUniform1i("nbPixelAverage",_w->nbPixelAverage()->val());
+
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
