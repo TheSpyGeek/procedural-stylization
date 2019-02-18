@@ -44,6 +44,7 @@ in vec4 normalWCenter;
 in vec4 shadingCenter;
 in vec4 depthCenter;
 in vec4 noiseCenter;
+in vec4 randomColor;
 
 in mat4 mvp;
 in mat4 mvpInv;
@@ -112,7 +113,7 @@ vec4 displaySplatFromStroke(){
 
     // if the center of the splat is in a possitive point of the noise
     if(texture(noiseTex1, texcoordCenter).x > 0){
-        return vec4(shadingCenter.rgb, alphaFactor*splatIMG);
+        return vec4(randomColor.rgb, alphaFactor*splatIMG);
     } else {
         discard;
     }

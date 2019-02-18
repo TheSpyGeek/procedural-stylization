@@ -100,13 +100,17 @@ class ProceduralStyle03Node : public NodeTexture2D {
   GLuint _headTex;  // head pointer texture
   GLuint _clBuffer; // clear buffer
   GLuint _maxNodes;
+
+  /* color per splat */
+  Vector4f *_colors;
+
 };
 
 
 
 
 // **** the node handle, containing information displayed in the interface ****
-class CoherentStyleHandle : public QObject, public NodeHandleInterface {
+class ProceduralStyle03Handle : public QObject, public NodeHandleInterface {
   Q_OBJECT
     Q_INTERFACES(NodeHandleInterface)
     Q_PLUGIN_METADATA(IID "Gratin.ProceduralStyle03")

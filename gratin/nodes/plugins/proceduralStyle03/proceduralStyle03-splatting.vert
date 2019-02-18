@@ -10,6 +10,7 @@
 #version 430 core
 
 layout(location = 0) in vec2 vertex;
+layout(location = 1) in vec4 color;
 
 uniform sampler2D matrices;
 uniform sampler2D positionWMap;
@@ -27,6 +28,7 @@ out vec4 normalWCenter;
 out vec4 shadingCenter;
 out vec4 depthCenter;
 out vec4 noiseCenter;
+out vec4 randomColor;
 
 out mat4 mvp;
 out mat4 mvpInv;
@@ -65,6 +67,8 @@ void main() {
   mat4 projected = proj*view*model;
   vec4 posW = texture(positionWMap,c);
   vec4 nW = texture(normalWMap,c);
+
+  randomColor = color;
 
   if(hash12(p)<test) {
     nW = vec4(0);

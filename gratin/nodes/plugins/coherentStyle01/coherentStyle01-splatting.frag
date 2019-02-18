@@ -1,4 +1,4 @@
-// This file is part of Gratin, a programmable Node-based System 
+// This file is part of Gratin, a programmable Node-based System
 // for GPU-friendly Applications.
 //
 // Copyright (C) 2013-2014 Romain Vergne <romain.vergne@inria.fr>
@@ -7,7 +7,7 @@
 // Public License v. 2.0. If a copy of the MPL was not distributed
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-#version 430 core 
+#version 430 core
 
 //layout (early_fragment_tests) in;
 
@@ -129,24 +129,24 @@ vec4 computeStyle() {
 
 void main() {
   vec4 test = vec4(1,0,0,1);
-  
+
   vec2 splatCoord = gl_PointCoord.xy;
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
   if(length(centeredSplatCoord)>0.5) discard;
 
   vec4 color = computeStyle();
-  
+
   if(color.w<0.01) discard;
-    
-  
+
+
   uint nodeIdx = atomicCounterIncrement(nextNodeCounter);
 
   if( nodeIdx < maxNodes ) {
     test = vec4(0,1,0,1);
 
     uint prevHead = imageAtomicExchange(headPointers, ivec2(gl_FragCoord.xy), nodeIdx);
-    
+
     // Here we set the color and depth of this new node to the color
     // and depth of the fragment.  The next pointer, points to the
     // previous head of the list.
@@ -158,7 +158,7 @@ void main() {
 
   }
 
-  // should not be necessary 
+  // should not be necessary
   //rendering = computeStyle();
   rendering = test;
   //vec2 c = vec2(gl_PointCoord.x,1.-gl_PointCoord.y); // position in splat space

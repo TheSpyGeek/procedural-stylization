@@ -43,7 +43,10 @@ ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
 
+
     _pBlend.addUniform("image");
+
+
 
     initSprites();
 }
@@ -51,6 +54,7 @@ ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
 ProceduralStyle03Node::~ProceduralStyle03Node() {
   delete _vaoSplat;
   cleanOITData();
+  delete _colors;
 }
 
 void ProceduralStyle03Node::apply() {
@@ -90,6 +94,7 @@ void ProceduralStyle03Node::apply() {
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
   _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
+
 
 
   _pSplat.setUniform1i("size",_w->halfsize()->val());
@@ -148,6 +153,28 @@ void ProceduralStyle03Node::initSprites() {
 
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
+
+
+  /* test color */
+  _colors = new Vector4f[nbVert];
+
+  float t;
+  for(unsigned int i=0; i<nbVert; i++){
+      t = (float)(rand()%255)/255.;
+      _colors[i].x() = t;
+      t = (float)(rand()%255)/255.;
+      _colors[i].y() = t;
+      t = (float)(rand()%255)/255.;
+      _colors[i].z() = t;
+      _colors[i].w() = 1.0;
+  }
+
+  /* test color */
+  //inline void addAttrib (GLsizeiptr buffersize,const void *data,GLint attribsize=4,
+    //         GLsizei stride=0,GLenum usage=GL_STATIC_DRAW);
+
+    _vaoSplat->addAttrib(nbVert*sizeof(Vector4f),_colors[0].data(),4);
+
 }
 
 void ProceduralStyle03Node::initOITData() {
