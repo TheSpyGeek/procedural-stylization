@@ -24,27 +24,31 @@ class ProceduralStyle03Widget : public NodeWidget {
     _halfsize(new IntSliderWidget(node,"size",1,100,32)),
     _test(new FloatSliderWidget(node,"test",0,1,0.95)),
     _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)),
-    _splatSize(new FloatSliderWidget(node,"splatSize", 1.,100.,40.)) {
+    _splatSize(new FloatSliderWidget(node,"splatSize", 1.,100.,40.)),
+    _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_halfsize);
     l->addWidget(_test);
     l->addWidget(_alphaFactor);
     l->addWidget(_splatSize);
+    l->addWidget(_splatDepthFactor);
     setLayout(l);
     addChildWidget(_halfsize);
     addChildWidget(_test);
     addChildWidget(_alphaFactor);
     addChildWidget(_splatSize);
+    addChildWidget(_splatDepthFactor);
   }
 
   inline IntSliderWidget *halfsize() const {return _halfsize;}
   inline FloatSliderWidget *test() const {return _test;}
   inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
   inline FloatSliderWidget *splatSize() const {return _splatSize;}
+  inline FloatSliderWidget *splatDepthFactor() const {return _splatDepthFactor;}
 
  private:
   IntSliderWidget *_halfsize;
-  FloatSliderWidget *_test, *_alphaFactor, *_splatSize;
+  FloatSliderWidget *_test, *_alphaFactor, *_splatSize, *_splatDepthFactor;
 };
 
 
@@ -72,6 +76,7 @@ class ProceduralStyle03Node : public NodeTexture2D {
  private:
   void initOITData();
   void cleanOITData();
+  void createColorArray();
 
   enum BufferNames {
     COUNTER_BUFFER = 0,

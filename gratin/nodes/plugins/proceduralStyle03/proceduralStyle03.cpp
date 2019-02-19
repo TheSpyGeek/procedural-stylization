@@ -42,13 +42,19 @@ ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("test");
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
-
+    _pSplat.addUniform("splatDepthFactor");
 
     _pBlend.addUniform("image");
 
 
 
     initSprites();
+
+
+
+
+
+
 }
 
 ProceduralStyle03Node::~ProceduralStyle03Node() {
@@ -57,7 +63,28 @@ ProceduralStyle03Node::~ProceduralStyle03Node() {
   delete _colors;
 }
 
+void ProceduralStyle03Node::createColorArray(){
+    _colors = new Vector4f[_nbElements];
+
+    float t;
+    for(unsigned int i=0; i<_nbElements; i++){
+        t = (float)(rand()%255)/255.;
+        _colors[i].x() = t;
+        t = (float)(rand()%255)/255.;
+        _colors[i].y() = t;
+        t = (float)(rand()%255)/255.;
+        _colors[i].z() = t;
+        _colors[i].w() = 1.0;
+    }
+
+    _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
+
+}
+
 void ProceduralStyle03Node::apply() {
+
+_vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
+
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
 
@@ -101,6 +128,7 @@ void ProceduralStyle03Node::apply() {
   _pSplat.setUniform1f("test",_w->test()->val());
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
+  _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -154,26 +182,7 @@ void ProceduralStyle03Node::initSprites() {
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
 
-
-  /* test color */
-  _colors = new Vector4f[nbVert];
-
-  float t;
-  for(unsigned int i=0; i<nbVert; i++){
-      t = (float)(rand()%255)/255.;
-      _colors[i].x() = t;
-      t = (float)(rand()%255)/255.;
-      _colors[i].y() = t;
-      t = (float)(rand()%255)/255.;
-      _colors[i].z() = t;
-      _colors[i].w() = 1.0;
-  }
-
-  /* test color */
-  //inline void addAttrib (GLsizeiptr buffersize,const void *data,GLint attribsize=4,
-    //         GLsizei stride=0,GLenum usage=GL_STATIC_DRAW);
-
-    _vaoSplat->addAttrib(nbVert*sizeof(Vector4f),_colors[0].data(),4);
+  createColorArray();
 
 }
 
