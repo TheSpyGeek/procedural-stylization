@@ -95,7 +95,7 @@ float W(float d,float s) {
 }
 
 bool hasToBeDisplayed(){
-    return texture(noiseTex1, texcoordCenter).x > 0;
+    return texture(noiseTex1, texcoordCenter).a > 0;
 }
 
 float fragDepth = 1e+10;
@@ -112,14 +112,17 @@ vec4 displaySplatFromStroke(){
         splatIMG = 0;
     }
 
+    vec3 color = texture(depthMap, texcoordCenter).rgb;
 
 
-    fragDepth = (projectedCenterPoint.z*zAxisOfSplat)/projectedCenterPoint.w + splatDepthFactor;
+    float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x*splatIMG;
+
+    fragDepth = (projectedCenterPoint.z)/projectedCenterPoint.w + pow(zAxisOfSplat-0.5, splatDepthFactor);
 
     // if the center of the splat is in a possitive point of the noise
     if(hasToBeDisplayed()){
         // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
-        return vec4(randomColor.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
+        return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {
         discard;
     }
@@ -134,7 +137,7 @@ vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
         vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
         fragDepth = test2.z/test2.w;
 
-        return vec4(shadingCenter.rgb, test1);
+        return vec4(randomColor.rgb, texture(noiseTex1, texcoordCenter).x);
     } else {
         discard;
     }
@@ -143,8 +146,8 @@ vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
 
 vec4 computeStyle() {
 
-    return displaySplatWithShadingColorAndVariableRadius(0.5);
-    // return displaySplatFromStroke();
+    // return displaySplatWithShadingColorAndVariableRadius(0.5);
+    return displaySplatFromStroke();
 
 }
 

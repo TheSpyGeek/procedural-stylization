@@ -64,7 +64,10 @@ ProceduralStyle03Node::~ProceduralStyle03Node() {
 }
 
 void ProceduralStyle03Node::createColorArray(){
+
+
     _colors = new Vector4f[_nbElements];
+
 
     float t;
     for(unsigned int i=0; i<_nbElements; i++){
@@ -79,6 +82,7 @@ void ProceduralStyle03Node::createColorArray(){
 
     _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
 
+    cout << "random Color created: " << _nbElements << " and " << (sizeof(_colors)/sizeof(*_colors)) << endl;
 }
 
 void ProceduralStyle03Node::apply() {
