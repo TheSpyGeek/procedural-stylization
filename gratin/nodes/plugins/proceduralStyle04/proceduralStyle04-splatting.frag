@@ -31,19 +31,15 @@ uniform uint maxNodes;
 uniform sampler2D matrices;
 uniform sampler2D positionWMap;
 uniform sampler2D normalWMap;
-uniform sampler2D shadingMap;
-uniform sampler2D depthMap;
+uniform sampler2D colorMap;
 uniform sampler2D noiseTex1;
 uniform sampler2D imgSplat;
-uniform int size;
 uniform float alphaFactor;
 uniform float splatDepthFactor;
 
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
 in vec4 normalWCenter;
-in vec4 shadingCenter;
-in vec4 depthCenter;
 in vec4 noiseCenter;
 in vec4 randomColor;
 
@@ -81,11 +77,7 @@ float gnoise(in vec3 x) {
 }
 
 
-vec3 modifDirection(in vec3 nV,in float i,in float size) {
-  vec3 n = nV;
-  n.y -= i/size;
-  return normalize(n);
-}
+
 
 
 
@@ -113,7 +105,7 @@ vec4 displaySplatFromStroke(){
         splatIMG = 0;
     }
 
-    vec3 color = texture(depthMap, texcoordCenter).rgb;
+    vec3 color = texture(colorMap, texcoordCenter).rgb;
 
 
     float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x*splatIMG;
