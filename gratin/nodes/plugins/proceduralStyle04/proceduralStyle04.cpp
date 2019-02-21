@@ -134,6 +134,11 @@ void ProceduralStyle04Node::apply() {
   //_glf->glDisable(GL_BLEND);
 }
 
+n1 += smoothstep(0.5-style,0.5+style,fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
+n2 += smoothstep(0.5-style,0.5+style,fnoise((data.xyz+offset)*frequency,amplitude,frequency,persistence,nboctaves));
+
+n3 += smoothstep(0.5-style,0.5+style,fnoise((data.xyz+offset)*frequency,amplitude,frequency,persistence,nboctaves));
+
 
 void ProceduralStyle04Node::initSprites() {
   vector<Vector2f> vertices;
