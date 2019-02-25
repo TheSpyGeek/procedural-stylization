@@ -37,9 +37,7 @@ ProceduralStyle05Node::ProceduralStyle05Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
     _pSplat.addUniform("imgSplat");
-    _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
-    _pSplat.addUniform("test");
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
     _pSplat.addUniform("splatDepthFactor");
@@ -60,34 +58,11 @@ ProceduralStyle05Node::ProceduralStyle05Node(PbGraph *parent,NodeHandle *handle)
 ProceduralStyle05Node::~ProceduralStyle05Node() {
   delete _vaoSplat;
   cleanOITData();
-  delete _colors;
 }
 
-void ProceduralStyle05Node::createColorArray(){
-
-
-    _colors = new Vector4f[_nbElements];
-
-
-    float t;
-    for(unsigned int i=0; i<_nbElements; i++){
-        t = (float)(rand()%255)/255.;
-        _colors[i].x() = t;
-        t = (float)(rand()%255)/255.;
-        _colors[i].y() = t;
-        t = (float)(rand()%255)/255.;
-        _colors[i].z() = t;
-        _colors[i].w() = 1.0;
-    }
-
-    _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
-
-    cout << "random Color created: " << _nbElements << " and " << (sizeof(_colors)/sizeof(*_colors)) << endl;
-}
 
 void ProceduralStyle05Node::apply() {
 
-_vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
 
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
@@ -127,9 +102,6 @@ _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
   _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
 
 
-
-  _pSplat.setUniform1i("size",_w->halfsize()->val());
-  _pSplat.setUniform1f("test",_w->test()->val());
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
@@ -186,7 +158,6 @@ void ProceduralStyle05Node::initSprites() {
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
 
-  createColorArray();
 
 }
 

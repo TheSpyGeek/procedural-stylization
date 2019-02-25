@@ -35,7 +35,6 @@ uniform sampler2D shadingMap;
 uniform sampler2D depthMap;
 uniform sampler2D noiseTex1;
 uniform sampler2D imgSplat;
-uniform int size;
 uniform float alphaFactor;
 uniform float splatDepthFactor;
 
@@ -45,7 +44,6 @@ in vec4 normalWCenter;
 in vec4 shadingCenter;
 in vec4 depthCenter;
 in vec4 noiseCenter;
-in vec4 randomColor;
 
 in mat4 mvp;
 in mat4 mv;
@@ -138,7 +136,7 @@ vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
         vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
         fragDepth = test2.z/test2.w;
 
-        return vec4(randomColor.rgb, texture(noiseTex1, texcoordCenter).x);
+        return vec4(shadingCenter.rgb, texture(noiseTex1, texcoordCenter).x);
     } else {
         discard;
     }
@@ -158,7 +156,7 @@ void main() {
   vec2 splatCoord = gl_PointCoord.xy;
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
-  if(length(centeredSplatCoord)>0.5) discard;
+  if(length(centeredSplatCoord)>0.5) discard;   
 
   vec4 color = computeStyle();
 
