@@ -79,22 +79,28 @@ float gnoise(in vec3 x) {
 }
 
 
-vec3 modifDirection(in vec3 nV,in float i,in float size) {
-  vec3 n = nV;
-  n.y -= i/size;
-  return normalize(n);
-}
 
 
 
-
-float W(float d,float s) {
-  // simple gaussian for the weight
-  return exp(-(d*d)/(2.*s*s));
-}
 
 bool hasToBeDisplayed(){
     return texture(noiseTex1, texcoordCenter).a > 0;
+}
+
+bool displayRotatedSplat(float radAngle){
+
+    float bias = 0.001;
+
+    vec2 coordInSplat = gl_PointCoord.xy;
+
+    float x = sin(radAngle)*coordInSplat.y - cos(radAngle)*coordInSplat.x;
+    float y = cos(radAngle)*coordInSplat.y + sin(radAngle)*coordInSplat.x;
+
+    vec2 coordNotRotated = vec2(x,y);
+
+    return texture(imgSplat, coordNotRotated).a > 0;
+
+
 }
 
 float fragDepth = 1e+10;
@@ -120,8 +126,13 @@ vec4 displaySplatFromStroke(){
 
     // if the center of the splat is in a possitive point of the noise
     if(hasToBeDisplayed()){
+        // if(displayRotatedSplat(0.5)){
+            return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
+        // } else {
+            // discard;
+        // }
         // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
-        return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
+        // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {
         discard;
     }
@@ -156,7 +167,7 @@ void main() {
   vec2 splatCoord = gl_PointCoord.xy;
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
-  if(length(centeredSplatCoord)>0.5) discard;   
+  if(length(centeredSplatCoord)>0.5) discard;
 
   vec4 color = computeStyle();
 
