@@ -37,6 +37,7 @@ uniform sampler2D noiseTex1;
 uniform sampler2D imgSplat;
 uniform float alphaFactor;
 uniform float splatDepthFactor;
+uniform float rotation;
 
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
@@ -87,18 +88,29 @@ bool hasToBeDisplayed(){
     return texture(noiseTex1, texcoordCenter).a > 0;
 }
 
-bool displayRotatedSplat(float radAngle){
+bool displayRotatedSplat(float radAngle, out vec4 color){
 
-    float bias = 0.001;
+    if(radAngle > 1 || radAngle < -1){
+        discard;
+    }
 
-    vec2 coordInSplat = gl_PointCoord.xy;
+    float angle = radAngle * PI;
 
-    float x = sin(radAngle)*coordInSplat.y - cos(radAngle)*coordInSplat.x;
-    float y = cos(radAngle)*coordInSplat.y + sin(radAngle)*coordInSplat.x;
+    vec2 positionFromCenter = gl_PointCoord.xy - 0.5;
 
-    vec2 coordNotRotated = vec2(x,y);
+    float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
+    float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
 
-    return texture(imgSplat, coordNotRotated).a > 0;
+    // float x = 0.5*cos(radAngle) + positionFromCenter.x;
+    // float y = 0.5*sin(radAngle) + positionFromCenter.y;
+
+
+    vec2 coordNotRotated = vec2(x,y) + 0.5;
+
+    color = texture(imgSplat, coordNotRotated);
+    // color = vec4(coordNotRotated,0,1);
+    // color = texture(imgSplat, gl_PointCoord.xy);
+    return color.a > 0;
 
 
 }
@@ -124,13 +136,20 @@ vec4 displaySplatFromStroke(){
 
     fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
 
-    // if the center of the splat is in a possitive point of the noise
+    // if the center of the splat is in a positive point of the noise
     if(hasToBeDisplayed()){
-        // if(displayRotatedSplat(0.5)){
-            return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
-        // } else {
-            // discard;
-        // }
+        vec4 colorRotated;
+        // return vec4(color*1.1, alpha);
+
+        if(displayRotatedSplat(rotation, colorRotated)){
+            return vec4(color*1.1, alpha);
+            fragDepth = projectedCenterPoint.z;
+            // return vec4(colorRotated.rgb, alpha);
+            return vec4(colorRotated.a,0,0,colorRotated.a);
+            // return colorRotated;
+        } else {
+            discard;
+        }
         // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
         // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {

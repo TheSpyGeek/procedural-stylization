@@ -23,23 +23,27 @@ class ProceduralStyle05Widget : public NodeWidget {
   NodeWidget(node),
     _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)),
     _splatSize(new FloatSliderWidget(node,"splatSize", 1.,100.,40.)),
+    _rotation(new FloatSliderWidget(node,"rotation", -1.,1.,0.)),
     _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_alphaFactor);
     l->addWidget(_splatSize);
     l->addWidget(_splatDepthFactor);
+    l->addWidget(_rotation);
     setLayout(l);
     addChildWidget(_alphaFactor);
     addChildWidget(_splatSize);
     addChildWidget(_splatDepthFactor);
+    addChildWidget(_rotation);
   }
 
   inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
   inline FloatSliderWidget *splatSize() const {return _splatSize;}
   inline FloatSliderWidget *splatDepthFactor() const {return _splatDepthFactor;}
+  inline FloatSliderWidget *rotation() const {return _rotation;}
 
  private:
-  FloatSliderWidget *_alphaFactor, *_splatSize, *_splatDepthFactor;
+  FloatSliderWidget *_alphaFactor, *_splatSize, *_splatDepthFactor, *_rotation;
 };
 
 

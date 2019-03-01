@@ -40,6 +40,7 @@ ProceduralStyle05Node::ProceduralStyle05Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
+    _pSplat.addUniform("rotation");
     _pSplat.addUniform("splatDepthFactor");
 
     _pBlend.addUniform("image");
@@ -105,6 +106,7 @@ void ProceduralStyle05Node::apply() {
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
+  _pSplat.setUniform1f("rotation",_w->rotation()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
