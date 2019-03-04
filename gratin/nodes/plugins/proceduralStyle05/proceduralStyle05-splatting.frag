@@ -79,6 +79,60 @@ float gnoise(in vec3 x) {
 		     dot(hash33(p+vec3(1.,1.,1.)),f-vec3(1.,1.,1.)),m.x),m.y),m.z)*.5+.5;
 }
 
+float fragDepth = 1e+10;
+
+vec3 modifDirection(in vec3 nV,in float i,in float size) {
+  vec3 n = nV;
+  n.y -= i/size;
+  return normalize(n);
+}
+
+
+float W(float d,float s) {
+  // simple gaussian for the weight
+  return exp(-(d*d)/(2.*s*s));
+}
+
+
+vec4 computeHair() {
+
+    const int size = 25;
+
+  vec4 col = vec4(vec3(0.),1.);
+  vec3 pW = positionWCenter.xyz;
+  vec3 nW = normalWCenter.xyz;
+  vec2 fc = gl_FragCoord.xy; // current pixel coordinate
+
+  float sig = 1.2; // sigma for distance to the curve
+  float vs = 0.005; // the volumetric step
+  float d = 1e+10;
+
+  // ideally, we should make sure that we never go beyond the size of the square...
+  int ss = size;//int(float(size)*noiseCenter.x);
+  float s = 0.;
+
+  for(int i=0;i<=ss;++i) {
+    vec3 nV = normalMat*nW;
+    nV = modifDirection(nV,float(i),float(ss));
+    vec3 nWN = normalMatInv*nV;
+
+    vec4 pW = vec4(pW+float(i)*nWN*vs,1.); // modified pos in world space
+    vec4 pP = mvp*pW; // position in clip space
+    vec2 pS = .5*((pP.xy/pP.w)+1.)*ts; // normalized position in screen space
+
+    float dt = distance(pS,fc);
+    if(dt<d) {
+      s = 1.-float(i)/float(ss+ss/1.5);
+      d = dt;
+      fragDepth = pP.z/pP.w;
+    }
+  }
+
+  float w = W(d,sig*s);
+  vec4 c = vec4(shadingCenter.xyz+vec3(noiseCenter.x-.5),1.);
+  return vec4(c.xyz,w*noiseCenter.y);
+}
+
 
 
 
@@ -94,31 +148,56 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
         discard;
     }
 
-    float angle = radAngle * PI;
+    float angle = radAngle * 3.14;
 
     vec2 positionFromCenter = gl_PointCoord.xy - 0.5;
+
 
     float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
     float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
 
-    // float x = 0.5*cos(radAngle) + positionFromCenter.x;
+    // float x = 0.5*cos(radAngle)+ positionFromCenter.x;
     // float y = 0.5*sin(radAngle) + positionFromCenter.y;
+
+    // y *= -1;
 
 
     vec2 coordNotRotated = vec2(x,y) + 0.5;
+    // coordNotRotated.y = 1-coordNotRotated.y;
 
-    color = texture(imgSplat, coordNotRotated);
+    color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
+
+
+
+    color = texture(imgSplat, coordNotRotated.xy);
+    // color.rgb = vec3(1,1,0);
+
     // color = vec4(coordNotRotated,0,1);
-    // color = texture(imgSplat, gl_PointCoord.xy);
-    return color.a > 0;
 
+    /* has to be deleted this is just a test */
+    if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
+        // color = vec4(0,0,1,1);
+        discard;
+    }
+
+    if(coordNotRotated.y > 1. || coordNotRotated.y < 0.){
+        // color = vec4(0,0,1,1);
+        discard;
+    }
+
+
+
+    // color = vec4(1,0,0,1);
+    // color = texture(imgSplat, gl_PointCoord.xy);
+
+    return color.a > 0;
 
 }
 
-float fragDepth = 1e+10;
 
 vec4 displaySplatFromStroke(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
+    float angle;
 
     vec4 splatColor = texture(imgSplat, gl_PointCoord.xy);
 
@@ -132,7 +211,7 @@ vec4 displaySplatFromStroke(){
     vec3 color = texture(shadingMap, texcoordCenter).rgb;
 
 
-    float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x*splatIMG;
+    float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x;
 
     fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
 
@@ -141,11 +220,14 @@ vec4 displaySplatFromStroke(){
         vec4 colorRotated;
         // return vec4(color*1.1, alpha);
 
+
+
         if(displayRotatedSplat(rotation, colorRotated)){
-            return vec4(color*1.1, alpha);
             fragDepth = projectedCenterPoint.z;
             // return vec4(colorRotated.rgb, alpha);
-            return vec4(colorRotated.a,0,0,colorRotated.a);
+            // return vec4(colorRotated);
+            return vec4(color, alpha);
+            // return vec4(colorRotated.a,0,0,colorRotated.a);
             // return colorRotated;
         } else {
             discard;
@@ -172,11 +254,23 @@ vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
     }
 }
 
+vec4 displayHairsOnNoise(){
+    if(hasToBeDisplayed()){
+        return computeHair();
+
+    } else {
+        discard;
+    }
+}
+
 
 vec4 computeStyle() {
 
     // return displaySplatWithShadingColorAndVariableRadius(0.5);
     return displaySplatFromStroke();
+    // return displayHairsOnNoise();
+
+
 
 }
 
