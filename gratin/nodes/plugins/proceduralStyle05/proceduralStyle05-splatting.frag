@@ -51,6 +51,7 @@ in mat4 mv;
 in mat4 mvpInv;
 in mat3 normalMat;
 in mat3 normalMatInv;
+in vec3 viewDir;
 
 #define PI 3.1415926535898
 
@@ -148,7 +149,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
         discard;
     }
 
-    float angle = radAngle * 3.14;
+    float angle = radAngle * PI;
 
     vec2 positionFromCenter = gl_PointCoord.xy - 0.5;
 
@@ -161,8 +162,9 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
 
     // y *= -1;
 
+    // multiply by -1 to inverse the image splat axis
+    vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
 
-    vec2 coordNotRotated = vec2(x,y) + 0.5;
     // coordNotRotated.y = 1-coordNotRotated.y;
 
     color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
@@ -175,7 +177,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
     // color = vec4(coordNotRotated,0,1);
 
     /* has to be deleted this is just a test */
-    if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
+    /*if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
         // color = vec4(0,0,1,1);
         discard;
     }
@@ -183,7 +185,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
     if(coordNotRotated.y > 1. || coordNotRotated.y < 0.){
         // color = vec4(0,0,1,1);
         discard;
-    }
+    }*/
 
 
 
@@ -210,6 +212,7 @@ vec4 displaySplatFromStroke(){
 
     vec3 color = texture(shadingMap, texcoordCenter).rgb;
 
+    vec2 normal;
 
     float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x;
 
@@ -220,15 +223,20 @@ vec4 displaySplatFromStroke(){
         vec4 colorRotated;
         // return vec4(color*1.1, alpha);
 
+        normal = normalize(depthCenter.xy);
+
+        //  rotation of the splat
+        angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
+
+        if(normal.x < 0){
+            angle *= -1;
+        }
 
 
-        if(displayRotatedSplat(rotation, colorRotated)){
+        if(displayRotatedSplat(angle, colorRotated)){
             fragDepth = projectedCenterPoint.z;
-            // return vec4(colorRotated.rgb, alpha);
-            // return vec4(colorRotated);
             return vec4(color, alpha);
-            // return vec4(colorRotated.a,0,0,colorRotated.a);
-            // return colorRotated;
+            // return vec4(vec3(angle), alpha);
         } else {
             discard;
         }

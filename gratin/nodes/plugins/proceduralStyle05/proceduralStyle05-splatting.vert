@@ -32,6 +32,7 @@ out mat4 mv;
 out mat4 mvpInv;
 out mat3 normalMat;
 out mat3 normalMatInv;
+out vec3 viewDir;
 
 // LOAD MATRICES
 vec4 m0 = texelFetch(matrices, ivec2(0, 0), 0);
@@ -94,4 +95,8 @@ void main() {
   mvpInv = inverse(projected);
   normalMat = transpose(inverse(mat3(view*model)));
   normalMatInv = inverse(normalMat);
+
+  mat4 inverseView = inverse(view);
+  viewDir = vec3(inverseView[2][0], inverseView[2][1], inverseView[2][2]);
+
 }
