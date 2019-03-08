@@ -14,8 +14,8 @@
     <uint name="nodeId-0" val="0"/>
     <uint name="nodeGraphId-0" val="0"/>
     <vector2f name="nodePos-0">
-     <float name="0" val="-3662.18"/>
-     <float name="1" val="2689.36"/>
+     <float name="0" val="-3623.78"/>
+     <float name="1" val="2674.96"/>
     </vector2f>
     <int name="nodeInputNameSize-0" val="0"/>
     <int name="nodeOutputNameSize-0" val="8"/>
@@ -152,8 +152,8 @@
     <uint name="nodeId-8" val="8"/>
     <uint name="nodeGraphId-8" val="0"/>
     <vector2f name="nodePos-8">
-     <float name="0" val="-1388.33"/>
-     <float name="1" val="6190"/>
+     <float name="0" val="-1233.73"/>
+     <float name="1" val="6282.76"/>
     </vector2f>
     <int name="nodeInputNameSize-8" val="2"/>
     <int name="nodeOutputNameSize-8" val="1"/>
@@ -512,14 +512,14 @@
       <vector3f name="shift">
        <float name="0" val="0"/>
        <float name="1" val="0"/>
-       <float name="2" val="1.55929"/>
+       <float name="2" val="2.23643"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="0.951066"/>
-        <float name="1" val="0.0894215"/>
-        <float name="2" val="0.29576"/>
-        <float name="3" val="0.00169031"/>
+        <float name="0" val="0.937807"/>
+        <float name="1" val="0.0970822"/>
+        <float name="2" val="0.316048"/>
+        <float name="3" val="0.105865"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -2276,10 +2276,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="4.79973"/>
+   <float name="scale" val="5.54807"/>
    <vector2f name="offset">
-    <float name="0" val="1288.79"/>
-    <float name="1" val="3694.37"/>
+    <float name="0" val="2348.54"/>
+    <float name="1" val="3194.5"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
@@ -2297,7 +2297,7 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float name="scale" val="1.0872"/>
+   <float name="scale" val="1.20916"/>
    <vector2f name="offset">
     <float name="0" val="817.384"/>
     <float name="1" val="265.577"/>
