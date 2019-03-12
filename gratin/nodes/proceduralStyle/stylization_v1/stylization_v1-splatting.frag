@@ -90,87 +90,9 @@ bool hasToBeDisplayed(){
 }
 
 
-bool displayRotatedSplat(float radAngle, out vec4 color){
-
-    float angle = radAngle * PI;
-
-    vec2 positionFromCenter = gl_PointCoord.xy - 0.5;
 
 
-    float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
-    float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
-
-
-    // multiply by -1 to inverse the image splat axis
-    vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
-
-
-    color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
-
-
-
-    color = texture(splatMap, coordNotRotated.xy);
-
-    return color.a > 0;
-
-}
-
-
-vec4 displaySplatFromStroke(){
-    vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
-
-    float angle;
-
-    vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
-
-    float zAxisOfSplat = splatColor.x;
-
-    float splatMap = splatColor.a;
-    if(splatColor.xyz == vec3(1)){
-        splatMap = 0;
-    }
-
-    vec3 color;
-
-    float alpha = alphaFactor*texture(noiseMap, texcoordCenter).x;
-
-    color = texture(colorMap, texcoordCenter).rgb;
-    fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
-
-    // if the center of the splat is in a positive point of the noise
-    if(hasToBeDisplayed()){
-
-        if(rotateSplat == 0){
-            return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
-        }
-
-
-        vec4 colorRotated;
-        vec2 normal = normalize(normalWCenter.xy);
-
-        //  rotation of the splat
-        angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
-
-        if(normal.x < 0){
-            angle *= -1;
-        }
-
-        if(displayRotatedSplat(angle, colorRotated)){
-            fragDepth = projectedCenterPoint.z;
-            return vec4(color, alpha);
-        } else {
-            discard;
-        }
-
-
-
-    } else {
-        discard;
-    }
-
-}
-
-vec4 testFix(){
+vec4 displaySplat(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
 
     vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
@@ -182,7 +104,6 @@ vec4 testFix(){
         splatIMG = 0;
     }
 
-    // splat Color
     vec3 color = texture(colorMap, texcoordCenter).rgb;
 
 
@@ -193,37 +114,127 @@ vec4 testFix(){
     // if the center of the splat is in a possitive point of the noise
     if(hasToBeDisplayed()){
         // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
-        if(rotateSplat == 1){
-            vec4 colorRotated;
-            vec2 normal = normalize(normalWCenter.xy);
-
-            //  rotation of the splat
-            float angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
-
-            if(normal.x < 0){
-                angle *= -1;
-            }
-
-            if(displayRotatedSplat(angle, colorRotated)){
-                fragDepth = projectedCenterPoint.z;
-                return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
-            } else {
-                discard;
-            }
-        } else {
-
-            return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
-        }
+        return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {
         discard;
     }
+
+}
+
+bool displayRotatedSplat(float radAngle, out vec4 color){
+
+    if(radAngle > 1 || radAngle < -1){
+        discard;
+    }
+
+    float angle = radAngle * PI;
+
+    vec2 positionFromCenter = gl_PointCoord.xy - 0.5;
+
+
+    float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
+    float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
+
+    // float x = 0.5*cos(radAngle)+ positionFromCenter.x;
+    // float y = 0.5*sin(radAngle) + positionFromCenter.y;
+
+    // y *= -1;
+
+    // multiply by -1 to inverse the image splat axis
+    vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
+
+    // coordNotRotated.y = 1-coordNotRotated.y;
+
+    color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
+
+
+
+    color = texture(splatMap, coordNotRotated.xy);
+    // color.rgb = vec3(1,1,0);
+
+    // color = vec4(coordNotRotated,0,1);
+
+    /* has to be deleted this is just a test */
+    /*if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
+        // color = vec4(0,0,1,1);
+        discard;
+    }
+
+    if(coordNotRotated.y > 1. || coordNotRotated.y < 0.){
+        // color = vec4(0,0,1,1);
+        discard;
+    }*/
+
+
+
+    // color = vec4(1,0,0,1);
+    // color = texture(imgSplat, gl_PointCoord.xy);
+
+    return color.a > 0;
+
+}
+
+
+vec4 displaySplatWithRotation(){
+    vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
+    float angle;
+
+    vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
+
+    float zAxisOfSplat = splatColor.x;
+
+    float splatIMG = splatColor.a;
+    if(splatColor.xyz == vec3(1)){
+        splatIMG = 0;
+    }
+
+    vec3 color = texture(colorMap, texcoordCenter).rgb;
+
+    vec2 normal;
+
+    float alpha = alphaFactor*texture(noiseMap, texcoordCenter).x;
+
+    fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
+
+    // if the center of the splat is in a positive point of the noise
+    if(hasToBeDisplayed()){
+        vec4 colorRotated;
+        // return vec4(color*1.1, alpha);
+
+        normal = normalize(normalWCenter.xy);
+
+        //  rotation of the splat
+        angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
+
+        if(normal.x < 0){
+            angle *= -1;
+        }
+
+
+        if(displayRotatedSplat(angle, colorRotated)){
+            fragDepth = projectedCenterPoint.z;
+            return vec4(color, alpha);
+            // return vec4(vec3(angle), alpha);
+        } else {
+            discard;
+        }
+        // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
+        // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
+    } else {
+        discard;
+    }
+
 }
 
 
 
 vec4 computeStyle() {
     // return displaySplatFromStroke();
-    return testFix();
+    if(rotateSplat == 1){
+        return displaySplatWithRotation();
+    } else if(rotateSplat == 0){
+        return displaySplat();
+    }
 }
 
 
