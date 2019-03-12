@@ -183,8 +183,8 @@
     <uint name="nodeId-10" val="10"/>
     <uint name="nodeGraphId-10" val="0"/>
     <vector2f name="nodePos-10">
-     <float name="0" val="2230.73"/>
-     <float name="1" val="4257.61"/>
+     <float name="0" val="2236.82"/>
+     <float name="1" val="4239.33"/>
     </vector2f>
     <int name="nodeInputNameSize-10" val="8"/>
     <int name="nodeOutputNameSize-10" val="1"/>
@@ -437,10 +437,10 @@
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="0.756814"/>
-        <float name="1" val="0.226257"/>
-        <float name="2" val="0.61299"/>
-        <float name="3" val="-0.0122944"/>
+        <float name="0" val="0.572613"/>
+        <float name="1" val="0.322843"/>
+        <float name="2" val="0.752527"/>
+        <float name="3" val="-0.038175"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -2180,8 +2180,8 @@
    </IOData>
    <float name="scale" val="6.09378"/>
    <vector2f name="offset">
-    <float name="0" val="-368.652"/>
-    <float name="1" val="5032.18"/>
+    <float name="0" val="-155.369"/>
+    <float name="1" val="5775.62"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>

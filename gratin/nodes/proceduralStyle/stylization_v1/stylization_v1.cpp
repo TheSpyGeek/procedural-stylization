@@ -34,10 +34,10 @@ Stylization_v1Node::Stylization_v1Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("matrices");
     _pSplat.addUniform("positionWMap");
     _pSplat.addUniform("normalWMap");
-    _pSplat.addUniform("shadingMap");
+    _pSplat.addUniform("colorMap");
     _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
-    _pSplat.addUniform("imgSplat");
+    _pSplat.addUniform("splatMap");
     _pSplat.addUniform("splatNormalMap");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("alphaFactor");
@@ -99,10 +99,10 @@ void Stylization_v1Node::apply() {
   _pSplat.setUniformTexture("matrices",GL_TEXTURE_2D,inputTex(0)->id());
   _pSplat.setUniformTexture("positionWMap",GL_TEXTURE_2D,inputTex(1)->id());
   _pSplat.setUniformTexture("normalWMap",GL_TEXTURE_2D,inputTex(2)->id());
-  _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
+  _pSplat.setUniformTexture("colorMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
-  _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
+  _pSplat.setUniformTexture("splatMap",GL_TEXTURE_2D,inputTex(6)->id());
   _pSplat.setUniformTexture("splatNormalMap",GL_TEXTURE_2D,inputTex(7)->id());
 
 

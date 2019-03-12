@@ -31,10 +31,11 @@ uniform uint maxNodes;
 uniform sampler2D matrices;
 uniform sampler2D positionWMap;
 uniform sampler2D normalWMap;
-uniform sampler2D shadingMap;
+uniform sampler2D colorMap;
 uniform sampler2D depthMap;
 uniform sampler2D noiseTex1;
-uniform sampler2D imgSplat;
+uniform sampler2D splatMap;
+uniform sampler2D splatNormalMap;
 uniform float alphaFactor;
 uniform float splatDepthFactor;
 uniform float rotation;
@@ -42,7 +43,7 @@ uniform float rotation;
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
 in vec4 normalWCenter;
-in vec4 shadingCenter;
+in vec4 colorCenter;
 in vec4 depthCenter;
 in vec4 noiseCenter;
 
@@ -130,7 +131,7 @@ vec4 computeHair() {
   }
 
   float w = W(d,sig*s);
-  vec4 c = vec4(shadingCenter.xyz+vec3(noiseCenter.x-.5),1.);
+  vec4 c = vec4(colorCenter.xyz+vec3(noiseCenter.x-.5),1.);
   return vec4(c.xyz,w*noiseCenter.y);
 }
 
@@ -171,7 +172,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
 
 
 
-    color = texture(imgSplat, coordNotRotated.xy);
+    color = texture(splatMap, coordNotRotated.xy);
     // color.rgb = vec3(1,1,0);
 
     // color = vec4(coordNotRotated,0,1);
@@ -190,7 +191,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
 
 
     // color = vec4(1,0,0,1);
-    // color = texture(imgSplat, gl_PointCoord.xy);
+    // color = texture(splatMap, gl_PointCoord.xy);
 
     return color.a > 0;
 
@@ -201,16 +202,16 @@ vec4 displaySplatFromStroke(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
     float angle;
 
-    vec4 splatColor = texture(imgSplat, gl_PointCoord.xy);
+    vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
 
     float zAxisOfSplat = splatColor.x;
 
-    float splatIMG = splatColor.a;
+    float splatMap = splatColor.a;
     if(splatColor.xyz == vec3(1)){
-        splatIMG = 0;
+        splatMap = 0;
     }
 
-    vec3 color = texture(shadingMap, texcoordCenter).rgb;
+    vec3 color = texture(colorMap, texcoordCenter).rgb;
 
     vec2 normal;
 
@@ -240,7 +241,7 @@ vec4 displaySplatFromStroke(){
         } else {
             discard;
         }
-        // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
+        // return vec4(colorCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatMap);
         // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {
         discard;
@@ -256,7 +257,7 @@ vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
         vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
         fragDepth = test2.z/test2.w;
 
-        return vec4(shadingCenter.rgb, texture(noiseTex1, texcoordCenter).x);
+        return vec4(colorCenter.rgb, texture(noiseTex1, texcoordCenter).x);
     } else {
         discard;
     }

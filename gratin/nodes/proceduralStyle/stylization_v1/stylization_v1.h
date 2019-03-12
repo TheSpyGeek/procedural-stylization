@@ -122,7 +122,7 @@ class Stylization_v1Handle : public QObject, public NodeHandleInterface {
   const QString     help    () const {return tr("procedural style.\n"
 						"TODO");}
 
-  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "shadingMap" << "depthMap" << "noiseTex1" << "imgSplat" << "splatNormalMap";  }
+  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "colorMap" << "depthMap" << "noiseTex1" << "splatMap" << "splatNormalMap";  }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {
