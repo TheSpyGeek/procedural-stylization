@@ -91,7 +91,7 @@ bool hasToBeDisplayed(){
 
 
 
-
+// compute the color of the current pixel using the image as splat
 vec4 displaySplat(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
 
@@ -120,9 +120,10 @@ vec4 displaySplat(){
 
 }
 
-bool displayRotatedSplat(float radAngle){
-
-    vec4 color;
+/* return if the current pixel has to be displayed
+depending on the rotation of the splat
+*/
+bool displayRotatedSplat(float radAngle, out vec4 color){
 
     float angle = radAngle * PI;
 
@@ -136,21 +137,19 @@ bool displayRotatedSplat(float radAngle){
     // multiply by -1 to inverse the image splat axis
     vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
 
-
     color = texture(splatMap, coordNotRotated.xy);
-
-
 
     return color.a > 0;
 
 }
 
 
+// compute the color of the current pixel using the image as splat
+// depending of the normal of the vertex
 vec4 displaySplatWithRotation(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
-    float angle;
 
-    vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
+    vec4 splatColor;
 
     float zAxisOfSplat = splatColor.x;
 
@@ -161,10 +160,8 @@ vec4 displaySplatWithRotation(){
 
     vec3 color = texture(colorMap, texcoordCenter).rgb;
 
-
     float alpha = alphaFactor*texture(noiseMap, texcoordCenter).x;
 
-    fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
 
     // if the center of the splat is in a positive point of the noise
     if(hasToBeDisplayed()){
@@ -172,15 +169,15 @@ vec4 displaySplatWithRotation(){
         vec2 normal = normalize(normalWCenter.xy);
 
         //  rotation of the splat
-        angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
+        float angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
 
         if(normal.x < 0){
             angle *= -1;
         }
 
 
-        if(displayRotatedSplat(angle)){
-            fragDepth = projectedCenterPoint.z;
+        if(displayRotatedSplat(angle, splatColor)){ // if the pixel has to be displayed
+            fragDepth = projectedCenterPoint.z + pow(splatColor.x-0.5, splatDepthFactor);
             return vec4(color, alpha);
         } else {
             discard;
