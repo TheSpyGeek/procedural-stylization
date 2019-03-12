@@ -15,7 +15,7 @@ mkdir build
 cd build
 cmake .. && make
 ```
-* add the path ```gratin/nodes/proceduralStyle/nodes/lib``` and add ```gratin/nodes/proceduralStyle/nodes/customs/``` (Tools >> Manage node paths... >> Add path)
+* add the path ```gratin/nodes/proceduralStyle/build/nodes/lib``` and add ```gratin/nodes/proceduralStyle/nodes/customs/``` (Tools >> Manage node paths... >> Add path)
 
 # Pipeline example
 * ```gratin/pipelines/simplified_pipeline/simplified01.gra```
@@ -26,4 +26,4 @@ cmake .. && make
 * modify the path so that it links to your gratin build directory
 * edit QString  of the node contained in the file <nodeName.cpp> to your path to this node
 * in plugins, do ```mkdir build && cd build && cmake .. && make -j8```
-* add the path  gratin/nodes/plugins/nodes/lib to your gratin settings
+* add the path ```gratin/nodes/testNodes/build/nodes/lib``` to your gratin settings
