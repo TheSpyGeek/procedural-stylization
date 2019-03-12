@@ -223,7 +223,7 @@ vec4 displaySplatFromStroke(){
         vec4 colorRotated;
         // return vec4(color*1.1, alpha);
 
-        normal = normalize(depthCenter.xy);
+        normal = normalize(normalWCenter.xy);
 
         //  rotation of the splat
         angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
