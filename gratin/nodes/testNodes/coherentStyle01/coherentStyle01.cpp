@@ -9,18 +9,18 @@
 
 #include <iostream>
 
-#include "proceduralStyle04.h"
+#include "coherentStyle01.h"
 
-//QString ProceduralStyle04Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString ProceduralStyle04Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/plugins/proceduralStyle04/");
+//QString CoherentStyleNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString CoherentStyleNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/testNodes/coherentStyle01/");
 
-ProceduralStyle04Node::ProceduralStyle04Node(PbGraph *parent,NodeHandle *handle)
+CoherentStyleNode::CoherentStyleNode(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
-    _pSplat(QString(SHADER_PATH+"proceduralStyle04-splatting.vert"),
-       QString(SHADER_PATH+"proceduralStyle04-splatting.frag")),
-    _pBlend(QString(SHADER_PATH+"proceduralStyle04-blending.vert"),
-       QString(SHADER_PATH+"proceduralStyle04-blending.frag")),
-    _w(new ProceduralStyle04Widget(this)),
+    _pSplat(QString(SHADER_PATH+"coherentStyle01-splatting.vert"),
+       QString(SHADER_PATH+"coherentStyle01-splatting.frag")),
+    _pBlend(QString(SHADER_PATH+"coherentStyle01-blending.vert"),
+       QString(SHADER_PATH+"coherentStyle01-blending.frag")),
+    _w(new CoherentStyleWidget(this)),
     _vaoSplat(NULL),
     _nbElements(0),
     _sw(1),
@@ -33,37 +33,24 @@ ProceduralStyle04Node::ProceduralStyle04Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("matrices");
     _pSplat.addUniform("positionWMap");
     _pSplat.addUniform("normalWMap");
-    _pSplat.addUniform("colorMap");
+    _pSplat.addUniform("shadingMap");
+    _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
-    _pSplat.addUniform("imgSplat");
+    _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
-    _pSplat.addUniform("alphaFactor");
-    _pSplat.addUniform("splatSize");
-    _pSplat.addUniform("splatDepthFactor");
+    _pSplat.addUniform("test");
 
     _pBlend.addUniform("image");
 
-
-
     initSprites();
-
-
-
-
-
-
 }
 
-ProceduralStyle04Node::~ProceduralStyle04Node() {
+CoherentStyleNode::~CoherentStyleNode() {
   delete _vaoSplat;
   cleanOITData();
 }
 
-
-
-void ProceduralStyle04Node::apply() {
-
-
+void CoherentStyleNode::apply() {
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
 
@@ -96,15 +83,11 @@ void ProceduralStyle04Node::apply() {
   _pSplat.setUniformTexture("matrices",GL_TEXTURE_2D,inputTex(0)->id());
   _pSplat.setUniformTexture("positionWMap",GL_TEXTURE_2D,inputTex(1)->id());
   _pSplat.setUniformTexture("normalWMap",GL_TEXTURE_2D,inputTex(2)->id());
-  _pSplat.setUniformTexture("colorMap",GL_TEXTURE_2D,inputTex(3)->id());
-  _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(4)->id());
-  _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(5)->id());
-
-
-
-  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
-  _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
-  _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
+  _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
+  _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
+  _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
+  _pSplat.setUniform1i("size",_w->halfsize()->val());
+  _pSplat.setUniform1f("test",_w->test()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -119,7 +102,6 @@ void ProceduralStyle04Node::apply() {
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
-
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
@@ -135,11 +117,10 @@ void ProceduralStyle04Node::apply() {
 }
 
 
-void ProceduralStyle04Node::initSprites() {
+void CoherentStyleNode::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
-
 
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {
@@ -157,11 +138,9 @@ void ProceduralStyle04Node::initSprites() {
 
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
-
-
 }
 
-void ProceduralStyle04Node::initOITData() {
+void CoherentStyleNode::initOITData() {
   cleanOITData();
 
   _glf->glGenBuffers(1, &_acBuffer);
@@ -201,7 +180,7 @@ void ProceduralStyle04Node::initOITData() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
-void ProceduralStyle04Node::cleanOITData() {
+void CoherentStyleNode::cleanOITData() {
   if(_glf->glIsBuffer(_acBuffer)) {
     _glf->glDeleteBuffers(1,&_acBuffer);
   }
@@ -224,7 +203,7 @@ void ProceduralStyle04Node::cleanOITData() {
   _clBuffer = 0;
 }
 
-void ProceduralStyle04Node::initFBO() {
+void CoherentStyleNode::initFBO() {
   NodeTexture2D::initFBO();
 
   if(nbOutputs()>0) {
@@ -237,7 +216,7 @@ void ProceduralStyle04Node::initFBO() {
   initOITData();
 }
 
-void ProceduralStyle04Node::cleanFBO() {
+void CoherentStyleNode::cleanFBO() {
   NodeTexture2D::cleanFBO();
   delete _vaoSplat; _vaoSplat = NULL;
   cleanOITData();

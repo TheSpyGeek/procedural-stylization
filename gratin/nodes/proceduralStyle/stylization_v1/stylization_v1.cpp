@@ -9,18 +9,19 @@
 
 #include <iostream>
 
-#include "proceduralStyle05.h"
+#include "stylization_v1.h"
 
-//QString ProceduralStyle05Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString ProceduralStyle05Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/plugins/proceduralStyle05/");
+//QString Stylization_v1Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString Stylization_v1Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
 
-ProceduralStyle05Node::ProceduralStyle05Node(PbGraph *parent,NodeHandle *handle)
+
+Stylization_v1Node::Stylization_v1Node(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
-    _pSplat(QString(SHADER_PATH+"proceduralStyle05-splatting.vert"),
-       QString(SHADER_PATH+"proceduralStyle05-splatting.frag")),
-    _pBlend(QString(SHADER_PATH+"proceduralStyle05-blending.vert"),
-       QString(SHADER_PATH+"proceduralStyle05-blending.frag")),
-    _w(new ProceduralStyle05Widget(this)),
+    _pSplat(QString(SHADER_PATH+"stylization_v1-splatting.vert"),
+       QString(SHADER_PATH+"stylization_v1-splatting.frag")),
+    _pBlend(QString(SHADER_PATH+"stylization_v1-blending.vert"),
+       QString(SHADER_PATH+"stylization_v1-blending.frag")),
+    _w(new Stylization_v1Widget(this)),
     _vaoSplat(NULL),
     _nbElements(0),
     _sw(1),
@@ -56,13 +57,13 @@ ProceduralStyle05Node::ProceduralStyle05Node(PbGraph *parent,NodeHandle *handle)
 
 }
 
-ProceduralStyle05Node::~ProceduralStyle05Node() {
+Stylization_v1Node::~Stylization_v1Node() {
   delete _vaoSplat;
   cleanOITData();
 }
 
 
-void ProceduralStyle05Node::apply() {
+void Stylization_v1Node::apply() {
 
 
   // init viewport
@@ -137,7 +138,7 @@ void ProceduralStyle05Node::apply() {
 }
 
 
-void ProceduralStyle05Node::initSprites() {
+void Stylization_v1Node::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
@@ -163,7 +164,7 @@ void ProceduralStyle05Node::initSprites() {
 
 }
 
-void ProceduralStyle05Node::initOITData() {
+void Stylization_v1Node::initOITData() {
   cleanOITData();
 
   _glf->glGenBuffers(1, &_acBuffer);
@@ -203,7 +204,7 @@ void ProceduralStyle05Node::initOITData() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
-void ProceduralStyle05Node::cleanOITData() {
+void Stylization_v1Node::cleanOITData() {
   if(_glf->glIsBuffer(_acBuffer)) {
     _glf->glDeleteBuffers(1,&_acBuffer);
   }
@@ -226,7 +227,7 @@ void ProceduralStyle05Node::cleanOITData() {
   _clBuffer = 0;
 }
 
-void ProceduralStyle05Node::initFBO() {
+void Stylization_v1Node::initFBO() {
   NodeTexture2D::initFBO();
 
   if(nbOutputs()>0) {
@@ -239,7 +240,7 @@ void ProceduralStyle05Node::initFBO() {
   initOITData();
 }
 
-void ProceduralStyle05Node::cleanFBO() {
+void Stylization_v1Node::cleanFBO() {
   NodeTexture2D::cleanFBO();
   delete _vaoSplat; _vaoSplat = NULL;
   cleanOITData();

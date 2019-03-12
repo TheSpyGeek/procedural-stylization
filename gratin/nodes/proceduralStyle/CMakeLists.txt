@@ -4,9 +4,9 @@ cmake_minimum_required(VERSION 2.8)
 # set the path to the gratin folder here
 #set(PATH_TO_GRATIN ${CMAKE_SOURCE_DIR}/../../../../gratin/trunk/build)
 #set(PATH_TO_GRATIN ${CMAKE_SOURCE_DIR}/../../../../projects/gratin-dev/trunk/build/)
-set(PATH_TO_GRATIN /home/vergne/projects/gratin-dev/trunk/build)
+set(PATH_TO_GRATIN /home/misnel/gratin/build)
 
-# set destination in which plugins will be located 
+# set destination in which plugins will be located
 set(DESTINATION_DIR ${CMAKE_SOURCE_DIR}/../lib-nodes)
 
 # include default modules and compiler options

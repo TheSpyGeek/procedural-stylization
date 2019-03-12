@@ -1,4 +1,4 @@
-// This file is part of Gratin, a programmable Node-based System 
+// This file is part of Gratin, a programmable Node-based System
 // for GPU-friendly Applications.
 //
 // Copyright (C) 2013-2014 Romain Vergne <romain.vergne@inria.fr>
@@ -9,18 +9,18 @@
 
 #include <iostream>
 
-#include "coherentStyle01.h"
+#include "proceduralStyleIMG.h"
 
-//QString CoherentStyleNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString CoherentStyleNode::SHADER_PATH = QString("/home/vergne/notes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+//QString ProceduralStyleIMGNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString ProceduralStyleIMGNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/testNodes/proceduralStyleIMG/");
 
-CoherentStyleNode::CoherentStyleNode(PbGraph *parent,NodeHandle *handle)
+ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
-    _pSplat(QString(SHADER_PATH+"coherentStyle01-splatting.vert"),
-       QString(SHADER_PATH+"coherentStyle01-splatting.frag")),
-    _pBlend(QString(SHADER_PATH+"coherentStyle01-blending.vert"),
-       QString(SHADER_PATH+"coherentStyle01-blending.frag")),
-    _w(new CoherentStyleWidget(this)),
+    _pSplat(QString(SHADER_PATH+"proceduralStyleIMG-splatting.vert"),
+       QString(SHADER_PATH+"proceduralStyleIMG-splatting.frag")),
+    _pBlend(QString(SHADER_PATH+"proceduralStyleIMG-blending.vert"),
+       QString(SHADER_PATH+"proceduralStyleIMG-blending.frag")),
+    _w(new ProceduralStyleIMGWidget(this)),
     _vaoSplat(NULL),
     _nbElements(0),
     _sw(1),
@@ -36,25 +36,28 @@ CoherentStyleNode::CoherentStyleNode(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("shadingMap");
     _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
+    _pSplat.addUniform("imgSplat");
     _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
+    _pSplat.addUniform("alphaFactor");
+    _pSplat.addUniform("splatSize");
 
     _pBlend.addUniform("image");
-    
+
     initSprites();
 }
 
-CoherentStyleNode::~CoherentStyleNode() {
+ProceduralStyleIMGNode::~ProceduralStyleIMGNode() {
   delete _vaoSplat;
   cleanOITData();
 }
 
-void CoherentStyleNode::apply() {
+void ProceduralStyleIMGNode::apply() {
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
 
-  // init first pass opengl settings 
+  // init first pass opengl settings
   _glf->glClearColor(0.0f,0.0f,0.0f,0.0f);
   _glf->glDisable(GL_DEPTH_TEST);
   _glf->glDisable(GL_BLEND);
@@ -67,14 +70,14 @@ void CoherentStyleNode::apply() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, _clBuffer);
   _glf->glBindTexture(GL_TEXTURE_2D,_headTex);
   _glf->glTexSubImage2D(GL_TEXTURE_2D,0,0,0,_sw,_sh,GL_RED_INTEGER,GL_UNSIGNED_INT, NULL);
-  
-  
-  
-  // THIS WILL HAVE TO BE REMOVED 
+
+
+
+  // THIS WILL HAVE TO BE REMOVED
   //_glf->glEnable(GL_BLEND);
   //_glf->glBlendFunc(GL_ONE,GL_ONE);
   // ****************************
-  
+
   _fbo.bind();
   _glf->glDrawBuffers(1,buffersOfTmpTex(0));
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -86,22 +89,28 @@ void CoherentStyleNode::apply() {
   _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
+  _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
+
+
   _pSplat.setUniform1i("size",_w->halfsize()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
+  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
+  _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
   _vaoSplat->unbind();
 
-  // second pass 
+  // second pass
   _glf->glDisable(GL_BLEND);
   _glf->glDisable(GL_DEPTH_TEST);
   _glf->glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
-  
+
   drawOutputs(buffersOfOutputTex(0),1,false,false);
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
+
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
@@ -111,16 +120,17 @@ void CoherentStyleNode::apply() {
   _glf->glBindTexture(GL_TEXTURE_2D, 0);
   _glf->glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-  
+
   FramebufferObject::unbind();
   //_glf->glDisable(GL_BLEND);
 }
 
 
-void CoherentStyleNode::initSprites() {
+void ProceduralStyleIMGNode::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
+
 
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {
@@ -140,14 +150,14 @@ void CoherentStyleNode::initSprites() {
   _nbElements = nbVert;
 }
 
-void CoherentStyleNode::initOITData() {
+void ProceduralStyleIMGNode::initOITData() {
   cleanOITData();
 
   _glf->glGenBuffers(1, &_acBuffer);
   _glf->glGenBuffers(1, &_llBuffer);
   _glf->glGenTextures(1, &_headTex);
   _glf->glGenBuffers(1, &_clBuffer);
-  
+
   //glGenBuffers(2, buffers);
   _maxNodes = 100 * _sw * _sh;
   GLint nodeSize = sizeof(Vector4f)+sizeof(GLfloat)+sizeof(GLuint);
@@ -180,7 +190,7 @@ void CoherentStyleNode::initOITData() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
-void CoherentStyleNode::cleanOITData() {
+void ProceduralStyleIMGNode::cleanOITData() {
   if(_glf->glIsBuffer(_acBuffer)) {
     _glf->glDeleteBuffers(1,&_acBuffer);
   }
@@ -188,11 +198,11 @@ void CoherentStyleNode::cleanOITData() {
   if(_glf->glIsBuffer(_llBuffer)) {
     _glf->glDeleteBuffers(1,&_llBuffer);
   }
-  
+
   if(_glf->glIsTexture(_headTex)) {
     _glf->glDeleteTextures(1,&_headTex);
   }
-  
+
   if(_glf->glIsBuffer(_clBuffer)) {
     _glf->glDeleteBuffers(1,&_clBuffer);
   }
@@ -203,7 +213,7 @@ void CoherentStyleNode::cleanOITData() {
   _clBuffer = 0;
 }
 
-void CoherentStyleNode::initFBO() {
+void ProceduralStyleIMGNode::initFBO() {
   NodeTexture2D::initFBO();
 
   if(nbOutputs()>0) {
@@ -216,9 +226,8 @@ void CoherentStyleNode::initFBO() {
   initOITData();
 }
 
-void CoherentStyleNode::cleanFBO() {
+void ProceduralStyleIMGNode::cleanFBO() {
   NodeTexture2D::cleanFBO();
   delete _vaoSplat; _vaoSplat = NULL;
   cleanOITData();
 }
-

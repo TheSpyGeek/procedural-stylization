@@ -9,18 +9,18 @@
 
 #include <iostream>
 
-#include "proceduralStyleIMG.h"
+#include "proceduralStyle03.h"
 
-//QString ProceduralStyleIMGNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString ProceduralStyleIMGNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/plugins/proceduralStyleIMG/");
+//QString ProceduralStyle03Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString ProceduralStyle03Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/testNodes/proceduralStyle03/");
 
-ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handle)
+ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
-    _pSplat(QString(SHADER_PATH+"proceduralStyleIMG-splatting.vert"),
-       QString(SHADER_PATH+"proceduralStyleIMG-splatting.frag")),
-    _pBlend(QString(SHADER_PATH+"proceduralStyleIMG-blending.vert"),
-       QString(SHADER_PATH+"proceduralStyleIMG-blending.frag")),
-    _w(new ProceduralStyleIMGWidget(this)),
+    _pSplat(QString(SHADER_PATH+"proceduralStyle03-splatting.vert"),
+       QString(SHADER_PATH+"proceduralStyle03-splatting.frag")),
+    _pBlend(QString(SHADER_PATH+"proceduralStyle03-blending.vert"),
+       QString(SHADER_PATH+"proceduralStyle03-blending.frag")),
+    _w(new ProceduralStyle03Widget(this)),
     _vaoSplat(NULL),
     _nbElements(0),
     _sw(1),
@@ -42,18 +42,53 @@ ProceduralStyleIMGNode::ProceduralStyleIMGNode(PbGraph *parent,NodeHandle *handl
     _pSplat.addUniform("test");
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
+    _pSplat.addUniform("splatDepthFactor");
 
     _pBlend.addUniform("image");
 
+
+
     initSprites();
+
+
+
+
+
+
 }
 
-ProceduralStyleIMGNode::~ProceduralStyleIMGNode() {
+ProceduralStyle03Node::~ProceduralStyle03Node() {
   delete _vaoSplat;
   cleanOITData();
+  delete _colors;
 }
 
-void ProceduralStyleIMGNode::apply() {
+void ProceduralStyle03Node::createColorArray(){
+
+
+    _colors = new Vector4f[_nbElements];
+
+
+    float t;
+    for(unsigned int i=0; i<_nbElements; i++){
+        t = (float)(rand()%255)/255.;
+        _colors[i].x() = t;
+        t = (float)(rand()%255)/255.;
+        _colors[i].y() = t;
+        t = (float)(rand()%255)/255.;
+        _colors[i].z() = t;
+        _colors[i].w() = 1.0;
+    }
+
+    _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
+
+    cout << "random Color created: " << _nbElements << " and " << (sizeof(_colors)/sizeof(*_colors)) << endl;
+}
+
+void ProceduralStyle03Node::apply() {
+
+_vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
+
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
 
@@ -92,10 +127,12 @@ void ProceduralStyleIMGNode::apply() {
   _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
 
 
+
   _pSplat.setUniform1i("size",_w->halfsize()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
+  _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -126,7 +163,7 @@ void ProceduralStyleIMGNode::apply() {
 }
 
 
-void ProceduralStyleIMGNode::initSprites() {
+void ProceduralStyle03Node::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
@@ -148,9 +185,12 @@ void ProceduralStyleIMGNode::initSprites() {
 
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
+
+  createColorArray();
+
 }
 
-void ProceduralStyleIMGNode::initOITData() {
+void ProceduralStyle03Node::initOITData() {
   cleanOITData();
 
   _glf->glGenBuffers(1, &_acBuffer);
@@ -190,7 +230,7 @@ void ProceduralStyleIMGNode::initOITData() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
-void ProceduralStyleIMGNode::cleanOITData() {
+void ProceduralStyle03Node::cleanOITData() {
   if(_glf->glIsBuffer(_acBuffer)) {
     _glf->glDeleteBuffers(1,&_acBuffer);
   }
@@ -213,7 +253,7 @@ void ProceduralStyleIMGNode::cleanOITData() {
   _clBuffer = 0;
 }
 
-void ProceduralStyleIMGNode::initFBO() {
+void ProceduralStyle03Node::initFBO() {
   NodeTexture2D::initFBO();
 
   if(nbOutputs()>0) {
@@ -226,7 +266,7 @@ void ProceduralStyleIMGNode::initFBO() {
   initOITData();
 }
 
-void ProceduralStyleIMGNode::cleanFBO() {
+void ProceduralStyle03Node::cleanFBO() {
   NodeTexture2D::cleanFBO();
   delete _vaoSplat; _vaoSplat = NULL;
   cleanOITData();

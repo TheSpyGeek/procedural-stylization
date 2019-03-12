@@ -9,18 +9,18 @@
 
 #include <iostream>
 
-#include "proceduralStyle03.h"
+#include "proceduralStyle01.h"
 
-//QString ProceduralStyle03Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString ProceduralStyle03Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/plugins/proceduralStyle03/");
+//QString ProceduralStyleNode::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString ProceduralStyleNode::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/testNodes/proceduralStyle01/");
 
-ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
+ProceduralStyleNode::ProceduralStyleNode(PbGraph *parent,NodeHandle *handle)
   : NodeTexture2D(parent,handle),
-    _pSplat(QString(SHADER_PATH+"proceduralStyle03-splatting.vert"),
-       QString(SHADER_PATH+"proceduralStyle03-splatting.frag")),
-    _pBlend(QString(SHADER_PATH+"proceduralStyle03-blending.vert"),
-       QString(SHADER_PATH+"proceduralStyle03-blending.frag")),
-    _w(new ProceduralStyle03Widget(this)),
+    _pSplat(QString(SHADER_PATH+"proceduralStyle01-splatting.vert"),
+       QString(SHADER_PATH+"proceduralStyle01-splatting.frag")),
+    _pBlend(QString(SHADER_PATH+"proceduralStyle01-blending.vert"),
+       QString(SHADER_PATH+"proceduralStyle01-blending.frag")),
+    _w(new ProceduralStyleWidget(this)),
     _vaoSplat(NULL),
     _nbElements(0),
     _sw(1),
@@ -36,59 +36,23 @@ ProceduralStyle03Node::ProceduralStyle03Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("shadingMap");
     _pSplat.addUniform("depthMap");
     _pSplat.addUniform("noiseTex1");
-    _pSplat.addUniform("imgSplat");
     _pSplat.addUniform("size");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("test");
-    _pSplat.addUniform("alphaFactor");
-    _pSplat.addUniform("splatSize");
-    _pSplat.addUniform("splatDepthFactor");
+    _pSplat.addUniform("width");
+    _pSplat.addUniform("height");
 
     _pBlend.addUniform("image");
 
-
-
     initSprites();
-
-
-
-
-
-
 }
 
-ProceduralStyle03Node::~ProceduralStyle03Node() {
+ProceduralStyleNode::~ProceduralStyleNode() {
   delete _vaoSplat;
   cleanOITData();
-  delete _colors;
 }
 
-void ProceduralStyle03Node::createColorArray(){
-
-
-    _colors = new Vector4f[_nbElements];
-
-
-    float t;
-    for(unsigned int i=0; i<_nbElements; i++){
-        t = (float)(rand()%255)/255.;
-        _colors[i].x() = t;
-        t = (float)(rand()%255)/255.;
-        _colors[i].y() = t;
-        t = (float)(rand()%255)/255.;
-        _colors[i].z() = t;
-        _colors[i].w() = 1.0;
-    }
-
-    _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
-
-    cout << "random Color created: " << _nbElements << " and " << (sizeof(_colors)/sizeof(*_colors)) << endl;
-}
-
-void ProceduralStyle03Node::apply() {
-
-_vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
-
+void ProceduralStyleNode::apply() {
   // init viewport
   Glutils::setViewport(outputTex(0)->w(),outputTex(0)->h());
 
@@ -124,15 +88,10 @@ _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
   _pSplat.setUniformTexture("shadingMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
   _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
-  _pSplat.setUniformTexture("imgSplat",GL_TEXTURE_2D,inputTex(6)->id());
-
-
-
   _pSplat.setUniform1i("size",_w->halfsize()->val());
+  _pSplat.setUniform1f("width",_w->width()->val());
+  _pSplat.setUniform1f("height",_w->height()->val());
   _pSplat.setUniform1f("test",_w->test()->val());
-  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
-  _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
-  _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();
@@ -147,7 +106,6 @@ _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
-
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
@@ -163,11 +121,12 @@ _vaoSplat->addAttrib(_nbElements*sizeof(Vector4f),_colors[0].data(),4);
 }
 
 
-void ProceduralStyle03Node::initSprites() {
+
+
+void ProceduralStyleNode::initSprites() {
   vector<Vector2f> vertices;
   unsigned int w = _sw;
   unsigned int h = _sh;
-
 
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {
@@ -176,7 +135,9 @@ void ProceduralStyle03Node::initSprites() {
 
       vertices.push_back(Vector2f(x,y));
     }
-  }
+}
+
+
 
   delete _vaoSplat;
   _vaoSplat = new VertexarrayObject();
@@ -185,12 +146,9 @@ void ProceduralStyle03Node::initSprites() {
 
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),vertices[0].data(),2);
   _nbElements = nbVert;
-
-  createColorArray();
-
 }
 
-void ProceduralStyle03Node::initOITData() {
+void ProceduralStyleNode::initOITData() {
   cleanOITData();
 
   _glf->glGenBuffers(1, &_acBuffer);
@@ -230,7 +188,7 @@ void ProceduralStyle03Node::initOITData() {
   _glf->glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 }
 
-void ProceduralStyle03Node::cleanOITData() {
+void ProceduralStyleNode::cleanOITData() {
   if(_glf->glIsBuffer(_acBuffer)) {
     _glf->glDeleteBuffers(1,&_acBuffer);
   }
@@ -253,7 +211,7 @@ void ProceduralStyle03Node::cleanOITData() {
   _clBuffer = 0;
 }
 
-void ProceduralStyle03Node::initFBO() {
+void ProceduralStyleNode::initFBO() {
   NodeTexture2D::initFBO();
 
   if(nbOutputs()>0) {
@@ -266,7 +224,7 @@ void ProceduralStyle03Node::initFBO() {
   initOITData();
 }
 
-void ProceduralStyle03Node::cleanFBO() {
+void ProceduralStyleNode::cleanFBO() {
   NodeTexture2D::cleanFBO();
   delete _vaoSplat; _vaoSplat = NULL;
   cleanOITData();
