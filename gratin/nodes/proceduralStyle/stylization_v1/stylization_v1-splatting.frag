@@ -204,11 +204,11 @@ vec4 computeStyle() {
 void main() {
   vec4 test = vec4(1,0,0,1);
 
-  vec2 splatCoord = gl_PointCoord.xy;
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
   if(length(centeredSplatCoord)>0.5) discard;
 
+  // compute the color and depth
   vec4 color = computeStyle();
 
   if(color.w<0.01) discard;
@@ -216,8 +216,8 @@ void main() {
 
   uint nodeIdx = atomicCounterIncrement(nextNodeCounter);
 
+  // adding in the linked list the color and depth computed
   if( nodeIdx < maxNodes ) {
-    test = vec4(0,1,0,1);
 
     uint prevHead = imageAtomicExchange(headPointers, ivec2(gl_FragCoord.xy), nodeIdx);
 
@@ -232,14 +232,5 @@ void main() {
 
   }
 
-  // should not be necessary
-  //rendering = computeStyle();
   rendering = test;
-  //vec2 c = vec2(gl_PointCoord.x,1.-gl_PointCoord.y); // position in splat space
-  //vec4 fcol = clamp(col,vec4(0.),vec4(1.));
-  //float ww = 10*(1.-depthCenter.x);
-  //fcol.w *= noiseCenter.x;
-  //rendering = fcol;//+fcol*ww;///float(size);
-  //rendering = vec4(vec3(W(d,sig*s)),1);
-  //rendering = t;//vec4(gl_FragCoord.xy/ts,0,1);
 }
