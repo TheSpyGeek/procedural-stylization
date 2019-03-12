@@ -113,7 +113,6 @@ vec4 displaySplat(){
 
     // if the center of the splat is in a possitive point of the noise
     if(hasToBeDisplayed()){
-        // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
         return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
     } else {
         discard;
@@ -121,11 +120,9 @@ vec4 displaySplat(){
 
 }
 
-bool displayRotatedSplat(float radAngle, out vec4 color){
+bool displayRotatedSplat(float radAngle){
 
-    if(radAngle > 1 || radAngle < -1){
-        discard;
-    }
+    vec4 color;
 
     float angle = radAngle * PI;
 
@@ -135,40 +132,14 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
     float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
     float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
 
-    // float x = 0.5*cos(radAngle)+ positionFromCenter.x;
-    // float y = 0.5*sin(radAngle) + positionFromCenter.y;
-
-    // y *= -1;
 
     // multiply by -1 to inverse the image splat axis
     vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
 
-    // coordNotRotated.y = 1-coordNotRotated.y;
-
-    color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
-
-
 
     color = texture(splatMap, coordNotRotated.xy);
-    // color.rgb = vec3(1,1,0);
-
-    // color = vec4(coordNotRotated,0,1);
-
-    /* has to be deleted this is just a test */
-    /*if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
-        // color = vec4(0,0,1,1);
-        discard;
-    }
-
-    if(coordNotRotated.y > 1. || coordNotRotated.y < 0.){
-        // color = vec4(0,0,1,1);
-        discard;
-    }*/
 
 
-
-    // color = vec4(1,0,0,1);
-    // color = texture(imgSplat, gl_PointCoord.xy);
 
     return color.a > 0;
 
@@ -190,7 +161,6 @@ vec4 displaySplatWithRotation(){
 
     vec3 color = texture(colorMap, texcoordCenter).rgb;
 
-    vec2 normal;
 
     float alpha = alphaFactor*texture(noiseMap, texcoordCenter).x;
 
@@ -198,10 +168,8 @@ vec4 displaySplatWithRotation(){
 
     // if the center of the splat is in a positive point of the noise
     if(hasToBeDisplayed()){
-        vec4 colorRotated;
-        // return vec4(color*1.1, alpha);
 
-        normal = normalize(normalWCenter.xy);
+        vec2 normal = normalize(normalWCenter.xy);
 
         //  rotation of the splat
         angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
@@ -211,15 +179,13 @@ vec4 displaySplatWithRotation(){
         }
 
 
-        if(displayRotatedSplat(angle, colorRotated)){
+        if(displayRotatedSplat(angle)){
             fragDepth = projectedCenterPoint.z;
             return vec4(color, alpha);
-            // return vec4(vec3(angle), alpha);
         } else {
             discard;
         }
-        // return vec4(shadingCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatIMG);
-        // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
+
     } else {
         discard;
     }
