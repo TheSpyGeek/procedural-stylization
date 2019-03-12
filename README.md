@@ -15,7 +15,7 @@ mkdir build
 cd build
 cmake .. && make
 ```
-* add the path ```gratin/nodes/proceduralStyle/nodes/lib``` (Tools >> Manage node paths... >> Add path)
+* add the path ```gratin/nodes/proceduralStyle/nodes/lib``` and add ```gratin/nodes/proceduralStyle/nodes/customs/``` (Tools >> Manage node paths... >> Add path)
 
 # Pipeline example
 * ```gratin/pipelines/simplified_pipeline/simplified01.gra```
