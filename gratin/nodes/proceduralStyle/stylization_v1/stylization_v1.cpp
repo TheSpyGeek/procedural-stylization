@@ -109,7 +109,7 @@ void Stylization_v1Node::apply() {
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
-  _pSplat.setUniform1f("rotateSplat",_w->rotateSplat()->val());
+  _pSplat.setUniform1i("rotateSplat",_w->rotateSplat()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();

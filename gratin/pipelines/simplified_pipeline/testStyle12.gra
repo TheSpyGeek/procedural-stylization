@@ -2180,8 +2180,8 @@
    </IOData>
    <float val="9.62853" name="scale"/>
    <vector2f name="offset">
-    <float val="775.958" name="0"/>
-    <float val="5304.11" name="1"/>
+    <float val="1411.44" name="0"/>
+    <float val="3696.15" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
@@ -2199,10 +2199,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float val="1.15528" name="scale"/>
+   <float val="1.78728" name="scale"/>
    <vector2f name="offset">
-    <float val="795.647" name="0"/>
-    <float val="250.873" name="1"/>
+    <float val="444.225" name="0"/>
+    <float val="262.297" name="1"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>
