@@ -36,14 +36,14 @@ Stylization_v1Node::Stylization_v1Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("normalWMap");
     _pSplat.addUniform("colorMap");
     _pSplat.addUniform("depthMap");
-    _pSplat.addUniform("noiseTex1");
+    _pSplat.addUniform("noiseMap");
     _pSplat.addUniform("splatMap");
     _pSplat.addUniform("splatNormalMap");
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
-    _pSplat.addUniform("rotation");
     _pSplat.addUniform("splatDepthFactor");
+    _pSplat.addUniform("rotateSplat");
 
     _pBlend.addUniform("image");
 
@@ -101,7 +101,7 @@ void Stylization_v1Node::apply() {
   _pSplat.setUniformTexture("normalWMap",GL_TEXTURE_2D,inputTex(2)->id());
   _pSplat.setUniformTexture("colorMap",GL_TEXTURE_2D,inputTex(3)->id());
   _pSplat.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(4)->id());
-  _pSplat.setUniformTexture("noiseTex1",GL_TEXTURE_2D,inputTex(5)->id());
+  _pSplat.setUniformTexture("noiseMap",GL_TEXTURE_2D,inputTex(5)->id());
   _pSplat.setUniformTexture("splatMap",GL_TEXTURE_2D,inputTex(6)->id());
   _pSplat.setUniformTexture("splatNormalMap",GL_TEXTURE_2D,inputTex(7)->id());
 
@@ -109,7 +109,7 @@ void Stylization_v1Node::apply() {
   _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
-  _pSplat.setUniform1f("rotation",_w->rotation()->val());
+  _pSplat.setUniform1f("rotateSplat",_w->rotateSplat()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_POINTS,0,_nbElements);
   _pSplat.disable();

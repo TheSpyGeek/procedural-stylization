@@ -23,27 +23,28 @@ class Stylization_v1Widget : public NodeWidget {
   NodeWidget(node),
     _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)),
     _splatSize(new FloatSliderWidget(node,"splatSize", 1.,100.,40.)),
-    _rotation(new FloatSliderWidget(node,"rotation", -1.,1.,0.)),
-    _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)) {
+    _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)),
+    _rotateSplat(new IntSliderWidget(node,"rotateSplat", 0,1,1)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_alphaFactor);
     l->addWidget(_splatSize);
     l->addWidget(_splatDepthFactor);
-    l->addWidget(_rotation);
+    l->addWidget(_rotateSplat);
     setLayout(l);
     addChildWidget(_alphaFactor);
     addChildWidget(_splatSize);
     addChildWidget(_splatDepthFactor);
-    addChildWidget(_rotation);
+    addChildWidget(_rotateSplat);
   }
 
   inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
   inline FloatSliderWidget *splatSize() const {return _splatSize;}
   inline FloatSliderWidget *splatDepthFactor() const {return _splatDepthFactor;}
-  inline FloatSliderWidget *rotation() const {return _rotation;}
+  inline IntSliderWidget *rotateSplat() const {return _rotateSplat;}
 
  private:
-  FloatSliderWidget *_alphaFactor, *_splatSize, *_splatDepthFactor, *_rotation;
+  FloatSliderWidget *_alphaFactor, *_splatSize, *_splatDepthFactor;
+  IntSliderWidget *_rotateSplat;
 };
 
 
@@ -122,7 +123,7 @@ class Stylization_v1Handle : public QObject, public NodeHandleInterface {
   const QString     help    () const {return tr("procedural style.\n"
 						"TODO");}
 
-  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "colorMap" << "depthMap" << "noiseTex1" << "splatMap" << "splatNormalMap";  }
+  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "colorMap" << "depthMap" << "noiseMap" << "splatMap" << "splatNormalMap";  }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {

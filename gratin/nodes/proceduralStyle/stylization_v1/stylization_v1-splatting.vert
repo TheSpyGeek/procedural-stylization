@@ -17,7 +17,9 @@ uniform sampler2D positionWMap;
 uniform sampler2D normalWMap;
 uniform sampler2D colorMap;
 uniform sampler2D depthMap;
-uniform sampler2D noiseTex1;
+uniform sampler2D noiseMap;
+uniform sampler2D splatMap;
+uniform sampler2D splatNormalMap;
 uniform float splatSize;
 
 out vec2 texcoordCenter;
@@ -71,7 +73,7 @@ void main() {
 
 
   float l = 1.;
-  vec4 nC = texture(noiseTex1,c);
+  vec4 nC = texture(noiseMap,c);
   //if(nC.y<0.8) l = 0.;
   //nC.x = (nC.x-0.8)*5.;
 
@@ -81,7 +83,7 @@ void main() {
 
   gl_Position  = vec4(p.xy,pP.z/pP.w,length(nW.xyz)*l);
   //gl_PointSize = 11.0;
-  // gl_PointSize = 40.;//texture(noiseTex1,c).x*40.0;
+  // gl_PointSize = 40.;//texture(noiseMap,c).x*40.0;
   gl_PointSize = splatSize;
 
   colorCenter = texture(colorMap,c);

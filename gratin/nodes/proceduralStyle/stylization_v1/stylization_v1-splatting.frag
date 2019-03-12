@@ -33,12 +33,12 @@ uniform sampler2D positionWMap;
 uniform sampler2D normalWMap;
 uniform sampler2D colorMap;
 uniform sampler2D depthMap;
-uniform sampler2D noiseTex1;
+uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
 uniform float alphaFactor;
 uniform float splatDepthFactor;
-uniform float rotation;
+uniform int rotateSplat;
 
 in vec2 texcoordCenter;
 in vec4 positionWCenter;
@@ -83,72 +83,14 @@ float gnoise(in vec3 x) {
 
 float fragDepth = 1e+10;
 
-vec3 modifDirection(in vec3 nV,in float i,in float size) {
-  vec3 n = nV;
-  n.y -= i/size;
-  return normalize(n);
-}
-
-
-float W(float d,float s) {
-  // simple gaussian for the weight
-  return exp(-(d*d)/(2.*s*s));
-}
-
-
-vec4 computeHair() {
-
-    const int size = 25;
-
-  vec4 col = vec4(vec3(0.),1.);
-  vec3 pW = positionWCenter.xyz;
-  vec3 nW = normalWCenter.xyz;
-  vec2 fc = gl_FragCoord.xy; // current pixel coordinate
-
-  float sig = 1.2; // sigma for distance to the curve
-  float vs = 0.005; // the volumetric step
-  float d = 1e+10;
-
-  // ideally, we should make sure that we never go beyond the size of the square...
-  int ss = size;//int(float(size)*noiseCenter.x);
-  float s = 0.;
-
-  for(int i=0;i<=ss;++i) {
-    vec3 nV = normalMat*nW;
-    nV = modifDirection(nV,float(i),float(ss));
-    vec3 nWN = normalMatInv*nV;
-
-    vec4 pW = vec4(pW+float(i)*nWN*vs,1.); // modified pos in world space
-    vec4 pP = mvp*pW; // position in clip space
-    vec2 pS = .5*((pP.xy/pP.w)+1.)*ts; // normalized position in screen space
-
-    float dt = distance(pS,fc);
-    if(dt<d) {
-      s = 1.-float(i)/float(ss+ss/1.5);
-      d = dt;
-      fragDepth = pP.z/pP.w;
-    }
-  }
-
-  float w = W(d,sig*s);
-  vec4 c = vec4(colorCenter.xyz+vec3(noiseCenter.x-.5),1.);
-  return vec4(c.xyz,w*noiseCenter.y);
-}
-
-
-
-
 
 
 bool hasToBeDisplayed(){
-    return texture(noiseTex1, texcoordCenter).a > 0;
+    return texture(noiseMap, texcoordCenter).a > 0;
 }
 
-bool displayRotatedSplat(float radAngle, out vec4 color){
 
-    if(radAngle > 1 || radAngle < -1){
-        discard;
-    }
+bool displayRotatedSplat(float radAngle, out vec4 color){
 
     float angle = radAngle * PI;
 
@@ -158,40 +100,16 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
     float x = sin(angle)*positionFromCenter.y - cos(angle)*positionFromCenter.x;
     float y = cos(angle)*positionFromCenter.y + sin(angle)*positionFromCenter.x;
 
-    // float x = 0.5*cos(radAngle)+ positionFromCenter.x;
-    // float y = 0.5*sin(radAngle) + positionFromCenter.y;
-
-    // y *= -1;
 
     // multiply by -1 to inverse the image splat axis
     vec2 coordNotRotated = -1*vec2(x,y) + 0.5;
 
-    // coordNotRotated.y = 1-coordNotRotated.y;
 
     color = vec4(coordNotRotated.x , coordNotRotated.y, 0, 1);
 
 
 
     color = texture(splatMap, coordNotRotated.xy);
-    // color.rgb = vec3(1,1,0);
-
-    // color = vec4(coordNotRotated,0,1);
-
-    /* has to be deleted this is just a test */
-    /*if(coordNotRotated.x > 1. || coordNotRotated.x < 0.){
-        // color = vec4(0,0,1,1);
-        discard;
-    }
-
-    if(coordNotRotated.y > 1. || coordNotRotated.y < 0.){
-        // color = vec4(0,0,1,1);
-        discard;
-    }*/
-
-
-
-    // color = vec4(1,0,0,1);
-    // color = texture(splatMap, gl_PointCoord.xy);
 
     return color.a > 0;
 
@@ -200,6 +118,7 @@ bool displayRotatedSplat(float radAngle, out vec4 color){
 
 vec4 displaySplatFromStroke(){
     vec4 projectedCenterPoint = mv*vec4(positionWCenter.xyz,1);
+
     float angle;
 
     vec4 splatColor = texture(splatMap, gl_PointCoord.xy);
@@ -211,77 +130,52 @@ vec4 displaySplatFromStroke(){
         splatMap = 0;
     }
 
-    vec3 color = texture(colorMap, texcoordCenter).rgb;
+    vec3 color;
 
-    vec2 normal;
+    float alpha = alphaFactor*texture(noiseMap, texcoordCenter).x;
 
-    float alpha = alphaFactor*texture(noiseTex1, texcoordCenter).x;
-
+    color = texture(colorMap, texcoordCenter).rgb;
     fragDepth = projectedCenterPoint.z + pow(zAxisOfSplat-0.5, splatDepthFactor);
 
     // if the center of the splat is in a positive point of the noise
     if(hasToBeDisplayed()){
-        vec4 colorRotated;
-        // return vec4(color*1.1, alpha);
 
-        normal = normalize(normalWCenter.xy);
-
-        //  rotation of the splat
-        angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
-
-        if(normal.x < 0){
-            angle *= -1;
+        if(rotateSplat == 1){
+            return vec4(1,0,0,1);
         }
 
 
-        if(displayRotatedSplat(angle, colorRotated)){
-            fragDepth = projectedCenterPoint.z;
-            return vec4(color, alpha);
-            // return vec4(vec3(angle), alpha);
-        } else {
-            discard;
-        }
-        // return vec4(colorCenter.rgb*(1-zAxisOfSplat)*1.1, alphaFactor*splatMap);
-        // return vec4(color*(1-zAxisOfSplat)*1.1, alpha);
+            vec4 colorRotated;
+            vec2 normal = normalize(normalWCenter.xy);
+
+            //  rotation of the splat
+            angle = 0.5*dot(normal, vec2(0,1)) + 0.5;
+
+            if(normal.x < 0){
+                angle *= -1;
+            }
+
+            if(displayRotatedSplat(angle, colorRotated)){
+                fragDepth = projectedCenterPoint.z;
+                return vec4(color, alpha);
+            } else {
+                discard;
+            }
+
+
+
     } else {
         discard;
     }
 
 }
 
-vec4 displaySplatWithShadingColorAndVariableRadius(float radius){
-
-    if(hasToBeDisplayed()){
-
-        float test1 = 1.-step(radius,distance(gl_PointCoord.xy,vec2(0.5)));
-        vec4 test2 = mvp*vec4(positionWCenter.xyz,1);
-        fragDepth = test2.z/test2.w;
-
-        return vec4(colorCenter.rgb, texture(noiseTex1, texcoordCenter).x);
-    } else {
-        discard;
-    }
-}
-
-vec4 displayHairsOnNoise(){
-    if(hasToBeDisplayed()){
-        return computeHair();
-
-    } else {
-        discard;
-    }
-}
 
 
 vec4 computeStyle() {
-
-    // return displaySplatWithShadingColorAndVariableRadius(0.5);
     return displaySplatFromStroke();
-    // return displayHairsOnNoise();
-
-
-
 }
+
 
 void main() {
   vec4 test = vec4(1,0,0,1);
