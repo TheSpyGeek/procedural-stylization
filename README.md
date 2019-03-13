@@ -16,9 +16,13 @@ cd build
 cmake .. && make
 ```
 * add the path ```gratin/nodes/proceduralStyle/build/nodes/lib``` and add ```gratin/nodes/proceduralStyle/nodes/customs/``` (Tools >> Manage node paths... >> Add path)
+* Note: the node in ```Gratin``` is in the stylization folder
 
-# Pipeline example
-* ```gratin/pipelines/simplified_pipeline/simplified01.gra```
+# Examples
+* ```gratin/pipelines/simplified_pipeline/simplified01.gra``` basic example
+* ```gratin/pipelines/simplified_pipeline/simplified02.gra``` example with a character and its color in texture
+* the splats used are in the folder: ```gratin/data/imgs/```
+* the models used are in the folder: ```gratin/data/mdoels/``` but you can use your owns
 
 
 # Compile tests nodes (optional):
