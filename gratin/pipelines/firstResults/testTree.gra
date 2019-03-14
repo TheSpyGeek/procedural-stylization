@@ -224,9 +224,9 @@
     <string name="nodeInputName-12-0" val="attenuationMap"/>
     <string name="nodeInputName-12-1" val="noiseMap"/>
     <string name="nodeOutputName-12-0" val="outBuffer0"/>
-    <string name="nodeStringId-13" val="stylization_v1Id"/>
+    <string name="nodeStringId-13" val="stylization_v1_initial_initialId"/>
     <uint name="nodeVersion-13" val="1"/>
-    <string name="nodeName-13" val="stylization_v1"/>
+    <string name="nodeName-13" val="stylization_v1_initial_initial"/>
     <string name="nodePath-13" val="stylization/"/>
     <string name="nodeDesc-13" val="procedural stylisation with image as splat"/>
     <string name="nodeHelp-13" val="procedural style.&#xa;TODO"/>

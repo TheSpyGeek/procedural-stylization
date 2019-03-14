@@ -221,9 +221,9 @@
     <int val="0" name="nodeInputNameSize-12"/>
     <int val="1" name="nodeOutputNameSize-12"/>
     <string val="image" name="nodeOutputName-12-0"/>
-    <string val="stylization_v1Id" name="nodeStringId-13"/>
+    <string val="stylization_v1_initialId" name="nodeStringId-13"/>
     <uint val="1" name="nodeVersion-13"/>
-    <string val="stylization_v1" name="nodeName-13"/>
+    <string val="stylization_v1_initial" name="nodeName-13"/>
     <string val="stylization/" name="nodePath-13"/>
     <string val="procedural stylisation with image as splat" name="nodeDesc-13"/>
     <string val="procedural style.&#xa;TODO" name="nodeHelp-13"/>
