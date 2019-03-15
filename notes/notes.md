@@ -58,11 +58,18 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 * how to build higher levels of control on top of the locally painted parameters to cover the full interaction spectrum?
 * how to design sufficiently generic, yet semantically meaningful parameters to allow cross-stylistic art-direction?
 
+
 #### Notes
 
 * They use noise (RGB) to control the UV inclination, the substracte distortion, pigments density .
 * Mapped control considered like most useful level of control
 * three distinct stylizations: watercolor, oil paint and charcoal.
+
+## Dynamic Solid Textures for Real-Time Coherent Stylization
+
+* In this paper we extend the Dynamic Canvas infinite zoom mechanism to object space textures, which allows the real-time stylization of dynamic objects without any sliding effects.
+* This 2D multiscale texture synthesis algorithm generates texture elements on the fly during the zoom
+
 
 ## Software
 
