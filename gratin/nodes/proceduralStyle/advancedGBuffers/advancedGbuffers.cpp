@@ -143,7 +143,7 @@ void Gbuffers2Node::apply() {
   _p->setUniform1f("zmin", _camera->zmin());
   _p->setUniform1f("zmax", _camera->zmax());
 
-  std::cerr << "num submeshes = " << _submeshes.size() << "\n";
+  //std::cerr << "num submeshes = " << _submeshes.size() << "\n";
 
   for (int si = 0; si < _submeshes.size(); ++si) {
     Submesh &sm = _submeshes[si];
@@ -160,7 +160,7 @@ void Gbuffers2Node::apply() {
     _p->setUniform1i("objectID", si);
 
 
-    std::cerr << "num submesh faces = " << sm.mesh->nbFaces() << "\n";
+    //std::cerr << "num submesh faces = " << sm.mesh->nbFaces() << "\n";
 
     if(useTesselation()) {
       _glf->glPatchParameteri(GL_PATCH_VERTICES,3);
