@@ -1,0 +1,6 @@
+ <!DOCTYPE RCC><RCC version="1.0">
+ <qresource>
+      <file alias="CNSPLAT.vert">stylization_v1_initial-splatting.vert</file>
+      <file alias="CNSPLAT.frag">stylization_v1_initial-splatting.vert</file>
+ </qresource>
+ </RCC>
