@@ -12,7 +12,8 @@
 #include "stylization_v1.h"
 
 //QString Stylization_v1Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-QString Stylization_v1Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
+//QString Stylization_v1Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
+QString Stylization_v1Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
 
 
 Stylization_v1Node::Stylization_v1Node(PbGraph *parent,NodeHandle *handle)
@@ -123,7 +124,8 @@ void Stylization_v1Node::apply() {
   drawOutputs(buffersOfOutputTex(0),1,false,false);
   _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _pBlend.enable();
-  _pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
+  //_pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
+  _pBlend.setUniformTexture("image",GL_TEXTURE_2D,inputTex(3)->id());
 
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
@@ -175,7 +177,7 @@ void Stylization_v1Node::initOITData() {
   _glf->glGenBuffers(1, &_clBuffer);
 
   //glGenBuffers(2, buffers);
-  _maxNodes = 100 * _sw * _sh;
+  _maxNodes = 200 * _sw * _sh;
   GLint nodeSize = sizeof(Vector4f)+sizeof(GLfloat)+sizeof(GLuint);
 
   // Our atomic counter
