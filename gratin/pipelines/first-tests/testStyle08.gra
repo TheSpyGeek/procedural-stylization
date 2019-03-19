@@ -2769,10 +2769,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="1.93646"/>
+   <float name="scale" val="8.54737"/>
    <vector2f name="offset">
-    <float name="0" val="-556.8"/>
-    <float name="1" val="3149.54"/>
+    <float name="0" val="-573.895"/>
+    <float name="1" val="4773.54"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
