@@ -12,8 +12,8 @@
 #include "stylization_v1.h"
 
 //QString Stylization_v1Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
-//QString Stylization_v1Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
-QString Stylization_v1Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
+QString Stylization_v1Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
+// QString Stylization_v1Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v1/");
 
 
 Stylization_v1Node::Stylization_v1Node(PbGraph *parent,NodeHandle *handle)
