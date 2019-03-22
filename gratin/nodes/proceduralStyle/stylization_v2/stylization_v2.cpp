@@ -40,7 +40,6 @@ Stylization_v2Node::Stylization_v2Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("splatMap");
     _pSplat.addUniform("splatNormalMap");
     _pSplat.addUniform("maxNodes");
-    _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
     _pSplat.addUniform("splatDepthFactor");
     _pSplat.addUniform("rotateSplat");
@@ -106,7 +105,6 @@ void Stylization_v2Node::apply() {
   _pSplat.setUniformTexture("splatNormalMap",GL_TEXTURE_2D,inputTex(7)->id());
 
 
-  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
   _pSplat.setUniform1i("rotateSplat",_w->rotateSplat()->val());

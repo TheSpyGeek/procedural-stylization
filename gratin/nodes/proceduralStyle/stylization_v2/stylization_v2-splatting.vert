@@ -83,8 +83,10 @@ void main() {
 
   gl_Position  = vec4(p.xy,pP.z/pP.w,length(nW.xyz)*l);
   //gl_PointSize = 11.0;
-  // gl_PointSize = 40.;//texture(noiseMap,c).x*40.0;
-  gl_PointSize = splatSize;
+  //gl_PointSize = 40.;//texture(noiseMap,c).x*40.0;
+
+  // TEST (require white noise map)
+  //if(gl_VertexID!=100000) gl_Position  = vec4(vec3(1000.),1.);
 
   colorCenter = texture(colorMap,c);
   positionWCenter = posW;
@@ -100,5 +102,9 @@ void main() {
 
   mat4 inverseView = inverse(view);
   viewDir = vec3(inverseView[2][0], inverseView[2][1], inverseView[2][2]);
+  float normalProjLength = length((normalMat*nW.xyz).xy);
 
+  if(nC.x<1e-5) gl_PointSize = 0.;
+  else
+    gl_PointSize = splatSize*smoothstep(-0.1,0.2,normalProjLength);
 }

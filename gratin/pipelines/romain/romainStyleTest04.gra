@@ -312,8 +312,8 @@
     <uint val="18" name="nodeId-18"/>
     <uint val="0" name="nodeGraphId-18"/>
     <vector2f name="nodePos-18">
-     <float val="3251.71" name="0"/>
-     <float val="2383.29" name="1"/>
+     <float val="4140.86" name="0"/>
+     <float val="3788.37" name="1"/>
     </vector2f>
     <int val="8" name="nodeInputNameSize-18"/>
     <int val="1" name="nodeOutputNameSize-18"/>
@@ -795,7 +795,7 @@
     <uint val="0" name="nbConnections-22-23"/>
     <bool val="1" name="nodeHasWidget-0"/>
     <IOData name="node-0">
-     <string val="../../../../gratin-dev/trunk/build/data/objs/sphere.obj" name="filename"/>
+     <string val="../../../../gratin/data/objs/sphere.obj" name="filename"/>
      <IOData name="camera">
       <int val="0" name="projType"/>
       <int val="0" name="rotType"/>
@@ -804,7 +804,7 @@
        <int val="512" name="1"/>
       </vector2i>
       <vector3f name="sceneCenter">
-       <float val="-3.03085e-05" name="0"/>
+       <float val="-3.03085e-5" name="0"/>
        <float val="-0.000244021" name="1"/>
        <float val="-0.00847389" name="2"/>
       </vector3f>
@@ -2439,7 +2439,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="100" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="8.9" name="currentVal"/>
+       <float val="8.8" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -2450,7 +2450,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="8.9" name="1"/>
+          <float val="8.8" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -3501,7 +3501,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-19"/>
     <IOData name="node-19">
-     <string val="../../../../../../home/vergne/projects/procedural-stylization/gratin/data/imgs/romain01.png" name="filename"/>
+     <string val="../../../../../vergne/projects/procedural-stylization/gratin/data/imgs/romain01.png" name="filename"/>
      <vector2i name="size">
       <int val="512" name="0"/>
       <int val="512" name="1"/>
@@ -3517,7 +3517,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-20"/>
     <IOData name="node-20">
-     <string val="../../../../../../home/home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/stroke_with_depth3.png" name="filename"/>
+     <string val="../../../../../home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/stroke_with_depth3.png" name="filename"/>
      <vector2i name="size">
       <int val="512" name="0"/>
       <int val="512" name="1"/>
@@ -3610,7 +3610,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-22"/>
     <IOData name="node-22">
-     <string val="../../../../../../home/home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/randomDots.png" name="filename"/>
+     <string val="../../../../../home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/randomDots.png" name="filename"/>
      <vector2i name="size">
       <int val="512" name="0"/>
       <int val="512" name="1"/>
@@ -3626,7 +3626,7 @@
     </vector2f>
     <bool val="1" name="nodeHasWidget-23"/>
     <IOData name="node-23">
-     <string val="../../../../../../home/home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/dot.png" name="filename"/>
+     <string val="../../../../../home/home/home/home/vergne/projects/procedural-stylization/gratin/data/imgs/dot.png" name="filename"/>
      <vector2i name="size">
       <int val="512" name="0"/>
       <int val="512" name="1"/>
@@ -3641,10 +3641,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="0.355102" name="scale"/>
+   <float val="10.9772" name="scale"/>
    <vector2f name="offset">
-    <float val="3648.74" name="0"/>
-    <float val="2617.64" name="1"/>
+    <float val="2386.37" name="0"/>
+    <float val="3781.22" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>

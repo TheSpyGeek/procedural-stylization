@@ -36,7 +36,6 @@ uniform sampler2D depthMap;
 uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
-uniform float alphaFactor;
 uniform float splatDepthFactor;
 uniform int rotateSplat;
 
@@ -189,14 +188,120 @@ vec4 displaySplatWithRotation(){
 
 }
 
+vec4 romainStyleTest01() {
+  // simplest as possible: display splat
 
+  vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
+  if(noiseData.w<=0.) discard; // outside silhouettes --> discard
+
+  vec4 splatData = texture(splatMap,gl_PointCoord.xy); // splat shape
+  vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
+
+
+  float globalSplatOpacity = noiseData.x;
+  float localSplatOpacity = splatData.w;
+  float alpha = globalSplatOpacity*localSplatOpacity; // pixel alpha
+  if(alpha<=1e-3) discard; // do not consider if opicity is too low
+
+
+  vec4 splatColor = vec4(colorData.xyz,alpha);
+
+  fragDepth = gl_FragCoord.z;
+
+  return splatColor;
+}
+
+vec4 romainStyleTest02() {
+  // add rotation
+
+
+  vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
+  if(noiseData.w<=0.) discard; // outside silhouettes --> discard
+
+  //// ROTATE
+  vec2 coord = gl_PointCoord.xy;
+  vec3 n = normalize(normalMat*normalWCenter.xyz);
+  float a = atan(n.y,n.x)+PI/2.;
+  vec2 T = coord-0.5;
+  coord.x = cos(a)*T.x-sin(a)*T.y+0.5;
+  coord.y = sin(a)*T.x+cos(a)*T.y+0.5;
+  // END ROTATE
+
+  vec4 splatData = texture(splatMap,coord); // splat shape
+  vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
+
+
+  float globalSplatOpacity = clamp(noiseData.x*1.,0.,1.);
+  float localSplatOpacity = splatData.w;
+  float alpha = globalSplatOpacity*localSplatOpacity; // pixel alpha
+  if(alpha<=1e-3) discard;
+  //alpha *= alphaFactor;
+  //if(alpha<0.01) discard; // do not consider if opacity is too low
+
+  vec4 splatColor = vec4(colorData.xyz,alpha);
+  //vec4 splatColor = vec4(texture(colorMap, texcoordCenter).xxx,alpha);
+
+  //if(globalSplatOpacity*localSplatOpacity<=0.) splatColor = vec4(1,0,0,1);
+  //else if(alphaFactor*globalSplatOpacity*localSplatOpacity<=0.01) splatColor = vec4(0,1,0,1);
+
+
+  fragDepth = gl_FragCoord.z;// texcoordCenter.x;//
+
+  return splatColor;
+}
+
+vec4 romainStyleTest03() {
+  // add shading
+
+
+  vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
+  if(noiseData.w<=0.) discard; // outside silhouettes --> discard
+
+  //// ROTATE
+  vec2 coord = gl_PointCoord.xy;
+  vec3 n = normalize(normalMat*normalWCenter.xyz);
+  vec2 pn = length(n.xy)>1e-10 ? normalize(n.xy) : n.xy;
+  float a = atan(n.y,n.x)+PI/2.;
+  vec2 T = coord-0.5;
+  coord.x = cos(a)*T.x-sin(a)*T.y+0.5;
+  coord.y = sin(a)*T.x+cos(a)*T.y+0.5;
+  // END ROTATE
+
+  vec4 splatData = texture(splatMap,coord); // splat shape
+  vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
+
+  // SHADING
+  vec4 normalData = texture(splatNormalMap,coord);
+  vec3 sl = normalize(vec3(-0.8,0.8,0.5)); // should be the same dir as for the base shading...
+  vec3 sn = vec3(cos(a)*normalData.x-sin(a)*normalData.y,
+  		 sin(a)*normalData.x+cos(a)*normalData.y,
+  		 normalData.z); // rotated too to account for the splat rotation
+  colorData.xyz *= max(dot(sn,sl),0.)*2.;
+  // END SHADING
+
+  float globalSplatOpacity = noiseData.x;
+  float localSplatOpacity = splatData.w;
+  float alpha = globalSplatOpacity*localSplatOpacity; // pixel alpha
+  if(alpha<=1e-3) discard; // do not consider if opacity is too low
+
+
+  vec4 splatColor = vec4(colorData.xyz,alpha);
+
+  fragDepth = gl_FragCoord.z;
+
+  return splatColor;
+}
 
 vec4 computeStyle() {
+  // return romainStyleTest02();
+
     // return displaySplatFromStroke();
     if(rotateSplat == 1){
-        return displaySplatWithRotation();
+        return romainStyleTest02();
     } else if(rotateSplat == 0){
-        return displaySplat();
+        return romainStyleTest01();
+    } else if(rotateSplat == 2){
+        return romainStyleTest03();
     }
 }
 
@@ -206,12 +311,12 @@ void main() {
 
   vec2 centeredSplatCoord = gl_PointCoord.xy-0.5;
 
-  if(length(centeredSplatCoord)>0.5) discard;
+  //if(length(centeredSplatCoord)>0.5) discard;
 
   // compute the color and depth
   vec4 color = computeStyle();
 
-  if(color.w<0.001) discard;
+  //if(color.w<0.01) discard;
 
 
   uint nodeIdx = atomicCounterIncrement(nextNodeCounter);

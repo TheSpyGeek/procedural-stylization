@@ -195,27 +195,27 @@ vec4 romainStyleTest01() {
   vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
   if(noiseData.w<=0.) discard; // outside silhouettes --> discard
 
-  vec4 splatData = texture(splatMap,gl_PointCoord.xy); // splat shape 
+  vec4 splatData = texture(splatMap,gl_PointCoord.xy); // splat shape
   vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
-  
-  
+
+
   float globalSplatOpacity = noiseData.x;
   float localSplatOpacity = splatData.w;
-  float alpha = alphaFactor*globalSplatOpacity*localSplatOpacity; // pixel alpha 
+  float alpha = alphaFactor*globalSplatOpacity*localSplatOpacity; // pixel alpha
   if(alpha<0.01) discard; // do not consider if opicity is too low
 
-  
+
   vec4 splatColor = vec4(colorData.xyz,alpha);
-  
+
   fragDepth = gl_FragCoord.z;
-  
+
   return splatColor;
 }
 
 vec4 romainStyleTest02() {
-  // add rotation 
+  // add rotation
 
-  
+
   vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
   if(noiseData.w<=0.) discard; // outside silhouettes --> discard
 
@@ -228,34 +228,34 @@ vec4 romainStyleTest02() {
   coord.x = cos(a)*T.x-sin(a)*T.y+0.5;
   coord.y = sin(a)*T.x+cos(a)*T.y+0.5;
   // END ROTATE
-  
-  vec4 splatData = texture(splatMap,coord); // splat shape 
+
+  vec4 splatData = texture(splatMap,coord); // splat shape
   vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
-  
-  
+
+
   float globalSplatOpacity = clamp(noiseData.x*1.,0.,1.);
   float localSplatOpacity = splatData.w;
   float alpha = globalSplatOpacity*localSplatOpacity; // pixel alpha
   if(alpha<=1e-3) discard;
   //alpha *= alphaFactor;
   //if(alpha<0.01) discard; // do not consider if opacity is too low
-		  
+
   vec4 splatColor = vec4(colorData.xyz,alpha);
   //vec4 splatColor = vec4(texture(colorMap, texcoordCenter).xxx,alpha);
 
   //if(globalSplatOpacity*localSplatOpacity<=0.) splatColor = vec4(1,0,0,1);
   //else if(alphaFactor*globalSplatOpacity*localSplatOpacity<=0.01) splatColor = vec4(0,1,0,1);
 
-  
+
   fragDepth = gl_FragCoord.z;// texcoordCenter.x;//
-  
+
   return splatColor;
 }
 
 vec4 romainStyleTest03() {
   // add shading
 
-  
+
   vec4 noiseData = texture(noiseMap, texcoordCenter);  // noise inpulses
   if(noiseData.w<=0.) discard; // outside silhouettes --> discard
 
@@ -268,7 +268,7 @@ vec4 romainStyleTest03() {
   coord.x = cos(a)*T.x-sin(a)*T.y+0.5;
   coord.y = sin(a)*T.x+cos(a)*T.y+0.5;
   // END ROTATE
-  
+
   vec4 splatData = texture(splatMap,coord); // splat shape
   vec4 colorData = texture(colorMap, texcoordCenter);  // rend color (modulated with noise)
 
@@ -279,18 +279,18 @@ vec4 romainStyleTest03() {
   		 sin(a)*normalData.x+cos(a)*normalData.y,
   		 normalData.z); // rotated too to account for the splat rotation
   colorData.xyz *= max(dot(sn,sl),0.)*2.;
-  // END SHADING 
-  
+  // END SHADING
+
   float globalSplatOpacity = noiseData.x;
   float localSplatOpacity = splatData.w;
-  float alpha = alphaFactor*globalSplatOpacity*localSplatOpacity; // pixel alpha 
+  float alpha = alphaFactor*globalSplatOpacity*localSplatOpacity; // pixel alpha
   if(alpha<0.01) discard; // do not consider if opacity is too low
 
-  
+
   vec4 splatColor = vec4(colorData.xyz,alpha);
-  
+
   fragDepth = gl_FragCoord.z;
-  
+
   return splatColor;
 }
 
