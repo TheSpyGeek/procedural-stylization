@@ -285,8 +285,8 @@
     <uint name="nodeId-16" val="16"/>
     <uint name="nodeGraphId-16" val="0"/>
     <vector2f name="nodePos-16">
-     <float name="0" val="-2100.57"/>
-     <float name="1" val="4401.94"/>
+     <float name="0" val="-2472.29"/>
+     <float name="1" val="4882.46"/>
     </vector2f>
     <int name="nodeInputNameSize-16" val="1"/>
     <int name="nodeOutputNameSize-16" val="1"/>
@@ -580,14 +580,14 @@
       <vector3f name="shift">
        <float name="0" val="-0.039804"/>
        <float name="1" val="0.0609031"/>
-       <float name="2" val="2.30377"/>
+       <float name="2" val="1.04859"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="-0.275098"/>
-        <float name="1" val="-0.212589"/>
-        <float name="2" val="-0.927966"/>
-        <float name="3" val="-0.133739"/>
+        <float name="0" val="0.48724"/>
+        <float name="1" val="0.0447167"/>
+        <float name="2" val="-0.871412"/>
+        <float name="3" val="-0.0334137"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -2508,10 +2508,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="10.808"/>
+   <float name="scale" val="2.38345"/>
    <vector2f name="offset">
-    <float name="0" val="1769.19"/>
-    <float name="1" val="2890.6"/>
+    <float name="0" val="1658.34"/>
+    <float name="1" val="3340.77"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
@@ -2529,10 +2529,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float name="scale" val="1.41221"/>
+   <float name="scale" val="1.10992"/>
    <vector2f name="offset">
-    <float name="0" val="934.626"/>
-    <float name="1" val="282.388"/>
+    <float name="0" val="704.993"/>
+    <float name="1" val="292.753"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>
