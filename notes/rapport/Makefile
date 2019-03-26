@@ -4,11 +4,10 @@ FILENAME=$(basename $(notdir $(TARGET)))
 
 
 
-all: $(TARGET)
-	echo $(basename $(notdir $(TARGET)))
+all: $(TARGET) $(FILENAME).tex
 
-$(TARGET): $(FILENAME).tex
-	xelatex main.tex
+$(TARGET): $(FILENAME).tex chapters/*.tex
+	pdflatex main.tex
 
 view: $(TARGET)
 	evince $<

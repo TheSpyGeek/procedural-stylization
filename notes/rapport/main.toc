@@ -8,6 +8,6 @@
 \babel@toc {english}{}
 \contentsline {chapter}{\chapternumberline {1}Introduction}{1}
 \contentsline {chapter}{\chapternumberline {2}State-of-the-Art}{3}
-\contentsline {section}{\numberline {2.1}Object Space}{3}
+\contentsline {section}{\numberline {2.1}Noise}{3}
 \contentsline {chapter}{\chapternumberline {3}Conclusion}{5}
 \contentsline {appendix}{\chapternumberline {A}Appendix}{7}
