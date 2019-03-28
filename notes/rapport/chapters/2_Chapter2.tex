@@ -1,10 +1,17 @@
-\chapter{State-of-the-Art}
+\chapter{Previous Work}
 
-There are many methods to style 3D objects. Each of these method have their advantages and disadvantages about the temporal coherence. We separated these ways to stylized in four differents sections.
 
-\section{Object Space}
+
+The problem of stylizing a 3D object has received many attention in previous work. There are many methods to stylize. Each of these method have their advantages and disadvantages about the temporal coherence. We separated these ways to stylized in four differents sections.
+
 
 \section{Image Space}
+
+This simpliest way to stylize a 3D model is to do in image space. The scene is rendered as an image in a texture and from this image the stylization can proceed.
+The idea is from this image succeed to compute at each pixel the right color of the splat if this is stroke based rendering or which color of an external texture have to be put on this pixel.
+To do an initial painting with strokes Hertzmann's [Image and Video-Based Artistic Stylisation, 2013] add strokes colored depending on the image in the image and decide to delete or replace it to fit at best curves to edges of the image.
+Implicit Brushes for Stylized Line-based Rendering [R.Vergne, 2011] use convolution of points to have an hand drawing effect. These points are placed depending on the \textit{feature profile} which is extracted from the image using maximum of the luminance gradient and the DeCarlo algorithm.
+\section{Object Space}
 
 \section{Texture Mapping}
 
