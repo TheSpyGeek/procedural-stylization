@@ -1,0 +1,17 @@
+\babel@toc {english}{}
+\babel@toc {english}{}
+\contentsline {chapter}{Abstract}{i}
+\contentsline {chapter}{Acknowledgement}{i}
+\contentsline {chapter}{R\'esum\'e}{i}
+\babel@toc {french}{}
+\babel@toc {english}{}
+\babel@toc {english}{}
+\contentsline {chapter}{\chapternumberline {1}Introduction}{1}
+\contentsline {section}{\numberline {1.1}Background}{1}
+\contentsline {section}{\numberline {1.2}Problem Statement}{1}
+\contentsline {subsection}{\numberline {1.2.1}Flatness}{1}
+\contentsline {chapter}{\chapternumberline {2}Previous Work}{3}
+\contentsline {section}{\numberline {2.1}Image Space}{3}
+\contentsline {section}{\numberline {2.2}Object Space}{3}
+\contentsline {section}{\numberline {2.3}Texture Mapping}{4}
+\contentsline {section}{\numberline {2.4}Stroke Based}{4}

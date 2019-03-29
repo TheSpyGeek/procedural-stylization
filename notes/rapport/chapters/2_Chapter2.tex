@@ -7,17 +7,13 @@ The problem of stylizing a 3D object has received many attentions in previous wo
 
 \section{Image Space}
 
-This simplest way to stylize a 3D model is to do in image space. The scene is rendered as an image in texture and from this image, the stylization can proceed. In this
-The idea is from this image succeed to compute at each pixel the right colour of the splat if this is stroke-based rendering or which colour of an external texture has to be put on this pixel.
-To do a brush painting with strokes Hertzmann's [Image and Video-Based Artistic Stylisation, 2013] add strokes coloured depending on the image in the image and decide to delete or replace it to fit at best curves to edges of the image. But this method suffer to motion coherence between frames when the camera is moving some brush strokes will disapear and some will appear because every frames are computed independantly of the previous frame and from the 3D model.
-The method of Vergne et al [Implicit Brushes, 2011] use convolution of points to have a hand drawing effect. These points are placed depending on the \textit{feature profile} which is extracted from the image using the maximum of the luminance gradient and the DeCarlo algorithm[ DeCarlo, 1985].
+This simplest way to stylize a 3D model is to do in image space. The scene is rendered as an image in texture and from this image, the stylization can proceed. The idea is from this image succeed to compute at each pixel the right colour of the splat if this is stroke-based rendering or which colour of an external texture has to be put on this pixel. To do a brush painting with strokes Hertzmann's [Image and Video-Based Artistic Stylisation, 2013] add strokes coloured depending on the image in the image and decide to delete or replace it to fit at best curves to edges of the image. But this method suffer to motion coherence between frames when the camera is moving some brush strokes will disapear and some will appear because every frames are computed independantly of the previous frame and from the 3D model. The method of Vergne et al [Implicit Brushes, 2011] use convolution of points to have a hand drawing effect. These points are placed depending on the \textit{feature profile} which is extracted from the image using the maximum of the luminance gradient and the DeCarlo algorithm[ DeCarlo, 1985].
 
 The advantage of being in image space is that this is in a 2D space so it is easier to make 2D effects like brush paintings, pencil hand drawing. But the disadvantage is there is no information about the geometry (the depth, the normals) and because of that it is hard to ensure \textit{motion coherence}.
 
 \section{Object Space}
 
-The most common way to display texture on an object is to do it in object space (also called 3D space) this permit to anchor the texture to each vertex of the models.
-In 3D space, we treat each vertex from the mesh independantly. Each vertex can have many informations about itself: position in 3D, normal of the surface, distance from the camera, ...
+The most common way to display texture on an object is to do it in object space (also called 3D space) this permit to anchor the texture to each vertex of the models. In 3D space, we treat each vertex from the mesh independantly. Each vertex can have many informations about itself: position in 3D, normal of the surface, distance from the camera, ...
 
 
 \section{Texture Mapping}
