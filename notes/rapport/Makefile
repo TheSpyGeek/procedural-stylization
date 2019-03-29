@@ -17,4 +17,4 @@ view: $(TARGET)
 	evince $<
 
 clean:
-	rm -f $(FILENAME).aux chapters/*.aux $(FILENAME).log $(FILENAME).bbl $(FILENAME).blg $(FILENAME).bcf $(FILENAME).run.xml
+	rm -f $(FILENAME).aux chapters/*.aux $(FILENAME).log $(FILENAME).bbl $(FILENAME).blg $(FILENAME).bcf $(FILENAME).run.xml $(FILENAME).toc

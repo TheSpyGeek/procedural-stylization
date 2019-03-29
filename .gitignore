@@ -1,7 +1,10 @@
 *.o
 *lib/
 *build/
+
+#### NOTES ####
 *.log
 *.aux
 *.bbl
 *.blg
+*.toc
