@@ -1,4 +1,6 @@
 TARGET=main.pdf
+COMPILER=pdflatex
+# COMPILER=
 
 FILENAME=$(basename $(notdir $(TARGET)))
 
@@ -7,7 +9,7 @@ FILENAME=$(basename $(notdir $(TARGET)))
 all: $(TARGET) $(FILENAME).tex
 
 $(TARGET): $(FILENAME).tex chapters/*.tex
-	pdflatex main.tex
+	$(COMPILER) main.tex
 
 view: $(TARGET)
 	evince $<
