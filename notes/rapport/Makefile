@@ -1,6 +1,5 @@
 TARGET=main.pdf
 COMPILER=pdflatex
-# COMPILER=
 
 FILENAME=$(basename $(notdir $(TARGET)))
 
@@ -10,9 +9,12 @@ all: $(TARGET) $(FILENAME).tex
 
 $(TARGET): $(FILENAME).tex chapters/*.tex
 	$(COMPILER) main.tex
+	bibtex $(FILENAME)
+	$(COMPILER) main.tex
+	$(COMPILER) main.tex
 
 view: $(TARGET)
 	evince $<
 
 clean:
-	rm -f $(TARGET) $(FILENAME).aux $(FILENAME).log $(FILENAME).toc chapters/*.log chapters/*.aux
+	rm -f $(FILENAME).aux chapters/*.aux $(FILENAME).log $(FILENAME).bbl $(FILENAME).blg $(FILENAME).bcf $(FILENAME).run.xml
