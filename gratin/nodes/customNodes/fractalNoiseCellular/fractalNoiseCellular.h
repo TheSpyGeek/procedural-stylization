@@ -50,8 +50,7 @@ class FractalNoiseCellularNode : public NodeTexture2D {
   void apply();
 
   inline NodeWidget  *widget() {return _w;}
-  void initSprites();
-  inline virtual void reload() {_pSplat.reload();_pBlend.reload();}
+  inline virtual void reload() {_pBlend.reload();}
   static QString SHADER_PATH;
 
 
@@ -76,11 +75,9 @@ class FractalNoiseCellularNode : public NodeTexture2D {
     GLuint next;
   } ListNode;
 
-  GPUProgram       _pSplat;
   GPUProgram       _pBlend;
   FractalNoiseCellularWidget *_w;
 
-  VertexarrayObject   *_vaoSplat;
   unsigned int         _nbElements;
   unsigned int         _sw;
   unsigned int         _sh;
@@ -108,12 +105,11 @@ class CoherentStyleHandle : public QObject, public NodeHandleInterface {
   unsigned int      version () const {return 1;}
 
   const QString     name    () const {return "fractalNoiseCellular";}
-  const QString     path    () const {return "Imaging/";}
-  const QString     desc    () const {return "Coherent style";}
-  const QString     help    () const {return tr("Coherent style.\n"
-						"TODO");}
+  const QString     path    () const {return "CustomNoises/";}
+  const QString     desc    () const {return "procedural fractal cellular noise";}
+  const QString     help    () const {return tr("fractal noise");}
 
-  const QStringList inputNames () const {return QStringList() << "matrices" << "positionWMap" << "normalWMap" << "shadingMap" << "depthMap" << "noiseTex1"; }
+  const QStringList inputNames () const {return QStringList() << "positionWMap" << "depthMap"; }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {
