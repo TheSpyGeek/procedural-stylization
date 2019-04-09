@@ -17,12 +17,20 @@ uniform float depthDistance;
 
 layout(location = 0) out vec4 rendering;
 
-
+/*
 const float frequency = 9.5;
 const float amplitude = 0.155;
 const float persistence = 0.583;
 const int nboctaves = 1;
 const int nbSamples = 5;
+const float style = 0.068;
+*/
+
+const float frequency = 9.5;
+const float amplitude = 0.134;
+const float persistence = 0.000;
+const int nboctaves = 4;
+const int nbSamples = 3;
 const float style = 0.068;
 
 

@@ -154,7 +154,7 @@
     <uint val="0" name="nbConnections-4-5"/>
     <bool val="1" name="nodeHasWidget-0"/>
     <IOData name="node-0">
-     <string val="../../../../gratin/data/objs/sphere.obj" name="filename"/>
+     <string val="../../../../gratin/data/objs/spot.obj" name="filename"/>
      <IOData name="camera">
       <int val="0" name="projType"/>
       <int val="0" name="rotType"/>
@@ -163,23 +163,23 @@
        <int val="512" name="1"/>
       </vector2i>
       <vector3f name="sceneCenter">
-       <float val="-3.03085e-5" name="0"/>
-       <float val="-0.000244021" name="1"/>
-       <float val="-0.00847389" name="2"/>
+       <float val="1.76273e-8" name="0"/>
+       <float val="0.105959" name="1"/>
+       <float val="0.189819" name="2"/>
       </vector3f>
-      <float val="1.00847" name="sceneRadius"/>
+      <float val="1.08276" name="sceneRadius"/>
       <float val="45" name="fovy"/>
       <vector3f name="shift">
        <float val="0" name="0"/>
        <float val="0" name="1"/>
-       <float val="4.12074" name="2"/>
+       <float val="3.45799" name="2"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float val="-0.0280077" name="0"/>
-        <float val="0.655016" name="1"/>
-        <float val="0.584811" name="2"/>
-        <float val="0.477661" name="3"/>
+        <float val="0.390297" name="0"/>
+        <float val="0.00686385" name="1"/>
+        <float val="0.918393" name="2"/>
+        <float val="0.0645682" name="3"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float val="256" name="0"/>
@@ -670,7 +670,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.155" name="currentVal"/>
+       <float val="0.134" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -681,7 +681,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.155" name="1"/>
+          <float val="0.134" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -693,7 +693,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.583" name="currentVal"/>
+       <float val="0" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -704,7 +704,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.583" name="1"/>
+          <float val="0" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -716,7 +716,7 @@
       <int val="1" name="intAttribMinVal"/>
       <int val="10" name="intAttribMaxVal"/>
       <IOData name="intAttribCurve">
-       <int val="1" name="currentVal"/>
+       <int val="4" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -727,7 +727,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="1" name="1"/>
+          <float val="4" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -832,8 +832,8 @@
    </IOData>
    <float val="6.21908" name="scale"/>
    <vector2f name="offset">
-    <float val="-725.93" name="0"/>
-    <float val="1876.21" name="1"/>
+    <float val="-1565.51" name="0"/>
+    <float val="5557.9" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
