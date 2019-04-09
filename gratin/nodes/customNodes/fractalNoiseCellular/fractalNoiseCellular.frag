@@ -12,6 +12,7 @@
 uniform sampler2D positionWMap;
 uniform sampler2D depthMap;
 
+uniform float depthDistance;
 
 
 layout(location = 0) out vec4 rendering;
@@ -26,7 +27,9 @@ in vec2 texcoord;
 
 void main() {
 
-  rendering = vec4(1,0,0,1);
+  rendering = vec4(depthDistance,0,0,1);
+  // rendering = texture(positionWMap, texcoord) * depthDistance;
+  // rendering.a = 1;
 
 
 

@@ -101,8 +101,8 @@
     <uint val="5" name="nodeId-5"/>
     <uint val="0" name="nodeGraphId-5"/>
     <vector2f name="nodePos-5">
-     <float val="621.162" name="0"/>
-     <float val="3333.24" name="1"/>
+     <float val="1041.28" name="0"/>
+     <float val="3324.49" name="1"/>
     </vector2f>
     <int val="2" name="nodeInputNameSize-5"/>
     <int val="1" name="nodeOutputNameSize-5"/>
@@ -792,36 +792,13 @@
     <bool val="1" name="nodeHasWidget-5"/>
     <IOData name="node-5"/>
     <IOData name="nodeWidget-5">
-     <uint val="2" name="nbChildren"/>
+     <uint val="1" name="nbChildren"/>
      <IOData name="childWidget-0">
-      <bool val="1" name="intAttribKeyframed"/>
-      <int val="1" name="intAttribMinVal"/>
-      <int val="100" name="intAttribMaxVal"/>
-      <IOData name="intAttribCurve">
-       <int val="0" name="currentVal"/>
-       <uint val="1" name="nbCurves"/>
-       <IOData name="curve-0">
-        <int val="0" name="interpType"/>
-        <int val="0" name="leftType"/>
-        <int val="0" name="rightType"/>
-        <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
-         <uint val="0" name="nbTangents"/>
-         <vector2f name="controlPoint-0">
-          <float val="0" name="0"/>
-          <float val="0" name="1"/>
-         </vector2f>
-        </IOData>
-       </IOData>
-      </IOData>
-      <uint val="0" name="nbChildren"/>
-     </IOData>
-     <IOData name="childWidget-1">
       <bool val="1" name="floatAttribKeyframed"/>
       <float val="0" name="floatAttribMinVal"/>
-      <float val="1" name="floatAttribMaxVal"/>
+      <float val="100" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0" name="currentVal"/>
+       <float val="0.6" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -832,7 +809,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0" name="1"/>
+          <float val="0.6" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -853,7 +830,7 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="7.23342" name="scale"/>
+   <float val="8.75244" name="scale"/>
    <vector2f name="offset">
     <float val="621.162" name="0"/>
     <float val="3333.24" name="1"/>

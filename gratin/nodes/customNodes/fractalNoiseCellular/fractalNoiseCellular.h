@@ -21,22 +21,17 @@ class FractalNoiseCellularWidget : public NodeWidget {
  public:
  FractalNoiseCellularWidget(NodeInterface *node) :
   NodeWidget(node),
-    _halfsize(new IntSliderWidget(node,"size",1,100,0)),
-    _test(new FloatSliderWidget(node,"test",0,1,0)) {
+    _depthDistance(new FloatSliderWidget(node,"depthDistance",0,100,1)) {
     QVBoxLayout *l = new QVBoxLayout();
-    l->addWidget(_halfsize);
-    l->addWidget(_test);
+    l->addWidget(_depthDistance);
     setLayout(l);
-    addChildWidget(_halfsize);
-    addChildWidget(_test);
+    addChildWidget(_depthDistance);
   }
 
-  inline IntSliderWidget *halfsize() const {return _halfsize;}
-  inline FloatSliderWidget *test() const {return _test;}
+  inline FloatSliderWidget *depthDistance() const {return _depthDistance;}
 
  private:
-  IntSliderWidget *_halfsize;
-  FloatSliderWidget *_test;
+  FloatSliderWidget *_depthDistance;
 };
 
 
@@ -50,45 +45,16 @@ class FractalNoiseCellularNode : public NodeTexture2D {
   void apply();
 
   inline NodeWidget  *widget() {return _w;}
-  inline virtual void reload() {_pBlend.reload();}
+  inline virtual void reload() {_pNoise.reload();}
   static QString SHADER_PATH;
 
 
- protected:
-  // need 1 tmp texture (because of the 2 passes)
-  inline unsigned int nbTmps()  const {return 1; }
-  void initFBO();
-  void cleanFBO();
-
  private:
-  void initOITData();
-  void cleanOITData();
 
-  enum BufferNames {
-    COUNTER_BUFFER = 0,
-    LINKED_LIST_BUFFER = 1
-  };
 
-  struct ListNode {
-    Vector4f color;
-    GLfloat depth;
-    GLuint next;
-  } ListNode;
-
-  GPUProgram       _pBlend;
+  GPUProgram       _pNoise;
   FractalNoiseCellularWidget *_w;
 
-  unsigned int         _nbElements;
-  unsigned int         _sw;
-  unsigned int         _sh;
-
-  // order-independent transparency data
-  // https://github.com/gangliao/Order-Independent-Transparency-GPU/tree/master/source%20code/src
-  GLuint _acBuffer; // atomic counter buffer
-  GLuint _llBuffer; // linked list buffer
-  GLuint _headTex;  // head pointer texture
-  GLuint _clBuffer; // clear buffer
-  GLuint _maxNodes;
 };
 
 
