@@ -46,7 +46,6 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 
 **OverCoat** is a software to draw strokes from a 3D model using a method that the artists can 'inflate' the 3D model to change where they draw in depth. It also allow to draw hair or leaves starting from a point on the 3D mesh.
 
-
 ## Maya Painter Effect ([video](https://www.youtube.com/watch?v=ybCqeHklt0M))
 
 * from a 3D mesh
@@ -58,25 +57,62 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
 * how to build higher levels of control on top of the locally painted parameters to cover the full interaction spectrum?
 * how to design sufficiently generic, yet semantically meaningful parameters to allow cross-stylistic art-direction?
 
-
 #### Notes
-
 * They use noise (RGB) to control the UV inclination, the substracte distortion, pigments density .
 * Mapped control considered like most useful level of control
-* three distinct stylizations: watercolor, oil paint and charcoal.
+* three distinct stylizations: watercolor, oil paint and charcoal.analisys
+
+## View-Dependent Particles for Interactive Non-Photorealistic Rendering
+
+* rendering in screen space
+* compute particles => define density of particles to define the level of precision
+* draw strokes from particles
+
+## WYSIWYG NPR: Drawing Strokes Directly on 3D Models
+
+* Interactive (different modes)
+* Select a silhouette to draw
+* draw strokes in 3D Space
+
+## Quality Assessment of Fractalized NPR Textures: a Perceptual Objective Metric
+
+* goal is to define some estimate of the quality of NPR renderings based on texture fractalization
+* rank fractal stylization like (hatching, stippling, ...)
+
+## Programmable rendering of line drawing from 3D scenes
+
+* line extraction in image space
+* for each style sheet done by the user, it apply stroke at some points of the final image
+* style sheets define by where draw, what is drawn, ...
+
+## Dynamic Canvas for Non-photorealistic Walkthroughs
+
+* infinite zoom effect
+* animation of background to improve the immersion when the camera is moving.
+* static backgrounds give a "shower door" effect
+* add motion to background with moving strokes according to camera motion
+
+## Pen and ink textures for real-time rendering
+
+* from an input image is based on the distribution of strokes according to a probability function.
+* draw outlines perpendicular to the direction of the gradient of the input image
+
+## Consistent media model for real time scene rendering
+
+* produces a coherent stylization avoiding the shower door and popping effects
+* fractalization for infinite zoom
 
 ## Dynamic Solid Textures for Real-Time Coherent Stylization
 
 * In this paper we extend the Dynamic Canvas infinite zoom mechanism to object space textures, which allows the real-time stylization of dynamic objects without any sliding effects.
 * This 2D multiscale texture synthesis algorithm generates texture elements on the fly during the zoom
 
-
 ## Software
 
 * Maya with Painter Effects
 * OverCoat
 * Disney's Deep canvas
-* [Freestyle](freestyle.sourceforge.net) (Stéphane Grabli)
+* [Freestyle](freestyle.sourceforge.net) (Stéphane Grabli)[Grabli et al. 2010]
 * RenderMan Pixar
 
 

@@ -1,11 +1,12 @@
 # TODO
 
-* [ ] lire 4 papiers indiqués sur le sujet de stage
-* [x] fix le pipeline sur gratin
-* [x] regarder les type de bruits (principalement perlin et fractal)
-* [x] regarder la technique de rendu de Gris (jeux vidéo)
-* [ ] regarder code shaderToy (https://www.shadertoy.com/view/XsfGWN)
-* [ ] essayer de changer le noeud custom pour afficher une image png
+* [ ] finir **State of the Art**
+* [ ] modifier la production du bruit pour ne plus avoir à toucher aux 2 param (style et frequency)
+* [ ] bruit fractal dans un noeud custom
+* [ ] chercher des trucs qui font apparaitre de l'aliasing
+* [ ] animer la caméra
+* [ ] shading sur chaque poil
+* [ ] poils: bruit pour controler la taille du splat
 
 # Papiers
 * [x] State-of-the-Art Report on Temporal Coherence for Stylized Animations
