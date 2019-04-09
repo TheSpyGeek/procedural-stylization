@@ -77,7 +77,7 @@ float fnoise(in vec3 p,in float amplitude,in float frequency,in float persistenc
 	return n;
 }
 
-void main() {
+vec4 noiseColor(vec2 textureCoord, float mult){
 	vec2 ps = .5*(1./textureSize(positionWMap,0).xy); // half pixel size
 	vec2 psStep  = ps/float(nbSamples+1);
 	float n = 0.;
@@ -86,8 +86,8 @@ void main() {
 	vec3 offset = vec3(10.);
 	for(int i=-nbSamples;i<=nbSamples;++i) {
 		for(int j=-nbSamples;j<=nbSamples;++j) {
-			vec2 coord = texcoord+vec2(float(i),float(j))*psStep;
-			vec4 data = texture(positionWMap,coord);
+			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
+			vec4 data = mult * texture(positionWMap,coord);
 			//n += smoothstep(0.5-style,0.5+style,1.-fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
 			//n += fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves);
 
@@ -100,7 +100,34 @@ void main() {
 	float finalA = a/nb;
 	float finalN = n/nb;
 
+	return vec4(vec3(finalN), finalA);
+}
+
+void main() {
+
+	float depth = texture(depthMap, texcoord).x;
+
+	float z = log2(depthDistance);
+	// float s = z-floor(z);
+	float s = depth;
+
+	float frag_scale = 1;//pow(2.0, floor(z));
+
+	// octave weight
+	float alpha1 = s/2.0;
+	float alpha2 = 1.0/2.0 - s/6.0;
+	float alpha3 = 1.0/3.0 - s/6.0;
+	float alpha4 = 1.0/6.0 - s/6.0;
+
+	vec4 oct1 = alpha1 * noiseColor(texcoord/frag_scale, 1.0);
+	vec4 oct2 = alpha2 * noiseColor(texcoord/frag_scale, 2.0);
+	vec4 oct3 = alpha3 * noiseColor(texcoord/frag_scale, 4.0);
+	vec4 oct4 = alpha4 * noiseColor(texcoord/frag_scale, 8.0);
+
+	vec4 n = oct1+oct2+oct3+oct4;
+
 	//finalN = 1.-smoothstep(0.,style,finalN);
 
-	rendering = vec4(vec3(finalN),finalA);
+	// rendering = noiseColor(texcoord);
+	rendering = n;
 }
