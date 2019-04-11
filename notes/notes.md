@@ -35,7 +35,7 @@
 ## From image parsing to painterly rendering
 
 ## Image and video based painterly animation
-
+Hertzmann's
 * process a segment of video
 * extract motion information from one source and apply it to another image
 * image space (video)
@@ -92,7 +92,7 @@
 
 **OverCoat** is a software to draw strokes from a 3D model using a method that the artists can 'inflate' the 3D model to change where they draw in depth. It also allow to draw hair or leaves starting from a point on the 3D mesh.
 
-# Painterly rendering for animation
+## Painterly rendering for animation
 
 
 ## Pen and ink textures for real-time rendering
@@ -143,6 +143,10 @@ complex non-photorealistic patterns (<a href="http://www-sop.inria.fr/reves/Basi
     * planar methods that deform the texture with global as-rigid-as-possible transformations
     * texture advection and filtering approaches that work at the pixel level
 * Fractalization => inifinite zoom ( -- modify the brushes, strokes)
+
+## Stroke Based Painterly Rendering
+
+* algorithm in image space
 
 ## Temporal Coherence Methods in Real-Time Rendering
 

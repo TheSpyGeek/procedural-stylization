@@ -1,24 +1,7 @@
 \chapter{Previous Work}
 
+Image stylization has been around for years. Algorithms were created to automatise this desire to stylize. Some techniques use line extraction algorithm to then use convolution of points to make hand drawing styles. Hertzmann with his \textit{curve stroke} algorithm \cite{rosin_stroke_2013}  succeed to create images that look like a traditional painting with paintbrushes. To do so he computes many control pint on the original image to further place strokes. But these create a problem when we wanted to stylize videos because it treats frames independantly and so it creates bad \textit{motion continuity}. The movie \textit{Loving Vincent}\cite{LovingVincent} can illustrate what can happen in this case of bad \textit{motion continuity}.
 
+Then some researches have be to propose a solution to this issue\cite{litwinowicz_processing_1997, hays_image_2004, bousseau_video_2007, lin_video_nodate}. The solution of Lin et \textit{al.} \cite{lin_video_nodate} is to create a segmentation manually of each key frame and then for each part of this segmentation they compute the motion. With this motion they adapt the stroke based rendering of the next frames. To have a watercolor stylization on a video Bousseau et \textit{al.} compute a texture advection to apply to the final image the wanted effect.
 
-The problem of stylizing a 3D object has received many attentions in previous work. There are many methods to stylize. Each of these methods has its advantages and disadvantages about the temporal coherence. We separated these ways to stylized in four different sections : image space, object space, texture mapping and stroke based rendering.
-
-
-\section{Image Space}
-
-This simplest way to stylize a 3D model is to do in image space. The scene is rendered as an image in texture and from this image, the stylization can proceed. The idea is from this image succeed to compute at each pixel the right colour of the splat if this is stroke-based rendering or which colour of an external texture has to be put on this pixel. To do a brush painting with strokes Hertzmann's {\color{red}[Image and Video-Based Artistic Stylisation, 2013]} add strokes coloured depending on the image in the image and decide to delete or replace it to fit at best curves to edges of the image. But this method suffer to \textit{temporal continuity} between frames when the camera is moving some brush strokes will disapear and some will appear because every frames are computed independantly of the previous frame and from the 3D model. The method of Vergne et al \cite{vergne_implicit_2011} use convolution of points to have a hand drawing effect. These points are placed depending on the \textit{feature profile} which is extracted from the image using the maximum of the luminance gradient and the DeCarlo algorithm {\color{red}[DeCarlo, 1985]}.
-
-In image space, it is easier to have and keep \textit{flatness} and we can do effects like brush paintings, pencil hand drawing. But the disadvantage is there is no information about the geometry (the depth, the normals) and because of that it is hard to ensure \textit{motion coherence}.
-
-\section{Object Space}
-
-The most common way to display texture on an object is to do it in object space (also called 3D space) this permit to anchor the texture to each vertex of the models. In 3D space, we treat each vertex from the mesh independantly. Each vertex can have many informations about itself: position in the 3D space, normal of the surface, distance from the camera, ...  OverCoat\cite{schmid_overcoat:_2011} is an interface that allow users to paint manually 2D strokes on a 3D model. To do so the user draw 2D splats in image space (in his camera view)  and then these splats are anchored on the object on points that are image points projected on the 3D model. Because the splat are anchored to the object, they follow the movement of the object and so Overcoat have no problem of \textit{motion coherence}.
-
-
-
-\section{Texture Mapping}
-
-Textures are
-
-\section{Stroke Based}
+In our approach, the goal is to make stylized rendering of 3D objects. There are two moments in a pipeline rendering when we can stylize an object, the first is when we manipulate the vertices and the color of each triangle it is the \textit{object space}. The second is when we do the compositing with the textures that we have like shadow map, image filter, ... (manipulation of pixels of the screen) it is the \textit{image space} and also called \textit{screen space}.
