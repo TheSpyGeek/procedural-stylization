@@ -12,26 +12,18 @@
 uniform sampler2D positionWMap;
 uniform sampler2D depthMap;
 
-uniform float depthDistance;
+uniform float amplitude;
+uniform int nbSamples;
+uniform float frequency;
+uniform float style;
 
 
 layout(location = 0) out vec4 rendering;
 
-/*
-const float frequency = 9.5;
-const float amplitude = 0.155;
-const float persistence = 0.583;
-const int nboctaves = 1;
-const int nbSamples = 5;
-const float style = 0.068;
-*/
 
-const float frequency = 9.5;
-const float amplitude = 0.134;
+
+const int nboctaves = 1;
 const float persistence = 0.000;
-const int nboctaves = 4;
-const int nbSamples = 3;
-const float style = 0.068;
 
 
 
@@ -85,7 +77,7 @@ float fnoise(in vec3 p,in float amplitude,in float frequency,in float persistenc
 	return n;
 }
 
-vec4 noiseColor(vec2 textureCoord, float mult){
+vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 	vec2 ps = .5*(1./textureSize(positionWMap,0).xy); // half pixel size
 	vec2 psStep  = ps/float(nbSamples+1);
 	float n = 0.;
@@ -95,11 +87,11 @@ vec4 noiseColor(vec2 textureCoord, float mult){
 	for(int i=-nbSamples;i<=nbSamples;++i) {
 		for(int j=-nbSamples;j<=nbSamples;++j) {
 			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
-			vec4 data = mult * texture(positionWMap,coord);
+			vec4 data = mult * texture(positionWMap,coord)/frag_scale;
 			//n += smoothstep(0.5-style,0.5+style,1.-fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
 			//n += fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves);
 
-			n +=  1.-smoothstep(0.,style,fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
+			n +=  1.-smoothstep(0.,style,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -115,11 +107,13 @@ void main() {
 
 	float depth = texture(depthMap, texcoord).x;
 
-	float z = log2(depthDistance);
-	// float s = z-floor(z);
-	float s = depth;
+	float z = log2(depth);
+	float s = z-floor(z);
+	// float s = fract(depth);
 
-	float frag_scale = 1;//pow(2.0, floor(z));
+	//float s = 0.3*fract(depth);
+
+	float frag_scale = pow(2.0, floor(z));
 
 	// octave weight
 	float alpha1 = s/2.0;
@@ -127,10 +121,10 @@ void main() {
 	float alpha3 = 1.0/3.0 - s/6.0;
 	float alpha4 = 1.0/6.0 - s/6.0;
 
-	vec4 oct1 = alpha1 * noiseColor(texcoord/frag_scale, 1.0);
-	vec4 oct2 = alpha2 * noiseColor(texcoord/frag_scale, 2.0);
-	vec4 oct3 = alpha3 * noiseColor(texcoord/frag_scale, 4.0);
-	vec4 oct4 = alpha4 * noiseColor(texcoord/frag_scale, 8.0);
+	vec4 oct1 = alpha1 * noiseColor(texcoord, 1.0, frag_scale);
+	vec4 oct2 = alpha2 * noiseColor(texcoord, 2.0, frag_scale);
+	vec4 oct3 = alpha3 * noiseColor(texcoord, 4.0, frag_scale);
+	vec4 oct4 = alpha4 * noiseColor(texcoord, 8.0, frag_scale);
 
 	vec4 n = oct1+oct2+oct3+oct4;
 

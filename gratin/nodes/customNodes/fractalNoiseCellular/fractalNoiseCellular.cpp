@@ -50,7 +50,10 @@ void FractalNoiseCellularNode::apply() {
   // send uniform to shader
   _pNoise.setUniformTexture("positionWMap",GL_TEXTURE_2D,inputTex(0)->id());
   _pNoise.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(1)->id());
-  _pNoise.setUniform1f("depthDistance",_w->depthDistance()->val());
+  _pNoise.setUniform1f("frequency",_w->frequency()->val());
+  _pNoise.setUniform1f("style",_w->style()->val());
+  _pNoise.setUniform1f("amplitude",_w->amplitude()->val());
+  _pNoise.setUniform1i("nbSamples",_w->nbSamples()->val());
 
   // draw quad
   _unitSquareVao->bind();

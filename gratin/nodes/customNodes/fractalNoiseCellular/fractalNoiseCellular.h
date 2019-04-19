@@ -21,17 +21,30 @@ class FractalNoiseCellularWidget : public NodeWidget {
  public:
  FractalNoiseCellularWidget(NodeInterface *node) :
   NodeWidget(node),
-    _depthDistance(new FloatSliderWidget(node,"depthDistance",0,100,1)) {
+    _frequency(new FloatSliderWidget(node,"frequency",0,100,8)),
+    _style(new FloatSliderWidget(node,"style",0,1,0.4)),
+    _amplitude(new FloatSliderWidget(node,"amplitude",0,1,0.8)),
+    _nbsamples(new IntSliderWidget(node, "nbSamples", 1, 10, 2)) {
     QVBoxLayout *l = new QVBoxLayout();
-    l->addWidget(_depthDistance);
+    l->addWidget(_frequency);
+    l->addWidget(_style);
+    l->addWidget(_amplitude);
+    l->addWidget(_nbsamples);
     setLayout(l);
-    addChildWidget(_depthDistance);
+    addChildWidget(_frequency);
+    addChildWidget(_style);
+    addChildWidget(_amplitude);
+    addChildWidget(_nbsamples);
   }
 
-  inline FloatSliderWidget *depthDistance() const {return _depthDistance;}
+  inline FloatSliderWidget *frequency() const {return _frequency;}
+  inline FloatSliderWidget *style() const {return _style;}
+  inline FloatSliderWidget *amplitude() const {return _amplitude;}
+  inline IntSliderWidget *nbSamples() const {return _nbsamples;}
 
  private:
-  FloatSliderWidget *_depthDistance;
+  FloatSliderWidget *_amplitude, *_style, *_frequency;
+  IntSliderWidget *_nbsamples;
 };
 
 
