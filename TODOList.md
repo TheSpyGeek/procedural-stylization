@@ -1,12 +1,13 @@
 # TODO
 
 * [ ] finir **State of the Art**
+* [ ] bruit fractal dans un noeud custom => faire overlapping
 * [ ] modifier la production du bruit pour ne plus avoir à toucher aux 2 param (style et frequency)
-* [ ] bruit fractal dans un noeud custom
-* [ ] chercher des trucs qui font apparaitre de l'aliasing
 * [ ] animer la caméra
 * [ ] shading sur chaque poil
 * [ ] poils: bruit pour controler la taille du splat
+* [ ] pouvoir jouer avec la profondeur de chaque splat
+* [ ] chercher des trucs qui font apparaitre de l'aliasing
 
 # Papiers
 * [x] State-of-the-Art Report on Temporal Coherence for Stylized Animations
