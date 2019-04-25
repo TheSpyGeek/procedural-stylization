@@ -35,12 +35,12 @@ void FractalNoiseCellularNode::apply() {
 
 
   // openGL settings
-  _glf->glClearColor(0.0f,0.0f,0.0f,0.0f);
-  _glf->glDisable(GL_DEPTH_TEST);
-  _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // bind fbo
   _fbo.bind();
+  _glf->glClearColor(0.0f,0.0f,0.0f,0.0f);
+  _glf->glDisable(GL_DEPTH_TEST);
+  _glf->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
   // enable the pass

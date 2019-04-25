@@ -2174,7 +2174,7 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="4.28441" name="scale"/>
+   <float val="8.82213" name="scale"/>
    <vector2f name="offset">
     <float val="1356.81" name="0"/>
     <float val="3232.38" name="1"/>
