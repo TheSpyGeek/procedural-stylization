@@ -18,3 +18,6 @@ view: $(TARGET)
 
 clean:
 	rm -f $(FILENAME).aux chapters/*.aux $(FILENAME).log $(FILENAME).bbl $(FILENAME).blg $(FILENAME).bcf $(FILENAME).run.xml $(FILENAME).toc
+
+rename:
+	cp $(TARGET) rapport_isnel_maxime.pdf

@@ -2,6 +2,9 @@
 
 ## A Dynamic Noise Primitive for Coherent Stylization
 
+* "Texture-based approaches are mostly used for continuous
+textures (canvas, watercolor)"
+
 ## Active Strokes: Coherent Line Stylization for Animated 3D Models
 
 ## An Image-Based Shading Pipeline for 2D Animation
