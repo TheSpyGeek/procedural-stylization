@@ -84,6 +84,10 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 	float nb = 0.;
 	float a = 0.;
 	vec3 offset = vec3(10.);
+
+	float myStyle = style;
+	// float myStyle = frequency/30;
+
 	for(int i=-nbSamples;i<=nbSamples;++i) {
 		for(int j=-nbSamples;j<=nbSamples;++j) {
 			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
@@ -91,7 +95,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 			//n += smoothstep(0.5-style,0.5+style,1.-fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
 			//n += fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves);
 
-			n +=  1.-smoothstep(0.,style,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
+			n +=  1.-smoothstep(0.,myStyle,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -127,6 +131,7 @@ void main() {
 	vec4 oct4 = alpha4 * noiseColor(texcoord, 8.0, frag_scale);
 
 	vec4 n = oct1+oct2+oct3+oct4;
+	//vec4 n = oct1;
 
 	//finalN = 1.-smoothstep(0.,style,finalN);
 
