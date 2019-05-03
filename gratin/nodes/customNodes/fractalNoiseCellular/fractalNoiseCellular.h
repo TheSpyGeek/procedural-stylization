@@ -88,7 +88,7 @@ class CoherentStyleHandle : public QObject, public NodeHandleInterface {
   const QString     desc    () const {return "procedural fractal cellular noise";}
   const QString     help    () const {return tr("fractal noise");}
 
-  const QStringList inputNames () const {return QStringList() << "positionWMap" << "depthMap"; }
+  const QStringList inputNames () const {return QStringList() << "positionWMap" << "depthMap" << "depthMinMax"; }
   const QStringList outputNames() const {return (QStringList() << "rendering");}
 
   NodeInterface *createInstance(PbGraph *parent) {

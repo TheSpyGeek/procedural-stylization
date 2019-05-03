@@ -8,9 +8,12 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #version 430 core
 
+#define MAX_FREQ 15
+
 
 uniform sampler2D positionWMap;
 uniform sampler2D depthMap;
+uniform sampler2D depthMinMax;
 
 uniform float amplitude;
 uniform int nbSamples;
@@ -83,19 +86,24 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 	float n = 0.;
 	float nb = 0.;
 	float a = 0.;
-	vec3 offset = vec3(10.);
 
-	float myStyle = style;
+	float z;
+	float f;
+	float zmax = texture(depthMinMax, texcoord).x;
+
 	// float myStyle = frequency/30;
 
 	for(int i=-nbSamples;i<=nbSamples;++i) {
 		for(int j=-nbSamples;j<=nbSamples;++j) {
 			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
-			vec4 data = mult * texture(positionWMap,coord)/frag_scale;
-			//n += smoothstep(0.5-style,0.5+style,1.-fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves));
-			//n += fnoise(data.xyz*frequency,amplitude,frequency,persistence,nboctaves);
+			vec4 pos = texture(positionWMap,coord);
+			pos = vec4(pos.xyz/zmax, pos.a);
+			vec4 data = mult * pos/frag_scale;
 
-			n +=  1.-smoothstep(0.,myStyle,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
+			z = 2*texture(depthMap, texcoord).x/zmax;
+			f = 0.8*(frequency/MAX_FREQ);
+
+			n +=  1.-smoothstep(0.,style*f,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -108,8 +116,9 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 }
 
 void main() {
+	float zmax = texture(depthMinMax, texcoord).x;
 
-	float depth = texture(depthMap, texcoord).x;
+	float depth = zmax*texture(depthMap, texcoord).x;
 
 	float z = log2(depth);
 	float s = z-floor(z);
@@ -118,6 +127,7 @@ void main() {
 	//float s = 0.3*fract(depth);
 
 	float frag_scale = pow(2.0, floor(z));
+	// float frag_scale = floor(z)/2;
 
 	// octave weight
 	float alpha1 = s/2.0;
@@ -131,10 +141,10 @@ void main() {
 	vec4 oct4 = alpha4 * noiseColor(texcoord, 8.0, frag_scale);
 
 	vec4 n = oct1+oct2+oct3+oct4;
-	//vec4 n = oct1;
+	// vec4 n = oct1;
 
 	//finalN = 1.-smoothstep(0.,style,finalN);
 
-	// rendering = noiseColor(texcoord);
 	rendering = n;
+	// rendering = noiseColor(texcoord, 1.0, 1.0);
 }

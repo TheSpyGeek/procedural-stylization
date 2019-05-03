@@ -22,6 +22,7 @@ FractalNoiseCellularNode::FractalNoiseCellularNode(PbGraph *parent,NodeHandle *h
 
     _pNoise.addUniform("positionWMap");
     _pNoise.addUniform("depthMap");
+    _pNoise.addUniform("depthMinMax");
 
 
 }
@@ -50,6 +51,7 @@ void FractalNoiseCellularNode::apply() {
   // send uniform to shader
   _pNoise.setUniformTexture("positionWMap",GL_TEXTURE_2D,inputTex(0)->id());
   _pNoise.setUniformTexture("depthMap",GL_TEXTURE_2D,inputTex(1)->id());
+  _pNoise.setUniformTexture("depthMinMax",GL_TEXTURE_2D,inputTex(2)->id());
   _pNoise.setUniform1f("frequency",_w->frequency()->val());
   _pNoise.setUniform1f("style",_w->style()->val());
   _pNoise.setUniform1f("amplitude",_w->amplitude()->val());
