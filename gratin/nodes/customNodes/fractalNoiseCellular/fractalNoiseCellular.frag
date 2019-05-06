@@ -89,7 +89,6 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 
 	float z;
 	float f;
-	float zmax = texture(depthMinMax, texcoord).x;
 
 	// float myStyle = frequency/30;
 
@@ -97,11 +96,10 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 		for(int j=-nbSamples;j<=nbSamples;++j) {
 			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
 			vec4 pos = texture(positionWMap,coord);
-			pos = vec4(pos.xyz/zmax, pos.a);
 			vec4 data = mult * pos/frag_scale;
 
-			z = 2*texture(depthMap, texcoord).x/zmax;
-			f = 0.8*(frequency/MAX_FREQ);
+			z = texture(depthMap, texcoord).x;
+			f = 1.2*(frequency/MAX_FREQ);
 
 			n +=  1.-smoothstep(0.,style*f,fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
 			a += data.w;
@@ -118,7 +116,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 void main() {
 	float zmax = texture(depthMinMax, texcoord).x;
 
-	float depth = zmax*texture(depthMap, texcoord).x;
+	float depth = texture(depthMap, texcoord).x;
 
 	float z = log2(depth);
 	float s = z-floor(z);
@@ -127,7 +125,7 @@ void main() {
 	//float s = 0.3*fract(depth);
 
 	float frag_scale = pow(2.0, floor(z));
-	// float frag_scale = floor(z)/2;
+	// float frag_scale = pow(2.0, 2*floor(z));
 
 	// octave weight
 	float alpha1 = s/2.0;
