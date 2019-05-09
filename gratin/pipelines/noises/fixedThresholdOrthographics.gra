@@ -124,12 +124,12 @@
     <uint name="nbConnections-0-3" val="0"/>
     <uint name="nbConnections-0-4" val="2"/>
     <vector2u name="connection-0-4-0">
-     <uint name="0" val="5"/>
-     <uint name="1" val="0"/>
-    </vector2u>
-    <vector2u name="connection-0-4-1">
      <uint name="0" val="6"/>
      <uint name="1" val="1"/>
+    </vector2u>
+    <vector2u name="connection-0-4-1">
+     <uint name="0" val="5"/>
+     <uint name="1" val="0"/>
     </vector2u>
     <uint name="nbConnections-0-5" val="1"/>
     <vector2u name="connection-0-5-0">
@@ -182,14 +182,14 @@
       <vector3f name="shift">
        <float name="0" val="0"/>
        <float name="1" val="0"/>
-       <float name="2" val="3.785"/>
+       <float name="2" val="3.0995"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="-0.953422"/>
-        <float name="1" val="0.12536"/>
-        <float name="2" val="0.261658"/>
-        <float name="3" val="0.0825129"/>
+        <float name="0" val="-0.287908"/>
+        <float name="1" val="0.812935"/>
+        <float name="2" val="0.159263"/>
+        <float name="3" val="0.480504"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -917,10 +917,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="7.21145"/>
+   <float name="scale" val="5.61883"/>
    <vector2f name="offset">
-    <float name="0" val="2.26769"/>
-    <float name="1" val="2786.46"/>
+    <float name="0" val="509.296"/>
+    <float name="1" val="2839.81"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
