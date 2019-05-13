@@ -8,7 +8,7 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #version 430 core
 
-#define MAX_FREQ 15
+#define MAX_FREQ 30
 
 
 uniform sampler2D positionWMap;
@@ -90,6 +90,8 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 	float z;
 	float f;
 
+	float zmax = texture(depthMinMax, texcoord).x;
+
 	// float myStyle = frequency/30;
 
 	for(int i=-nbSamples;i<=nbSamples;++i) {
@@ -98,10 +100,10 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 			vec4 pos = texture(positionWMap,coord);
 			vec4 data = mult * pos/frag_scale;
 
-			z = (mult*texture(depthMap, coord).x)/frag_scale;
+			z = mult*texture(depthMap, coord).x/(frag_scale);
 			f = 1.2*(frequency/MAX_FREQ);
 
-			n +=  1.-smoothstep(0.,(style*z*f),fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
+			n +=  1.-smoothstep(0.,(style*f*z),fnoise(data.xyz,amplitude,frequency,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -114,7 +116,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 }
 
 void main() {
-	// float zmax = texture(depthMinMax, texcoord).x;
+	float zmax = texture(depthMinMax, texcoord).x;
 
 	float depth = texture(depthMap, texcoord).x;
 
@@ -145,7 +147,7 @@ void main() {
 
 	//finalN = 1.-smoothstep(0.,style,finalN);
 
-	rendering = 2*n;
+	rendering = n;
 
-	// rendering = noiseColor(texcoord, 1.0, frag_scale);
+	// rendering = noiseColor(texcoord, 1.0, 1.0);
 }
