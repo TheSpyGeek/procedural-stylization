@@ -8,7 +8,7 @@
 // with this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 #version 430 core
 
-#define MAX_FREQ 30
+
 
 
 uniform sampler2D positionWMap;
@@ -80,6 +80,8 @@ float fnoise(in vec3 p,in float amplitude,in float frequency,in float persistenc
 	return n;
 }
 
+#define MAX_FREQ 50
+
 vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 	vec2 ps = .5*(1./textureSize(positionWMap,0).xy); // half pixel size
 	vec2 psStep  = ps/float(nbSamples+1);
@@ -101,10 +103,10 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale){
 			vec4 data =  pos;
 
 			// z = mult*texture(depthMap, coord).x/(frag_scale);
-			z = texture(depthMap, coord).x/zmax;
-			f = 1.2*(frequency/MAX_FREQ);
+			z = texture(depthMap, coord).x;
+			f = (frequency/MAX_FREQ);
 
-			n +=  1.-smoothstep(0.,style*z*f,fnoise(data.xyz,amplitude,mult*frequency/frag_scale,persistence,nboctaves));
+			n +=  1.-smoothstep(0.,style*f,fnoise(data.xyz,amplitude,mult*frequency/frag_scale,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -120,7 +122,7 @@ void main() {
 	float zmax = texture(depthMinMax, texcoord).x;
 	float zmin = texture(depthMinMax, texcoord).y;
 
-	float depth = texture(depthMap, texcoord).x;
+	float depth = texture(depthMap, texcoord).x*zmax;
 
 	float z = log2(depth);
 	// float z = depth/zmax;
