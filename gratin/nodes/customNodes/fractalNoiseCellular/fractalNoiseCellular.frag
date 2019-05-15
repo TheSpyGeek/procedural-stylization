@@ -18,7 +18,7 @@ uniform sampler2D depthMinMax;
 uniform float amplitude;
 uniform int nbSamples;
 uniform float frequency;
-uniform float style;
+uniform float threshold;
 
 
 layout(location = 0) out vec4 rendering;
@@ -98,7 +98,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale, in float wei
 
 	float zmax = texture(depthMinMax, texcoord).x;
 
-	// float myStyle = frequency/30;
+	// float mythreshold = frequency/30;
 
 	for(int i=-nbSamples;i<=nbSamples;++i) {
 		for(int j=-nbSamples;j<=nbSamples;++j) {
@@ -112,7 +112,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale, in float wei
 			z = pow(2,weight);
 			f = (frequency/MAX_FREQ);
 
-			n +=  1.-smoothstep(0.,style*f*z,fnoise(data.xyz,amplitude,mult*frequency/frag_scale,persistence,nboctaves));
+			n +=  1.-smoothstep(0.,threshold*f*z,fnoise(data.xyz,amplitude,mult*frequency/frag_scale,persistence,nboctaves));
 			a += data.w;
 			nb += 1.;
 		}
@@ -157,7 +157,7 @@ void main() {
 
 	// vec4 n = oct1;
 
-	//finalN = 1.-smoothstep(0.,style,finalN);
+	//finalN = 1.-smoothstep(0.,threshold,finalN);
 
 	rendering = n;
 	// rendering = noiseColor(texcoord, 1.0, frag_scale);

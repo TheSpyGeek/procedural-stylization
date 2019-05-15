@@ -22,28 +22,28 @@ class FractalNoiseCellularWidget : public NodeWidget {
  FractalNoiseCellularWidget(NodeInterface *node) :
   NodeWidget(node),
     _frequency(new FloatSliderWidget(node,"frequency",0,100,8)),
-    _style(new FloatSliderWidget(node,"style",0,1,0.4)),
+    _threshold(new FloatSliderWidget(node,"threshold",0,2,0.6)),
     _amplitude(new FloatSliderWidget(node,"amplitude",0,1,0.8)),
     _nbsamples(new IntSliderWidget(node, "nbSamples", 1, 10, 2)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_frequency);
-    l->addWidget(_style);
+    l->addWidget(_threshold);
     l->addWidget(_amplitude);
     l->addWidget(_nbsamples);
     setLayout(l);
     addChildWidget(_frequency);
-    addChildWidget(_style);
+    addChildWidget(_threshold);
     addChildWidget(_amplitude);
     addChildWidget(_nbsamples);
   }
 
   inline FloatSliderWidget *frequency() const {return _frequency;}
-  inline FloatSliderWidget *style() const {return _style;}
+  inline FloatSliderWidget *threshold() const {return _threshold;}
   inline FloatSliderWidget *amplitude() const {return _amplitude;}
   inline IntSliderWidget *nbSamples() const {return _nbsamples;}
 
  private:
-  FloatSliderWidget *_amplitude, *_style, *_frequency;
+  FloatSliderWidget *_amplitude, *_threshold, *_frequency;
   IntSliderWidget *_nbsamples;
 };
 
