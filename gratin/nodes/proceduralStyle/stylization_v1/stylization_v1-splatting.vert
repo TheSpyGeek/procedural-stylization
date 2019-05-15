@@ -105,6 +105,14 @@ void main() {
   float normalProjLength = length((normalMat*nW.xyz).xy);
 
   if(nC.x<1e-5) gl_PointSize = 0.;
-  else 
-    gl_PointSize = splatSize*smoothstep(-0.1,0.2,normalProjLength);
+  else
+    gl_PointSize = splatSize*smoothstep(-0.2,0.2,normalProjLength);
+
+
+    if(nC.x<1e-5){
+        gl_PointSize = 0.;
+    } else {
+        float zcam = depthCenter.x;
+        gl_PointSize = splatSize*smoothstep(-0.1*zcam,0.2*zcam,pow(3.0,normalProjLength));
+    }
 }
