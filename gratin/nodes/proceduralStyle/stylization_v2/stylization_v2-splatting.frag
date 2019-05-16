@@ -55,6 +55,13 @@ in vec3 viewDir;
 
 #define PI 3.1415926535898
 
+/*** choice of rendering ***/
+#define NOT_ROTATE 0
+#define ROTATE 1
+#define SHADING 2
+
+
+
 vec2 ts = textureSize(positionWMap,0);
 
 vec3 hash33(vec3 p) {
@@ -292,13 +299,15 @@ vec4 romainStyleTest03() {
   return splatColor;
 }
 
+
+
 vec4 computeStyle() {
   // return romainStyleTest02();
 
     // return displaySplatFromStroke();
-    if(rotateSplat == 1){
+    if(rotateSplat == ROTATE){
         return romainStyleTest02();
-    } else if(rotateSplat == 0){
+    } else if(rotateSplat == NOT_ROTATE){
         return romainStyleTest01();
     } else if(rotateSplat == 2){
         return romainStyleTest03();

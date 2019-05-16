@@ -23,7 +23,7 @@ class Stylization_v2Widget : public NodeWidget {
   NodeWidget(node),
     _splatSize(new FloatSliderWidget(node,"splatSize", 1.,100.,40.)),
     _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)),
-    _rotateSplat(new IntSliderWidget(node,"rotateSplat", 0,1,2)) {
+    _rotateSplat(new IntSliderWidget(node,"rotateSplat", 0,2,1)) {
     QVBoxLayout *l = new QVBoxLayout();
     l->addWidget(_splatSize);
     l->addWidget(_splatDepthFactor);

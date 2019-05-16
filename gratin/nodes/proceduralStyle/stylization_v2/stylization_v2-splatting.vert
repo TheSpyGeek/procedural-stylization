@@ -21,6 +21,7 @@ uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
 uniform float splatSize;
+uniform int rotateSplat;
 
 out vec2 texcoordCenter;
 out vec4 positionWCenter;
@@ -35,6 +36,11 @@ out mat4 mvpInv;
 out mat3 normalMat;
 out mat3 normalMatInv;
 out vec3 viewDir;
+
+/*** choice of rendering ***/
+#define NOT_ROTATE 0
+#define ROTATE 1
+#define SHADING 2
 
 // LOAD MATRICES
 vec4 m0 = texelFetch(matrices, ivec2(0, 0), 0);
@@ -105,10 +111,16 @@ void main() {
   float normalProjLength = length((normalMat*nW.xyz).xy);
 
 
+
+
     if(nC.x<1e-5){
         gl_PointSize = 0.;
     } else {
-        float zcam = depthCenter.x;
-        gl_PointSize = splatSize*smoothstep(-0.1*zcam,0.2*zcam,pow(3.0,normalProjLength));
+        // if(rotateSplat == NOT_ROTATE){
+        //     gl_PointSize = splatSize;
+        // } else {
+            float zcam = depthCenter.x;
+            gl_PointSize = splatSize*smoothstep(-0.1*zcam,0.2*zcam,pow(3.0,normalProjLength));
+        // }
     }
 }
