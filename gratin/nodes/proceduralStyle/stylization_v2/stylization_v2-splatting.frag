@@ -215,6 +215,12 @@ vec4 romainStyleTest01() {
 
   fragDepth = gl_FragCoord.z;
 
+  /*** TEST
+  float depth = texture(depthMap, texcoordCenter).x;
+  float zmax = texture(splatNormalMap, texcoordCenter).x;
+
+  fragDepth = depth*zmax;*/
+
   return splatColor;
 }
 

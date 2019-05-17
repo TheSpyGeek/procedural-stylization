@@ -84,6 +84,37 @@ void main() {
   //if(count==0) color = vec4(1,0,0,1);
 #endif
 
+#ifdef BLEND_MODE_4
+
+    const int nb = 50;
+
+  // rescale alphas before the blend
+  for(int i=0;i<count && i<nb;i++) {
+    float a = clamp(frags[i].color.a*10.,0.,1.);
+    color = mix(vec4(color.xyz,1),vec4(frags[i].color.xyz,a*1), a);
+    //color = frags[count-1].color*a*100;
+    //color.a = a;
+  }
+
+  //if(count==0) color = vec4(1,0,0,1);
+#endif
+
+// we take the closest pixel
+#ifdef BLEND_MODE_5
+
+
+  if(count == 0){
+    color = vec4(0,0,0,1);
+  } else {
+      float a = clamp(frags[count-1].color.a*10.,0.,1.);
+      color = frags[count-1].color;
+      color.a = a;
+      // color = vec4(1,0,0,1);
+  }
+
+  //if(count==0) color = vec4(1,0,0,1);
+#endif
+
 #ifdef BLEND_MODE_12
   // rescale alphas before the blend
   for(int i=0;i<count;i++) {

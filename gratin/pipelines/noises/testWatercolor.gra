@@ -558,16 +558,16 @@
       <float name="sceneRadius" val="1.00847"/>
       <float name="fovy" val="45"/>
       <vector3f name="shift">
-       <float name="0" val="0"/>
-       <float name="1" val="0"/>
-       <float name="2" val="2.59609"/>
+       <float name="0" val="-0.116101"/>
+       <float name="1" val="-0.0232203"/>
+       <float name="2" val="4.95812"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="-0.689096"/>
-        <float name="1" val="-0.434869"/>
-        <float name="2" val="0.541949"/>
-        <float name="3" val="0.205727"/>
+        <float name="0" val="0.297299"/>
+        <float name="1" val="0.00836372"/>
+        <float name="2" val="0.953407"/>
+        <float name="3" val="0.0505899"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -629,7 +629,7 @@
        <quaternionf name="currentVal">
         <float name="0" val="0.93525"/>
         <float name="1" val="0.0263108"/>
-        <float name="2" val="4.00272"/>
+        <float name="2" val="2.99925"/>
         <float name="3" val="0.159147"/>
        </quaternionf>
        <uint name="nbCurves" val="4"/>
@@ -2312,22 +2312,22 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="7.34765"/>
+   <float name="scale" val="8.28667"/>
    <vector2f name="offset">
-    <float name="0" val="1909.71"/>
-    <float name="1" val="6291.63"/>
+    <float name="0" val="1669.4"/>
+    <float name="1" val="6431.49"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
     <uint name="lastFrame" val="180"/>
-    <uint name="currentFrame" val="133"/>
+    <uint name="currentFrame" val="107"/>
     <uint name="fps" val="60"/>
    </IOData>
   </IOData>
   <IOData name="animationWidget">
    <vector2i name="animationWidgetSize">
     <int name="0" val="1920"/>
-    <int name="1" val="276"/>
+    <int name="1" val="254"/>
    </vector2i>
    <IOData name="timelineWidget"/>
   </IOData>
