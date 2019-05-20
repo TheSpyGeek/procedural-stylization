@@ -560,14 +560,14 @@
       <vector3f name="shift">
        <float name="0" val="0"/>
        <float name="1" val="0"/>
-       <float name="2" val="2.59609"/>
+       <float name="2" val="2.88048"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="-0.689096"/>
-        <float name="1" val="-0.434869"/>
-        <float name="2" val="0.541949"/>
-        <float name="3" val="0.205727"/>
+        <float name="0" val="-0.954554"/>
+        <float name="1" val="-0.157242"/>
+        <float name="2" val="-0.107496"/>
+        <float name="3" val="0.22921"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -1891,7 +1891,7 @@
       <float name="floatAttribMinVal" val="0"/>
       <float name="floatAttribMaxVal" val="100"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="11.7"/>
+       <float name="currentVal" val="6.1"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -1902,7 +1902,7 @@
          <uint name="nbTangents" val="0"/>
          <vector2f name="controlPoint-0">
           <float name="0" val="0"/>
-          <float name="1" val="11.7"/>
+          <float name="1" val="6.1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -2312,10 +2312,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="7.34765"/>
+   <float name="scale" val="1.36153"/>
    <vector2f name="offset">
-    <float name="0" val="1909.71"/>
-    <float name="1" val="6291.63"/>
+    <float name="0" val="4738.71"/>
+    <float name="1" val="4838.53"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
@@ -2333,10 +2333,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float name="scale" val="1.35751"/>
+   <float name="scale" val="0.890662"/>
    <vector2f name="offset">
-    <float name="0" val="860.687"/>
-    <float name="1" val="253.159"/>
+    <float name="0" val="559.643"/>
+    <float name="1" val="245.143"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>

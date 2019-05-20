@@ -411,16 +411,16 @@
       <float name="sceneRadius" val="1.1915"/>
       <float name="fovy" val="45"/>
       <vector3f name="shift">
-       <float name="0" val="0"/>
-       <float name="1" val="0"/>
-       <float name="2" val="3.009"/>
+       <float name="0" val="-0.0370816"/>
+       <float name="1" val="-0.157597"/>
+       <float name="2" val="1.54427"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="0.865683"/>
-        <float name="1" val="-0.153621"/>
-        <float name="2" val="0.4216"/>
-        <float name="3" val="0.221921"/>
+        <float name="0" val="0.905021"/>
+        <float name="1" val="0.0840691"/>
+        <float name="2" val="0.391451"/>
+        <float name="3" val="0.143662"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -1430,8 +1430,8 @@
    </IOData>
    <float name="scale" val="9.21046"/>
    <vector2f name="offset">
-    <float name="0" val="-70.968"/>
-    <float name="1" val="3745.27"/>
+    <float name="0" val="1504.02"/>
+    <float name="1" val="5301.84"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
