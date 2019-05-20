@@ -12,9 +12,12 @@ One of the most used ways to colored object in 3D is the \textit{texture mapping
 
 % splatting
 
+The natural way to stylize 3D objects is to as an artist apply paint strokes on the object. These paint strokes can be represented with smalls images also called splatMap. Daniels\cite{Daniels_1999} and Schmid\cite{schmid_overcoat} propose to project strokes and stored them on the 3D surface. Some works \cite{meier_painterly_1996, Fekete_2000, chi_stylized_2006}(more in the state of the art \cite{benard_state---art_2011}) use point distribution in order to make anchor points for splats. Anchor these splats to the model improve the \textit{motion coherence} because each splat will follow the motion of the 3D model. These splats are rendered in the image space as a 2D sprites so preserved the \textit{flatness}. The problem is how to have the point distribution and how can we control it in order to have an uniform, not too sparse and not too dense distribution. Moreover these point distribution does not provide control on the \textit{temporal continuity}. In our method we use procedural noise to anchor the splats.
 
-% papier a citer
-\cite{noauthor_npar_2000, chi_stylized_2006, vanderhaeghe_dynamic_nodate, pastor_real-time_2003}
+
+
+
+
 
 As in real painting, some techniques to stylize is to draw elements often they are strokes and sometimes they are dots and with the convolution of dots it creates lines. Overcoat\cite{schmid_overcoat:_2011} choose to draw strokes on a 3D model, this is an interactive software to help artist. It has 3 tools, the hair tool that permit to draw starting in same direction of the normal at any of point of the surface, the feather tool that works the same but with the tangent of the surface and the level set tool that permit to draw at a certain distance of the object but keeping the curvature of the surface. This technique has a good \textit{temporal continuity} and on the results they present it seems to have a good \textit{motion coherence} and a good \textit{flatness} but these results were do manually by artist.
 
