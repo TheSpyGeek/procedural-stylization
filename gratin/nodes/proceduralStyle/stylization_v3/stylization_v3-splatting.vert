@@ -110,11 +110,13 @@ void main() {
   vp.xy = splatpos+splatSize*(1.-ancNoise.z)*normalize(vertex-splatpos);
   
   // rotate vertex to align with cam space normal
-  vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x)-PI/2.,splatpos.xy);
+  vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x),splatpos.xy); // tangent
+  //vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x)-PI/2.,splatpos.xy); // normal
 
   // rotate vertex along plane axis (3D)
   vp = rotate3D(vp,normalize(vec3(-vn.y,vn.x,0.)),rotateSplat*asin(vn.z),vec3(splatpos,ancDepth));
-
+  //vp.z = ancDepth.x; // constant depth
+  
   gl_Position  = vec4(vp,1.);
 
   // output stuff to the fragment shader 

@@ -9,7 +9,7 @@
 
 #version 430 core
 
-#define BLEND_MODE_1
+#define BLEND_MODE_0
 
 #define MAX_FRAGMENTS 200
 
@@ -51,91 +51,81 @@ void loadFrags() {
 void bubbleSort() {
   int j, i;
   NodeType tempNode;
-  for(i = 0; i < count - 1; i++)
-    {
-      for(j = 0; j < count - i - 1; j++)
-	{
-	  if(frags[j].depth < frags[j+1].depth)
-	    {
-	      tempNode = frags[j];
-	      frags[j] = frags[j+1];
-	      frags[j+1] = tempNode;
-	    }
-	}
+  for(i=0;i<count-1;i++) {
+    for(j=0;j<count-i-1;j++) {
+      if(frags[j].depth < frags[j+1].depth) {
+	tempNode = frags[j];
+	frags[j] = frags[j+1];
+	frags[j+1] = tempNode;
+      }
     }
+  }
 }
 
-vec4 blendSplats() {
-  vec4 backfrag = vec4(texture(image,texcoord).xyz,1.);
 
-  if(count<=0) {
-    return backfrag;
+vec4 backToFrontOver(in vec4 backcolor) {
+  const float gamma = 1.2;
+  vec4 color = backcolor;
+  for(int i=0;i<count;i++) {
+    float a = clamp(pow(frags[i].color.a,1./gamma),0.,1.);
+    color = mix(vec4(color.xyz,1.),vec4(frags[i].color.xyz,a), a);
   }
+  return color;
+}
 
-  float sigD = 0.05;
-  //vec3 currentColor = frags[count-1].color.xyz;
-  //float currentAlpha = frags[count-1].color.a;
-  //float currentDepth = frags[count-1].depth;
+vec4 over(in vec4 c1,in vec4 c2) {
+  float a = (c1.a+(1.-c1.a)*c2.a);
+  return vec4((c1.xyz*c1.a + c2.xyz*(1.-c1.a)*c2.a)/a,a);
+}
 
-  vec3 c = vec3(0.);
-  float a = 0.;
+vec4 frontToBackOver(in vec4 backcolor) {
+  const float gamma = 2.;
+  vec4 color = vec4(0.);
+  for(int i=count-1;i>=0;i--) {
+    NodeType n = frags[i];
+    color = over(color,vec4(n.color.xyz,clamp(pow(n.color.a,1./gamma),0.,1.)));
+  }
+  return over(color,backcolor);
+}
+
+vec4 frontToBackOverDepthTest(in vec4 backcolor) {
+  const float gamma = 1.2;
   
-  for(int i=count-1;i>=0;--i) {
-    c = c+frags[i].color.xyz;
-    a = a+frags[i].color.w;
-  }
+  vec4 color = vec4(0.);
 
-  a = a/float(count);
-  return vec4((c+backfrag.xyz)/float(count),1);
-  return mix(vec4(c/float(count),a),backfrag,a);
+  if(count<=0) return backcolor;
+  float d1 = -1.;//frags[count-1].depth;
+  
+  for(int i=count-1;i>=0;i--) {
+    NodeType n = frags[i];
+    float d2 = n.depth;
+    float d = d2-d1;
+    float s = 1.;
+    float w =  exp((d*d)/(s*s))*gamma;
+    float a = clamp(pow(n.color.a,1./w),0.,1.);
+    d1 = d2;
+    color = over(color,vec4(n.color.xyz,a));
+  }
+  return over(color,backcolor);
 }
+
 
 void main() {
   loadFrags();
   bubbleSort();
-
-  vec4 color = vec4(texture(image,texcoord).xyz,1.);
-  //color.xyz *= 0.7;
-  color = vec4(0,0,0,1);
-
+ vec4 col = texture(image,texcoord);
+  vec4 color = mix(vec4(0.5,0.5,0.5,1.0),vec4(col.xyz,1.),col.w);
+ 
 #ifdef BLEND_MODE_0
-  color = blendSplats();
+  color = frontToBackOver(color);
 #endif
 
-  
 #ifdef BLEND_MODE_1
-  // rescale alphas before the blend
-  for(int i=0;i<count;i++) {
-    float a = clamp(frags[i].color.a*10.,0.,1.);
-    color = mix(vec4(color.xyz,1),vec4(frags[i].color.xyz,a*1), a);
-    //color = frags[count-1].color*a*100;
-    //color.a = a;
-  }
-  //if(count==0) color = vec4(1,0,0,1);
-#endif
-
-#ifdef BLEND_MODE_12
-  // rescale alphas before the blend
-  for(int i=0;i<count;i++) {
-    float a = clamp(frags[i].color.a*1.,0.,1.);
-    color = mix(color,vec4(frags[i].color.xyz,a), a);
-    //color = frags[count-1].color;
-  }
+  color = backToFrontOver(color);
 #endif
 
 #ifdef BLEND_MODE_2
-  // rescale alphas after the blend
-  if(count>0) {
-    vec4 splatCol = vec4(frags[0].color.xyz,1.);
-    float alpha = frags[0].color.w;
-    for(int i=1;i<count;i++) {
-      splatCol = mix( splatCol, vec4(frags[i].color.xyz,1.), frags[i].color.a);
-      alpha += frags[i].color.a;
-    }
-    
-    alpha = clamp(alpha*2.,0.,1.);
-    color = mix(texture(image,texcoord),splatCol,alpha);
-  }
+  color = frontToBackOverDepthTest(color);
 #endif
 
 #ifdef BLEND_MODE_3
@@ -143,7 +133,7 @@ void main() {
   vec4 splatCol = vec4(0.);
   float sumAlpha = 0.;
   for(int i=0;i<count;i++) {
-    float w = frags[i].color.w*100.;
+    float w = pow(frags[i].color.w,1./50.2);
     splatCol += vec4(frags[i].color.xyz,1.)*w;
     sumAlpha += w;
   }
@@ -155,18 +145,6 @@ void main() {
   }
 #endif
   
-#ifdef BLEND_MODE_4
-  // sum
-  vec4 splatCol = vec4(0.);
-  //float sumAlpha = 0.;
-  for(int i=0;i<count;i++) {
-    float w = frags[i].color.w*200.;
-    splatCol += frags[i].color;
-    //sumAlpha += w;
-  }
 
-  color = mix(vec4(0,0,1,1),vec4(splatCol.xyz/50.,1),clamp(splatCol.w,0.,1.));
-
-#endif
   rendering = color;
 }
