@@ -5,17 +5,19 @@
 
 \section{Problem Statement}
 
-The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research have been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. we separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate}:
+The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. we separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate}:
 
 \subsection{Flatness}
 
-The impression of drawing on a flat surface gives the \textit{flatness}. The stylization has a good \textit{flatness} if the image rendered has a good 2D appearence. In order to keep this effect the size and the distribution of the marks of your stylization has to be independant to the distance between the stylized object and the camera.
+The impression of drawing on a flat surface gives the \textit{flatness}. The stylization has a good \textit{flatness} if the image rendered has a good 2D appearance. In order to keep this effect, the size and the distribution of the marks of your stylization have to be independent of the distance between the stylized object and the camera.
 
 \subsection{Motion Coherence}
 
-\textit{Motion coherence} is a correlation between the motion of marks and the motion of the 3D object. Bad \textit{Motion coherence} will give the impression to see the scene through semi-transparent layer of marks, this is called \textit{shower door} effect \cite{meier_painterly_1996}, a example to illustrate what happen when there is a bad \textit{Motion coherence} is the movie \textit{Loving Vincent}\cite{LovingVincent}. The goal is to provide in 2D screen space a perceptual impression of motion as
+\textit{Motion coherence} is a correlation between the motion of marks and the motion of the 3D object. Bad \textit{Motion coherence} will give the impression to see the scene through a semi-transparent layer of marks, this is called \textit{shower door} effect \cite{meier_painterly_1996}, an example to illustrate what happens when there is a bad \textit{Motion coherence} is the movie \textit{Loving Vincent}\cite{LovingVincent}. The goal is to provide in 2D screen space a perceptual impression of motion as
 close as possible to the 3D displacement in object space.
 
 \subsection{Temporal continuity}
 
-\textit{Temporal continuity} is the quality of minimizing changes from frame to frame to ensure fluid animations. In order to have a good \textit{temporal continuity} the marks of the image has to fade slowly during the animation. Human perception is very sensitive to \textit{temporal incoherence} according to some perceptual studies\cite{percept_studies, Schwarz_2009}
+\textit{Temporal continuity} is the quality of minimizing changes from frame to frame to ensure fluid animations. In order to have good \textit{temporal continuity}, the marks of the image have to fade slowly during the animation. Human perception is very sensitive to \textit{temporal incoherence} according to some perceptual studies\cite{percept_studies, Schwarz_2009}.
+
+\subsection{Prcedural Noises}
