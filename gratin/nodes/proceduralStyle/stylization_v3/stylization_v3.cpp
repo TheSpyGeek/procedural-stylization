@@ -11,9 +11,9 @@
 
 #include "stylization_v3.h"
 
-//QString Stylization_v3Node::SHADER_PATH = QString("/disc/research/ideasAndNotes/coding-tests/silhouette-stylization/gratin-nodes/coherentStyle01/");
+QString Stylization_v3Node::SHADER_PATH = QString("/home/romain/research/proceduralStylization/gratin/nodes/proceduralStyle/stylization_v3/");
 // QString Stylization_v3Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
-QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
+//QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
 
 
 Stylization_v3Node::Stylization_v3Node(PbGraph *parent,NodeHandle *handle)
@@ -41,12 +41,12 @@ Stylization_v3Node::Stylization_v3Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("splatMap");
     _pSplat.addUniform("splatNormalMap");
     _pSplat.addUniform("maxNodes");
-    _pSplat.addUniform("alphaFactor");
     _pSplat.addUniform("splatSize");
     _pSplat.addUniform("splatDepthFactor");
     _pSplat.addUniform("rotateSplat");
 
     _pBlend.addUniform("image");
+    _pBlend.addUniform("gammaBlend");
 
 
 
@@ -107,7 +107,6 @@ void Stylization_v3Node::apply() {
   _pSplat.setUniformTexture("splatNormalMap",GL_TEXTURE_2D,inputTex(7)->id());
 
 
-  _pSplat.setUniform1f("alphaFactor",_w->alphaFactor()->val());
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
   _pSplat.setUniform1f("rotateSplat",_w->rotateSplat()->val());
@@ -126,7 +125,8 @@ void Stylization_v3Node::apply() {
   _pBlend.enable();
   //_pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,inputTex(3)->id());
-
+  _pBlend.setUniform1f("gammaBlend",_w->gammaBlend()->val());
+  
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();

@@ -22,29 +22,31 @@ class Stylization_v3Widget : public NodeWidget {
  public:
  Stylization_v3Widget(NodeInterface *node) :
   NodeWidget(node),
-    _alphaFactor(new FloatSliderWidget(node, "alphaFactor", 0,1,0.9)),
+    _gammaBlend(new FloatSliderWidget(node, "gammaBlend", 0.01f,8.0f,1.0f)),
     _splatSize(new FloatSliderWidget(node,"splatSize", 0.0f,1.0f,0.05f)),
     _splatDepthFactor(new FloatSliderWidget(node,"splatDepthFactor", 0.01,10.,1.)),
     _rotateSplat(new FloatSliderWidget(node,"rotateSplat", 0,1,1)) {
     QVBoxLayout *l = new QVBoxLayout();
-    l->addWidget(_alphaFactor);
     l->addWidget(_splatSize);
     l->addWidget(_splatDepthFactor);
     l->addWidget(_rotateSplat);
+    l->addWidget(_gammaBlend);
+
     setLayout(l);
-    addChildWidget(_alphaFactor);
     addChildWidget(_splatSize);
     addChildWidget(_splatDepthFactor);
     addChildWidget(_rotateSplat);
+    addChildWidget(_gammaBlend);
+
   }
 
-  inline FloatSliderWidget *alphaFactor() const {return _alphaFactor;}
+  inline FloatSliderWidget *gammaBlend() const {return _gammaBlend;}
   inline FloatSliderWidget *splatSize() const {return _splatSize;}
   inline FloatSliderWidget *splatDepthFactor() const {return _splatDepthFactor;}
   inline FloatSliderWidget *rotateSplat() const {return _rotateSplat;}
 
  private:
-  FloatSliderWidget *_alphaFactor, *_splatSize, *_splatDepthFactor, *_rotateSplat;
+  FloatSliderWidget *_gammaBlend, *_splatSize, *_splatDepthFactor, *_rotateSplat;
 };
 
 
