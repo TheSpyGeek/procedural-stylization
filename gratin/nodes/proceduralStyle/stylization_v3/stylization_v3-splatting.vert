@@ -26,6 +26,7 @@ uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
 uniform float splatSize;
 uniform float rotateSplat;
+uniform float splatDepthFactor;
 
 out vec2 splatCoord;
 out vec2 anchorCoord;
@@ -62,7 +63,10 @@ mat4 view = mat4(v0,v1,v2,v3);
 mat4 proj = mat4(p0,p1,p2,p3);
 mat3 nmat = transpose(inverse(mat3(view*model)));
 
+mat4 mvp = proj*view*model;
+
 // **** SPLAT PROJECTION ****
+
 vec3 hash33(vec3 p) {
   vec3 q = vec3(dot(p,vec3(127.1,311.7,74.7)),
 		dot(p,vec3(269.5,183.3,246.1)),
@@ -70,32 +74,52 @@ vec3 hash33(vec3 p) {
   return fract(sin(q)*43758.5453123);
 }
 
-///p+b+H (rand point)
-///p+f (pt)
+vec3 project(in vec3 p) {
+  vec4 tmp = mvp*vec4(p,1.);
+  return tmp.xyz/tmp.w;
+}
 
-float wnoise(in vec3 x,in vec3 n,in float freq) {
-  vec3 p = floor(x);
-  vec3 f = fract(x);
+vec4 wnoise(in vec3 x,in vec3 n,in float freq) {
+  // x: 3D position 
+  // f: frequency
+  // return: closest 3D rand position + 3D dist between x and this position 
+  
+  vec3 p = floor(x*freq);
+  vec3 f = fract(x*freq);
+  vec3 xp = project(x);
   
   float id = 0.0;
-  vec2 res = vec2( 100.0 );
-  
+  vec4 res = vec4(1e+10);
   for( int k=-1; k<=1; k++ )
     for( int j=-1; j<=1; j++ )
       for( int i=-1; i<=1; i++ ) {
 	vec3 b = vec3( float(i), float(j), float(k) );
-	vec3 r = vec3( b ) - f + hash33( p + b );
-	float d = dot( r, r );
+	vec3 r = (p+b+hash33( p + b ))/freq;
+	//vec3 rp = r-dot(n,r-x)*n;
 	
-	if( d < res.x ) {
-	  id = dot( p+b, vec3(1.0,57.0,113.0 ) );
-	  res = vec2( d, res.x );	
-	} else if( d < res.y ) {
-	  res.y = d;
-        }
+	float d = distance(r,x);
+	//float d = distance(project(r).xy,xp.xy);
+	
+	if(d<res.w) {
+	  res = vec4(r,d);
+	} 
       }
+  
+  return res;
+}
 
-  return sqrt(res.x);
+float dist(in vec3 p,in vec4 n) {
+  // 3D distance 
+  //return n.w;
+  
+  // 2D (projected) distance)
+  return distance(project(p).xy,project(n.xyz).xy);
+}
+
+vec2 offsetSplatPosToNoise(in vec2 splatPos,in vec4 ancPosW, in float freq) {
+  vec4 no = wnoise(ancPosW.xyz,vec3(0.),freq);
+  vec3 np = project(no.xyz);
+  return np.xy-splatPos;
 }
 
 vec3 rotate3D(in vec3 v,in vec3 axis,in float angle,in vec3 c) {
@@ -131,26 +155,32 @@ void main() {
   vec4 ancNoise = texture(noiseMap,ancCoord);
   vec4 ancDepth = texture(depthMap,ancCoord);
 
+  // ancNoise : splat opacity, splat offset (2D) , another noise 
+
+  
   // discard splats outside the object (or without noise impulses)
-  if(length(ancNorW)<EPS || ancNoise.w<EPS || ancNoise.x<EPS) {
+  if(length(ancNorW)<EPS || ancColor.w<EPS || ancNoise.x<EPS) {
     gl_Position = vec4(0.);
     return;
   }
   
-  // compute vertex position (=vertex + z of projected surface)
-  vec3 vp = vec3(vertex,ancDepth.x);
+  vec2 offset = ancNoise.yz;
+  vec2 sp = splatpos+offset;
+
+  
+  vec3 vp = vec3(vertex+offset,ancDepth.x);
   //vec3 vn = normalize(nmat*ancNorW.xyz);
   vec3 vn = ancDepth.yzw; // this may contain a flow 
 
   // scale splat (ancNoise.z is mean curvature^2)
-  vp.xy = splatpos+splatSize*ancNoise.z*normalize(vertex-splatpos);
+  vp.xy = sp+splatSize*ancNoise.w*normalize(vp.xy-sp);
   
   // rotate vertex to align with cam space normal
-  //vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x),splatpos.xy); // tangent
-  vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x)-PI/2.,splatpos.xy); // normal
+  //vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x),sp); // tangent
+  vp.xy = rotate2D(vp.xy,atan(vn.y,vn.x)-PI/2.,sp); // normal
 
   // rotate vertex along plane axis (3D)
-  vp = rotate3D(vp,normalize(vec3(-vn.y,vn.x,0.)),rotateSplat*asin(vn.z),vec3(splatpos,ancDepth.x));
+  vp = rotate3D(vp,normalize(vec3(-vn.y,vn.x,0.)),rotateSplat*asin(vn.z),vec3(sp,ancDepth.x));
   //vp.z = ancDepth.x; // constant depth
   
   gl_Position  = vec4(vp,1.);

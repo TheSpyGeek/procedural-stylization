@@ -36,7 +36,6 @@ uniform sampler2D depthMap;
 uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
-uniform float splatDepthFactor;
 uniform float rotateSplat;
 
 in vec2 splatCoord;
