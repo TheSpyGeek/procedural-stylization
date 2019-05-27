@@ -10,7 +10,6 @@
 #version 430 core
 
 #define BLEND_MODE_0
-
 #define MAX_FRAGMENTS 200
 
 //layout (early_fragment_tests) in;
@@ -32,6 +31,7 @@ layout( binding = 0, std430 ) buffer linkedLists {
 in vec2 texcoord;
 
 uniform sampler2D image;
+uniform float gammaBlend;
 
 NodeType frags[MAX_FRAGMENTS];
 int count = 0;
@@ -64,10 +64,9 @@ void bubbleSort() {
 
 
 vec4 backToFrontOver(in vec4 backcolor) {
-  const float gamma = 1.2;
   vec4 color = backcolor;
   for(int i=0;i<count;i++) {
-    float a = clamp(pow(frags[i].color.a,1./gamma),0.,1.);
+    float a = clamp(pow(frags[i].color.a,1./gammaBlend),0.,1.);
     color = mix(vec4(color.xyz,1.),vec4(frags[i].color.xyz,a), a);
   }
   return color;
@@ -79,18 +78,15 @@ vec4 over(in vec4 c1,in vec4 c2) {
 }
 
 vec4 frontToBackOver(in vec4 backcolor) {
-  const float gamma = 2.;
   vec4 color = vec4(0.);
   for(int i=count-1;i>=0;i--) {
     NodeType n = frags[i];
-    color = over(color,vec4(n.color.xyz,clamp(pow(n.color.a,1./gamma),0.,1.)));
+    color = over(color,vec4(n.color.xyz,clamp(pow(n.color.a,1./gammaBlend),0.,1.)));
   }
   return over(color,backcolor);
 }
 
-vec4 frontToBackOverDepthTest(in vec4 backcolor) {
-  const float gamma = 1.2;
-  
+vec4 frontToBackOverDepthTest(in vec4 backcolor) {  
   vec4 color = vec4(0.);
 
   if(count<=0) return backcolor;
@@ -101,7 +97,7 @@ vec4 frontToBackOverDepthTest(in vec4 backcolor) {
     float d2 = n.depth;
     float d = d2-d1;
     float s = 1.;
-    float w =  exp((d*d)/(s*s))*gamma;
+    float w =  exp((d*d)/(s*s))*gammaBlend;
     float a = clamp(pow(n.color.a,1./w),0.,1.);
     d1 = d2;
     color = over(color,vec4(n.color.xyz,a));

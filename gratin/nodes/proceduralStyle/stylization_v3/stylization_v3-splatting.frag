@@ -36,7 +36,6 @@ uniform sampler2D depthMap;
 uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
-uniform float alphaFactor;
 uniform float splatDepthFactor;
 uniform float rotateSplat;
 
@@ -108,7 +107,7 @@ void styleTest01(out vec3 fragColor,out float fragOpacity, out float fragDepth) 
   
   float opacity = splatData.w*clamp(ancNoise.x,0.,1.); if(opacity<=1e-3) discard; // not enough opaque
 
-  fragColor = anchorColor.xyz;
+  fragColor = anchorColor.xyz;//*splatCoord.y;
   fragOpacity = opacity;
   fragDepth = gl_FragCoord.z;
 }
