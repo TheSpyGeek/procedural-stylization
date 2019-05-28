@@ -36,7 +36,17 @@ uniform sampler2D depthMap;
 uniform sampler2D noiseMap;
 uniform sampler2D splatMap;
 uniform sampler2D splatNormalMap;
-uniform float rotateSplat;
+uniform float splatDepthFactor;
+
+// WHAT DO WE HAVE IN THESE MAPS...
+// matrices : contains model, view, projection matrices at specific locations (see vertex shader)
+// positionWMap : the untransformed original 3D positions
+// colorMap : original rendering map (with colors + alpha that delimit the processed shape)
+// depthMap : contains a normalized depth (x) + a 3D flow field (yzw) that determine how splats are rotated
+// noiseMap : contains the splat impulses (x) + an offset (yz) between the splat position and noise impulse + an aditional noise that control the variation of splat sizes
+// splatMap : (the image to splat) contains a luminance factor (x) that will basically be multiplied with the shading color (to vary the color inside the splat) + a depth variation factor (y) that is added to the fragment depth + the opacity (w).
+// splatNormalMap : the normal of the splat (xyz) + its opacity (w)
+
 
 in vec2 splatCoord;
 in vec2 anchorCoord;
@@ -99,16 +109,16 @@ float gnoise(in vec3 x) {
 // ******* STYLE FUNCTIONS ******* 
 void styleTest01(out vec3 fragColor,out float fragOpacity, out float fragDepth) {
   // SIMPLE TEST: colored splat with a careful handle of noise opacity to discard fragments 
-  vec4 ancNoise = anchorNoise; if(ancNoise.w<=0.) discard; // outside silhouettes 
+  vec4 ancNoise = anchorNoise; //if(ancNoise.w<=0.) discard; // outside silhouettes 
   vec4 ancColor = anchorColor;
 
   vec4 splatData = texture(splatMap,splatCoord);
   
   float opacity = splatData.w*clamp(ancNoise.x,0.,1.); if(opacity<=1e-3) discard; // not enough opaque
 
-  fragColor = anchorColor.xyz;//*splatCoord.y;
+  fragColor = anchorColor.xyz*splatData.x;
   fragOpacity = opacity;
-  fragDepth = gl_FragCoord.z;
+  fragDepth = gl_FragCoord.z+splatData.y*splatDepthFactor;
 }
 
 

@@ -43,7 +43,6 @@ Stylization_v3Node::Stylization_v3Node(PbGraph *parent,NodeHandle *handle)
     _pSplat.addUniform("maxNodes");
     _pSplat.addUniform("splatSize");
     _pSplat.addUniform("splatDepthFactor");
-    _pSplat.addUniform("rotateSplat");
 
     _pBlend.addUniform("image");
     _pBlend.addUniform("gammaBlend");
@@ -109,7 +108,6 @@ void Stylization_v3Node::apply() {
 
   _pSplat.setUniform1f("splatSize",_w->splatSize()->val());
   _pSplat.setUniform1f("splatDepthFactor",_w->splatDepthFactor()->val());
-  _pSplat.setUniform1f("rotateSplat",_w->rotateSplat()->val());
   _glf->glUniform1ui(_glf->glGetUniformLocation(_pSplat.id(),"maxNodes"),_maxNodes);
   _vaoSplat->drawArrays(GL_TRIANGLES,0,_nbElements);
   _pSplat.disable();
@@ -208,7 +206,7 @@ void Stylization_v3Node::initOITData() {
   _glf->glGenBuffers(1, &_clBuffer);
 
   //glGenBuffers(2, buffers);
-  _maxNodes = 200 * _sw * _sh;
+  _maxNodes = 300 * _sw * _sh;
   GLint nodeSize = sizeof(Vector4f)+sizeof(GLfloat)+sizeof(GLuint);
 
   // Our atomic counter

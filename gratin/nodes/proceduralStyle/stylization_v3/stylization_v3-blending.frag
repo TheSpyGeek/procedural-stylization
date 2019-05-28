@@ -10,7 +10,7 @@
 #version 430 core
 
 #define BLEND_MODE_0
-#define MAX_FRAGMENTS 200
+#define MAX_FRAGMENTS 300
 
 //layout (early_fragment_tests) in;
 
