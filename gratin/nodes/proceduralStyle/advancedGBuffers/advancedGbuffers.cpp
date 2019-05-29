@@ -39,14 +39,19 @@ QDir Gbuffers2Widget::_currentPath = QDir::currentPath();
 
 Gbuffers2Widget::Gbuffers2Widget(Gbuffers2Node *node)
     : GenericCustomWidget(node), _load(new QPushButton("Load...")),
-      _default(new QPushButton("Reset cam"))
-{
+      _default(new QPushButton("Reset cam")),
+      _rotX(new FloatSliderWidget(node,"eulerAngleX", 0.0f,6.28318530718f,0.0f)),
+      _rotY(new FloatSliderWidget(node,"eulerAngleY", 0.0f,6.28318530718f,0.0f)),
+      _rotZ(new FloatSliderWidget(node,"eulerAngleZ", 0.0f,6.28318530718f,0.0f))  {
 
   _camWidget = new TrackballCameraWidget(node, "Camera", node->camera());
   _taaIndex = new IntSpinWidget(node, "TAA index", 0, 100000, 0, true);
 
   // default parameters
   userLayout()->addWidget(_load);
+  userLayout()->addWidget(_rotX);
+  userLayout()->addWidget(_rotY);
+  userLayout()->addWidget(_rotZ);
   userLayout()->addWidget(_camWidget);
   userLayout()->addWidget(_taaIndex);
   userLayout()->addWidget(_default);
@@ -55,6 +60,9 @@ Gbuffers2Widget::Gbuffers2Widget(Gbuffers2Node *node)
   connect(_default, SIGNAL(clicked()), this, SLOT(defaultClicked()));
 
   addChildWidget(_camWidget);
+  addChildWidget(_rotX);
+  addChildWidget(_rotY);
+  addChildWidget(_rotZ);
 }
 
 void Gbuffers2Widget::loadClicked() {
@@ -100,8 +108,18 @@ Gbuffers2Node::~Gbuffers2Node() {
 }
 
 void Gbuffers2Node::apply() {
-    float fWidth = (float)outputTex(0)->w();
-    float fHeight = (float)outputTex(0)->h();
+  Matrix4f M = _camera->modelMatrix();
+  Matrix4f V = _camera->viewMatrix();
+  Matrix4f P = _camera->projMatrix();
+  
+  V = rotateFromView(V,Vector3f(1.0f,0.0f,0.0f),_w->rotX()->val());
+  V = rotateFromView(V,Vector3f(0.0f,1.0f,0.0f),_w->rotY()->val());
+  V = rotateFromView(V,Vector3f(0.0f,0.0f,1.0f),_w->rotZ()->val());
+
+  
+  float fWidth = (float)outputTex(0)->w();
+  float fHeight = (float)outputTex(0)->h();
+
   Glutils::setViewport(outputTex(0)->w(), outputTex(0)->h());
   setOutputParams();
 
@@ -109,32 +127,29 @@ void Gbuffers2Node::apply() {
   _glf->glDrawBuffers(nbOutputs(), buffersOfOutputTex(0));
 
   Vector2f TAAOffset = TAASampleScale * TAASampleOffsets[_w->_taaIndex->val()%TAASampleCount];
-
-  Transform<float,3,Affine> projMatrixJitter(Translation3f(2.0f * TAAOffset.x() / fWidth,
-                                   2.0f * TAAOffset.y() / fHeight, 0.0f));
+  Affine3f projMatrixJitter(Translation3f(2.0f * TAAOffset.x() / fWidth,
+					  2.0f * TAAOffset.y() / fHeight, 0.0f));
 
   // apply projection matrix jitter for TAA
-  Matrix4f projMatrixTAA = projMatrixJitter.matrix()
-          * _camera->projMatrix();
+  Matrix4f projMatrixTAA = projMatrixJitter.matrix() * P;
 
   initOpenGLState();
 
   enableShaders();
-  auto mvp =
-      _camera->projMatrix() * _camera->viewMatrix() * _camera->modelMatrix();
+  auto mvp = P*V*M;
 
   if (first) {
-      prevModel = _camera->modelMatrix();
-      prevView = _camera->viewMatrix();
-      prevProj = projMatrixTAA;
+    prevModel = M;
+    prevView = V;
+    prevProj = projMatrixTAA;
   }
   first = false;
 
   _p->setUniformMatrix4fv("prevModel", (GLfloat *)prevModel.data());
   _p->setUniformMatrix4fv("prevView", (GLfloat *)prevView.data());
   _p->setUniformMatrix4fv("prevProj", (GLfloat *)prevProj.data());
-  _p->setUniformMatrix4fv("model", (GLfloat *)_camera->modelMatrix().data());
-  _p->setUniformMatrix4fv("view", (GLfloat *)_camera->viewMatrix().data());
+  _p->setUniformMatrix4fv("model", (GLfloat *)M.data());
+  _p->setUniformMatrix4fv("view", (GLfloat *)V.data());
   _p->setUniformMatrix4fv("proj", (GLfloat *)projMatrixTAA.data());
   prevModel = _camera->modelMatrix();
   prevView = _camera->viewMatrix();
@@ -145,7 +160,7 @@ void Gbuffers2Node::apply() {
 
   //std::cerr << "num submeshes = " << _submeshes.size() << "\n";
 
-  for (int si = 0; si < _submeshes.size(); ++si) {
+  for (unsigned int si = 0; si < _submeshes.size(); ++si) {
     Submesh &sm = _submeshes[si];
     // transform aabb in clip space
     sm.vao->bind();
@@ -178,8 +193,8 @@ void Gbuffers2Node::apply() {
   // upload camera matrices (output #0)
   outputTex(0)->bind();
   float camData[4*4*3];
-  memcpy(camData, _camera->modelMatrix().data(), 4*4*4);
-  memcpy(camData+4*4, _camera->viewMatrix().data(), 4*4*4);
+  memcpy(camData, M.data(), 4*4*4);
+  memcpy(camData+4*4, V.data(), 4*4*4);
   memcpy(camData+2*4*4, projMatrixTAA.data(), 4*4*4);
   _glf->glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 4, 3, GL_RGBA, GL_FLOAT, (GLfloat*)camData);
 
@@ -195,7 +210,7 @@ void Gbuffers2Node::loadObject(const QString &filename) {
 
   vector<Mesh *> outMeshes;
   Mesh *mesh = MultiObjLoader::load(f.toStdString(), outMeshes);
-  for (int mi = 0; mi < outMeshes.size(); ++mi) {
+  for (unsigned int mi = 0; mi < outMeshes.size(); ++mi) {
     Submesh sm;
     sm.mesh = outMeshes[mi];
     sm.nbElements = sm.mesh->nbFaces() * 3;
@@ -213,7 +228,7 @@ void Gbuffers2Node::loadObject(const QString &filename) {
 
   // init VAOs
   makeCurrent();
-  for (int mi = 0; mi < _submeshes.size(); ++mi) {
+  for (unsigned int mi = 0; mi < _submeshes.size(); ++mi) {
     Submesh &sm = _submeshes[mi];
     delete sm.vao;
     sm.vao = new VertexarrayObject();

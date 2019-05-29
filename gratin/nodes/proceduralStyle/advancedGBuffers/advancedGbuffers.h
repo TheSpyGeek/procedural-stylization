@@ -18,6 +18,7 @@
 #include <QObject>
 #include "AABB.h"
 #include "misc/mesh.h"
+#include <Eigen/Geometry>
 
 class Gbuffers2Node;
 
@@ -28,6 +29,10 @@ public:
   Gbuffers2Widget(Gbuffers2Node *node);
   IntSpinWidget *_taaIndex;
 
+  inline FloatSliderWidget *rotX() const {return _rotX;}
+  inline FloatSliderWidget *rotY() const {return _rotY;}
+  inline FloatSliderWidget *rotZ() const {return _rotZ;}
+		  
 public slots:
   void loadClicked();
   void defaultClicked();
@@ -35,6 +40,9 @@ public slots:
 private:
   QPushButton *_load;
   QPushButton *_default;
+  FloatSliderWidget *_rotX;
+  FloatSliderWidget *_rotY;
+  FloatSliderWidget *_rotZ;
   TrackballCameraWidget *_camWidget;
   static QDir _currentPath;
 };
@@ -101,7 +109,13 @@ protected:
 
   void initFBO();
   void cleanFBO();
-
+  
+  inline Matrix4f rotateFromView(const Matrix4f &V,const Vector3f &axis,float angle) {
+    const Vector4f a = V.inverse()*Vector4f(axis[0],axis[1],axis[2],0.0f);
+    Affine3f T(AngleAxisf(angle,Vector3f(a[0],a[1],a[2])));
+    return V*T.matrix();
+  }
+  
 private:
   QString _filename;
   TrackballCamera *_camera;
