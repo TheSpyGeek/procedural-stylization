@@ -58,6 +58,76 @@ Also called splatting.
 * [Meier's painterly algorithm] drawing strokes in image-space permit a good flatness.
 * [Active Strokes, Coherent...] convolution of strokes in this lines (like arcs, overdrawn lines, ...)  
 
+# Realisation
+
+## Overview
+
+* take the better of the two worlds between object space and image space
+    * image space with G-Buffer (cf: Bléron)
+* splatting because texture based is very limited (cf: Pierre bénard: Dynamic Solid Textures... )
+* problem of anchor point => procedural noise
+    * easy to manipulate
+    * easy to implement
+    * coherent during the motion
+* splatting => splat properties:
+    * size
+    * density
+    * opacity
+    * orientation
+
+
+## Procedural noise and fractalisation
+
+* Worley and Perlin
+* PN controls the density of splat and a part of their opacity
+* threshold in order to have less splats in the screen
+* Worley
+    * adapt the threshold depending on the distance from the camera
+    * adapt the threshold depending on the frequency of the noise
+
+* fractalization (cf: Pierre Bénard)
+    * quasi constant size of splats => ++ flatness
+    * infinite zoom effect => ++ temporal continuity
+    * problem:
+        * alter original pattern
+        * impossible to have certain pattern (example: damier)
+
+## Splatting
+
+* apply 2D image on the screen
+    * it can be created proceduraly
+    * paint brushes
+    * hairs
+    * leaves
+
+* blending:
+    * with the distance from the camera
+    * alpha blending (cf: overcoat follow up)
+
+
+## Stylization
+
+* talk about how we can do a certain style
+
+* realist hair:
+    * small point for the noise (Worley)
+    * high density
+    * hair as splats
+    * size of splat: medium (and varying on the object)
+    * shading in order to add 3D impression
+* painted style:
+    * small point for the noise
+    * low density
+    * brushes strokes as splats
+    * size of splat: high
+
+# Technical implementation
+
+* use Gratin: pipeline rendering software
+* order independent transparency on GPU
+
+
+
 #### VRAC
 
 * Our method does not permit to do filtering on the whole image but it can be done after our step of stylizing.

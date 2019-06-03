@@ -104,7 +104,7 @@ vec4 noiseColor(vec2 textureCoord, float mult, in float frag_scale, in float wei
 		for(int j=-nbSamples;j<=nbSamples;++j) {
 			vec2 coord = textureCoord+vec2(float(i),float(j))*psStep;
 			vec4 pos = texture(positionWMap,coord);
-			vec4 data =  pos;
+			vec4 data = pos;
 
 			// z = mult*texture(depthMap, coord).x/(frag_scale);
 			// z = texture(depthMap, coord).x;

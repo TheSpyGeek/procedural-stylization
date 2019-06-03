@@ -12,8 +12,8 @@
 #include "stylization_v3.h"
 
 //QString Stylization_v3Node::SHADER_PATH = QString("/home/romain/research/proceduralStylization/gratin/nodes/proceduralStyle/stylization_v3/");
-// QString Stylization_v3Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
-QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
+QString Stylization_v3Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
+// QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
 
 
 Stylization_v3Node::Stylization_v3Node(PbGraph *parent,NodeHandle *handle)
@@ -124,7 +124,7 @@ void Stylization_v3Node::apply() {
   //_pBlend.setUniformTexture("image",GL_TEXTURE_2D,tmpTex(0)->id());
   _pBlend.setUniformTexture("image",GL_TEXTURE_2D,inputTex(3)->id());
   _pBlend.setUniform1f("gammaBlend",_w->gammaBlend()->val());
-  
+
   _unitSquareVao->bind();
   _unitSquareVao->drawArrays(GL_TRIANGLES,0,6);
   _unitSquareVao->unbind();
@@ -149,7 +149,7 @@ void Stylization_v3Node::initSprites() {
   unsigned int h = _sh;
 
   const float hsize = 0.1f;
-  
+
   for(unsigned int i=0;i<h;++i) {
     for(unsigned int j=0;j<w;++j) {
       const float x = 2.0f*(((float)j+0.5f)/(float)w)-1.0f;
@@ -166,7 +166,7 @@ void Stylization_v3Node::initSprites() {
       vertices.push_back(v1);
       vertices.push_back(v3);
       vertices.push_back(v4);
-      
+
       texcoord.push_back(Vector2f(0.0f,0.0f));
       texcoord.push_back(Vector2f(1.0f,0.0f));
       texcoord.push_back(Vector2f(1.0f,1.0f));
@@ -193,7 +193,7 @@ void Stylization_v3Node::initSprites() {
   _vaoSplat->addAttrib(nbVert*sizeof(Vector2f),splatcoord[0].data(),2);
 
   cout << "Nb elem : " << _nbElements << endl;
-  
+
   _nbElements = nbVert;
 }
 
