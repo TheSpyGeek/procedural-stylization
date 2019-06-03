@@ -79,6 +79,7 @@ Also called splatting.
 ## Procedural noise and fractalisation
 
 * Worley and Perlin
+* explain Worley
 * PN controls the density of splat and a part of their opacity
 * threshold in order to have less splats in the screen
 * Worley
@@ -125,8 +126,17 @@ Also called splatting.
 
 * use Gratin: pipeline rendering software
 * order independent transparency on GPU
+* NOT NEED spécific structure of rendering
+* can be done in post precessing
 
 
+# Results
+
+* all styles possible to render
+    * hairs
+    * leaves
+    * paintbrushes strokes
+    * pointillism
 
 #### VRAC
 
