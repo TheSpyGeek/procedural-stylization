@@ -3,6 +3,8 @@
 
 \section{Overview}
 
+As explains above in the state of the art and in the figure\ref{tableau_comparatif} each approach has its advantages and its disadvantages. That is why in our solution we tried to take the better of the two worlds. We stylize the 3D scene in image space (screen space) but with all the information about the 3D object and the camera (camera matrices, position, normals, tangents, UV coordinates, distance from the camera). This solution permit to apply something like 2D images on the screen so have a good \textit{flatness} while keeping the information on the silhouettes, the orientation, the depth, etc. This solution permit also to easy integrate the stylizing of a scene in a pipeline rendering because it can be done at the end during the post-processing rendering pass.
+
 
 
 \section{Procedural noise and fractalization}

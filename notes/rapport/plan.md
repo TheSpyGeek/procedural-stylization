@@ -114,7 +114,19 @@ Also called splatting.
 
 ## Stylization
 
-* talk about how we can do a certain style
+* talk about how can we make a specific style
+* in order to make a specific style the user has to manipulate some parameters:
+    * splat
+        * content (hairs, leaves, paint strokes)
+        * size
+        * orientation
+    * procedural noise
+        * frequency
+        * threshold
+    * gamma blending
+
+
+Some examples:
 
 * realist hair:
     * small point for the noise (Worley)
@@ -143,6 +155,7 @@ Also called splatting.
     * leaves
     * paintbrushes strokes
     * pointillism
+    * clouds ?
 
 #### VRAC
 

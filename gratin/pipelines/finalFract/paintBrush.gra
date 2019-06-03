@@ -558,16 +558,16 @@
       <float name="sceneRadius" val="1.00847"/>
       <float name="fovy" val="45"/>
       <vector3f name="shift">
-       <float name="0" val="0"/>
-       <float name="1" val="0"/>
-       <float name="2" val="2.15836"/>
+       <float name="0" val="0.202654"/>
+       <float name="1" val="-0.839569"/>
+       <float name="2" val="8.4503"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float name="0" val="-0.00550275"/>
-        <float name="1" val="0.641108"/>
-        <float name="2" val="0.741657"/>
-        <float name="3" val="0.197231"/>
+        <float name="0" val="-0.314074"/>
+        <float name="1" val="0.732256"/>
+        <float name="2" val="0.580314"/>
+        <float name="3" val="-0.16852"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float name="0" val="256"/>
@@ -622,7 +622,7 @@
      <bool name="genericWidgetKeyframed-0" val="0"/>
     </IOData>
     <IOData name="nodeWidget-0">
-     <uint name="nbChildren" val="2"/>
+     <uint name="nbChildren" val="5"/>
      <IOData name="childWidget-0">
       <bool name="trackballCameraKeyframed" val="1"/>
       <IOData name="trackballCameraAttribCurveQ">
@@ -778,6 +778,75 @@
       <uint name="nbChildren" val="0"/>
      </IOData>
      <IOData name="childWidget-1">
+      <bool name="floatAttribKeyframed" val="0"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="1"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-2">
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-3">
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-4">
       <bool name="floatAttribKeyframed" val="0"/>
       <float name="floatAttribMinVal" val="0"/>
       <float name="floatAttribMaxVal" val="1"/>
@@ -2312,10 +2381,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="5.09563"/>
+   <float name="scale" val="6.78228"/>
    <vector2f name="offset">
-    <float name="0" val="-75.5543"/>
-    <float name="1" val="2124.07"/>
+    <float name="0" val="1009.31"/>
+    <float name="1" val="5037.75"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>
@@ -2333,10 +2402,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float name="scale" val="0.941123"/>
+   <float name="scale" val="0.956914"/>
    <vector2f name="offset">
-    <float name="0" val="1017.95"/>
-    <float name="1" val="240.452"/>
+    <float name="0" val="615.604"/>
+    <float name="1" val="258.365"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>
