@@ -8,8 +8,7 @@ Image stylization has been around for years. Researchers first start to stylize 
 
 \textbf{Texture-based methods}
 
-One of the most used ways to colored object in 3D is the \textit{texture mapping} \cite{texture_mapping}. It consists to add information to each vertex of the 3D object. These information many times are 2D coordinates that correspond to the position of a pixel in a 2D texture. This technique is very used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. Cel-shading, toon art mapping, gooch shading and others\cite{benard_state---art_2011} are texture based rendering in object space\cite{praun_real-time_2001, klein_non-photorealistic_2000, benard_dynamic_2009, benard_dynamic_2010, freudenberg_walk-through_2001} which are used to stylize scene. As said by Bénard et \textit{al.} \cite{benard_dynamic_2009} textures naturally ensure \textit{motion coherence} and \textit{temporal continuity}. Indeed because each vertex has his color and so the color in moving with the object but gives a bad \textit{flatness} because if the object gets bigger and bigger, pixelization will appear. In order to solve this problem, some\cite{klein_non-photorealistic_2000, benard_dynamic_2009} tries to use mipmaps (combining multiple scales of textures) to improve \textit{flatness}. Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise.
-
+One of the most used ways to colored object in 3D is the \textit{texture mapping} \cite{texture_mapping}. It consists to add information to each vertex of the 3D object. These information many times are 2D coordinates that correspond to the position of a pixel in a 2D texture. This technique is very used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. Cel-shading, toon art mapping, gooch shading and others\cite{benard_state---art_2011} are texture based rendering in object space\cite{praun_real-time_2001, klein_non-photorealistic_2000, benard_dynamic_2009, benard_dynamic_2010, freudenberg_walk-through_2001} which are used to stylize scene. As said by Bénard et \textit{al.} \cite{benard_dynamic_2009} textures naturally ensure \textit{motion coherence} and \textit{temporal continuity}. Indeed because each vertex has his color and so the color in moving with the object but gives a bad \textit{flatness} because if the object gets bigger and bigger, pixelization will appear. In order to solve this problem, some\cite{klein_non-photorealistic_2000, benard_dynamic_2009} tries to use mipmaps (combining multiple scales of textures) to improve \textit{flatness}. Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
 
 
 \textbf{Mark based methods}
@@ -23,7 +22,7 @@ The natural way to stylize 3D objects is to as an artist apply paint strokes on 
 
 Many methods to stylize in image space used texture based approaches. It consists to apply the texture to the entire image \cite{benard_state---art_2011} but in the case of stylizing animated scenes, the problem is how do we deform the texture to minimize the apparition of sliding artefacts. We can distinguish two families of approaches to solve this problem. The first family of approaches use an approximation of the 3D camera motion with 2D transformations of the texture\cite{cunzi_dynamic_nodate}. This gives a nice trade-off between \textit{motion coherence} and \textit{flatness} but it is limited to static scenes and a set of few camera motions. Moreover, sliding artefacts still occur with strong parallax so Fung et al.\cite{fung_pen-and-ink_nodate} and Breslav et al.\cite{breslav_dynamic_nodate} improve the approximation of the scene motion in order to reduce sliding artefacts.
 
-The second family of approaches use non-rigid deformations to animate the texture\cite{bousseau_video_2007}. These deformations are computed from the optical flow of a video. This is an extension of the methods used in vector field visualization by Neyret\cite{neyret_imagis-gravir_nodate}. These deformations can distort the texture and alter the original pattern. The method of Bousseau et al.\cite{bousseau_video_2007} is very effective with stochastic textures as the fractalization process but creates artefacts with structured patterns.
+The second family of approaches use non-rigid deformations to animate the texture\cite{bousseau_video_2007}. These deformations are computed from the optical flow of a video. This is an extension of the methods used in vector field visualization by Neyret\cite{neyret_imagis-gravir_nodate}. These deformations can distort the texture and alter the original pattern. The method of Bousseau et al.\cite{bousseau_video_2007} is very effective with stochastic textures as the fractalization process but creates artefacts with structured patterns. \newline
 
 
 
@@ -31,3 +30,28 @@ The second family of approaches use non-rigid deformations to animate the textur
 
 A method very used to stylize in image space consists to draw strokes/splats at some place of the image\cite{bleron_motion-coherent_2018, vergne_implicit_2011, benard_active_nodate, zeng_image_2009, grabli_programmable_2010}. The question of these mark based method is where do we place the marks in order to have a stylized rendering without losing the meaning of the scene. A first approach is to extract lines that are relevant like the silhouettes, etc. \cite{vergne_implicit_2011, grabli_programmable_2010, lee_line_nodate} and then stylize the image with this information, like keeping only the extracted lines and change the shape of each line or apply strokes along these lines as Vergne et al.\cite{vergne_implicit_2011} did try to have a good \textit{temporal coherence}. The problem of these techniques is the popping marks due to a bad \textit{temporal continuity}.
 A second approach is to segment the image in order to have the different parts of the scene\cite{zeng_image_2009, lin_video_nodate}. Thanks to this segmentation, they apply different strokes for each part of the image with the corresponding colors. The work of Lin et al.\cite{lin_video_nodate} is about videos so they use the optical flow of the videos in order to have a good \textit{temporal coherence}. These mark based methods have a good impression of \textit{flatness} thanks to the splatting in image space, this is something that we will use in our approach.
+
+
+\begin{figure}
+
+    \begin{tabular}{|l|*{4}{c|}}
+    \hline
+         & \textbf{Motion coherence} & \textbf{Flatness} & \textbf{Temporal continuity} & \textbf{Style variation} \\
+    \hline
+    \textbf{Object space} & & & & \\
+    \hline
+    Texture-based methods & ++ & - - & ++ & - - \\
+    \hline
+    Mark based methods & ++ & + & - & +/- \\
+    \hline
+    \textbf{Image space} & & & & \\
+    \hline
+    Texture-based methods & -  & ++ & + & - - \\
+    \hline
+    Mark based methods & - & ++ & - - & + \\
+    \hline
+    \end{tabular}
+
+    \caption{Summary of trade-offs made in different approaches}
+    \label{tableau_comparatif}
+\end{figure}

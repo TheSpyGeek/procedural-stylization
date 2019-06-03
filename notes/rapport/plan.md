@@ -9,11 +9,17 @@
 * The trinity (motion coherence, temporal continuity, flatness)
 * wide variety of possible style
 
+### procedural noise
+
+* continuous and non-perdiodic
+* Noise is a stationary and normal random process
+* In computer graphics we use Gabor Noise, Perlin Noise, Worley Noise, etc.
+
 
 ## Scientific Approach and Investigative Method and Results
 
 
-## Content of this report
+### Content of this report
 
 * Stylize 3D Models
 * ensure temporal coherence

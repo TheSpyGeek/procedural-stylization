@@ -5,7 +5,7 @@
 
 \section{Problem Statement}
 
-The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. we separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate}:
+The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. we separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate, benard_state---art_2011}:
 
 \subsection{Flatness}
 
@@ -20,4 +20,9 @@ close as possible to the 3D displacement in object space.
 
 \textit{Temporal continuity} is the quality of minimizing changes from frame to frame to ensure fluid animations. In order to have good \textit{temporal continuity}, the marks of the image have to fade slowly during the animation. Human perception is very sensitive to \textit{temporal incoherence} according to some perceptual studies\cite{percept_studies, Schwarz_2009}.
 
-\subsection{Prcedural Noises}
+
+The problem introduced in the works of Bénard et al.\cite{benard_state---art_2011} is the difficulty to have a ideal solution, the one that has a good \textit{flatness}, a good \textit{motion coherence} and a good \textit{temporal continuity}. These three goals are inherently contradictory, when you improve one you neglect one or maybe more. So researchers work to find solutions that make \textit{trade-offs} between these three goals. Our solution is a \textit{trade-offs} too.
+
+\section{Scientific approach}
+
+\section{Contents of this report}
