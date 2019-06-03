@@ -14,8 +14,8 @@
     <uint val="0" name="nodeId-0"/>
     <uint val="0" name="nodeGraphId-0"/>
     <vector2f name="nodePos-0">
-     <float val="-3667.47" name="0"/>
-     <float val="2689.36" name="1"/>
+     <float val="-3662.08" name="0"/>
+     <float val="2694.75" name="1"/>
     </vector2f>
     <int val="0" name="nodeInputNameSize-0"/>
     <int val="8" name="nodeOutputNameSize-0"/>
@@ -83,8 +83,8 @@
     <uint val="4" name="nodeId-4"/>
     <uint val="0" name="nodeGraphId-4"/>
     <vector2f name="nodePos-4">
-     <float val="-1046.31" name="0"/>
-     <float val="5295.49" name="1"/>
+     <float val="-1784.87" name="0"/>
+     <float val="4825.16" name="1"/>
     </vector2f>
     <int val="1" name="nodeInputNameSize-4"/>
     <int val="1" name="nodeOutputNameSize-4"/>
@@ -99,8 +99,8 @@
     <uint val="5" name="nodeId-5"/>
     <uint val="0" name="nodeGraphId-5"/>
     <vector2f name="nodePos-5">
-     <float val="-1642.4" name="0"/>
-     <float val="6114.58" name="1"/>
+     <float val="-1039.33" name="0"/>
+     <float val="6765.62" name="1"/>
     </vector2f>
     <int val="1" name="nodeInputNameSize-5"/>
     <int val="1" name="nodeOutputNameSize-5"/>
@@ -115,8 +115,8 @@
     <uint val="6" name="nodeId-6"/>
     <uint val="0" name="nodeGraphId-6"/>
     <vector2f name="nodePos-6">
-     <float val="-818.139" name="0"/>
-     <float val="6101.02" name="1"/>
+     <float val="-215.067" name="0"/>
+     <float val="6752.06" name="1"/>
     </vector2f>
     <int val="1" name="nodeInputNameSize-6"/>
     <int val="1" name="nodeOutputNameSize-6"/>
@@ -131,8 +131,8 @@
     <uint val="7" name="nodeId-7"/>
     <uint val="0" name="nodeGraphId-7"/>
     <vector2f name="nodePos-7">
-     <float val="0.80685" name="0"/>
-     <float val="5461.51" name="1"/>
+     <float val="603.879" name="0"/>
+     <float val="6112.55" name="1"/>
     </vector2f>
     <int val="2" name="nodeInputNameSize-7"/>
     <int val="1" name="nodeOutputNameSize-7"/>
@@ -148,8 +148,8 @@
     <uint val="8" name="nodeId-8"/>
     <uint val="0" name="nodeGraphId-8"/>
     <vector2f name="nodePos-8">
-     <float val="953.625" name="0"/>
-     <float val="5226.64" name="1"/>
+     <float val="1556.7" name="0"/>
+     <float val="5877.68" name="1"/>
     </vector2f>
     <int val="1" name="nodeInputNameSize-8"/>
     <int val="1" name="nodeOutputNameSize-8"/>
@@ -180,7 +180,7 @@
     <uint val="10" name="nodeId-10"/>
     <uint val="0" name="nodeGraphId-10"/>
     <vector2f name="nodePos-10">
-     <float val="958.49" name="0"/>
+     <float val="956.97" name="0"/>
      <float val="4407.91" name="1"/>
     </vector2f>
     <int val="3" name="nodeInputNameSize-10"/>
@@ -523,14 +523,14 @@
       <vector3f name="shift">
        <float val="0" name="0"/>
        <float val="0" name="1"/>
-       <float val="7.27817" name="2"/>
+       <float val="2.452" name="2"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
-        <float val="-0.0253664" name="0"/>
-        <float val="0.535237" name="1"/>
-        <float val="0.498987" name="2"/>
-        <float val="0.681097" name="3"/>
+        <float val="-0.629931" name="0"/>
+        <float val="0.7193" name="1"/>
+        <float val="-0.0516991" name="2"/>
+        <float val="-0.288313" name="3"/>
        </quaternionf>
        <vector2f name="screenCenter">
         <float val="256" name="0"/>
@@ -1907,7 +1907,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="100" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="16.8" name="currentVal"/>
+       <float val="17.6" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1918,7 +1918,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="16.8" name="1"/>
+          <float val="17.6" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1930,7 +1930,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="2" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.6" name="currentVal"/>
+       <float val="0.526" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1941,7 +1941,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.6" name="1"/>
+          <float val="0.526" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -2263,10 +2263,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="8.80766" name="scale"/>
+   <float val="9.14434" name="scale"/>
    <vector2f name="offset">
-    <float val="-1167.35" name="0"/>
-    <float val="5622.73" name="1"/>
+    <float val="1196.34" name="0"/>
+    <float val="5514.99" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
@@ -2284,10 +2284,10 @@
   </IOData>
   <IOData name="nodeListWidget"/>
   <IOData name="interactionWidget">
-   <float val="0.778048" name="scale"/>
+   <float val="0.864054" name="scale"/>
    <vector2f name="offset">
-    <float val="553.917" name="0"/>
-    <float val="257.482" name="1"/>
+    <float val="658.535" name="0"/>
+    <float val="269.642" name="1"/>
    </vector2f>
   </IOData>
   <IOData name="nodeInterfaceWidget"/>
