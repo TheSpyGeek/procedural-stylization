@@ -5,7 +5,17 @@
 
 \section{Problem Statement}
 
-The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. Bénard et al. separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate, benard_state---art_2011}:
+A part of the computer graphics is create non-photorealistic images. A method to do this is to stylize 3D objects and 3D scenes. Stylize an object means create an image that imitates the style of an artist who would have drawn it on sheet of paper. There exist many different styles like hand drawing, brush painting, pointillism painting, stippling, watercolor painting, etc.
+
+The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The \textit{temporal coherence} problem in non-photorealistic rendering encompasses both spatial and temporal aspects of the marks. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. Bénard et al. separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate, benard_state---art_2011} the ideal solution (Figure \ref{problem_temporal_coherence} a) could correspond to something drawn by an artist at each frame. Neglect one of this three goals provide artifacts (Figure \ref{problem_temporal_coherence} b-d).
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.3]{pics/temporal_coherence.png}
+    \end{center}
+    \caption{Problem involve by temporal coherence depending of the flatness, temporal continuity, motion coherence.}
+    \label{problem_temporal_coherence}
+\end{figure}
 
 \subsection{Flatness}
 
