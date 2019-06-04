@@ -38,9 +38,13 @@ As shown in the state of the art Report on Temporal Coherence for stylized Anima
 
 **< inserer axe orthogonaux >**
 
+
+
 ## Object space
 
 ### Texture based
+
+
 
 ### Mark based
 

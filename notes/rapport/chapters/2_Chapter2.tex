@@ -6,13 +6,37 @@ Many research have been done in stylizing 3D scene\cite{schmid_overcoat:_2011, p
 
 \section{Object Space}
 
-In the object space we workd on the surface of the object and so we have all the knowledge about the geometry.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.2]{pics/texture_mapping.png}
+    \end{center}
+    \caption{Texture mapping: example}
+    \label{texture_mapping}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.2]{images/marble.jpg}
+    \end{center}
+    \caption{Marble with procedural texture}
+    \label{marble_rendering}
+\end{figure}
+
+
+
+
+
+In the object space we workd on the surface of the object and so we have all the knowledge about the geometry. \newline
 
 % texture based
 
 \textbf{Texture-based methods}
 
-One of the most used ways to colored object in 3D is the \textit{texture mapping} \cite{texture_mapping}. It consists to add information to each vertex of the 3D object. These information many times are 2D coordinates that correspond to the position of a pixel in a 2D texture. This technique is very used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. Cel-shading, toon art mapping, gooch shading and others\cite{benard_state---art_2011} are texture based rendering in object space\cite{praun_real-time_2001, klein_non-photorealistic_2000, benard_dynamic_2009, benard_dynamic_2010, freudenberg_walk-through_2001} which are used to stylize scene. As said by Bénard et \textit{al.} \cite{benard_dynamic_2009} textures naturally ensure \textit{motion coherence} and \textit{temporal continuity}. Indeed because each vertex has his color and so the color in moving with the object but gives a bad \textit{flatness} because if the object gets bigger and bigger, pixelization will appear. In order to solve this problem, some\cite{klein_non-photorealistic_2000, benard_dynamic_2009} tries to use mipmaps (combining multiple scales of textures) to improve \textit{flatness}. Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
+One of the most used ways to colored object in 3D is the \textit{texture mapping}. It consists in mapping an image on the object\ref{texture_mapping}. This technique is widely used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. As shown in the example, texture mapping can be used with images as texture in order to stylize the object\cite{praun_real-time_2001, klein_non-photorealistic_2000, freudenberg_walk-through_2001}. Texture mapping can also be done with \textit{procedural noises}\cite{perlin_improving_2002} in this case called \textit{procedural textures}. Procedural textures are mathematicaly computed from coordinates the most famous is Perlin but there exist others like gabor noise, worley noise, etc. With these textures, we can create images looks like marble\ref{marble_rendering} or realist wood. Bénard et al.\cite{benard_dynamic_2009, benard_dynamic_2010} use this method of texture mapping with noise in order to make watercolor stylization. \newline
+
+
+
 
 
 \textbf{Mark based methods}
