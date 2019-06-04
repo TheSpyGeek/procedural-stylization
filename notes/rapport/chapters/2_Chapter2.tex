@@ -1,8 +1,12 @@
 \chapter{Previous Work}
 
-Image stylization has been around for years. Researchers first start to stylize images \cite{litwinowicz_processing_1997, hays_image_2004, rosin_stroke_2013, zeng_image_2009, kyprianidis_image_2009, lu_interactive_2010, litwinowicz_processing_1997, kyprianidis_state_2013} in order to have non-photorealistic images. Then they tried to stylize video\cite{lin_video_nodate, litwinowicz_processing_1997, kyprianidis_state_2013, bousseau_video_2007} some of them use the advantage to have the motion flow to improve the \textit{temporal coherence}. In our approach, we want to stylize 3D objects. The advantages of it are that we have more information (like the position of each vertex, the normals, the distance from the camera, ...) about the scene than just an image or a video. In our approach, the goal is to make stylized rendering of 3D objects. There are two moments in a pipeline rendering when we can stylize an object, the first is when we manipulate the vertices and the color of each triangle it is the \textit{object space}. The second is when we do the compositing with the textures that we have like shadow map, image filter, ... (manipulation of pixels of the screen) it is the \textit{image space} and also called \textit{screen space}
+Many research have been done in stylizing 3D scene\cite{schmid_overcoat:_2011, praun_real-time_2001, klein_non-photorealistic_2000, benard_dynamic_2009, benard_dynamic_2010, freudenberg_walk-through_2001, benard_state---art_2011} trying to propose solutions or trade-offs of the problem of \textit{temporal coherence}. In this part of this report, we will present you some techniques to stylize 3D scenes and we will show their advantages and disadvantages. In order to render an image of a 3D object in the screen, a graphics program goes through several steps that compute some different information like the gradient of the image, the shadows made by the object, the amount of light received by the object, etc. The gathering of all these steps is called \textbf{graphical pipeline rendering}. In this graphical pipeline, there are two moments when we can stylize the objects. The first is when we computed information about the geometry of each object in the scene, we call it \textit{object space}. The second moment is when we gather the previously computed images of the scene in order to make for example shadows, global illumination, ambient occlusion, etc. we call it the \textit{image space}. We will treat these two space separately and with the two different types of methods to stylize.
+
+
 
 \section{Object Space}
+
+In the object space we workd on the surface of the object and so we have all the knowledge about the geometry.
 
 % texture based
 

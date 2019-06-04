@@ -38,7 +38,15 @@ As shown in the state of the art Report on Temporal Coherence for stylized Anima
 
 **< inserer axe orthogonaux >**
 
+## Object space
+
+### Texture based
+
+### Mark based
+
 ## Image space
+
+
 
 * Stylizing in image space is mainly used to do non-photorealistic rendering on videos and images. To do this they either extract important lines or they compute point distribution to anchor textures or strokes.
 
