@@ -9,7 +9,7 @@ Many research have been done in stylizing 3D scene\cite{schmid_overcoat:_2011, p
 
 \begin{figure}
     \begin{center}
-    \includegraphics[scale=0.2]{pics/texture_mapping.png}
+    \includegraphics[scale=0.4]{pics/texture_mapping.png}
     \end{center}
     \caption{Texture mapping: example}
     \label{texture_mapping}
@@ -24,6 +24,23 @@ Many research have been done in stylizing 3D scene\cite{schmid_overcoat:_2011, p
 \end{figure}
 
 
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.2]{pics/hatching.png}
+    \end{center}
+    \caption{Real time hatching rendering \cite{praun_real-time_2001}}
+    \label{hatching_rendering}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.3]{pics/watercolor_objspace.png}
+    \end{center}
+    \caption{Watercolor stylization with procedural textures \cite{benard_dynamic_2009}}
+    \label{watercolor_rendering}
+\end{figure}
+
+
 
 
 
@@ -33,7 +50,8 @@ In the object space, we work on the surface of the object and so we have all the
 
 \textbf{Texture-based methods}
 
-One of the most used ways to colored object in 3D is the \textit{texture mapping}. It consists of mapping an image on the object (Figure \ref{texture_mapping}). This technique is widely used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. As shown in the example, texture mapping can be used with images as a texture in order to stylize the object\cite{praun_real-time_2001, klein_non-photorealistic_2000, freudenberg_walk-through_2001}. Texture mapping can also be done with \textit{procedural noises}\cite{perlin_improving_2002} in this case called \textit{procedural textures}. Procedural textures are mathematically computed from coordinates the most famous is Perlin but there exist others like Gabor noise, Worley noise, etc. With these textures, we can create images looks like marble (Figure \ref{marble_rendering}) or realist wood. Bénard et al.\cite{benard_dynamic_2009, benard_dynamic_2010} use this method of texture mapping with noise in order to make watercolor stylization. \newline
+
+One of the most used ways to colored object in 3D is the \textit{texture mapping}. It consists of mapping an image on the object (Figure \ref{texture_mapping}\ref{hatching_rendering}). This technique is widely used in video games because it is easy to implement, it can be implemented for GPU and it needs low computation. As shown in the example, texture mapping can be used with images as a texture in order to stylize the object\cite{praun_real-time_2001, klein_non-photorealistic_2000, freudenberg_walk-through_2001}. Texture mapping can also be done with \textit{procedural noises}\cite{perlin_improving_2002} in this case called \textit{procedural textures}. Procedural textures are mathematically computed from coordinates the most famous is Perlin but there exist others like Gabor noise, Worley noise, etc. With these textures, we can create images looks like marble (Figure \ref{marble_rendering}) or realist wood. Bénard et al.\cite{benard_dynamic_2009, benard_dynamic_2010} use this method of texture mapping with noise in order to make watercolor stylization (Figure \ref{watercolor_rendering}). \newline
 
 This method has a problem of \textit{foreshortening} of the silhouettes which makes an area with more elements than in the center of the object and when zooming in/out the size of the elements in the mapped texture vary depending on the distance from the camera, if we get closer to the object the elements on the texture become bigger and bigger going up to pixelization sometimes. These two problems make texture mapping bad in term of \textit{flatness} because an artist does not draw bigger strokes if the object is close and does not draw more details at the silhouettes than in the center of his objects. Texture mapping is also bad in term of variety of style that you can do because you are depending on the texture chosen you cannot, for instance, do a rendered image that looks like painted with brushes and especially you cannot change the shape of the object in the rendered image, a perfect sphere will always appear as a perfect sphere. On the other hand, this method naturally ensures \textit{motion coherence} and \textit{temporal continuity} because the texture is mapped directly on the surface of the object. \newline
 
@@ -52,7 +70,11 @@ This method has a problem of \textit{foreshortening} of the silhouettes which ma
 
 \textbf{Mark based methods}
 
-The natural way to stylize 3D objects is to as an artist apply paint strokes on the object. These paint strokes can be represented with smalls images also called splats. Daniels\cite{Daniels_1999} and Schmid\cite{schmid_overcoat:_2011} propose to project splats composed of stroke and stored them on the geometry of the model but this technique is expensive in term of storage. Some works \cite{meier_painterly_1996, Fekete_2000, chi_stylized_2006}(more in the state of the art \cite{benard_state---art_2011}) use point distribution in order to make anchor points for splats. These point distributions are often computed in image space and then are projected on the model. Anchor these splats to the model improve the \textit{motion coherence} because each splat will follow the motion of the 3D model. These splats are rendered in the image space as a 2D sprites so preserved the \textit{flatness}. The problem is how to have the point distribution and how can we control it in order to have a uniform, not too sparse and not too dense distribution. Moreover, these point distribution does not provide control over the \textit{temporal continuity}. In our method, we use procedural noise to anchor the splats.
+The natural way to stylize 3D objects is to as an artist apply paint strokes on the object. These paint strokes can be represented with smalls images also called splat. Some works \cite{meier_painterly_1996, Fekete_2000, chi_stylized_2006}(more in the state of the art \cite{benard_state---art_2011}) use point distribution in order to make anchor points for splats. These point distributions are often computed in image space and then are projected on the model. Anchor these splats to the model improve the \textit{motion coherence} because each splat will follow the motion of the 3D model. These splats are rendered in the image space as a 2D sprites so preserved the \textit{flatness}. The problem is how to have the point distribution and how can we control it in order to have a uniform, not too sparse and not too dense distribution. Moreover, these point distribution does not provide control over the \textit{temporal continuity}. In our method, we use procedural noise to anchor the splats.
+
+Daniels\cite{Daniels_1999} and Schmid\cite{schmid_overcoat:_2011} propose to project splat on the geometry and stored them in nodes but anchored to the geometry of the model but this technique is expensive in term of storage. OverCoat\cite{schmid_overcoat:_2011} is an interactive software that permit to the user to stylize manually a 3D object (\href{https://www.youtube.com/watch?v=Nfw6JxC9Fw4}{Overcoat demo}). Their techniques is the closer techniques to our proposed solution. In their solution, they use 3D splines drawn by the user and they display images along these lines. Each spline is stored in nodes that contains the image to splat along this line, the color, the thickness and the transparency that permit to the user to edit the stylization after drawing the splines. These splines are anchored on a proxy generated by the program this has the disadvantage to place the stylization at the beginning of the graphical pipeline. It has a problem of \textit{foreshortening} of the silhouettes that makes the rendering blurred at some place of the image. Overcoat has a big problem of flatness when rescaling the stylized object, this is because the user draw marks at a specific scale so when we zoom in the scene the marks looks bigger or smaller and that effect the \textit{flatness} of the rendered image. All the marks drawn are anchored to the geometry so it ensures the \textit{motion coherence}
+
+
 
 
 \section{Image space}
@@ -81,7 +103,7 @@ A second approach is to segment the image in order to have the different parts o
     \hline
     Texture-based methods & ++ & - - & ++ & - - \\
     \hline
-    Mark based methods & ++ & + & - & +/- \\
+    Mark based methods & ++ & +/- & - & +/- \\
     \hline
     \textbf{Image space} & & & & \\
     \hline
