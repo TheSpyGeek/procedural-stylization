@@ -157,8 +157,7 @@ Some examples:
 * use Gratin: pipeline rendering software
 * order independent transparency on GPU
 * NOT NEED spécific structure of rendering
-* can be done in post precessing
-
+* can be done in compositing
 
 # Results
 
@@ -168,6 +167,13 @@ Some examples:
     * paintbrushes strokes
     * pointillism
     * clouds ?
+
+# go further and discussion
+
+* depth in the splat itself
+* watercolor
+
+
 
 #### VRAC
 
