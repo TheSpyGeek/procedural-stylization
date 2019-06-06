@@ -111,7 +111,7 @@ void main() {
   bubbleSort();
  vec4 col = texture(image,texcoord);
   vec4 color = mix(vec4(0.5,0.5,0.5,1.0),vec4(col.xyz,1.),col.w);
- 
+  color = vec4(vec3(0.5),1.);
 #ifdef BLEND_MODE_0
   color = frontToBackOver(color);
 #endif

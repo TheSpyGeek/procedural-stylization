@@ -12,8 +12,8 @@
 #include "stylization_v3.h"
 
 //QString Stylization_v3Node::SHADER_PATH = QString("/home/romain/research/proceduralStylization/gratin/nodes/proceduralStyle/stylization_v3/");
-QString Stylization_v3Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
-// QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
+//QString Stylization_v3Node::SHADER_PATH = QString("/home/misnel/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
+QString Stylization_v3Node::SHADER_PATH = QString("/home/vergne/projects/procedural-stylization/gratin/nodes/proceduralStyle/stylization_v3/");
 
 
 Stylization_v3Node::Stylization_v3Node(PbGraph *parent,NodeHandle *handle)
