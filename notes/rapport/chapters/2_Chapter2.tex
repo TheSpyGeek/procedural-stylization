@@ -112,10 +112,28 @@ These texture based methods for 3d scenes have issues with \textit{motion cohere
     \label{Hertzman_algo}
 \end{figure}
 
+\begin{figure}
+    \begin{center}
+
+    \includegraphics[scale=0.5]{pics/segmentation_example.png}
+    \end{center}
+    \caption{Example segmentation image\cite{benard_state---art_2011}}
+    \label{segmenation_example}
+\end{figure}
+
 A method very used to stylize in image space consists to draw strokes/splats at some place of the image\cite{bleron_motion-coherent_2018, vergne_implicit_2011, benard_active_nodate, zeng_image_2009, grabli_programmable_2010}. It is like adding others images in an image (like you can do in Photoshop or Gimp, Figure \ref{Hertzman_algo}). The question of these mark based method is where do we place these marks in order to have a stylized rendering without loosing the meaning of the scene and without loosing details. A first approach is to extract lines that are relevant like the silhouettes, etc. \cite{vergne_implicit_2011, grabli_programmable_2010, lee_line_nodate} and then stylize the image with this information, like keeping only the extracted lines and change the shape of each line or apply strokes along these lines as Vergne et al.\cite{vergne_implicit_2011} did try to have a good \textit{temporal coherence}. The problem of these techniques is the popping marks due to a bad \textit{temporal continuity} because we do not know if in the next frame there will be more details or not or the color to display is different from the current one.
-A second approach is to segment the image (Figure ???) in order to have the different parts of the scene\cite{zeng_image_2009, lin_video_nodate}. Thanks to this segmentation, they apply different strokes for each part of the image with the corresponding colors. The work of Lin et al.\cite{lin_video_nodate} is about videos so they use the optical flow of the videos in order to have a good \textit{temporal coherence}. These mark based methods have a good impression of \textit{flatness} thanks to the splatting in image space, this is something that we will use in our approach.
+A second approach is to segment the image (Figure \ref{segmenation_example}) in order to have the different parts of the scene\cite{zeng_image_2009, lin_video_nodate}. Thanks to this segmentation, they apply different strokes for each part of the image with the corresponding colors. The work of Lin et al.\cite{lin_video_nodate} is about videos so they use the optical flow of the videos in order to have a good \textit{temporal coherence}. These mark based methods have a good impression of \textit{flatness} thanks to the splatting in image space, this is something that we will use in our approach.
 
 These methods of splatting have almost the same problem that the texture based method they suffer of bad \textit{motion coherence} and \textit{temporal continuity}. Temporal continuity that can be improve using a motion flow which cannot be possible in our case. In the other hand, changing the type of splat, the size and their orientation we can make many different styles, like brushes painting, pencil drawings, stippling, hairs. These method draw 2d strokes/burshes in the image so it looks like drawn by a person on a flat surface which makes a good \textit{flatness} impression. \newline
+
+
+% Conclusion state of the art
+
+% mark based method propose de variation de style
+% l'espace objet permet une bonne coherence de mouvement
+%
+
+The figure \ref{tableau_comparatif} is a summary of the previous works. The interesting point is mark based method can make a wider variety of styles than the texture based method. We can see that for \textit{motion coherence} and \textit{temporal continuity} doing the stylization in object space is better than in image space but in image space we can do stylization that have a good \textit{flatness} impression contrary to the object space.
 
 
 \begin{figure}
@@ -128,7 +146,7 @@ These methods of splatting have almost the same problem that the texture based m
     \hline
     Texture-based methods & ++ & - - & ++ & - - \\
     \hline
-    Mark based methods & ++ & +/- & - & +/- \\
+    Mark based methods & ++ & +/- & +/- & +/- \\
     \hline
     \textbf{Image space} & & & & \\
     \hline

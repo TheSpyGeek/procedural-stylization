@@ -103,6 +103,7 @@ Also called splatting.
 * Worley
     * adapt the threshold depending on the distance from the camera
     * adapt the threshold depending on the frequency of the noise
+* aliasing
 
 * fractalization (cf: Pierre Bénard)
     * quasi constant size of splats => ++ flatness
@@ -151,6 +152,7 @@ Some examples:
     * low density
     * brushes strokes as splats
     * size of splat: high
+
 
 # Technical implementation
 
