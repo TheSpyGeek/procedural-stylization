@@ -65,7 +65,15 @@ in mat3 Nmat; // normal matrix
 
 vec2 ts = textureSize(positionWMap,0);
 
-// ******* USEFUL FUNCTIONS (rotation/noises/etc) ******* 
+// ******* USEFUL FUNCTIONS (rotation/noises/etc) *******
+vec2 rotate2D(in vec2 v,in float angle,in vec2 c) {
+  // rotation of v around c with a particular angle
+  vec2 T = v-c;
+  return vec2(cos(angle)*T.x-sin(angle)*T.y,
+	      sin(angle)*T.x+cos(angle)*T.y) + c;
+}
+
+
 vec3 rotateAxisAngle(in vec3 v,in vec3 axis,in float angle) {
   float ca  = cos(angle);
   float sa = sin(angle);
@@ -117,6 +125,27 @@ void styleTest01(out vec3 fragColor,out float fragOpacity, out float fragDepth) 
   float opacity = splatData.w*clamp(ancNoise.x,0.,1.); if(opacity<=1e-3) discard; // not enough opaque
 
   fragColor = anchorColor.xyz*splatData.x;
+  fragOpacity = opacity;
+  fragDepth = gl_FragCoord.z+splatData.y*splatDepthFactor;
+}
+
+
+void styleTest02(out vec3 fragColor,out float fragOpacity, out float fragDepth) {
+  // SIMPLE TEST: colored splat with a careful handle of noise opacity to discard fragments 
+  vec4 ancNoise = anchorNoise; //if(ancNoise.w<=0.) discard; // outside silhouettes 
+  vec4 ancColor = anchorColor;
+
+  vec4 splatData = texture(splatMap,splatCoord);
+  vec4 splatNormal = texture(splatNormalMap,splatCoord);
+  vec3 vn = anchorDepth.yzw;
+  splatNormal.xy = rotate2D(splatNormal.xy,atan(vn.y,vn.x)-PI/2.,vec2(0.)); // rotate normal
+  
+  float opacity = splatData.w*clamp(ancNoise.x,0.,1.); if(opacity<=1e-3) discard; // not enough opaque
+
+  vec3 l = normalize(vec3(-1,1,1));
+  float test = max(dot(l,splatNormal.xyz),0.)*2.;
+  
+  fragColor = anchorColor.xyz*splatData.x*test;
   fragOpacity = opacity;
   fragDepth = gl_FragCoord.z+splatData.y*splatDepthFactor;
 }
