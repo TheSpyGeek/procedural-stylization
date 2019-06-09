@@ -10,6 +10,11 @@ We chose to use mark based methods to stylize our scene because texture based me
 
 \section{Procedural noise and fractalization}
 
+We compute procedural texture in order to create anchor points. Procedural noises are \textit{pseudorandom} gradient. In computer grapchis, they are usually used in 2d as an image or in 3d for texturing a 3d object, in our case we use it in 3d. This texture are computed from procedural noise with a mathematical process. There exist many procedural noise such as Perlin noise, Worley noise, Gabor noise, Value noise, Gradient noise, etc. In order to map the procedural texture to the 3d object, we compute it with the vector position of each vertex of the object.
+
+There several parameters available to change the aspect the noise. The frequency control how many details there is in the texture. 
+% parler de la fréquence
+
 
 \textbf{Fractalization}
  Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
