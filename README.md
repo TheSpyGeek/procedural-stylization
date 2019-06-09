@@ -19,11 +19,11 @@ cmake .. && make
 * Note: the node in ```Gratin``` is in the stylization folder
 
 # Examples
-* ```gratin/pipelines/simplified_pipeline/simplified01.gra``` basic example
-* ```gratin/pipelines/simplified_pipeline/simplified02.gra``` example with a character and its color in texture
-* the splats used are in the folder: ```gratin/data/imgs/```
-* the models used are in the folder: ```gratin/data/mdoels/``` but you can use your owns
 
 * pipeline with all function usefull: ```gratin/pipelines/romain/romainCleanPipeline01.gra```
 * with the fractal noise ```gratin/pipelines/romain/romain-fractalization.gra```
 * test ahir rendering: ```gratin/pipelines/romain/bouleDePoils01.gra```
+
+
+* the splats used are in the folder: ```gratin/data/imgs/```
+* the models used are in the folder: ```gratin/data/mdoels/``` but you can use your owns
