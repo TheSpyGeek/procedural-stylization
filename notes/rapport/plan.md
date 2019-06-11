@@ -96,14 +96,14 @@ Also called splatting.
 
 ## Procedural noise and fractalisation
 
-* Worley and Perlin
-* explain Worley
-* PN controls the density of splat and a part of their opacity
+* Worley and Perlin +
+* PN controls the density of splat and a part of their opacity +
 * threshold in order to have less splats in the screen
 * Worley
+* explain Worley
     * adapt the threshold depending on the distance from the camera
     * adapt the threshold depending on the frequency of the noise
-* aliasing
+* aliasing +
 
 * fractalization (cf: Pierre Bénard)
     * quasi constant size of splats => ++ flatness

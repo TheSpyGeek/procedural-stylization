@@ -29,12 +29,37 @@ We compute procedural texture in order to create anchor points. Procedural noise
     \begin{center}
     \includegraphics[scale=0.6]{images/noise/addition.png}
     \end{center}
-    \caption{Usage of procedural texture to anchor splats}
+    \caption{Usage of procedural texture to anchor splats: (left: splat image, middle: procedural teture, right: rendered image)}
     \label{procedural_noise_anchor}
 \end{figure}
 
-In our case we used the procedural texture to anchor the splat. For each pixel of the final image we "paste" a splat if the current pixel correspond to black pixel in the procedural texture the splat is not displayed (see Figure \ref{procedural_noise_anchor}). Thanks to this mechanism we can control the density of splat in the image.
+In our case we used the procedural texture to anchor the splat. For each pixel of the final image we "paste" a splat if the current pixel correspond to black pixel in the procedural texture the splat is not displayed (see Figure \ref{procedural_noise_anchor}). Thanks to this mechanism we can control the density of splat in the image. The value of our noise in the texture is between 0 and 1. The opacity vary according to this value of the procedural noise. One problem of working in image space is the aliasing, it creates some problem with \textit{temporal continuity} and \textit{motion coherence}. To reduce the aliasing in the procedural texture we make multiple samples with very small variation and we do an average to have the final value.
 
+We add a threshold parameter to compute the noise in order to reduce the number of splat to display but especially to have small points in the procedural texture if not the splats convolve as you can see in the rendered image in the figure \ref{procedural_noise_anchor}.
+
+% Worley
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.2]{images/noise/worley_explain.png}
+    \end{center}
+    \caption{Worley noise in 2d}
+    \label{worley_explain}
+\end{figure}
+
+We mainly work with the Worley noise which is a cellular noise as you can see at the right in the figure \ref{procedural_texture}. To create a procedural texture from a Worley noise, we divide the image in cells (squares with the same size in 2d and cubes with the same size in 3d, red lines in the figure \ref{worley_explain}), then in each square (cube in 3d) we compute a point with a seeded random (white dot in the figure \ref{worley_explain}) and finally at each pixel of the texture we put as value the distance with the closest point computed previously with the random seed. Increase the frequency of this noise correspond to divide the image with smaller cells and so have more cells in the image. In our pipeline we use the inverse of this noise (1-worleynoise) in order to have the white pixels of the procedural texture as anchor points.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.3]{images/noise/worley3d_thresh_1.png}
+    \includegraphics[scale=0.3]{images/noise/worley3d_thresh_2.png}
+    \includegraphics[scale=0.3]{images/noise/worley3d_thresh_3.png}
+    \end{center}
+    \caption{Use of threshold in the case of Worley noise with the same frequency}
+    \label{worley_threshold}
+\end{figure}
+
+As we said before we use a threshold for the purpose of having an another control on the noise. With the Worley noise this threshold correspond to the "size" of the points. If we increase the threshold the points become smaller as you can see in the figure \ref{worley_threshold}.
 
 % Add fractalization
 
