@@ -10,11 +10,33 @@ We chose to use mark based methods to stylize our scene because texture based me
 
 \section{Procedural noise and fractalization}
 
-We compute procedural texture in order to create anchor points. Procedural noises are \textit{pseudorandom} gradient. In computer grapchis, they are usually used in 2d as an image or in 3d for texturing a 3d object, in our case we use it in 3d. This texture are computed from procedural noise with a mathematical process. There exist many procedural noise such as Perlin noise, Worley noise, Gabor noise, Value noise, Gradient noise, etc. In order to map the procedural texture to the 3d object, we compute it with the vector position of each vertex of the object.
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.2]{images/PerlinNoise2d.png}
+    \includegraphics[scale=0.1]{images/WorleyNoise2d.jpg}
+    \end{center}
+    \caption{Examples of procedural texture: \textit{left using perlin noise, right using worley noise}}
+    \label{procedural_texture}
+\end{figure}
 
-There several parameters available to change the aspect the noise. The frequency control how many details there is in the texture. 
-% parler de la fréquence
+% Description of procedural noise
 
+We compute procedural texture in order to create anchor points. Procedural noises are \textit{pseudorandom} gradient of grid point. In computer grapchis, they are usually used in 2d \ref{procedural_texture} as an image or in 3d for texturing a 3d object, in our case we use it in 3d. This texture are computed from procedural noise with a mathematical process. There exist many procedural noise such as Perlin noise, Worley noise, Gabor noise, Value noise, Gradient noise, etc. In order to map the procedural texture to the 3d object, we compute it with the vector position of each vertex of the object. The frequency of a noise control how many details there is in the texture. With a Worley noise, increasing the frequency will increase the number of black area in the texture.
+
+% how we use it
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.6]{images/noise/addition.png}
+    \end{center}
+    \caption{Usage of procedural texture to anchor splats}
+    \label{procedural_noise_anchor}
+\end{figure}
+
+In our case we used the procedural texture to anchor the splat. For each pixel of the final image we "paste" a splat if the current pixel correspond to black pixel in the procedural texture the splat is not displayed (see Figure \ref{procedural_noise_anchor}). Thanks to this mechanism we can control the density of splat in the image.
+
+
+% Add fractalization
 
 \textbf{Fractalization}
  Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
