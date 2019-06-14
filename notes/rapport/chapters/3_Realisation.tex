@@ -15,7 +15,7 @@ We chose to use mark based methods to stylize our scene because texture based me
     \includegraphics[scale=0.2]{images/PerlinNoise2d.png}
     \includegraphics[scale=0.1]{images/WorleyNoise2d.jpg}
     \end{center}
-    \caption{Examples of procedural texture: \textit{left using perlin noise, right using worley noise}}
+    \caption{Examples of procedural texture: \textit{left using perlin noise, right using worley noise}.}
     \label{procedural_texture}
 \end{figure}
 
@@ -29,7 +29,7 @@ We compute procedural texture in order to create anchor points. Procedural noise
     \begin{center}
     \includegraphics[scale=0.6]{images/noise/addition.png}
     \end{center}
-    \caption{Usage of procedural texture to anchor splats: (left: splat image, middle: procedural teture, right: rendered image)}
+    \caption{Usage of procedural texture to anchor splats: (left: splat image, middle: procedural teture, right: rendered image).}
     \label{procedural_noise_anchor}
 \end{figure}
 
@@ -43,7 +43,7 @@ We add a threshold parameter to compute the noise in order to reduce the number 
     \begin{center}
     \includegraphics[scale=0.2]{images/noise/worley_explain.png}
     \end{center}
-    \caption{Worley noise in 2d}
+    \caption{Worley noise in 2d.}
     \label{worley_explain}
 \end{figure}
 
@@ -55,7 +55,7 @@ We mainly work with the Worley noise which is a cellular noise as you can see at
     \includegraphics[scale=0.3]{images/noise/worley3d_thresh_2.png}
     \includegraphics[scale=0.3]{images/noise/worley3d_thresh_3.png}
     \end{center}
-    \caption{Use of threshold in the case of Worley noise with the same frequency}
+    \caption{Use of threshold in the case of Worley noise with the same frequency.}
     \label{worley_threshold}
 \end{figure}
 
@@ -63,8 +63,35 @@ As we said before we use a threshold for the purpose of having an another contro
 
 % Add fractalization
 
+
 \textbf{Fractalization}
- Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.3]{images/fractalization_principle.png}
+    \end{center}
+    \caption{Principle of fractalization \cite{benard_dynamic_2010}.}
+    \label{fractalization_principle}
+\end{figure}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.5]{images/fractalization_practical.png}
+    \end{center}
+    \caption{Combination of the noises with the alpha value.}
+    \label{fractalization_practical}
+\end{figure}
+
+
+Bénard et \textit{al.}\cite{benard_dynamic_2010} introduce the mechanism of fractalization on textures. This technique create an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy of Neyret Fabrice}). To creates this fractalization, they create textures at multiple frequency (not necessary procedural texture) (see figure \ref{fractalization_principle}) and they combine them with the transparency and they overlap them according to the distance from the camera as you can see in the results of the figure \ref{fractalization_principle}.
+
+The figure \ref{fractalization_practical} show how we combine the procedural noises in our pipeline. More the distance from the camera is close to 0 more the the frequency of the noises are high. In the figure, we have: \texttt{2*frequency(noise1) = frequency(noise2)} and \texttt{2*frequency(noise2) = frequency(noise3)} because in our case we divide the distance from the camera with a \textit{log2} so when the distance from camera is twice as large the frequency of the noise displayed is multiplied by 2. To compute the alpha of each noise we use Gaussian interpolation
+
+
+
+
+
+ % Bénard et \textit{al.}\cite{benard_dynamic_2010} use the same principle but with procedural textures. They create multiple noises with different frequency and combine them playing with transparency. Moreover, they overlap the noise to make an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy}). With this method patterns of the texture have an almost constant size regardless of the size of the object but it can create small problems of \textit{temporal continuity}. In our method, we will use this technique of fractalization of a procedural noise. \newline
 
 \section{Splatting}
 
