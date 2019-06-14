@@ -12,10 +12,11 @@ We chose to use mark based methods to stylize our scene because texture based me
 
 \begin{figure}
     \begin{center}
-    \includegraphics[scale=0.2]{images/PerlinNoise2d.png}
-    \includegraphics[scale=0.1]{images/WorleyNoise2d.jpg}
+    \includegraphics[width=40mm, height=40mm]{images/PerlinNoise2d.png}
+    \includegraphics[width=40mm, height=40mm]{images/GaborNoise2d.png}
+    \includegraphics[width=40mm, height=40mm]{images/WorleyNoise2d.jpg}
     \end{center}
-    \caption{Examples of procedural texture: \textit{left using perlin noise, right using worley noise}.}
+    \caption{Examples of procedural texture: \textit{left using perlin noise, middle using Gabor noise,right using worley noise}.}
     \label{procedural_texture}
 \end{figure}
 
@@ -29,7 +30,7 @@ We compute procedural texture in order to create anchor points. Procedural noise
     \begin{center}
     \includegraphics[scale=0.6]{images/noise/addition.png}
     \end{center}
-    \caption{Usage of procedural texture to anchor splats: (left: splat image, middle: procedural teture, right: rendered image).}
+    \caption{Usage of procedural texture to anchor splats: (left: splat image, middle: procedural teture, right: rendered image, bottom: color).}
     \label{procedural_noise_anchor}
 \end{figure}
 
@@ -59,7 +60,7 @@ We mainly work with the Worley noise which is a cellular noise as you can see at
     \label{worley_threshold}
 \end{figure}
 
-As we said before we use a threshold for the purpose of having an another control on the noise. With the Worley noise this threshold correspond to the "size" of the points. If we increase the threshold the points become smaller as you can see in the figure \ref{worley_threshold}. In order to facilate the control of this noise we adapt this threshold according to frequency and the distance from the camera. That means that the size of each point is constant if the frequency or/and the distance from the camera is changed.
+As we said before we use a threshold for the purpose of having an another control on the noise. With the Worley noise this threshold correspond to the "size" of the points. If we increase the threshold the points become smaller as you can see in the figure \ref{worley_threshold}. In order to facilate the control of this noise we adapt this threshold according to frequency and the distance from the camera. That means that the size of each point is constant if the frequency or/and the distance from the camera is changed. \newline
 
 % Add fractalization
 
@@ -76,16 +77,19 @@ As we said before we use a threshold for the purpose of having an another contro
 
 \begin{figure}
     \begin{center}
-    \includegraphics[scale=0.5]{images/fractalization_practical.png}
+    \includegraphics[scale=0.6]{images/fractal_explained.png}
     \end{center}
-    \caption{Combination of the noises with the alpha value.}
+    \caption{Combination of the noises with the weight value in this case with 2 noises.}
     \label{fractalization_practical}
 \end{figure}
 
 
-Bénard et \textit{al.}\cite{benard_dynamic_2010} introduce the mechanism of fractalization on textures. This technique create an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy of Neyret Fabrice}). To creates this fractalization, they create textures at multiple frequency (not necessary procedural texture) (see figure \ref{fractalization_principle}) and they combine them with the transparency and they overlap them according to the distance from the camera as you can see in the results of the figure \ref{fractalization_principle}.
+Bénard et \textit{al.}\cite{benard_dynamic_2010} introduce the mechanism of fractalization on textures. This technique creates an impression of infinite zoom effect (like in this example: \href{https://www.shadertoy.com/view/XlBXWw?fbclid=IwAR1fU2JxQzXtks1ZcmVmzrHiv646G8w2gWceeiV-UToeFkAFMQ2NecbsGGs}{ShaderToy of Neyret Fabrice}). In our method of stylizing it improves the \textit{temporal continuity} because there is always display even if you get very close to the object and it also improves the \textit{flatness} impression because there is almost the same number of anchor points in the screen and their size is quasi-constant. This method alters the original pattern of the texture as you can see in the figure \ref{fractalization_principle} it can be an issue because some pattern cannot be fractalized (like the checkboard pattern) but it works well with stochastic textures. To creates this fractalization, they use textures at multiple frequencies (not necessary procedural texture) (see figure \ref{fractalization_principle}) and they combine them with the transparency and they overlap them according to the distance from the camera as you can see in the results of the figure \ref{fractalization_principle}. \newline
 
-The figure \ref{fractalization_practical} show how we combine the procedural noises in our pipeline. More the distance from the camera is close to 0 more the the frequency of the noises are high. In the figure, we have: \texttt{2*frequency(noise1) = frequency(noise2)} and \texttt{2*frequency(noise2) = frequency(noise3)} because in our case we divide the distance from the camera with a \textit{log2} so when the distance from camera is twice as large the frequency of the noise displayed is multiplied by 2. To compute the alpha of each noise we use Gaussian interpolation
+
+The figure \ref{fractalization_principle} show 4 noises (octaves) at different frequency it is a zooming cycle. As you can see, if the distance from the camera is close to 0 the frequency of the noises is high and if we move away from the object the frequency decrease. In the figure, we have: \texttt{2*frequency(octave 1) = frequency(octave 2)} and \texttt{2*frequency(octave 2) = frequency(octave 3)} and etc.  because in this case they divide the distance from the camera with a \textit{log2} so when the distance from camera is twice as large the frequency of the noise displayed is multiplied by 2. During the zoom, we modulate each octave with a weight. To compute the weight of each noise we use Gaussian interpolation centered on our current distance from the camera (see figure \ref{fractalization_practical}) with a sigma depending on the number of noises that we want to combine.
+
+
 
 
 
