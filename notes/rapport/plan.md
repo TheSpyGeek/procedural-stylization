@@ -160,13 +160,17 @@ Some examples:
 # Technical implementation
 
 * use Gratin: pipeline rendering software
-* order independent transparency on GPU
+
 * NOT NEED spécific structure of rendering
 * can be done in compositing
+
+* splatting principle on GPU
+
 * algo fractalization
 * aliasing +
 
-    * blending with the distance from the camera
+* order independent transparency on GPU
+* blending with the distance from the camera
 
 # Results
 
