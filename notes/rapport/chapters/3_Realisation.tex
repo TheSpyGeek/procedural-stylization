@@ -110,9 +110,27 @@ The figure \ref{fractalization_principle} show 4 noises (octaves) at different f
     \label{splat_examples}
 \end{figure}
 
-Artists draw on a flat surface that gives a good impression of \textit{flatness}. We use the same principle to stylize our scene. We put splats/marks directly on the image like an artist will do (illustrated in the figure \ref{procedural_noise_anchor}). In our solution, the user controls the splat image he can use anything. These marks can be leaves, hairs, dots, feathers, lines, paint brushes, etc. They can also be created from a procedural noise. The user has also the control on the size of these splats, he has a global control of the size and control on a specific part of the object through a texture. The rotation of the splats is also a parameter that the user can control. He can choose to rotate all the splat, for example, depending on the normals or depending on the tangents. \newline
+The marks based method try to imitate how the artists do when they stylize. They draw on a flat surface that gives a good impression of \textit{flatness}. We use the same principle to stylize our scene. We put splats/marks directly on the image like an artist will do (illustrated in the figure \ref{procedural_noise_anchor}). \newline
 
-Artists control how their marks are combined for example if he is doing painting he could want to have non-transparent marks in order to cover the marks behind the new one. He could want more transparency if for example he wants to do watercolorization. In our method, we take this into account during the blending of all marks. The user can control how many marks the stylization will mix and control the transparency (alpha blending). For example, the user can choose to only show the marks at the top of the flat surface (the closest to the camera) or he can choose to mix some marks in order to account some marks covered.
+In our solution, the user controls the splat image he can use anything. These marks can be leaves, hairs, dots, feathers, lines, paint brushes, etc. They can also be created from a procedural noise. The user has also the control on the size of these splats, he has a global control of the size and control on a specific part of the object through a texture. The rotation of the splats is also a parameter that the user can control. He can choose to rotate all the splat, for example, depending on the normals or depending on the tangents. \newline
+
+Artists control how their marks are combined for example if he is doing painting he could want to have non-transparent marks in order to cover the marks behind the new one. He could want more transparency if for example he wants to do watercolorization.\newline
+
+In our method, we take this into account during the blending of all marks. The user can control how many marks the stylization will mix and control the transparency (alpha blending). For example, the user can choose to only show the marks at the top of the flat surface (the closest to the camera) or he can choose to mix some marks in order to account some marks covered.
 
 
 \section{Stylization}
+
+As explained in the previous section, in our method, the user control the content of the splats, their size, their orientation, the density of splat on the object and how they are blended with the alpha blending. In this section, we will show you some examples of how we did specific style using our pipeline. \newline
+
+\textbf{Pointillism}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=80mm, height=80mm]{Resultats/spotPoint/final.png}
+    \end{center}
+    \caption{Example of pointillism with our method.}
+    \label{final_point}
+\end{figure}
+
+In order to make pointillism style we use a dot as splat (gaussian fonction in 2d, the first in the figure \ref{splat_examples}), the procedural noise to control the number of splats has a high frequency, the size of the splats can vay depending on which size of brush he wants to imitate and for the alpha blending it usually adapt to not mix many marks. In this case the orientation does not matter. The figure \ref{final_point} shows the final rendered image.
