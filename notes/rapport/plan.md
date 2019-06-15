@@ -103,7 +103,7 @@ Also called splatting.
 * explain Worley
     * adapt the threshold depending on the distance from the camera
     * adapt the threshold depending on the frequency of the noise
-* aliasing +
+
 
 * fractalization (cf: Pierre Bénard)
     * quasi constant size of splats => ++ flatness
@@ -119,10 +119,13 @@ Also called splatting.
     * paint brushes
     * hairs
     * leaves
+    * **control size of the splat**
+    * **control their rotation**
 
 * blending:
-    * with the distance from the camera
+
     * alpha blending (cf: overcoat follow up)
+    * **control transparency**
 
 
 ## Stylization
@@ -160,6 +163,10 @@ Some examples:
 * order independent transparency on GPU
 * NOT NEED spécific structure of rendering
 * can be done in compositing
+* algo fractalization
+* aliasing +
+
+    * blending with the distance from the camera
 
 # Results
 
@@ -174,6 +181,9 @@ Some examples:
 
 * depth in the splat itself
 * watercolor
+* adapt with the flow motion
+
+
 
 
 
