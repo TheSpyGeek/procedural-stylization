@@ -23,4 +23,48 @@ For the splatting step, we draw on each pixel of the screen a square centered on
     \label{order}
 \end{figure}
 
-In this \textit{fragment shader}, we setup the technique of \textit{order-independent transparency} that consists to have in each pixel of the screen an array of color and depth (in our case the depth of the vertex where teh splat is anchored) in order to know which pixel is in front of the others pixels. In our example in the figure \ref{splatting_principle}, we have some splats that cover others splats. How do we know which one is in front the other if we treat them independently? For example, if there is a pixel where splat cover another one, we construct an array with 2 elements composed of a color and a depth so we can know which one is in front of the other one (see example in the figure \ref{order}).
+In this \textit{fragment shader}, we prepare the technique of \textit{order-independent transparency} that consists to have in each pixel of the screen an array of color and depth (in our case the depth of the vertex where the splat is anchored) in order to know which pixel is in front of the others pixels. In our example in the figure \ref{splatting_principle}, we have some splats that cover others splats. How do we know which one is in front of the other if we treat them independently? For example, if there is a pixel where splat covers another one, we construct an array with 2 elements composed of color and a depth so we can know which one is in front of the other one (see example in the figure \ref{order}). We apply the same technique but in our case we have a lot of splats that cover others and as depth to put in this array we use the depth corresponding to vertex of the stylized object where the splat is anchored (the red dots in the figure \ref{splatting_principle} correspond to a vertex of the 3d objects). \newline
+
+After creating these array, we will in the last pass treat each pixel of the screen independently and (still on GPU) decide which color has to be displayed. In order to do this, we sort the array corresponding to the current pixel according to the depth. And finally, we apply our algorithm of alpha blending:
+
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  showstringspaces=false,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+
+\lstset{escapechar=@,style=customc}
+
+\begin{lstlisting}
+vec4 over(in vec4 c1,in vec4 c2) {
+    float a = (c1.a+(1.-c1.a)*c2.a);
+    return vec4((c1.rgb*c1.a + c2.rgb*(1.-c1.a)*c2.a)/a,a);
+}
+
+vec4 alpha_blending(vec4 colorArray[], int count, vec4 backgroundColor, float gammaBlend){
+    // colorArray is the list of color sorted: colorArray[0] correspond to the farest
+    // count correspond to the number of splat that we will take account during the blending
+    // backgroundColor is the color of the background our image
+    // gammaBlend is a user parameter that will increase the transparency of the displayed color
+
+    vec4 finalColor = vec4(0,0,0,0);
+
+    for(int i=count-1; i>=0; i--) {
+        vec4 currentColor = colorArray[i];
+        finalColor = over(finalColor,vec4(currentColor.rgb,clamp(pow(currentColor.a,1./gammaBlend),0.,1.)));
+    }
+
+    return over(finalColor,backgroundColor);
+}
+\end{lstlisting}
+
+After this algorithm we have the color to display in the current pixel of the image/screen.
