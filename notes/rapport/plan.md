@@ -181,12 +181,15 @@ Some examples:
     * pointillism
     * clouds ?
 
-# go further and discussion
+
+# Conclusion
+
+## go further and discussion
 
 * depth in the splat itself
 * watercolor
 * adapt with the flow motion
-
+* work on the color
 
 
 
