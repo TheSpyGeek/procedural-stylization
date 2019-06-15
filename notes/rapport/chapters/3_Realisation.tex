@@ -133,4 +133,28 @@ As explained in the previous section, in our method, the user control the conten
     \label{final_point}
 \end{figure}
 
-In order to make pointillism style we use a dot as splat (gaussian fonction in 2d, the first in the figure \ref{splat_examples}), the procedural noise to control the number of splats has a high frequency, the size of the splats can vay depending on which size of brush he wants to imitate and for the alpha blending it usually adapt to not mix many marks. In this case the orientation does not matter. The figure \ref{final_point} shows the final rendered image.
+In order to make pointillism style we use a dot as splat (gaussian fonction in 2d, the first in the figure \ref{splat_examples}), the procedural noise to control the number of splats has a high frequency with a high threshold in order to have small anchor points, the size of the splats can vay depending on which size of brush he wants to imitate but usually we use small splat size for this style and for the alpha blending it usually adapt to not mix many marks. In this case the orientation does not matter. The figure \ref{final_point} shows the final rendered image. \newline
+
+\textbf{Brush painting}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=80mm, height=80mm]{Resultats/painting1/final.png}
+    \end{center}
+    \caption{Example of painting with burshes with our method.}
+    \label{final_brushes}
+\end{figure}
+
+In order to make an image made like a painter we use an image of a paint strokes (like the fourth in the figure \ref{splat_examples}), we do not need too much splat displayed so the frequency of the procedural noise do not have to be very high but a threshold high/medium, the size of the splats depend of the 3d model but usually we use large splat. For the alpha blending it depends on the effect wanted, in our case we mixed many splats. And for the orientation usually the artists align the strokes with the tangents but it works well if the strokes are horizontal. The figure \ref{final_brushes} shows the final rendered image. \newline
+
+\textbf{Hair rendering}
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=80mm, height=80mm]{Resultats/bouledepoil1/final.png}
+    \end{center}
+    \caption{Example of hairs rendering with our method.}
+    \label{final_hair}
+\end{figure}
+
+In order to show that we have the control of the \textit{flatness} impression we tried to create hairs with a 3d aspect like it can be done in digital painting (see figure \ref{final_hair}). To do this we use a splat created mathematicaly that looks like a hair (the second in the figure \ref{splat_examples}) rotated according to the normals of the object. With the procedural noise that is used to anchor marks, the density can be varied impacting directly the density of hairs in the fur. The size of the splats vary depending on what size you want your hair to be. And for the alpha blending you do not want to mix too much splats but you do not want to only show the last hairs drawn. The figure \ref{final_hair} shows the final rendered image.
