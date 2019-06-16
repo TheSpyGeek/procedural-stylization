@@ -33,6 +33,18 @@ close as possible to the 3D displacement in object space.
 
 The problem introduced in the works of Bénard et al.\cite{benard_state---art_2011} is the difficulty to have a ideal solution, the one that has a good \textit{flatness}, a good \textit{motion coherence} and a good \textit{temporal continuity}. These three goals are inherently contradictory when you improve one you neglect one or maybe more. So researchers work to find solutions that make \textit{trade-offs} between these three goals. We built our approach trying to take the better of each different approach, looking at what work well and what can be integrated in our method.
 
-\section{Scientific approach}
-
 \section{Contents of this report}
+
+After an analysis of the previous works on stylizing scene, we searched on how we could have a solution that permits to control the 3 axes of the \textit{temporal coherence}. We defined what were the advantages of each method of stylizing: marks-based method and texture-based method. The texture-based method has a very good \textit{temporal continuity} and \textit{motion coherence} at a price of bad \textit{flatness} and a poor variety of style. On the over hand, the mark-based method has good flatness and a wide variety of possibles styles but introducing a problem of anchoring these marks. From this analysis, we decided to use marks to stylize our object but we had to find a way to anchor these splat. We used the good property of the textures mapped in object space. They permit to have a perfect \textit{temporal continuity} and \textit{motion coherence} so we used the textures to anchor our marks to the object but we did not ordinary texture to do so, we used procedural textures because we can manipulate them easily and are cheap to render. \newline
+
+This is our solution, draw marks anchored to the object thanks to procedural textures in an image. We implemented this solution in OpenGL in order to render all images with the power of the GPU. In the figure \ref{some_results} you can see some results done with our method.
+
+\begin{figure}
+    \begin{center}
+    \includegraphics[width=50mm, height=50mm]{Resultats/spotPoint/final.png}
+    \includegraphics[width=50mm, height=50mm]{Resultats/painting1/final.png}
+    \includegraphics[width=50mm, height=50mm]{Resultats/bouledepoil1/final.png}
+    \end{center}
+    \caption{Some results of stylizing with our method of procedural stylization (left: pointillism rendering, middle: brush painting, right: hair rendering).}
+    \label{some_results}
+\end{figure}
