@@ -3,7 +3,7 @@
 
 
 
-During our research on stylization, we used Gratin which a pipeline rendering software using \textit{OpenGL}. It permits to easily creates rendered images with \textit{GLSL} combining previous images as textures <insert screenshot of gratin>. As we said before every texture used from our contribution can be computed in parallel on GPU including the noises, the fractalization of the noises, the alpha blending and the splatting. Our method use only images as input so it can easily be integrated into every pipeline rendering. For example, if you have a pipeline rendering with \textit{path tracing} to compute the color of your scene you can use this rendered image as color input of our method without re-compute it.\newline
+During our research on stylization, we used Gratin \cite{vergne:hal-01254546} which a pipeline rendering software using \textit{OpenGL}. It permits to easily creates rendered images with \textit{GLSL} combining previous images as textures <insert screenshot of gratin>. As we said before every texture used from our contribution can be computed in parallel on GPU including the noises, the fractalization of the noises, the alpha blending and the splatting. Our method use only images as input so it can easily be integrated into every pipeline rendering. For example, if you have a pipeline rendering with \textit{path tracing} to compute the color of your scene you can use this rendered image as color input of our method without re-compute it.\newline
 
 \begin{figure}
     \begin{center}
@@ -17,7 +17,7 @@ For the splatting step, we draw on each pixel of the screen a square centered on
 
 \begin{figure}
     \begin{center}
-    \fbox{\includegraphics[scale=0.8]{images/splatting/order_independant_transparency.png}}
+    \includegraphics[scale=0.3]{images/splatting/order_independant_transparency.png}
     \end{center}
     \caption{Example of usage of the order independant transparency.}
     \label{order}

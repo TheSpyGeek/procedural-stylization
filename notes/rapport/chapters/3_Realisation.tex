@@ -3,6 +3,14 @@
 
 \section{Overview}
 
+\begin{figure}
+    \begin{center}
+    \includegraphics[scale=0.4]{images/Overview2.png}
+    \end{center}
+    \caption{Overview of our solution.}
+    \label{overview}
+\end{figure}
+
 As explains above in the state of the art and in the figure\ref{tableau_comparatif} each approach has its advantages and its disadvantages. That is why in our solution we tried to take the better of the two worlds. We stylize the 3D scene in image space (screen space) but with all the information about the 3D object and the camera (camera matrices, position, normals, tangents, UV coordinates, distance from the camera). This solution permits to apply something like 2D images on the screen so have a good \textit{flatness} while keeping the information on the silhouettes, the orientation, the depth, etc. This solution permits also to easily integrate the stylizing of a scene in a pipeline rendering because it can be done at the end during the post-processing rendering pass. \newline
 
 We chose to use mark based methods to stylize our scene because texture based methods in image space give a poor variety of styles as said in the work of Bénard et al.\cite{benard_dynamic_2009}. This mark based method implies to decide where in the image the splats will be drawn. In our problem, the goal is to anchor these splats with the objects in order to have the same motion for the splats and the object. This avoid the problem of \textit{shower door effect} and ensure the good \textit{motion coherence}. So we needed anchor points depending on the position of our object. Therefore in our approach, we used procedural noise\cite{perlin_improving_2002} as a texture of our 3D object. The procedural noises are easy to implement, fast to compute and easy to manipulate. Like every texture computed in object space, it has a good motion coherence. Each value different of zero of this texture represents an anchor point for a splat.
