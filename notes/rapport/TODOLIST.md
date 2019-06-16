@@ -1,4 +1,5 @@
 
+* screen threshold
 * intro
 * faire correction romain sur la partie 3 réalisation
 * faire vidéo pour essayer de montrer 'shower door effect'
