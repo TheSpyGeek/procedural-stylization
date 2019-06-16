@@ -3,7 +3,7 @@
 
 \section{Overview}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.4]{images/Overview2.png}
     \end{center}
@@ -18,7 +18,7 @@ We chose to use mark based methods to stylize our scene because texture based me
 
 \section{Procedural noise and fractalization}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[width=40mm, height=40mm]{images/PerlinNoise2d.png}
     \includegraphics[width=40mm, height=40mm]{images/GaborNoise2d.png}
@@ -34,7 +34,7 @@ We compute procedural texture in order to create anchor points. Procedural noise
 
 % how we use it
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.6]{images/noise/addition.png}
     \end{center}
@@ -48,7 +48,7 @@ We add a threshold parameter to compute the noise in order to reduce the number 
 
 % Worley
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.2]{images/noise/worley_explain.png}
     \end{center}
@@ -58,7 +58,7 @@ We add a threshold parameter to compute the noise in order to reduce the number 
 
 We mainly work with the Worley noise which is a cellular noise as you can see at the right in the figure \ref{procedural_texture}. To create a procedural texture from a Worley noise, we divide the image in cells (squares with the same size in 2d and cubes with the same size in 3d, red lines in the figure \ref{worley_explain}), then in each square (cube in 3d) we compute a point with a seeded random (white dot in the figure \ref{worley_explain}) and finally at each pixel of the texture we put as value the distance with the closest point computed previously with the random seed. Increase the frequency of this noise correspond to divide the image with smaller cells and so have more cells in the image. In our pipeline we use the inverse of this noise (1-worleynoise) in order to have the white pixels of the procedural texture as anchor points.
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.3]{images/noise/worley3d_thresh_1.png}
     \includegraphics[scale=0.3]{images/noise/worley3d_thresh_2.png}
@@ -75,7 +75,7 @@ As we said before we use a threshold for the purpose of having an another contro
 
 \textbf{Fractalization}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.3]{images/fractalization_principle.png}
     \end{center}
@@ -83,7 +83,7 @@ As we said before we use a threshold for the purpose of having an another contro
     \label{fractalization_principle}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[scale=0.6]{images/fractal_explained.png}
     \end{center}
@@ -107,7 +107,7 @@ The figure \ref{fractalization_principle} show 4 noises (octaves) at different f
 
 \section{Splatting}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \fbox{\includegraphics[width=30mm, height=30mm]{images/splats/dot_splat.png}}
     \fbox{\includegraphics[width=30mm, height=30mm]{images/splats/hair_splat.png}}
@@ -133,7 +133,7 @@ As explained in the previous section, in our method, the user control the conten
 
 \textbf{Pointillism}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[width=80mm, height=80mm]{Resultats/spotPoint/final.png}
     \end{center}
@@ -145,7 +145,7 @@ In order to make pointillism style we use a dot as splat (gaussian fonction in 2
 
 \textbf{Brush painting}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[width=80mm, height=80mm]{Resultats/painting1/final.png}
     \end{center}
@@ -157,7 +157,7 @@ In order to make an image made like a painter we use an image of a paint strokes
 
 \textbf{Hair rendering}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
     \includegraphics[width=80mm, height=80mm]{Resultats/bouledepoil1/final.png}
     \end{center}
