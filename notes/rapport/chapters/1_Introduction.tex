@@ -2,10 +2,10 @@
 
 
 \section{Background}
+A part of the computer graphics is create non-photorealistic images. A method to do this is to stylize 3D scenes. Stylizing an object means creating an image that imitates the style of an artist who would have drawn it on sheet of paper. There exist many different styles like hand drawing, brush painting, pointillism painting, stippling, watercolor painting, etc. The two main method to stylize is to use texture mapped on the objects of the scene or to use marks/splats which are 2d images drawn.
 
 \section{Problem Statement}
 
-A part of the computer graphics is create non-photorealistic images. A method to do this is to stylize 3D scenes. Stylizing an object means creating an image that imitates the style of an artist who would have drawn it on sheet of paper. There exist many different styles like hand drawing, brush painting, pointillism painting, stippling, watercolor painting, etc. The two main method to stylize is to use texture mapped on the objects of the scene or to use marks/splats which are 2d images drawn.
 
 The main problem of stylizing a 3D object in an animation is the \textit{temporal coherence}. The \textit{temporal coherence} problem in non-photorealistic rendering encompasses both spatial and temporal aspects of the marks. The effect given by the stylization has to be kept if the object is moving, rotating and scaling. Many research has been done to solve this problem of \textit{temporal coherence} \cite{vergne_implicit_2011, benard_dynamic_2009, bleron_motion-coherent_2018}. Bénard et al. separate this problem is three sections inspired by previous work\cite{meier_painterly_1996, cunzi_dynamic_nodate, breslav_dynamic_nodate, benard_state---art_2011} but he show that an ideal solution (Figure \ref{problem_temporal_coherence} a)  does not exists. Even \textit{Loving Vincent} \cite{LovingVincent} that was done by artists frame by frame has problems of marks popping because they cannot follow perfectly the flow motion of a scene. Neglect one of this three goals provide artifacts (Figure \ref{problem_temporal_coherence} b-d).
 
