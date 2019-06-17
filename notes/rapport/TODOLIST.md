@@ -14,4 +14,4 @@
 Pour les videos
 
 
-ffmpeg -framerate 1/5 -i *%03d.png -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4
+ffmpeg -framerate 30 -i %03d-final.png -c:v libx264 -r 30 -pix_fmt yuv420p out.mp4
