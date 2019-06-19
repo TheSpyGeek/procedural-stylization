@@ -1,0 +1,18 @@
+
+
+.sommaire ol {
+    /* list-style-type: value; */
+}
+
+
+.sommaire ol li::before {
+}
+
+
+#decoration1 {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: auto;
+}
