@@ -27,3 +27,28 @@ cmake .. && make
 
 * the splats used are in the folder: ```gratin/data/imgs/```
 * the models used are in the folder: ```gratin/data/mdoels/``` but you can use your owns
+
+
+# Presentation use
+
+
+1. install npm (4.0 or later)
+
+2. go to presentation folder
+
+```cd presentation/```
+
+3. Install dependencies
+
+```npm install```
+
+4. Serve the presentation and monitor source files for changes
+
+```npm start```
+
+
+5. Open http://localhost:8000 to view your presentation
+
+```You can change the port by using npm start -- --port=8001.```
+
+6. In the slide press 's' to display presentator view
