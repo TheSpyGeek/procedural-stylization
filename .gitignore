@@ -9,3 +9,5 @@
 *.blg
 *.toc
 *.out
+
+presentation/node_modules/
