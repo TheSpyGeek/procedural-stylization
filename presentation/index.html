@@ -30,7 +30,7 @@
 
 			<div class="slides">
 				<section>
-					<h1>La stylisation procedurale</h1>
+					<h2 id="titre">Stylisation implicite de scènes 3D à l'étape du compositing</h2>
 					<p id="max">Maxime Isnel</p>
 					<p id="supervisors">supervisé par Joëlle Thollot et Romain Vergne</p>
 
@@ -42,7 +42,6 @@
 
 
 				<section class="sommaire">
-					<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
 					<h2>Sommaire</h2>
 
 					<ol>
@@ -63,43 +62,97 @@
 					<p class="partieNom">01. Introduction</p>
 
 					<p>Définition: Action de styliser, de représenter un objet de manière simplifiée en vue d'un effet décoratif.</p>
-				</section>
 
-				<section>
-						<!-- <h5>01. Introduction</h5> -->
-
-						<h2>La stylisation</h2>
-
-						<p>
-							<img class="" src="images/stylisation_example1.png" alt="stylisation1" style="width: auto; height:500px;">
-							<img class="fragment" src="images/stylisation_example2.png" alt="stylisation2" style="width: auto; height:500px;">
-						</p>
 				</section>
 
 				<section>
 					<h2>La stylisation</h2>
 
-					<p>Insérer exemples de stylisation: peinture, dessin aux crayons, aquarelles, dessin réaliste de cheveux, etc.</p>
+					<p class="partieNom">01. Introduction</p>
+
+					<p>Notre but: donner des outils controlables aux artistes permettant de créer l'apparence souhaitée d'un object, tout en assurant un certaine cohérence durant une animations.</p>
+
+					<aside class="notes">
+						orienté Digital Painting
+					</aside>
 
 				</section>
 
 				<section>
+						<p class="partieNom">01. Introduction</p>
+						<!-- <h5>01. Introduction</h5> -->
+
+						<h2>La stylisation</h2>
+
+						<div class="horizontal">
+							<img class="" src="images/colorExample.png" alt="stylisation1" style="width: auto; height:450px;">
+							<video class="fragment" loop style="width: auto; height:450px;">
+								<source data-src="videos/colorExample.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+							</video>
+						</div>
+				</section>
+
+				<section>
+
+					<p class="partieNom">01. Introduction</p>
+					<h2>La stylisation</h2>
+
+					<div class="horizontal styles">
+						<img src="images/styles/VanGogh.jpg" alt="van gogh">
+						<img src="images/styles/stippling.jpg" alt="stippling">
+						<img src="images/styles/fur.jpeg" alt="fur">
+						<img src="images/styles/watercolor.jpg" alt="aquarelle">
+					</div>
+
+
+
+				</section>
+
+				<section>
+					<p class="partieNom">01. Introduction</p>
+					<h3>La cohérence temporelle</h3>
+
+					<p>Nous avons divisé le problème en 3 parties [Bénard, 2011]:</p>
+
+					<ul>
+						<li>la continuité temporelle</li>
+						<li>la cohérence du mouvement</li>
+						<li>l'aspect 2D</li>
+					</ul>
+
+				</section>
+
+				<section>
+					<p class="partieNom">01. Introduction</p>
 					<h3>La continuité temporelle</h3>
-					<video controls loop>
-						<source data-src="videos/loving_vincent.flv">
-						Sorry, your browser doesn't support embedded videos.
-					</video>
-				</section>
-
-				<section>
-					<h3>La cohérence de mouvement</h3>
 					<video loop>
-						<source data-src="videos/motionCoherence.mp4" type="video/mp4">
+						<source data-src="videos/loving_vincent.mp4" type="video/mp4">
 						Sorry, your browser doesn't support embedded videos.
 					</video>
+					<span style="font-size: 25px;">Loving Vincent, 2017</span>
 				</section>
 
 				<section>
+					<p class="partieNom">01. Introduction</p>
+					<h3>La cohérence du mouvement</h3>
+
+					<div class="horizontal motion">
+						<video loop>
+							<source data-src="videos/badMotion.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/goodMotion.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+				</section>
+
+				<section>
+					<p class="partieNom">01. Introduction</p>
 					<h3>L'aspect 2D</h3>
 					<video loop>
 						<source data-src="videos/.mp4" type="video/mp4">
@@ -108,7 +161,6 @@
 				</section>
 
 				<section class="sommaire">
-					<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
 					<h2>Sommaire</h2>
 
 					<ol>
@@ -123,16 +175,17 @@
 
 
 				<section>
+					<p class="partieNom">02. État de l'art</p>
 					<h3>Espaces de travail</h3>
-					<div class="horizontal ">
+					<div class="horizontal espaces">
 						<div class="vertical fragment">
 							<p>Espace objet</p>
-							<p>insérer image maillage</p>
+							<img src="images/3dmesh.jpg" alt="3d mesh">
 						</div>
 
 						<div class="vertical fragment">
 							<p>Espace image</p>
-							<p>insérer image d'object projeté</p>
+							<img src="images/imageNormals.png" alt="normals">
 						</div>
 					</div>
 
@@ -200,7 +253,7 @@
 
 						<div class="vertical fragment">
 							<p>Espace image</p>
-							<p>image distribution de point</p>
+							<img src="images/point_distribution.png" alt="point distribution">
 						</div>
 
 					</div>
@@ -337,6 +390,24 @@
 				<p>comment ça marche</p>
 			</section>
 
+			<section>
+
+			</section>
+
+
+			<section class="sommaire">
+				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
+				<h2>Sommaire</h2>
+
+				<ol>
+					<li>Introduction</li>
+					<li >État de l'art</li>
+					<li>Stylisation procedurale</li>
+					<li>Résultats</li>
+					<li style="color:red; font-weight: bold;">Conclusion</li>
+				</ol>
+
+			</section>
 
 			<section>
 				<h2>Conclusion</h2>
@@ -350,6 +421,10 @@
 					rappeler les contributions
 
 				</aside>
+			</section>
+
+			<section>
+				<h2>Travaux futurs</h2>
 			</section>
 
 

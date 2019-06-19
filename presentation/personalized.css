@@ -20,6 +20,14 @@ section > h1, section > h2, section > h3 {
 }
 
 
+.reveal section img {
+    decoration: none;
+    border: none;
+    margin:0;
+    background: none;
+    box-shadow: none;
+}
+
 section .partieNom {
     position: absolute;
     bottom: 0;
@@ -36,10 +44,16 @@ section .partieNom {
     bottom: 5%;
 }
 
+
+
 .sommaire ol {
     /* list-style-type: value; */
 }
 
+
+#titre {
+    font-size: 120px;
+}
 
 .sommaire ol li::before {
 }
@@ -57,12 +71,39 @@ section .partieNom {
 .vertical {
         display: flex;
         flex-direction: column;
+        margin:10px;
 }
 
 .horizontal {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
+.styles {
+    margin-top: 5%;
+}
+
+.styles img {
+    decoration:none;
+    border:none;
+    width: auto;
+    height: 250px;
+    margin: 10px !important;
+}
+
+.espaces img {
+    width: auto;
+    height: 400px;
+    margin: 5px;
+}
+
+
+.motion video {
+    width: auto;
+    height: 350px;
+    margin: 10px;
+}
 
 .captionImage {
     font-size: 20px !important;
