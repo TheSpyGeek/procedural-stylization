@@ -98,7 +98,7 @@
 					<p class="partieNom">01. Introduction</p>
 					<h2>La stylisation</h2>
 
-					<div class="horizontal styles">
+					<div class="horizontal styles" style="flex-wrap: wrap;">
 						<img src="images/styles/VanGogh.jpg" alt="van gogh">
 						<img src="images/styles/stippling.jpg" alt="stippling">
 						<img src="images/styles/fur.jpeg" alt="fur">
@@ -185,7 +185,7 @@
 
 						<div class="vertical fragment">
 							<p>Espace image</p>
-							<img src="images/imageNormals.png" alt="normals">
+							<img src="images/imageSpaceExample.png" alt="normals">
 						</div>
 					</div>
 
@@ -198,22 +198,33 @@
 
 					<p>Principe: mapper une texture sur un objet.</p>
 
-					<p>image montrant le principe</p>
+					<div class="horizontal styles">
+							<img class="fragment" src="images/texturemapping/model.png" alt="model">
+							<img class="fragment" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
+							<img class="fragment" src="images/texturemapping/gimped.png" alt="mapped">
+					</div>
 				</section>
 
 				<section>
 					<h3>Rendu à base de textures</h3>
 
-					<div class="horizontal">
+					<div class="horizontal styles">
 						<div class="vertical fragment">
 							<p>Espace objet</p>
-							<p>texture en 3D (papier Pierre)</p>
+							<img src="images/texturePierre.png" alt="texture Pierre">
+							<span class="captionImage">Dynamic Solid Textures for Real-Time Coherent Stylization</span>
 						</div>
 
 						<div class="vertical fragment">
 							<p>Espace image</p>
-							<p>image texture papier (MNPR: framework)</p>
+							<img src="images/filtering.png" alt="filtrage">
+							<span class="captionImage">MNPR: a framework for real-time expressive non-photorealistic renderin</span>
 						</div>
+
+						<aside class="notes">
+							espace object: texture mapped directement sur l'image
+							espace image: filtrage
+						</aside>
 
 					</div>
 
@@ -238,17 +249,18 @@
 
 				<section>
 					<h3>Rendu à base de marques</h3>
-					<h5>Besoins</h5>
+					<p style="margin-top: 5%;">Besoins</p>
 
 					<ul>
 						<li>marques 2D</li>
 						<li>points d'ancrage</li>
 					</ul>
 
-					<div class="horizontal">
+					<div class="horizontal styles">
 						<div class="vertical fragment">
 							<p>Espace objet</p>
-							<p>image point d'ancrage sur object</p>
+							<img src="images/ancrageMaillage.png" alt="ancrage maillage">
+							<span class="captionImage">OverCoat: an implicit canvas for 3D painting</span>
 						</div>
 
 						<div class="vertical fragment">
@@ -263,20 +275,20 @@
 
 			<section>
 				<h3>Rendu à base de marques</h3>
-				<h5>Examples</h5>
+				<p style="margin-top: 8%;">Examples</p>
 
-				<div class="horizontal">
-					<div class="vertical fragment">
+				<div class="horizontal ">
+					<div class="vertical fragment" style="margin-bottom: 10px;">
 						<p>Espace objet</p>
-						<p>image Overcoat</p>
+						<img style="width:300px; height:auto;" src="images/stylisation_example2.png" alt="overcoat marin">
 						<span class="captionImage">OverCoat: an implicit canvas for 3D painting</span>
 					</div>
 
 					<div class="vertical fragment">
 						<p>Espace image</p>
-						<p>image en espace image avec marques</p>
+						<img style="width:auto; height:300px;" src="images/imageMarks.png" alt="rendering marks">
 
-						<span class="captionImage">Ref</span>
+						<span class="captionImage">From image parsing to painterly renering, [Zeng, 2009]</span>
 					</div>
 				</div>
 			</section>
