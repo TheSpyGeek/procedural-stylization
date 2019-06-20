@@ -30,7 +30,7 @@ section > h1, section > h2, section > h3 {
 
 section .partieNom {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
 }
 
@@ -106,4 +106,18 @@ section .partieNom {
 
 .captionImage {
     font-size: 20px !important;
+}
+
+
+th {
+    font-size: 30px;
+}
+
+td {
+    font-size: 25px;
+}
+
+.fractal .vertical video {
+    width: auto;
+    height: 270px;
 }

@@ -29,7 +29,7 @@
 		<div class="reveal">
 
 			<div class="slides">
-				<section>
+				<section data-fullscreen>
 					<h2 id="titre">Stylisation implicite de scènes 3D à l'étape du compositing</h2>
 					<p id="max">Maxime Isnel</p>
 					<p id="supervisors">supervisé par Joëlle Thollot et Romain Vergne</p>
@@ -41,7 +41,7 @@
 				</section>
 
 
-				<section class="sommaire">
+				<section data-fullscreen class="sommaire">
 					<h2>Sommaire</h2>
 
 					<ol>
@@ -55,17 +55,23 @@
 				</section>
 
 
-				<section>
-					<!-- <h5>01. Introduction</h5> -->
-					<h2>La stylisation</h2>
+				<section data-fullscreen>
 
 					<p class="partieNom">01. Introduction</p>
+					<h2>La stylisation</h2>
 
-					<p>Définition: Action de styliser, de représenter un objet de manière simplifiée en vue d'un effet décoratif.</p>
+					<div class="horizontal styles" style="flex-wrap: wrap;">
+						<img src="images/styles/VanGogh.jpg" alt="van gogh">
+						<img src="images/styles/stippling.jpg" alt="stippling">
+						<img src="images/styles/fur.jpeg" alt="fur">
+						<img src="images/styles/watercolor.jpg" alt="aquarelle">
+					</div>
+
+
 
 				</section>
 
-				<section>
+				<section data-fullscreen>
 					<h2>La stylisation</h2>
 
 					<p class="partieNom">01. Introduction</p>
@@ -93,33 +99,23 @@
 						</div>
 				</section>
 
-				<section>
 
-					<p class="partieNom">01. Introduction</p>
-					<h2>La stylisation</h2>
-
-					<div class="horizontal styles" style="flex-wrap: wrap;">
-						<img src="images/styles/VanGogh.jpg" alt="van gogh">
-						<img src="images/styles/stippling.jpg" alt="stippling">
-						<img src="images/styles/fur.jpeg" alt="fur">
-						<img src="images/styles/watercolor.jpg" alt="aquarelle">
-					</div>
-
-
-
-				</section>
 
 				<section>
 					<p class="partieNom">01. Introduction</p>
 					<h3>La cohérence temporelle</h3>
 
-					<p>Nous avons divisé le problème en 3 parties [Bénard, 2011]:</p>
+					<p>[Bénard, 2011]:</p>
 
 					<ul>
-						<li>la continuité temporelle</li>
-						<li>la cohérence du mouvement</li>
-						<li>l'aspect 2D</li>
+						<li>Continuité temporelle</li>
+						<li>Cohérence du mouvement</li>
+						<li>Aspect 2D</li>
 					</ul>
+
+					<aside class="notes">
+						Si on touche a un truc les autres bouges en général.
+					</aside>
 
 				</section>
 
@@ -194,6 +190,7 @@
 
 				<!-- TEXTURE BASED -->
 				<section>
+					<p class="partieNom">02. État de l'art</p>
 					<h3>Rendu à base de textures</h3>
 
 					<p>Principe: mapper une texture sur un objet.</p>
@@ -206,6 +203,7 @@
 				</section>
 
 				<section>
+					<p class="partieNom">02. État de l'al'rt</p>
 					<h3>Rendu à base de textures</h3>
 
 					<div class="horizontal styles">
@@ -230,31 +228,33 @@
 
 				</section>
 
-				<section>
-					<h3>Rendu à base de textures</h3>
-
-					<p>avantages et inconvénients</p>
-				</section>
 
 				<!-- MARKS BASED -->
 				<section>
+					<p class="partieNom">02. État de l'art</p>
 					<h3>Rendu à base de marques</h3>
 
 
 					<p>Principe: faire un rendu graphique à partir de dessin d'images 2D</p>
 
-					<img data-src="images/slide_stroke based.jpg" alt="paitning">
+					<div class="horizontal">
+
+						<div class="vertical">
+							<img data-src="images/slide_stroke based.jpg" alt="paitning">
+							<span class="captionImage">aglorithme d'Hertzmann pour styliser une image</span>
+						</div>
+
+						<div  class="vertical">
+							<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
+						</div>
+					</div>
+
 
 				</section>
 
 				<section>
+					<p class="partieNom">02. État de l'art</p>
 					<h3>Rendu à base de marques</h3>
-					<p style="margin-top: 5%;">Besoins</p>
-
-					<ul>
-						<li>marques 2D</li>
-						<li>points d'ancrage</li>
-					</ul>
 
 					<div class="horizontal styles">
 						<div class="vertical fragment">
@@ -274,6 +274,7 @@
 
 
 			<section>
+				<p class="partieNom">02. État de l'art</p>
 				<h3>Rendu à base de marques</h3>
 				<p style="margin-top: 8%;">Examples</p>
 
@@ -301,13 +302,72 @@
 			</section>
 
 			<section>
+				<p class="partieNom">02. État de l'art</p>
 				<h3>Conclusion état de l'art</h3>
 
-				<p>insérer tableau comparatif (le même que sur le rapport)</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Technique</th>
+							<th>Cohérence du mouvement</th>
+							<th>Continuité temporelle</th>
+							<th>Aspect 2D</th>
+							<th>Variété de style</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>À base de textures</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="fragment">
+							<td>en espace objet</td>
+							<td>++</td>
+							<td>++</td>
+							<td>--</td>
+							<td>-</td>
+						</tr>
+						<tr class="fragment">
+							<td>en espace image</td>
+							<td>-</td>
+							<td>--</td>
+							<td>++</td>
+							<td>--</td>
+						</tr>
+
+						<tr class="fragment">
+							<td>À base de marques</td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="fragment">
+							<td>en espace objet</td>
+							<td>++</td>
+							<td>++</td>
+							<td>+/-</td>
+							<td>+/-</td>
+						</tr>
+						<tr class="fragment">
+							<td>en espace image</td>
+							<td>-</td>
+							<td>--</td>
+							<td>++</td>
+							<td>+</td>
+						</tr>
+						<tr>
+
+						</tr>
+					</tbody>
+				</table>
 
 				<aside class="notes">
-					C'est un problème non résolu.
-					Expliquer ce qu'on va faire du coup.
+					C'est un problème non résolu. Personne n'a trouvé la solution parfaite car elle n'existe pas
+
 				</aside>
 			</section>
 
@@ -327,82 +387,372 @@
 
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h2>Vue d'ensemble</h2>
 
-				<p>inserer schéma de l'overview</p>
+				<img src="images/Overview2.png" alt="overview">
+
+				<aside class="notes">
+					expliquer chaque étape
+
+					bruit procéduraux mappé en 3D pour pouvoir guider les marques en espace image.
+
+
+				</aside>
 			</section>
 
-
 			<section>
-				<h2>Moment de la composition</h2>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h2>Étape du compositing</h2>
 
 				<ul>
-					<li>Travail qu'avec des images</li>
-					<li>G-buffer déjà rendu</li>
+					<li>informations sur la géometrie déjà rendu</li>
+					<li>peut être intégrer dans des pipelines sans structure particulière</li>
 				</ul>
 
 				<aside class="notes">
-					Pas besoin de recalculer les objets
+					gain de temps
+
+					exemple: global illumination
+
 				</aside>
-
-				<p>insérer image G-Buffer rendus</p>
 			</section>
 
-			<section>
-				<h2>Bruits procéduraux</h2>
 
-				<p>pourquoi on l'utilise</p>
 
-				<ul>
-					<li>bruit pseudo aléatoire</li>
-					<li>utilisé en tant que texture en informatique graphique</li>
-					<li>calculés à partir de coordonées</li>
-				</ul>
-			</section>
+
+
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h2>Bruits procéduraux</h2>
 
 				<p>Examples de bruits procéduraux</p>
+
+				<div class="horizontal styles">
+					<div class="vertical">
+						<img src="images/noises/PerlinNoise2d.png" alt="perlin">
+						<span class="captionImage">Perlin</span>
+					</div>
+
+					<div class="vertical">
+						<img src="images/noises/GaborNoise2d.png" alt="gabor">
+						<span class="captionImage">Gabor</span>
+					</div>
+
+					<div class="vertical">
+						<img src="images/noises/WorleyNoise2d.jpg" alt="worley">
+						<span class="captionImage">Worley</span>
+					</div>
+				</div>
+
+				<aside class="notes">
+					utilisé en tant que texture en informatique graphique
+					calculés à partir de coordonées
+					contrable
+				</aside>
 			</section>
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h2>Bruits procéduraux</h2>
 
 				<p>Examples d'usage de bruits procéduraux</p>
-				<p>marble</p>
-				<p>feu</p>
-				<p>vague avec worley</p>
+
+				<div class="horizontal styles">
+					<div class="vertical fragment">
+						<img src="images/noises/marble.jpg" alt="marbre">
+						<span class="captionImage">Marbre</span>
+					</div>
+
+					<div class="vertical fragment">
+						<img src="images/fire.png" alt="gabor">
+						<span class="captionImage">Feu</span>
+					</div>
+
+					<div class="vertical fragment">
+						<img src="images/noises/wood.jpeg" alt="wood">
+						<span class="captionImage">Bois</span>
+					</div>
+				</div>
+
+
 			</section>
 
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Bruit de Worley</h3>
 
-				<p>Explication de son principe</p>
+				<div class="horizontal espaces">
+					<div class="vertical">
+						<img src="images/noises/WorleyNoise2d.jpg" alt="worley2d">
+						<span class="captionImage">2D</span>
+					</div>
+					<div class="vertical">
+						<img src="images/noises/WorleyNoise3d.png" alt="worley3d">
+						<span class="captionImage">3D</span>
+					</div>
+				</div>
+
+
+				<aside class="notes">
+					ce qui se rapproche le plus des distribution de point
+					et controlable
+
+				</aside>
+
 			</section>
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Principe de calcul</h3>
+
+				<div class="horizontal styles">
+					<img src="images/noises/worley_explain.png" alt="worley expliqué">
+
+					<ul>
+						<li class="fragment">grille</li>
+						<li class="fragment">point aléatoire</li>
+						<li class="fragment">distance avec le plus proche</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+
+					expliquer que c'est la même chose avec en 3D
+
+				</aside>
+
+			</section>
+
+
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Bruit de Worley</h3>
 
-				<p>explication de notre contribution avec les formules</p>
+				<p>Constance de la taille des point quand la fréquence du bruit change</p>
+			</section>
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Bruit de Worley</h3>
+
+				<p>Constance de la taille des point quand la distance à la caméra change</p>
 			</section>
 
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Fractalisation</h3>
 
-				<p>Pourquoi ?</p>
-				<p>Exemples avec et sans</p>
+				<p style="margin-top: 5%">Pourquoi ?</p>
+
+				<div class="horizontal fractal">
+					<div class="vertical fragment">
+						<video loop>
+						<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/fractal/without.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+							</video>
+
+						</div>
+
+				</div>
 			</section>
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Fractalisation</h3>
+
+				<div class="horizontal fractal">
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/fractal/noise_with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/fractal/with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<span class="captionImage">With Fractalisation</span>
+					</div>
+
+				</div>
+			</section>
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Fractalisation</h3>
+
+				<div class="horizontal fractal">
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/fractal/noise_with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/fractal/with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<span class="captionImage">With Fractalisation</span>
+					</div>
+
+					<div class="vertical">
+						<video loop>
+						<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/fractal/without.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+							</video>
+
+							<span class="captionImage">Without Fractalisation</span>
+						</div>
+
+				</div>
+			</section>
+
+
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Fractalisation</h3>
 
 				<p>comment ça marche</p>
+
+				<img src="images/noises/fractalization_principle.png" alt="Fractalisation">
 			</section>
 
 			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Splatting</h3>
+
+				<p>Qu'est ce que c'est?</p>
+
+				<div class="horizontal">
+					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting1.png" alt="splatting 1">
+					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting2.png" alt="splatting 2">
+					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting3.png" alt="splatting 3">
+				</div>
+
+
+
+				<aside class="notes">
+					coller des images sur l'écran
+				</aside>
+			</section>
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Splatting</h3>
+
+				<img src="images/splatting/addition.png" alt="principe">
+
+			</section>
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Splatting</h3>
+
+				<div class="horizontal fractal">
+					<div class="vertical">
+						<span class="captionImage">Couleur</span>
+						<video loop>
+							<source data-src="images/splatting/color.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Bruit</span>
+						<video loop>
+						<source data-src="images/splatting/noise.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Résultat</span>
+						<video loop>
+						<source data-src="images/splatting/rendering.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+
+			</section>
+
+			<section>
+				<p class="partieNom">03. Stylisation procedurale</p>
+				<h3>Splatting</h3>
+
+				<p>Le mélange des splats</p>
+
+				<ul>
+					<li>Profondeur</li>
+					<li>Du poids du bruits</li>
+					<li>Paramêtre utilisateur</li>
+				</ul>images
+
+			</section>
+
+			<section class="sommaire">
+				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
+				<h2>Sommaire</h2>
+
+				<ol>
+					<li>Introduction</li>
+					<li >État de l'art</li>
+					<li>Stylisation procedurale</li>
+					<li style="color:red; font-weight: bold;">Résultats</li>
+					<li>Conclusion</li>
+				</ol>
+
+			</section>
+
+			<section>
+				<p class="partieNom">04. Résultats</p>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+					<div class="vertical">
+						<span class="captionImage">Couleur</span>
+						<video loop>
+						<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical fragment">
+						<span class="captionImage">Bruit</span>
+						<video loop>
+						<source data-src="images/resultats/painting.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical fragment">
+						<span class="captionImage">Résultat</span>
+						<video loop>
+						<source data-src="images/resultats/leave1.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
 
 			</section>
 
@@ -422,11 +772,13 @@
 			</section>
 
 			<section>
-				<h2>Conclusion</h2>
+				<p class="partieNom">05. Conclusion</p>
+				<h2>Limitations</h2>
 
 				<ul>
-					<li>modification bruit de Worley</li>
-					<li>utilisation de ce bruit pour les points d'ancrage des marques</li>
+					<li class="fragment">pas paramétrisation</li>
+					<li class="fragment">Aliasing</li>
+					<li class="fragment">Convolution</li>
 				</ul>
 
 				<aside class="notes">
@@ -436,14 +788,47 @@
 			</section>
 
 			<section>
+				<p class="partieNom">05. Conclusion</p>
 				<h2>Travaux futurs</h2>
+
+				<ul>
+					<li class="fragment">Objets déformables et scènes dynamiques</li>
+					<li class="fragment">Aspect du bruit</li>
+					<li class="fragment">Aspect des marques</li>
+				</ul>
+
+				<aside class="notes">
+					rappeler les contributions
+
+				</aside>
 			</section>
+
+			<section>
+				<p class="partieNom">05. Conclusion</p>
+				<h2>Conclusion</h2>
+
+				<ul>
+					<li class="fragment">Outil paramétant la stylisation</li>
+					<li class="fragment">Travail sur le bruit Worley</li>
+					<li class="fragment">Variation des styles</li>
+				</ul>
+
+				<aside class="notes">
+					rappeler les contributions
+
+				</aside>
+			</section>
+
+
 
 
 			</div>
 		</div>
 
 		<script src="js/reveal.js"></script>
+		<script type="text/javascript" src="plugin/fullscreen/fullscreen.js">
+
+		</script>
 
 		<script>
 			// More info about config & dependencies:
