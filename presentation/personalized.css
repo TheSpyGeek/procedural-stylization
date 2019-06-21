@@ -47,6 +47,23 @@ section .partieNom {
     bottom: 5%;
 }
 
+.imageMedium {
+    width: auto;
+    height: 250px;
+}
+
+
+.overview {
+    height: 580px;
+
+}
+
+.aspect img {
+    width: auto;
+    height: 270px;
+    margin: 0 5px;
+}
+
 
 
 .sommaire ol {

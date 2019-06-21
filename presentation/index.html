@@ -29,7 +29,7 @@
 		<div class="reveal">
 
 			<div class="slides">
-				<section data-fullscreen>
+				<section >
 					<h2 id="titre">Stylisation implicite de scènes 3D à l'étape du compositing</h2>
 					<p id="max">Maxime Isnel</p>
 					<p id="supervisors">supervisé par Joëlle Thollot et Romain Vergne</p>
@@ -45,7 +45,7 @@
 				</section>
 
 
-				<section data-fullscreen class="sommaire">
+				<section  class="sommaire">
 					<h3>Sommaire</h3>
 
 					<ol>
@@ -58,7 +58,7 @@
 
 				</section>
 
-				<section data-fullscreen>
+				<section >
 					<h3>Synthèse d'image</h3>
 
 					<div class="horizontal styles">
@@ -80,7 +80,7 @@
 				</section>
 
 
-				<section data-fullscreen>
+				<section >
 
 					<h3>Rendu non photoréaliste</h3>
 
@@ -95,7 +95,7 @@
 
 				</section>
 
-				<section data-fullscreen>
+				<section >
 					<h3>Notre stylisation</h3>
 
 
@@ -185,10 +185,23 @@
 
 				<section>
 					<h3>L'aspect 2D</h3>
-					<video loop>
-						<source data-src="videos/.mp4" type="video/mp4">
-						Sorry, your browser doesn't support embedded videos.
-					</video>
+
+					<div class="horizontal aspect">
+
+
+							<img src="images/resultats/3d.png" alt="3d">
+							<img class="" src="images/resultats/painting.png" alt="painting">
+
+
+					</div>
+
+					<div class="horizontal aspect fragment">
+						<img src="images/resultats/3d2.png" alt="3d">
+
+						<img class="" src="images/resultats/painting2.png" alt="painting">
+					</div>
+
+
 
 					<aside class="notes">
 						problème de la taille des marques posé par un artiste
@@ -243,14 +256,14 @@
 
 						<h3>Primitives de dessin</h3>
 
-						<div class="horizontal styles" style="margin-top:10%">
-							<div class="vertical">
+						<div class="horizontal" style="margin-top:10%">
+							<div class="vertical fragment">
 								<span class="captionImage">A base de textures</span>
-								<img class="fragment" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
-								<img class="fragment" src="images/texturemapping/gimped.png" alt="mapped">
+								<img class="imageMedium" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
+								<img class="imageMedium" src="images/texturemapping/texture_mapped.png" alt="mapped">
 							</div>
 
-							<div class="vertical">
+							<div class="vertical fragment">
 								<span class="captionImage">A base de marques</span>
 								<img data-src="images/slide_stroke based.jpg" alt="paitning">
 								<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
@@ -289,10 +302,76 @@
 
 
 
-			<section>
+			<section data-transition="none">
 				<h3>Etat de l'art</h3>
 
-				<p>inserer animations</p>
+				<img class="overview" src="images/stateofart/step1.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step2.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step3.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step4.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step5.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step6.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step7.png" alt="step1">
 
 				<aside class="notes">
 
@@ -417,20 +496,24 @@
 
 				<p>Fonction "over" utilisé par [Schmid, 2011]</p>
 
-				<svg width="600px" height="100px" >
-					<text font-size="20" x="300" y="50">$ \text{c1  et c2 des couleurs} $</text>
+				<svg class="fragment" width="600px" height="60px" >
+					<text font-size="20" x="300" y="30">$ \text{c1  et c2 des couleurs} $</text>
 				</svg>
 
-				<svg width="600px" height="100px" >
-					<text font-size="20" x="300" y="50">$ depth(c1) < depth(c2) $</text>
+				<svg class="fragment" width="600px" height="60px" >
+					<text font-size="20" x="300" y="30">$ depth(c1) < depth(c2) $</text>
 				</svg>
 
-				<svg width="750px" height="100px" >
-					<text font-size="20" x="375" y="50">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
+				<svg class="fragment" width="750px" height="60px" >
+					<text font-size="20" x="375" y="30">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
 				</svg>
 
-				<svg width="800px" height="100px" >
-				<text font-size="18" x="400" y="50">$ couleur = vec4((c1.xyz*c1.alpha + c2.xyz*(1.-c1.alpha)*c2.alpha)/alpha, alpha) $</text>
+				<svg class="fragment" width="800px" height="120px" >
+				<text font-size="18" x="400" y="60">$ couleur = \\ (c1.xyz*c1.alpha + c2.xyz*(1.-c1.alpha)*c2.alpha)/alpha $</text>
+				</svg>
+
+				<svg class="fragment" width="750px" height="60px" >
+				<text font-size="18" x="400" y="30">$ resultat = vec4(couleur, alpha) $</text>
 				</svg>
 
 				<!-- <svg width="600px" height="200px" >
@@ -449,7 +532,7 @@
 
 
 				<section>
-					<h2>Générateur procédural de points</h2>
+					<h2>Générateur procédural</h2>
 
 					<img src="images/Overview3.png" alt="overview">
 
@@ -506,11 +589,11 @@
 
 				<div class="horizontal espaces">
 					<div class="vertical">
-						<img src="images/noises/noisesModified.png" alt="worley2d">
+						<img src="images/noises/notrenoise.png" alt="worley2d">
 					</div>
 
 					<div class="vertical">
-						<img src="images/noises/noisesModified2.png" alt="worley2d">
+						<img src="images/noises/notrenoise2.png" alt="worley2d">
 					</div>
 				</div>
 
@@ -525,6 +608,7 @@
 
 			<section>
 				<h3>Notre texture</h3>
+
 
 				<p>Constance de la taille des point quand la fréquence du bruit change</p>
 
@@ -588,10 +672,9 @@
 
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Fractalisation</h3>
 
-				<p>comment ça marche</p>
+				<p>Principe</p>
 
 				<video loop>
 					<source data-src="videos/fracalisationPrincipe.mp4" type="video/mp4">
@@ -668,28 +751,25 @@
 			</section>
 
 			<section>
-				<p class="partieNom">05. Conclusion</p>
 				<h2>Limitations</h2>
 
 				<ul>
-					<li class="fragment">pas paramétrisation</li>
 					<li class="fragment">Aliasing</li>
-					<li class="fragment">Convolution</li>
+					<li class="fragment">continuité temporelle</li>
 				</ul>
 
 				<aside class="notes">
-					rappeler les contributions
+					aliasing aux silhouttes
 
 				</aside>
 			</section>
 
 			<section>
-				<p class="partieNom">05. Conclusion</p>
 				<h2>Travaux futurs</h2>
 
 				<ul>
 					<li class="fragment">Objets déformables et scènes dynamiques</li>
-					<li class="fragment">Aspect du bruit</li>
+					<li class="fragment">Aspect des points d'ancrage</li>
 					<li class="fragment">Aspect des marques</li>
 				</ul>
 
@@ -700,19 +780,38 @@
 			</section>
 
 			<section>
-				<p class="partieNom">05. Conclusion</p>
-				<h2>Conclusion</h2>
+				<h3>Conclusion</h3>
 
-				<ul>
-					<li class="fragment">Outil paramétant la stylisation</li>
-					<li class="fragment">Travail sur le bruit Worley</li>
-					<li class="fragment">Variation des styles</li>
-				</ul>
+				<div class="horizontal">
+					<div class="vertical">
+						<span class="captionImage">Fourrure en peinture digitale</span>
+						<video loop>
+						<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Peinture au pinceaux</span>
+						<video loop>
+						<source data-src="images/resultats/painting.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Dessin à partir de feuilles</span>
+						<video loop>
+						<source data-src="images/resultats/leave1.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
 
 				<aside class="notes">
-					rappeler les contributions
-
+					présenter les résultats et ce qu'on voulait fire
 				</aside>
+
 			</section>
 
 
@@ -722,7 +821,7 @@
 		</div>
 
 		<script src="js/reveal.js"></script>
-		<script type="text/javascript" src="plugin/fullscreen/fullscreen.js"></script>
+		<!-- <script type="text/javascript" src="plugin/fullscreen/fullscreen.js"></script> -->
 		<script type="text/javascript" src="plugin/mathsvg/math.js"></script>
 
 
