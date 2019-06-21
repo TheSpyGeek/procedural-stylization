@@ -44,20 +44,6 @@
 
 				</section>
 
-
-				<section  class="sommaire">
-					<h3>Sommaire</h3>
-
-					<ol>
-						<li style="color:red; font-weight: bold;">Introduction</li>
-						<li>État de l'art</li>
-						<li>Stylisation procedurale</li>
-						<li>Résultats</li>
-						<li>Conclusion</li>
-					</ol>
-
-				</section>
-
 				<section >
 					<h3>Synthèse d'image</h3>
 
@@ -67,13 +53,14 @@
 							<img src="images/realist_rendering.jpg" alt="réaliste">
 						</div>
 
-						<div class="vertical fragment">
+						<div class="vertical">
 							<span class="captionImage">non photoréaliste</span>
 							<img src="images/dreams.jpg" alt="non réaliste">
 						</div>
 					</div>
 
 					<aside class="notes">
+						synthèse d'image créer des images à l'informatiquement
 						photoréaliste: principe de physique
 						non photoréaliste: expression d'un artiste
 					</aside>
@@ -91,6 +78,10 @@
 						<img src="images/styles/watercolor.jpg" alt="aquarelle">
 					</div>
 
+					<aside class="notes">
+						la variété de style
+						des petits elements qui stylise
+					</aside>
 
 
 				</section>
@@ -103,7 +94,8 @@
 
 					<ul>
 						<li>Donner des outils pour styliser</li>
-						<li>Cohérence temporelle</li>
+						<li>Variété de styles</li>
+						<li>Animer les scènes</li>
 					</ul>
 
 					<aside class="notes">
@@ -114,38 +106,7 @@
 
 				</section>
 
-				<!-- <section>
-						<p class="partieNom">01. Introduction</p>
 
-						<h2>La stylisation</h2>
-
-						<div class="horizontal">
-							<img class="" src="images/colorExample.png" alt="stylisation1" style="width: auto; height:450px;">
-							<video class="fragment" loop style="width: auto; height:450px;">
-								<source data-src="videos/colorExample.mp4" type="video/mp4">
-								Sorry, your browser doesn't support embedded videos.
-							</video>
-						</div>
-				</section> -->
-
-
-
-				<section>
-					<h3>La cohérence temporelle</h3>
-
-					<p>[Bénard, 2011]:</p>
-
-					<ul>
-						<li>Continuité temporelle</li>
-						<li>Cohérence du mouvement</li>
-						<li>Aspect 2D</li>
-					</ul>
-
-					<aside class="notes">
-						problème bien poser par Pierre Bénard à partir de 3 contraintes
-					</aside>
-
-				</section>
 
 				<section>
 					<h3>La continuité temporelle</h3>
@@ -177,8 +138,7 @@
 					</div>
 
 					<aside class="notes">
-						problème du glissement
-							effet rideau de douche
+						du coup si on place nos petits elements sur l'image...
 					</aside>
 
 				</section>
@@ -195,7 +155,7 @@
 
 					</div>
 
-					<div class="horizontal aspect fragment">
+					<div class="horizontal aspect">
 						<img src="images/resultats/3d2.png" alt="3d">
 
 						<img class="" src="images/resultats/painting2.png" alt="painting">
@@ -210,16 +170,24 @@
 					</aside>
 				</section>
 
-				<section class="sommaire">
-					<h2>Sommaire</h2>
+				<section>
+					<h3>La cohérence temporelle</h3>
 
-					<ol>
-						<li>Introduction</li>
-						<li style="color:red; font-weight: bold;">État de l'art</li>
-						<li>Stylisation procedurale</li>
-						<li>Résultats</li>
-						<li>Conclusion</li>
-					</ol>
+					<p>[Bénard, 2011]:</p>
+
+					<ul>
+						<li>Continuité temporelle</li>
+						<li>Cohérence du mouvement</li>
+						<li>Aspect 2D</li>
+
+
+					</ul>
+
+					<p>insérer triangle Pierre Bénard</p>
+
+					<aside class="notes">
+						problème bien poser par Pierre Bénard à partir de 3 contraintes
+					</aside>
 
 				</section>
 
@@ -250,7 +218,6 @@
 
 				</section>
 
-				<!-- TEXTURE BASED -->
 				<section>
 					<section>
 
@@ -272,8 +239,9 @@
 
 						</div>
 						<aside class="notes">
-							texture mappé directement sur l'object
-							marques posées sur l'image à l'aide de point d'ancrage
+							cohérence mouvement: ancré sur l'objet
+							Aspect 2D: placé sur un plan 2D
+							continuité temporelle: une texture est un tout != marques
 						</aside>
 					</section>
 
@@ -300,40 +268,6 @@
 
 				</section>
 
-
-
-			<section data-transition="none">
-				<h3>Etat de l'art</h3>
-
-				<img class="overview" src="images/stateofart/step1.png" alt="step1">
-
-				<aside class="notes">
-
-					a la fin parler que c'est 2 styles différents: Textures et Marques
-				</aside>
-			</section>
-
-			<section data-transition="none">
-				<h3>Etat de l'art</h3>
-
-				<img class="overview" src="images/stateofart/step2.png" alt="step1">
-
-				<aside class="notes">
-
-					a la fin parler que c'est 2 styles différents: Textures et Marques
-				</aside>
-			</section>
-
-			<section data-transition="none">
-				<h3>Etat de l'art</h3>
-
-				<img class="overview" src="images/stateofart/step3.png" alt="step1">
-
-				<aside class="notes">
-
-					a la fin parler que c'est 2 styles différents: Textures et Marques
-				</aside>
-			</section>
 
 			<section data-transition="none">
 				<h3>Etat de l'art</h3>
@@ -383,31 +317,15 @@
 			</section>
 
 			<section>
-				<h3>Conclusion état de l'art</h3>
+				<h3>Notre approche</h3>
 
 				<ul>
-					<li class="fragment">Espace image avec G-buffer</li>
 					<li class="fragment">Marques</li>
 					<li class="fragment">Guidées par une texture</li>
-					<li class="fragment">Contrôle par l'artiste</li>
-					<li class="fragment">Cohérence temporelle</li>
+					<li class="fragment">Espace image avec G-buffer</li>
 				</ul>
 			</section>
 
-
-			<section class="sommaire">
-				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
-				<h2>Sommaire</h2>
-
-				<ol>
-					<li>Introduction</li>
-					<li>État de l'art</li>
-					<li style="color:red; font-weight: bold;">Stylisation procedurale</li>
-					<li>Résultats</li>
-					<li>Conclusion</li>
-				</ol>
-
-			</section>
 
 			<section>
 				<h2>Étape du compositing</h2>
@@ -486,48 +404,7 @@
 				</aside>
 			</section>
 
-			<section>
-				<h3>Splatting</h3>
 
-				<img style="width:auto; height: 50%;" src="images/splatting/order_independant_transparency.png" alt="principe order indepdant transparency">
-
-			</section>
-
-
-
-			<section>
-				<h3>Mélange des marques</h3>
-
-				<p>Fonction "over" utilisé par [Schmid, 2011]</p>
-
-				<svg class="fragment" width="750px" height="60px" >
-					<text font-size="20" x="400" y="30">$ \text{c1  et c2 des couleurs de marques differentes} $</text>
-				</svg>
-
-				<svg class="fragment" width="600px" height="60px" >
-					<text font-size="20" x="300" y="30">$ depth(c1) \leq depth(c2) $</text>
-				</svg>
-
-				<svg class="fragment" width="750px" height="60px" >
-					<text font-size="20" x="375" y="30">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
-				</svg>
-
-				<svg class="fragment" width="800px" height="120px" >
-				<text font-size="18" x="400" y="60">$ couleur = \\ (c1.rgb*c1.alpha + c2.rgb*(1.-c1.alpha)*c2.alpha)/alpha $</text>
-				</svg>
-
-				<svg class="fragment" width="750px" height="60px" >
-				<text font-size="18" x="400" y="30">$ resultat = vec4(couleur, alpha) $</text>
-				</svg>
-
-
-				<aside class="notes">
-					frontToBackOver: du plus proche au plus loin
-
-
-				</aside>
-
-			</section>
 
 
 				<section>
@@ -547,8 +424,8 @@
 
 				<div class="horizontal espaces">
 					<div class="vertical">
-						<img src="images/noises/WorleyNoise3d.png" alt="worleyd">
-						<span class="captionImage">Texture 3D</span>
+						<img src="images/noises/notrenoise.png" alt="worleyd">
+						<span class="captionImage">Point d'ancrage</span>
 					</div>
 				</div>
 
@@ -586,9 +463,11 @@
 			<section>
 				<h3>Notre texture</h3>
 
+				<p>TODO:ajouter sigmoid pour montrer remapping</p>
+
 				<div class="horizontal espaces">
 					<div class="vertical">
-						<img src="images/noises/notrenoise.png" alt="worley2d">
+						<img src="images/noises/WorleyNoise3d.png" alt="worley2d">
 					</div>
 
 					<div class="vertical">
@@ -598,7 +477,7 @@
 
 
 				<aside class="notes">
-					j'ai inversé les valeurs et ajouté un contrôle sur la taille des regions
+					re-mapping des valeurs pour pouvoir controler ça
 				</aside>
 
 			</section>
@@ -683,20 +562,67 @@
 			</section>
 
 
+			<section>
+				<h2>Splatting</h2>
+
+				<img src="images/Overview2.png" alt="overview">
+
+				<aside class="notes">
+					On commence par expliquer le splatting
+
+				</aside>
+			</section>
+
+			<section>
+				<h3>Splatting</h3>
+				<p>A changer</p>
+
+				<img style="width:auto; height: 50%;" src="images/splatting/order_independant_transparency.png" alt="principe order indepdant transparency">
+
+			</section>
 
 
-			<section class="sommaire">
-				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
-				<h2>Sommaire</h2>
 
-				<ol>
-					<li>Introduction</li>
-					<li >État de l'art</li>
-					<li>Stylisation procedurale</li>
-					<li style="color:red; font-weight: bold;">Résultats</li>
-					<li>Conclusion</li>
-				</ol>
+			<section>
+				<h3>Mélange des marques</h3>
 
+				<p>A changer</p>
+
+				<p>Fonction "over" utilisé par [Schmid, 2011]</p>
+
+				<svg class="fragment" width="750px" height="60px" >
+					<text font-size="20" x="400" y="30">$ \text{c1  et c2 des couleurs de marques differentes} $</text>
+				</svg>
+
+				<svg class="fragment" width="600px" height="60px" >
+					<text font-size="20" x="300" y="30">$ depth(c1) \leq depth(c2) $</text>
+				</svg>
+
+				<svg class="fragment" width="750px" height="60px" >
+					<text font-size="20" x="375" y="30">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
+				</svg>
+
+				<svg class="fragment" width="800px" height="120px" >
+				<text font-size="18" x="400" y="60">$ couleur = \\ (c1.rgb*c1.alpha + c2.rgb*(1.-c1.alpha)*c2.alpha)/alpha $</text>
+				</svg>
+
+				<svg class="fragment" width="750px" height="60px" >
+				<text font-size="18" x="400" y="30">$ resultat = vec4(couleur, alpha) $</text>
+				</svg>
+
+
+				<aside class="notes">
+					frontToBackOver: du plus proche au plus loin
+
+
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Paramêtres utilisateur</h3>
+
+				<p>TODO</p>
 			</section>
 
 			<section>
@@ -734,20 +660,6 @@
 
 			</section>
 
-
-			<section class="sommaire">
-				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
-				<h2>Sommaire</h2>
-
-				<ol>
-					<li>Introduction</li>
-					<li >État de l'art</li>
-					<li>Stylisation procedurale</li>
-					<li>Résultats</li>
-					<li style="color:red; font-weight: bold;">Conclusion</li>
-				</ol>
-
-			</section>
 
 			<section>
 				<h2>Limitations</h2>
