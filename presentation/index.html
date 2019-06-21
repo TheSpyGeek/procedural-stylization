@@ -239,238 +239,67 @@
 
 				<!-- TEXTURE BASED -->
 				<section>
-					<h3>Primitive de dessin</h3>
+					<section>
 
-					<div class="horizontal styles" style="margin-top:10%">
-						<div class="vertical">
-							<span class="captionImage">A base de textures</span>
-							<img class="fragment" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
-							<img class="fragment" src="images/texturemapping/gimped.png" alt="mapped">
+						<h3>Primitives de dessin</h3>
+
+						<div class="horizontal styles" style="margin-top:10%">
+							<div class="vertical">
+								<span class="captionImage">A base de textures</span>
+								<img class="fragment" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
+								<img class="fragment" src="images/texturemapping/gimped.png" alt="mapped">
+							</div>
+
+							<div class="vertical">
+								<span class="captionImage">A base de marques</span>
+								<img data-src="images/slide_stroke based.jpg" alt="paitning">
+								<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
+							</div>
+
+
 						</div>
-
-						<div class="vertical">
-							<span class="captionImage">A base de marques</span>
-							<img data-src="images/slide_stroke based.jpg" alt="paitning">
-							<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
-						</div>
-
 						<aside class="notes">
 							texture mappé directement sur l'object
 							marques posées sur l'image à l'aide de point d'ancrage
 						</aside>
+					</section>
 
-					</div>
+					<section>
+						<h3>Point d'ancrage</h3>
+
+						<div class="horizontal styles">
+							<div class="vertical fragment">
+								<p>Espace objet</p>
+								<img src="images/ancrageMaillage.png" alt="ancrage maillage">
+								<span class="captionImage">OverCoat: an implicit canvas for 3D painting</span>
+							</div>
+
+							<div class="vertical fragment">
+								<p>Espace image</p>
+								<img src="images/point_distribution.png" alt="point distribution">
+							</div>
+
+						</div>
+
+					</section>
+
 
 
 				</section>
 
-				<section>
-					<h3>Etat de l'art</h3>
-
-					<table>
-						<thead>
-							<tr>
-								<th>Objet</th>
-								<th>Image</th>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td> <img style="width:300px; height:auto;" src="images/stylisation_example2.png" alt="overcoat marin">
-								<span class="captionImage">[Schmid et al,2011]</span>
-								</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr class="fragment">
-								<td>en espace objet</td>
-								<td>++</td>
-								<td>++</td>
-								<td>--</td>
-								<td>-</td>
-							</tr>
-							<tr class="fragment">
-								<td>en espace image</td>
-								<td>-</td>
-								<td>--</td>
-								<td>++</td>
-								<td>--</td>
-							</tr>
-
-							<tr class="fragment">
-								<td>À base de marques</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-							<tr class="fragment">
-								<td>en espace objet</td>
-								<td>++</td>
-								<td>++</td>
-								<td>+/-</td>
-								<td>+/-</td>
-							</tr>
-							<tr class="fragment">
-								<td>en espace image</td>
-								<td>-</td>
-								<td>--</td>
-								<td>++</td>
-								<td>+</td>
-							</tr>
-							<tr>
-
-							</tr>
-						</tbody>
-					</table>
-				</section>
-
-
-
-
-				<!-- MARKS BASED -->
-				<section>
-					<p class="partieNom">02. État de l'art</p>
-					<h3>Rendu à base de marques</h3>
-
-
-					<p>Principe: faire un rendu graphique à partir de dessin d'images 2D</p>
-
-					<div class="horizontal">
-
-						<div class="vertical">
-							<img data-src="images/slide_stroke based.jpg" alt="paitning">
-							<span class="captionImage">aglorithme d'Hertzmann pour styliser une image</span>
-						</div>
-
-						<div  class="vertical">
-							<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
-						</div>
-					</div>
-
-
-				</section>
-
-				<section>
-					<p class="partieNom">02. État de l'art</p>
-					<h3>Rendu à base de marques</h3>
-
-					<div class="horizontal styles">
-						<div class="vertical fragment">
-							<p>Espace objet</p>
-							<img src="images/ancrageMaillage.png" alt="ancrage maillage">
-							<span class="captionImage">OverCoat: an implicit canvas for 3D painting</span>
-						</div>
-
-						<div class="vertical fragment">
-							<p>Espace image</p>
-							<img src="images/point_distribution.png" alt="point distribution">
-						</div>
-
-					</div>
-
-				</section>
 
 
 			<section>
-				<h3>Rendu à base de marques</h3>
-				<p style="margin-top: 8%;">Examples</p>
+				<h3>Etat de l'art</h3>
 
-				<div class="horizontal ">
-					<div class="vertical fragment" style="margin-bottom: 10px;">
-						<p>Espace objet</p>
-						<img style="width:300px; height:auto;" src="images/stylisation_example2.png" alt="overcoat marin">
-						<span class="captionImage">OverCoat: an implicit canvas for 3D painting</span>
-					</div>
-
-					<div class="vertical fragment">
-						<p>Espace image</p>
-						<img style="width:auto; height:300px;" src="images/imageMarks.png" alt="rendering marks">
-
-						<span class="captionImage">From image parsing to painterly renering, [Zeng, 2009]</span>
-					</div>
-				</div>
-			</section>
-
-
-			<section>
-				<h3>Rendu à base de marques</h3>
-
-				<p>avantages et inconvénients</p>
-			</section>
-
-			<section>
-				<p class="partieNom">02. État de l'art</p>
-				<h3>Conclusion état de l'art</h3>
-
-				<table>
-					<thead>
-						<tr>
-							<th>Technique</th>
-							<th>Cohérence du mouvement</th>
-							<th>Continuité temporelle</th>
-							<th>Aspect 2D</th>
-							<th>Variété de style</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>À base de textures</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="fragment">
-							<td>en espace objet</td>
-							<td>++</td>
-							<td>++</td>
-							<td>--</td>
-							<td>-</td>
-						</tr>
-						<tr class="fragment">
-							<td>en espace image</td>
-							<td>-</td>
-							<td>--</td>
-							<td>++</td>
-							<td>--</td>
-						</tr>
-
-						<tr class="fragment">
-							<td>À base de marques</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="fragment">
-							<td>en espace objet</td>
-							<td>++</td>
-							<td>++</td>
-							<td>+/-</td>
-							<td>+/-</td>
-						</tr>
-						<tr class="fragment">
-							<td>en espace image</td>
-							<td>-</td>
-							<td>--</td>
-							<td>++</td>
-							<td>+</td>
-						</tr>
-						<tr>
-
-						</tr>
-					</tbody>
-				</table>
+				<p>inserer animations</p>
 
 				<aside class="notes">
-					C'est un problème non résolu. Personne n'a trouvé la solution parfaite car elle n'existe pas
 
+					a la fin parler que c'est 2 styles différents: Textures et Marques
 				</aside>
 			</section>
+
 
 			<section class="sommaire">
 				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
@@ -486,9 +315,26 @@
 
 			</section>
 
+			<section>
+				<h2>Étape du compositing</h2>
+
+				<ul>
+					<li class="fragment">informations sur la géometrie déjà rendu</li>
+					<li class="fragment">peut être intégrer dans des pipelines sans structure particulière</li>
+				</ul>
+
+				<aside class="notes">
+					avant de parler de notre solution
+
+					gain de temps
+
+					exemple: global illumination
+
+				</aside>
+			</section>
+
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h2>Vue d'ensemble</h2>
 
 				<img src="images/Overview2.png" alt="overview">
@@ -502,22 +348,7 @@
 				</aside>
 			</section>
 
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h2>Étape du compositing</h2>
 
-				<ul>
-					<li>informations sur la géometrie déjà rendu</li>
-					<li>peut être intégrer dans des pipelines sans structure particulière</li>
-				</ul>
-
-				<aside class="notes">
-					gain de temps
-
-					exemple: global illumination
-
-				</aside>
-			</section>
 
 
 
