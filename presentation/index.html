@@ -300,6 +300,17 @@
 				</aside>
 			</section>
 
+			<section>
+				<h3>Conclusion état de l'art</h3>
+
+				<ul>
+					<li class="fragment">Espace image avec G-buffer</li>
+					<li class="fragment">Marques</li>
+					<li class="fragment">Contrôle par l'artiste</li>
+					<li class="fragment">Cohérence temporelle</li>
+				</ul>
+			</section>
+
 
 			<section class="sommaire">
 				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
@@ -319,9 +330,27 @@
 				<h2>Étape du compositing</h2>
 
 				<ul>
+					<li>Espace image</li>
 					<li class="fragment">informations sur la géometrie déjà rendu</li>
 					<li class="fragment">peut être intégrer dans des pipelines sans structure particulière</li>
 				</ul>
+
+				<div class="horizontal styles">
+					<div class="vertical">
+						<span class="captionImage">Normales</span>
+						<img src="images/noises/Gbuffernormales.png" alt="normales">
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Positions</span>
+						<img src="images/noises/Gbufferposition.png" alt="positions">
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Profondeur</span>
+						<img src="images/noises/Gbufferprofondeur.png" alt="profondeur">
+					</div>
+				</div>
 
 				<aside class="notes">
 					avant de parler de notre solution
@@ -337,7 +366,7 @@
 			<section>
 				<h2>Vue d'ensemble</h2>
 
-				<img src="images/Overview2.png" alt="overview">
+				<img src="images/Overview.png" alt="overview">
 
 				<aside class="notes">
 					expliquer chaque étape
@@ -356,7 +385,6 @@
 
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h2>Bruits procéduraux</h2>
 
 				<p>Examples de bruits procéduraux</p>
@@ -657,12 +685,11 @@
 			</section>
 
 			<section>
-				<p class="partieNom">04. Résultats</p>
 				<h3>Résultats</h3>
 
 				<div class="horizontal">
 					<div class="vertical">
-						<span class="captionImage">Couleur</span>
+						<span class="captionImage">Fourrure en peinture digitale</span>
 						<video loop>
 						<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
 							Sorry, your browser doesn't support embedded videos.
@@ -670,7 +697,7 @@
 					</div>
 
 					<div class="vertical fragment">
-						<span class="captionImage">Bruit</span>
+						<span class="captionImage">Peinture au pinceaux</span>
 						<video loop>
 						<source data-src="images/resultats/painting.mp4" type="video/mp4">
 							Sorry, your browser doesn't support embedded videos.
@@ -678,13 +705,17 @@
 					</div>
 
 					<div class="vertical fragment">
-						<span class="captionImage">Résultat</span>
+						<span class="captionImage">Dessin à partir de feuilles</span>
 						<video loop>
 						<source data-src="images/resultats/leave1.mp4" type="video/mp4">
 							Sorry, your browser doesn't support embedded videos.
 						</video>
 					</div>
 				</div>
+
+				<aside class="notes">
+					présenter les résultats et ce qu'on voulait fire
+				</aside>
 
 			</section>
 
