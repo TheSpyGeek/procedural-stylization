@@ -19,6 +19,9 @@ section > h1, section > h2, section > h3 {
   text-align: center !important;
 }
 
+h2 {
+    font-size:80px;
+}
 
 .reveal section img {
     decoration: none;
@@ -52,7 +55,7 @@ section .partieNom {
 
 
 #titre {
-    font-size: 120px;
+    font-size: 100px;
 }
 
 .sommaire ol li::before {

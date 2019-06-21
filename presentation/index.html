@@ -34,6 +34,10 @@
 					<p id="max">Maxime Isnel</p>
 					<p id="supervisors">supervisé par Joëlle Thollot et Romain Vergne</p>
 
+					<img style="position: absolute; width:auto; height:200px; top:50%; left: 0%" src="images/boulepoil.png" alt="boulePoil">
+
+					<img style="position: absolute; width:auto; height:200px; top:50%; right: 0%" src="images/leaves02.png" alt="boulePoil">
+
 						<aside class="notes">
 							Ceci est un exemple de notes comme un rappel
 						</aside>
@@ -42,7 +46,7 @@
 
 
 				<section data-fullscreen class="sommaire">
-					<h2>Sommaire</h2>
+					<h3>Sommaire</h3>
 
 					<ol>
 						<li style="color:red; font-weight: bold;">Introduction</li>
@@ -54,11 +58,31 @@
 
 				</section>
 
+				<section data-fullscreen>
+					<h3>Synthèse d'image</h3>
+
+					<div class="horizontal styles">
+						<div class="vertical">
+							<span class="captionImage">photoréaliste</span>
+							<img src="images/realist_rendering.jpg" alt="réaliste">
+						</div>
+
+						<div class="vertical fragment">
+							<span class="captionImage">non photoréaliste</span>
+							<img src="images/dreams.jpg" alt="non réaliste">
+						</div>
+					</div>
+
+					<aside class="notes">
+						photoréaliste: principe de physique
+						non photoréaliste: expression d'un artiste
+					</aside>
+				</section>
+
 
 				<section data-fullscreen>
 
-					<p class="partieNom">01. Introduction</p>
-					<h2>La stylisation</h2>
+					<h3>Rendu non photoréaliste</h3>
 
 					<div class="horizontal styles" style="flex-wrap: wrap;">
 						<img src="images/styles/VanGogh.jpg" alt="van gogh">
@@ -72,21 +96,26 @@
 				</section>
 
 				<section data-fullscreen>
-					<h2>La stylisation</h2>
+					<h3>Notre stylisation</h3>
 
-					<p class="partieNom">01. Introduction</p>
 
-					<p>Notre but: donner des outils controlables aux artistes permettant de créer l'apparence souhaitée d'un object, tout en assurant un certaine cohérence durant une animations.</p>
+					<p>Notre but:</p>
+
+					<ul>
+						<li>Donner des outils pour styliser</li>
+						<li>Cohérence temporelle</li>
+					</ul>
 
 					<aside class="notes">
-						orienté Digital Painting
+						introduire les problèmes:
+							dure de reproduire des styles d'artiste
+							les animations
 					</aside>
 
 				</section>
 
-				<section>
+				<!-- <section>
 						<p class="partieNom">01. Introduction</p>
-						<!-- <h5>01. Introduction</h5> -->
 
 						<h2>La stylisation</h2>
 
@@ -97,12 +126,11 @@
 								Sorry, your browser doesn't support embedded videos.
 							</video>
 						</div>
-				</section>
+				</section> -->
 
 
 
 				<section>
-					<p class="partieNom">01. Introduction</p>
 					<h3>La cohérence temporelle</h3>
 
 					<p>[Bénard, 2011]:</p>
@@ -114,23 +142,26 @@
 					</ul>
 
 					<aside class="notes">
-						Si on touche a un truc les autres bouges en général.
+						problème bien poser par Pierre Bénard à partir de 3 contraintes
 					</aside>
 
 				</section>
 
 				<section>
-					<p class="partieNom">01. Introduction</p>
 					<h3>La continuité temporelle</h3>
 					<video loop>
 						<source data-src="videos/loving_vincent.mp4" type="video/mp4">
 						Sorry, your browser doesn't support embedded videos.
 					</video>
 					<span style="font-size: 25px;">Loving Vincent, 2017</span>
+
+					<aside class="notes">
+						parler de popping
+					</aside>
+
 				</section>
 
 				<section>
-					<p class="partieNom">01. Introduction</p>
 					<h3>La cohérence du mouvement</h3>
 
 					<div class="horizontal motion">
@@ -145,15 +176,25 @@
 						</video>
 					</div>
 
+					<aside class="notes">
+						problème du glissement
+							effet rideau de douche
+					</aside>
+
 				</section>
 
 				<section>
-					<p class="partieNom">01. Introduction</p>
 					<h3>L'aspect 2D</h3>
 					<video loop>
 						<source data-src="videos/.mp4" type="video/mp4">
 						Sorry, your browser doesn't support embedded videos.
 					</video>
+
+					<aside class="notes">
+						problème de la taille des marques posé par un artiste
+						foreshortening.
+						perspective
+					</aside>
 				</section>
 
 				<section class="sommaire">
@@ -171,7 +212,6 @@
 
 
 				<section>
-					<p class="partieNom">02. État de l'art</p>
 					<h3>Espaces de travail</h3>
 					<div class="horizontal espaces">
 						<div class="vertical fragment">
@@ -181,8 +221,17 @@
 
 						<div class="vertical fragment">
 							<p>Espace image</p>
-							<img src="images/imageSpaceExample.png" alt="normals">
+							<img src="images/imageSpacePixel.JPG" alt="normals">
+							<p>insérer G-buffer</p>
 						</div>
+
+
+						<aside class="notes">
+							objet: a la surface de l'objet
+							image: sur les pixels de l'image
+								mais on peut dans les images avoir des informations sur l'objet
+									mais sans savoir ce qu'il se passe derrière
+						</aside>
 					</div>
 
 
@@ -190,43 +239,96 @@
 
 				<!-- TEXTURE BASED -->
 				<section>
-					<p class="partieNom">02. État de l'art</p>
-					<h3>Rendu à base de textures</h3>
+					<h3>Primitive de dessin</h3>
 
-					<p>Principe: mapper une texture sur un objet.</p>
-
-					<div class="horizontal styles">
-							<img class="fragment" src="images/texturemapping/model.png" alt="model">
+					<div class="horizontal styles" style="margin-top:10%">
+						<div class="vertical">
+							<span class="captionImage">A base de textures</span>
 							<img class="fragment" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
 							<img class="fragment" src="images/texturemapping/gimped.png" alt="mapped">
-					</div>
-				</section>
-
-				<section>
-					<p class="partieNom">02. État de l'al'rt</p>
-					<h3>Rendu à base de textures</h3>
-
-					<div class="horizontal styles">
-						<div class="vertical fragment">
-							<p>Espace objet</p>
-							<img src="images/texturePierre.png" alt="texture Pierre">
-							<span class="captionImage">Dynamic Solid Textures for Real-Time Coherent Stylization</span>
 						</div>
 
-						<div class="vertical fragment">
-							<p>Espace image</p>
-							<img src="images/filtering.png" alt="filtrage">
-							<span class="captionImage">MNPR: a framework for real-time expressive non-photorealistic renderin</span>
+						<div class="vertical">
+							<span class="captionImage">A base de marques</span>
+							<img data-src="images/slide_stroke based.jpg" alt="paitning">
+							<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
 						</div>
 
 						<aside class="notes">
-							espace object: texture mapped directement sur l'image
-							espace image: filtrage
+							texture mappé directement sur l'object
+							marques posées sur l'image à l'aide de point d'ancrage
 						</aside>
 
 					</div>
 
+
 				</section>
+
+				<section>
+					<h3>Etat de l'art</h3>
+
+					<table>
+						<thead>
+							<tr>
+								<th>Objet</th>
+								<th>Image</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td> <img style="width:300px; height:auto;" src="images/stylisation_example2.png" alt="overcoat marin">
+								<span class="captionImage">[Schmid et al,2011]</span>
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr class="fragment">
+								<td>en espace objet</td>
+								<td>++</td>
+								<td>++</td>
+								<td>--</td>
+								<td>-</td>
+							</tr>
+							<tr class="fragment">
+								<td>en espace image</td>
+								<td>-</td>
+								<td>--</td>
+								<td>++</td>
+								<td>--</td>
+							</tr>
+
+							<tr class="fragment">
+								<td>À base de marques</td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr class="fragment">
+								<td>en espace objet</td>
+								<td>++</td>
+								<td>++</td>
+								<td>+/-</td>
+								<td>+/-</td>
+							</tr>
+							<tr class="fragment">
+								<td>en espace image</td>
+								<td>-</td>
+								<td>--</td>
+								<td>++</td>
+								<td>+</td>
+							</tr>
+							<tr>
+
+							</tr>
+						</tbody>
+					</table>
+				</section>
+
+
 
 
 				<!-- MARKS BASED -->
@@ -274,7 +376,6 @@
 
 
 			<section>
-				<p class="partieNom">02. État de l'art</p>
 				<h3>Rendu à base de marques</h3>
 				<p style="margin-top: 8%;">Examples</p>
 
