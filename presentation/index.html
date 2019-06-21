@@ -376,6 +376,9 @@
 				<aside class="notes">
 
 					a la fin parler que c'est 2 styles différents: Textures et Marques
+
+					texture: tendance a s'éttirer aux silhouettes
+					Marques: dépasser de l'objet, ressemble à ce que fait un artiste
 				</aside>
 			</section>
 
@@ -385,6 +388,7 @@
 				<ul>
 					<li class="fragment">Espace image avec G-buffer</li>
 					<li class="fragment">Marques</li>
+					<li class="fragment">Guidées par une texture</li>
 					<li class="fragment">Contrôle par l'artiste</li>
 					<li class="fragment">Cohérence temporelle</li>
 				</ul>
@@ -496,12 +500,12 @@
 
 				<p>Fonction "over" utilisé par [Schmid, 2011]</p>
 
-				<svg class="fragment" width="600px" height="60px" >
-					<text font-size="20" x="300" y="30">$ \text{c1  et c2 des couleurs} $</text>
+				<svg class="fragment" width="750px" height="60px" >
+					<text font-size="20" x="400" y="30">$ \text{c1  et c2 des couleurs de marques differentes} $</text>
 				</svg>
 
 				<svg class="fragment" width="600px" height="60px" >
-					<text font-size="20" x="300" y="30">$ depth(c1) < depth(c2) $</text>
+					<text font-size="20" x="300" y="30">$ depth(c1) \leq depth(c2) $</text>
 				</svg>
 
 				<svg class="fragment" width="750px" height="60px" >
@@ -509,23 +513,18 @@
 				</svg>
 
 				<svg class="fragment" width="800px" height="120px" >
-				<text font-size="18" x="400" y="60">$ couleur = \\ (c1.xyz*c1.alpha + c2.xyz*(1.-c1.alpha)*c2.alpha)/alpha $</text>
+				<text font-size="18" x="400" y="60">$ couleur = \\ (c1.rgb*c1.alpha + c2.rgb*(1.-c1.alpha)*c2.alpha)/alpha $</text>
 				</svg>
 
 				<svg class="fragment" width="750px" height="60px" >
 				<text font-size="18" x="400" y="30">$ resultat = vec4(couleur, alpha) $</text>
 				</svg>
 
-				<!-- <svg width="600px" height="200px" >
-					<text font-size="30">$ depth(c1) < depth(c2) $</text>
-				</svg>
-
-				<svg width="600px" height="200px" >
-				<text font-size="30">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
-				</svg> -->
 
 				<aside class="notes">
 					frontToBackOver: du plus proche au plus loin
+
+
 				</aside>
 
 			</section>
@@ -537,7 +536,7 @@
 					<img src="images/Overview3.png" alt="overview">
 
 					<aside class="notes">
-						On commence par expliquer le splatting
+						parler de pourquoi on va avoir besoin de générateur de point
 
 					</aside>
 				</section>
