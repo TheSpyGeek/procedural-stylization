@@ -388,11 +388,80 @@
 				</aside>
 			</section>
 
+			<section>
+				<h3>Splatting</h3>
+
+				<p>Le principe</p>
+
+				<img src="images/splatting/Splatting2.png" alt="splatting principe">
+
+
+
+				<aside class="notes">
+					coller des images sur l'écran
+					sur TOUS LES PIXELS
+				</aside>
+			</section>
+
+			<section>
+				<h3>Splatting</h3>
+
+				<img style="width:auto; height: 50%;" src="images/splatting/order_independant_transparency.png" alt="principe order indepdant transparency">
+
+			</section>
 
 
 
 			<section>
-				<h3>Générateur procédural de point</h3>
+				<h3>Mélange des marques</h3>
+
+				<p>Fonction "over" utilisé par [Schmid, 2011]</p>
+
+				<svg width="600px" height="100px" >
+					<text font-size="20" x="300" y="50">$ \text{c1  et c2 des couleurs} $</text>
+				</svg>
+
+				<svg width="600px" height="100px" >
+					<text font-size="20" x="300" y="50">$ depth(c1) < depth(c2) $</text>
+				</svg>
+
+				<svg width="750px" height="100px" >
+					<text font-size="20" x="375" y="50">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
+				</svg>
+
+				<svg width="800px" height="100px" >
+				<text font-size="18" x="400" y="50">$ couleur = vec4((c1.xyz*c1.alpha + c2.xyz*(1.-c1.alpha)*c2.alpha)/alpha, alpha) $</text>
+				</svg>
+
+				<!-- <svg width="600px" height="200px" >
+					<text font-size="30">$ depth(c1) < depth(c2) $</text>
+				</svg>
+
+				<svg width="600px" height="200px" >
+				<text font-size="30">$ alpha = c1.alpha+(1-c1.alpha)*c2.alpha $</text>
+				</svg> -->
+
+				<aside class="notes">
+					frontToBackOver: du plus proche au plus loin
+				</aside>
+
+			</section>
+
+
+				<section>
+					<h2>Générateur procédural de points</h2>
+
+					<img src="images/Overview3.png" alt="overview">
+
+					<aside class="notes">
+						On commence par expliquer le splatting
+
+					</aside>
+				</section>
+
+
+			<section>
+				<h3>Générateur procédural de points</h3>
 
 				<div class="horizontal espaces">
 					<div class="vertical">
@@ -455,13 +524,19 @@
 
 
 			<section>
-				<h3>Bruit de Worley</h3>
+				<h3>Notre texture</h3>
 
 				<p>Constance de la taille des point quand la fréquence du bruit change</p>
+
+				<video loop>
+				<source data-src="videos/fractal/frequencyChange.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
 			</section>
 
 			<section>
-				<h3>Bruit de Worley</h3>
+				<h3>Notre texture</h3>
 
 				<p>Constance de la taille des point quand la distance à la caméra change</p>
 
@@ -527,77 +602,6 @@
 
 
 
-			<section>
-				<h3>Splatting</h3>
-
-				<p>Qu'est ce que c'est?</p>
-
-				<div class="horizontal">
-					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting1.png" alt="splatting 1">
-					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting2.png" alt="splatting 2">
-					<img style="margin:3px; border:solid 1px black;" class="fragment" src="images/splatting/splatting3.png" alt="splatting 3">
-				</div>
-
-
-
-				<aside class="notes">
-					coller des images sur l'écran
-				</aside>
-			</section>
-
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Splatting</h3>
-
-				<img src="images/splatting/addition.png" alt="principe">
-
-			</section>
-
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Splatting</h3>
-
-				<div class="horizontal fractal">
-					<div class="vertical">
-						<span class="captionImage">Couleur</span>
-						<video loop>
-							<source data-src="images/splatting/color.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-					</div>
-
-					<div class="vertical">
-						<span class="captionImage">Bruit</span>
-						<video loop>
-						<source data-src="images/splatting/noise.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-					</div>
-
-					<div class="vertical">
-						<span class="captionImage">Résultat</span>
-						<video loop>
-						<source data-src="images/splatting/rendering.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-					</div>
-				</div>
-
-			</section>
-
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Splatting</h3>
-
-				<p>Le mélange des splats</p>
-
-				<ul>
-					<li>Profondeur</li>
-					<li>Du poids du bruits</li>
-					<li>Paramêtre utilisateur</li>
-				</ul>images
-
-			</section>
 
 			<section class="sommaire">
 				<!-- <img id="decoration1" src="images/slide.png" alt="deco"> -->
@@ -718,9 +722,9 @@
 		</div>
 
 		<script src="js/reveal.js"></script>
-		<script type="text/javascript" src="plugin/fullscreen/fullscreen.js">
+		<script type="text/javascript" src="plugin/fullscreen/fullscreen.js"></script>
+		<script type="text/javascript" src="plugin/mathsvg/math.js"></script>
 
-		</script>
 
 		<script>
 			// More info about config & dependencies:
