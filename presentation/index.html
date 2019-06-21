@@ -335,7 +335,7 @@
 					<li class="fragment">peut être intégrer dans des pipelines sans structure particulière</li>
 				</ul>
 
-				<div class="horizontal styles">
+				<div class="horizontal styles fragment">
 					<div class="vertical">
 						<span class="captionImage">Normales</span>
 						<img src="images/noises/Gbuffernormales.png" alt="normales">
@@ -377,103 +377,49 @@
 				</aside>
 			</section>
 
-
-
-
-
-
-
-
 			<section>
-				<h2>Bruits procéduraux</h2>
+				<h2>Splatting</h2>
 
-				<p>Examples de bruits procéduraux</p>
-
-				<div class="horizontal styles">
-					<div class="vertical">
-						<img src="images/noises/PerlinNoise2d.png" alt="perlin">
-						<span class="captionImage">Perlin</span>
-					</div>
-
-					<div class="vertical">
-						<img src="images/noises/GaborNoise2d.png" alt="gabor">
-						<span class="captionImage">Gabor</span>
-					</div>
-
-					<div class="vertical">
-						<img src="images/noises/WorleyNoise2d.jpg" alt="worley">
-						<span class="captionImage">Worley</span>
-					</div>
-				</div>
+				<img src="images/Overview2.png" alt="overview">
 
 				<aside class="notes">
-					utilisé en tant que texture en informatique graphique
-					calculés à partir de coordonées
-					contrable
+					On commence par expliquer le splatting
+
 				</aside>
 			</section>
 
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h2>Bruits procéduraux</h2>
 
-				<p>Examples d'usage de bruits procéduraux</p>
-
-				<div class="horizontal styles">
-					<div class="vertical fragment">
-						<img src="images/noises/marble.jpg" alt="marbre">
-						<span class="captionImage">Marbre</span>
-					</div>
-
-					<div class="vertical fragment">
-						<img src="images/fire.png" alt="gabor">
-						<span class="captionImage">Feu</span>
-					</div>
-
-					<div class="vertical fragment">
-						<img src="images/noises/wood.jpeg" alt="wood">
-						<span class="captionImage">Bois</span>
-					</div>
-				</div>
-
-
-			</section>
 
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Bruit de Worley</h3>
+				<h3>Générateur procédural de point</h3>
 
 				<div class="horizontal espaces">
 					<div class="vertical">
-						<img src="images/noises/WorleyNoise2d.jpg" alt="worley2d">
-						<span class="captionImage">2D</span>
-					</div>
-					<div class="vertical">
-						<img src="images/noises/WorleyNoise3d.png" alt="worley3d">
-						<span class="captionImage">3D</span>
+						<img src="images/noises/WorleyNoise3d.png" alt="worleyd">
+						<span class="captionImage">Texture 3D</span>
 					</div>
 				</div>
 
 
 				<aside class="notes">
-					ce qui se rapproche le plus des distribution de point
-					et controlable
-
+					ce qui se rapproche le plus d'une distribution de point
+					des zônes dont l'opacité va décroitre
 				</aside>
 
 			</section>
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Principe de calcul</h3>
+
+				<p>Utilisé par Worley [Worley, 1996]</p>
 
 				<div class="horizontal styles">
 					<img src="images/noises/worley_explain.png" alt="worley expliqué">
 
 					<ul>
 						<li class="fragment">grille</li>
-						<li class="fragment">point aléatoire</li>
+						<li class="fragment">points aléatoires</li>
 						<li class="fragment">distance avec le plus proche</li>
 					</ul>
 				</div>
@@ -486,51 +432,65 @@
 
 			</section>
 
+			<section>
+				<h3>Notre texture</h3>
+
+				<div class="horizontal espaces">
+					<div class="vertical">
+						<img src="images/noises/noisesModified.png" alt="worley2d">
+					</div>
+
+					<div class="vertical">
+						<img src="images/noises/noisesModified2.png" alt="worley2d">
+					</div>
+				</div>
+
+
+				<aside class="notes">
+					j'ai inversé les valeurs et ajouté un contrôle sur la taille des regions
+				</aside>
+
+			</section>
+
 
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Bruit de Worley</h3>
 
 				<p>Constance de la taille des point quand la fréquence du bruit change</p>
 			</section>
 
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Bruit de Worley</h3>
 
 				<p>Constance de la taille des point quand la distance à la caméra change</p>
+
+				<video loop>
+				<source data-src="videos/fractal/cameraZoom.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
 			</section>
 
 
+
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Fractalisation</h3>
 
-				<p style="margin-top: 5%">Pourquoi ?</p>
-
 				<div class="horizontal fractal">
-					<div class="vertical fragment">
+					<div class="vertical">
 						<video loop>
-						<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-
-						<video loop>
-							<source data-src="videos/fractal/without.mp4" type="video/mp4">
+							<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
 								Sorry, your browser doesn't support embedded videos.
 							</video>
 
-						</div>
+					<video loop>
+						<source data-src="videos/fractal/without.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
 
-				</div>
-			</section>
-
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Fractalisation</h3>
-
-				<div class="horizontal fractal">
+						<span class="captionImage">Without Fractalisation</span>
+					</div>
 
 					<div class="vertical">
 						<video loop>
@@ -546,42 +506,6 @@
 						<span class="captionImage">With Fractalisation</span>
 					</div>
 
-				</div>
-			</section>
-
-			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
-				<h3>Fractalisation</h3>
-
-				<div class="horizontal fractal">
-
-					<div class="vertical">
-						<video loop>
-							<source data-src="videos/fractal/noise_with.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-
-						<video loop>
-							<source data-src="videos/fractal/with.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-
-						<span class="captionImage">With Fractalisation</span>
-					</div>
-
-					<div class="vertical">
-						<video loop>
-						<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-
-						<video loop>
-							<source data-src="videos/fractal/without.mp4" type="video/mp4">
-								Sorry, your browser doesn't support embedded videos.
-							</video>
-
-							<span class="captionImage">Without Fractalisation</span>
-						</div>
 
 				</div>
 			</section>
@@ -594,11 +518,16 @@
 
 				<p>comment ça marche</p>
 
-				<img src="images/noises/fractalization_principle.png" alt="Fractalisation">
+				<video loop>
+					<source data-src="videos/fracalisationPrincipe.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
 			</section>
 
+
+
 			<section>
-				<p class="partieNom">03. Stylisation procedurale</p>
 				<h3>Splatting</h3>
 
 				<p>Qu'est ce que c'est?</p>
