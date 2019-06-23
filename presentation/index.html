@@ -183,37 +183,63 @@
 
 					</ul>
 
-					<p>insérer triangle Pierre Bénard</p>
+					<img src="images/temmporal_coherence.png" alt="triangle">
 
 					<aside class="notes">
 						problème bien poser par Pierre Bénard à partir de 3 contraintes
+						3 contraintes qui sont contradictoires
 					</aside>
 
 				</section>
 
 
 				<section>
-					<h3>Espaces de travail</h3>
-					<div class="horizontal espaces">
-						<div class="vertical fragment">
-							<p>Espace objet</p>
-							<img src="images/3dmesh.jpg" alt="3d mesh">
+					<section>
+
+						<h3>Espaces de travail</h3>
+						<div class="horizontal espaces">
+							<div class="vertical fragment">
+								<p>Espace objet</p>
+								<img src="images/3dmesh.jpg" alt="3d mesh">
+							</div>
+
+							<div class="vertical fragment">
+								<p>Espace image</p>
+								<img src="images/imageSpacePixel.JPG" alt="normals">
+							</div>
+
+
+							<aside class="notes">
+								objet: a la surface de l'objet
+								image: sur les pixels de l'image
+									mais on peut dans les images avoir des informations sur l'objet
+										mais sans savoir ce qu'il se passe derrière
+							</aside>
 						</div>
+					</section>
 
-						<div class="vertical fragment">
-							<p>Espace image</p>
-							<img src="images/imageSpacePixel.JPG" alt="normals">
-							<p>insérer G-buffer</p>
+					<section>
+						<h3>G-Buffer</h3>
+
+						<div class="horizontal styles fragment">
+							<div class="vertical">
+								<span class="captionImage">Normales</span>
+								<img src="images/noises/Gbuffernormales.png" alt="normales">
+							</div>
+
+							<div class="vertical">
+								<span class="captionImage">Positions</span>
+								<img src="images/noises/Gbufferposition.png" alt="positions">
+							</div>
+
+							<div class="vertical">
+								<span class="captionImage">Profondeur</span>
+								<img src="images/noises/Gbufferprofondeur.png" alt="profondeur">
+							</div>
 						</div>
+					</section>
 
 
-						<aside class="notes">
-							objet: a la surface de l'objet
-							image: sur les pixels de l'image
-								mais on peut dans les images avoir des informations sur l'objet
-									mais sans savoir ce qu'il se passe derrière
-						</aside>
-					</div>
 
 
 				</section>
