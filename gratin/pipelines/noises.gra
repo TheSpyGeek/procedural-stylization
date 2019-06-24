@@ -465,7 +465,7 @@
       <vector3f name="shift">
        <float val="0.0399995" name="0"/>
        <float val="-0.00515763" name="1"/>
-       <float val="1.3602" name="2"/>
+       <float val="2.37629" name="2"/>
       </vector3f>
       <IOData name="trackball">
        <quaternionf name="rotation">
@@ -611,7 +611,7 @@
        <vector3f name="currentVal">
         <float val="0.0399995" name="0"/>
         <float val="-0.00515763" name="1"/>
-        <float val="1.3602" name="2"/>
+        <float val="2.37629" name="2"/>
        </vector3f>
        <uint val="3" name="nbCurves"/>
        <IOData name="curve-0">
@@ -657,11 +657,11 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="8.64937" name="1"/>
+          <float val="2.38346" name="1"/>
          </vector2f>
          <vector2f name="controlPoint-1">
-          <float val="299" name="0"/>
-          <float val="1.3602" name="1"/>
+          <float val="295.856" name="0"/>
+          <float val="2.37629" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1356,18 +1356,22 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="100" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="3.6" name="currentVal"/>
+       <float val="2.98187" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
         <int val="0" name="leftType"/>
         <int val="0" name="rightType"/>
         <IOData name="interpolator">
-         <uint val="1" name="nbPoints"/>
+         <uint val="2" name="nbPoints"/>
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="3.6" name="1"/>
+          <float val="10.0406" name="1"/>
+         </vector2f>
+         <vector2f name="controlPoint-1">
+          <float val="299" name="0"/>
+          <float val="2.98187" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1448,7 +1452,7 @@
       <int val="0" name="intAttribMinVal"/>
       <int val="10" name="intAttribMaxVal"/>
       <IOData name="intAttribCurve">
-       <int val="1" name="currentVal"/>
+       <int val="0" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1459,7 +1463,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="1" name="1"/>
+          <float val="0" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -1471,7 +1475,7 @@
       <float val="0" name="floatAttribMinVal"/>
       <float val="0.1" name="floatAttribMaxVal"/>
       <IOData name="floatAttribCurve">
-       <float val="0.0283" name="currentVal"/>
+       <float val="0.0484" name="currentVal"/>
        <uint val="1" name="nbCurves"/>
        <IOData name="curve-0">
         <int val="0" name="interpType"/>
@@ -1482,7 +1486,7 @@
          <uint val="0" name="nbTangents"/>
          <vector2f name="controlPoint-0">
           <float val="0" name="0"/>
-          <float val="0.0283" name="1"/>
+          <float val="0.0484" name="1"/>
          </vector2f>
         </IOData>
        </IOData>
@@ -2401,10 +2405,10 @@
      <float val="28.16" name="1"/>
     </vector2f>
    </IOData>
-   <float val="6.23493" name="scale"/>
+   <float val="7.32019" name="scale"/>
    <vector2f name="offset">
-    <float val="283.854" name="0"/>
-    <float val="3625.22" name="1"/>
+    <float val="133.233" name="0"/>
+    <float val="4117.25" name="1"/>
    </vector2f>
    <IOData name="animation">
     <uint val="0" name="firstFrame"/>
@@ -2416,7 +2420,7 @@
   <IOData name="animationWidget">
    <vector2i name="animationWidgetSize">
     <int val="1920" name="0"/>
-    <int val="343" name="1"/>
+    <int val="201" name="1"/>
    </vector2i>
    <IOData name="timelineWidget"/>
   </IOData>
