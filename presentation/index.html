@@ -221,7 +221,7 @@
 					<section>
 						<h3>G-Buffer</h3>
 
-						<div class="horizontal styles fragment">
+						<div class="horizontal styles">
 							<div class="vertical">
 								<span class="captionImage">Normales</span>
 								<img src="images/noises/Gbuffernormales.png" alt="normales">
@@ -258,8 +258,8 @@
 
 							<div class="vertical fragment">
 								<span class="captionImage">A base de marques</span>
-								<img data-src="images/slide_stroke based.jpg" alt="paitning">
 								<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
+								<img data-src="images/slide_stroke based.jpg" alt="paitning">
 							</div>
 
 
@@ -449,10 +449,8 @@
 				<h3>Générateur procédural de points</h3>
 
 				<div class="horizontal espaces">
-					<div class="vertical">
-						<img src="images/noises/notrenoise.png" alt="worleyd">
-						<span class="captionImage">Point d'ancrage</span>
-					</div>
+					<img src="images/generation/points.png" alt="points">
+					<img src="images/generation/resultats.png" alt="results">
 				</div>
 
 
@@ -489,17 +487,11 @@
 			<section>
 				<h3>Notre texture</h3>
 
-				<p>TODO:ajouter sigmoid pour montrer remapping</p>
+				<div class="horizontal">
 
-				<div class="horizontal espaces">
-					<div class="vertical">
-						<img src="images/noises/WorleyNoise3d.png" alt="worley2d">
-					</div>
-
-					<div class="vertical">
-						<img src="images/noises/notrenoise2.png" alt="worley2d">
-					</div>
+					<img style="width: 650px; height:650px;" src="images/remap/sigmoid.png" alt="sigmoid">
 				</div>
+
 
 
 				<aside class="notes">
@@ -552,7 +544,7 @@
 							Sorry, your browser doesn't support embedded videos.
 						</video>
 
-						<span class="captionImage">Without Fractalisation</span>
+						<span class="captionImage">Sans fractalisation</span>
 					</div>
 
 					<div class="vertical">
@@ -566,7 +558,7 @@
 							Sorry, your browser doesn't support embedded videos.
 						</video>
 
-						<span class="captionImage">With Fractalisation</span>
+						<span class="captionImage">Avec fractalisation</span>
 					</div>
 
 
@@ -604,6 +596,12 @@
 				<p>A changer</p>
 
 				<img style="width:auto; height: 50%;" src="images/splatting/order_independant_transparency.png" alt="principe order indepdant transparency">
+
+
+				<aside class="notes">
+					pour avoir un style interressant
+						pas moyennage
+				</aside>
 
 			</section>
 
@@ -646,45 +644,119 @@
 			</section>
 
 			<section>
+				<h2>Vue d'ensemble</h2>
+
+				<img src="images/Overview.png" alt="overview">
+
+				<aside class="notes">
+					expliquer chaque étape
+
+					bruit procéduraux mappé en 3D pour pouvoir guider les marques en espace image.
+
+
+				</aside>
+			</section>
+
+			<section>
 				<h3>Paramêtres utilisateur</h3>
 
-				<p>TODO</p>
+				<ul>
+					<li>densité des marques</li>
+					<li>taille des zones d'ancrage</li>
+					<li>contenu des marques</li>
+					<li>taille des marques</li>
+					<li>orientation</li>
+					<li>transparence global</li>
+				</ul>
 			</section>
 
 			<section>
 				<h3>Résultats</h3>
 
 				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>poil</li>
+							<li>orientés avec les normales</li>
+							<li>taille petite avec variation</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/hair_splat.png" alt="hair">
+					</div>
+
 					<div class="vertical">
-						<span class="captionImage">Fourrure en peinture digitale</span>
 						<video loop>
-						<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-					</div>
-
-					<div class="vertical fragment">
-						<span class="captionImage">Peinture au pinceaux</span>
-						<video loop>
-						<source data-src="images/resultats/painting.mp4" type="video/mp4">
-							Sorry, your browser doesn't support embedded videos.
-						</video>
-					</div>
-
-					<div class="vertical fragment">
-						<span class="captionImage">Dessin à partir de feuilles</span>
-						<video loop>
-						<source data-src="images/resultats/leave1.mp4" type="video/mp4">
+							<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
 							Sorry, your browser doesn't support embedded videos.
 						</video>
 					</div>
 				</div>
-
 				<aside class="notes">
-					présenter les résultats et ce qu'on voulait fire
 				</aside>
 
 			</section>
+
+
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>coup de pinceaux</li>
+							<li>orientés avec les tangentes</li>
+							<li>taille grande</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/paint_splat.png" alt="hair">
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="images/resultats/painting.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+				<aside class="notes">
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>feuilles</li>
+							<li>orientés avec les normales</li>
+							<li>taille petite</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/leaves3.png" alt="hair">
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/leaves02.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+				<aside class="notes">
+				</aside>
+
+			</section>
+
+
 
 
 			<section>

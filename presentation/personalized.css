@@ -33,7 +33,7 @@ h2 {
 
 section .partieNom {
     position: absolute;
-    top: 0;
+    top: 0;resultats
     left: 0;
 }
 
@@ -140,4 +140,9 @@ td {
 .fractal .vertical video {
     width: auto;
     height: 270px;
+}
+
+
+.resultats ul li {
+    font-size: 35px;
 }
