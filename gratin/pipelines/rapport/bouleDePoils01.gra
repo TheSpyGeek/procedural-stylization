@@ -1614,7 +1614,7 @@
       <float name="floatAttribMinVal" val="0"/>
       <float name="floatAttribMaxVal" val="6.28319"/>
       <IOData name="floatAttribCurve">
-       <float name="currentVal" val="0.207345"/>
+       <float name="currentVal" val="0.194779"/>
        <uint name="nbCurves" val="1"/>
        <IOData name="curve-0">
         <int name="interpType" val="0"/>
@@ -5696,8 +5696,8 @@
    </IOData>
    <float name="scale" val="9.209"/>
    <vector2f name="offset">
-    <float name="0" val="1300.75"/>
-    <float name="1" val="6086.73"/>
+    <float name="0" val="1484.93"/>
+    <float name="1" val="1675.62"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>

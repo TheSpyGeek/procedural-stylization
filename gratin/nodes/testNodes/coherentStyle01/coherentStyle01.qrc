@@ -1,6 +1,0 @@
- <!DOCTYPE RCC><RCC version="1.0">
- <qresource>
-      <file alias="CNSPLAT.vert">coherentStyle01-splatting.vert</file>
-      <file alias="CNSPLAT.frag">coherentStyle01-splatting.vert</file>
- </qresource>
- </RCC>
