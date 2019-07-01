@@ -9,3 +9,4 @@
 * splats procéduraux
 * aquarelle avec du filtrage après stylisation
 * comparaison avec une distribution de points (question Pierre B)
+* shading sur chaque poil
