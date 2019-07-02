@@ -30,6 +30,7 @@ mkdir build
 cd build
 cmake .. && make
 ```
+
 * add the path ```gratin/nodes/proceduralStyle/build/nodes/lib``` and add ```gratin/nodes/proceduralStyle/nodes/customs/``` (Tools >> Manage node paths... >> Add path)
 * Note: the node in ```Gratin``` is in the stylization folder
 
@@ -39,7 +40,7 @@ cmake .. && make
 
 * pipeline with all function usefull: ```gratin/pipelines/romain/romainCleanPipeline01.gra```
 * with the fractal noise ```gratin/pipelines/romain/romain-fractalization.gra```
-* test ahir rendering: ```gratin/pipelines/romain/bouleDePoils01.gra```
+* test hair rendering: ```gratin/pipelines/romain/bouleDePoils01.gra```
 
 
 * the splats used are in the folder: ```gratin/data/imgs/```
@@ -66,6 +67,6 @@ cmake .. && make
 
 5. Open http://localhost:8000 to view your presentation
 
-You can change the port by using ```npm start -- --port=8001.```
+You can change the port by using ```npm start --port=8001.```
 
-6. In the slide press 's' to display presentator view
+6. In the slides press 's' to display presentator view
