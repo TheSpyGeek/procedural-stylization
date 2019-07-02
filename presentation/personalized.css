@@ -1,0 +1,148 @@
+
+.reveal.slide .slides > section, .reveal.slide .slides > section > section {
+  min-height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  position: absolute !important;
+  top: 0 !important;
+  align-items: center !important;
+  width: 100% !important;
+}
+section > h1, section > h2, section > h3 {
+  position: absolute !important;
+  top: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+}
+
+h2 {
+    font-size:80px;
+}
+
+.reveal section img {
+    decoration: none;
+    border: none;
+    margin:0;
+    background: none;
+    box-shadow: none;
+}
+
+section .partieNom {
+    position: absolute;
+    top: 0;resultats
+    left: 0;
+}
+
+#max {
+    position: absolute;
+    bottom: 20%;
+}
+
+#supervisors {
+    position: absolute;
+    bottom: 5%;
+}
+
+.imageMedium {
+    width: auto;
+    height: 250px;
+}
+
+
+.overview {
+    height: 580px;
+
+}
+
+.aspect img {
+    width: auto;
+    height: 270px;
+    margin: 0 5px;
+}
+
+
+
+.sommaire ol {
+    /* list-style-type: value; */
+}
+
+
+#titre {
+    font-size: 100px;
+}
+
+.sommaire ol li::before {
+}
+
+
+#decoration1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 300px;
+    height: auto;
+}
+
+
+.vertical {
+        display: flex;
+        flex-direction: column;
+        margin:10px;
+}
+
+.horizontal {
+    display: flex;
+    justify-content: center;
+}
+
+.styles {
+    margin-top: 5%;
+}
+
+.styles img {
+    decoration:none;
+    border:none;
+    width: auto;
+    height: 250px;
+    margin: 10px !important;
+}
+
+.espaces img {
+    width: auto;
+    height: 400px;
+    margin: 5px;
+}
+
+
+.motion video {
+    width: auto;
+    height: 350px;
+    margin: 10px;
+}
+
+.captionImage {
+    font-size: 20px !important;
+}
+
+
+th {
+    font-size: 30px;
+}
+
+td {
+    font-size: 25px;
+}
+
+.fractal .vertical video {
+    width: auto;
+    height: 270px;
+}
+
+
+.resultats ul li {
+    font-size: 35px;
+}

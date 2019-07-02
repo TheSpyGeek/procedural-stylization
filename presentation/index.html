@@ -1,0 +1,872 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Presentation stylisation procedurale</title>
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+
+
+		<link rel="stylesheet" href="personalized.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+
+			<div class="slides">
+				<section >
+					<h2 id="titre">Stylisation implicite de scènes 3D à l'étape du compositing</h2>
+					<p id="max">Maxime Isnel</p>
+					<p id="supervisors">supervisé par Joëlle Thollot et Romain Vergne</p>
+
+					<img style="position: absolute; width:auto; height:200px; top:50%; left: 0%" src="images/boulepoil.png" alt="boulePoil">
+
+					<img style="position: absolute; width:auto; height:200px; top:50%; right: 0%" src="images/leaves02.png" alt="boulePoil">
+
+						<aside class="notes">
+							Ceci est un exemple de notes comme un rappel
+						</aside>
+
+				</section>
+
+				<section >
+					<h3>Synthèse d'image</h3>
+
+					<div class="horizontal styles">
+						<div class="vertical">
+							<span class="captionImage">photoréaliste</span>
+							<img src="images/realist_rendering.jpg" alt="réaliste">
+						</div>
+
+						<div class="vertical">
+							<span class="captionImage">non photoréaliste</span>
+							<img src="images/dreams.jpg" alt="non réaliste">
+						</div>
+					</div>
+
+					<aside class="notes">
+						synthèse d'image créer des images à l'informatiquement
+						photoréaliste: principe de physique
+						non photoréaliste: expression d'un artiste
+					</aside>
+				</section>
+
+
+				<section >
+
+					<h3>Rendu non photoréaliste</h3>
+
+					<div class="horizontal styles" style="flex-wrap: wrap;">
+						<img src="images/styles/VanGogh.jpg" alt="van gogh">
+						<img src="images/styles/stippling.jpg" alt="stippling">
+						<img src="images/styles/fur.jpeg" alt="fur">
+						<img src="images/styles/watercolor.jpg" alt="aquarelle">
+					</div>
+
+					<aside class="notes">
+						la variété de style
+						des petits elements qui stylise
+					</aside>
+
+
+				</section>
+
+				<section >
+					<h3>Notre stylisation</h3>
+
+
+					<p>Notre but:</p>
+
+					<ul>
+						<li>Donner des outils pour styliser</li>
+						<li>Variété de styles</li>
+						<li>Animer les scènes</li>
+					</ul>
+
+					<aside class="notes">
+						introduire les problèmes:
+							dure de reproduire des styles d'artiste
+							les animations
+					</aside>
+
+				</section>
+
+
+
+				<section>
+					<h3>La continuité temporelle</h3>
+					<video loop muted>
+						<source data-src="videos/loving_vincent.mp4" type="video/mp4">
+						Sorry, your browser doesn't support embedded videos.
+					</video>
+					<span style="font-size: 25px;">Loving Vincent, 2017</span>
+
+					<aside class="notes">
+						parler de popping
+					</aside>
+
+				</section>
+
+				<section>
+					<h3>La cohérence du mouvement</h3>
+
+					<div class="horizontal motion">
+						<video loop>
+							<source data-src="videos/spot_stylised2.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+							</video>
+						<video loop>
+							<source data-src="videos/spot_stylised.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+					</div>
+
+					<aside class="notes">
+						du coup si on place nos petits elements sur l'image...
+					</aside>
+
+				</section>
+
+				<section>
+					<h3>L'aspect 2D</h3>
+
+					<div class="horizontal aspect">
+
+
+							<img src="images/resultats/3d.png" alt="3d">
+							<img class="" src="images/resultats/painting.png" alt="painting">
+
+
+					</div>
+
+					<div class="horizontal aspect">
+						<img src="images/resultats/3d2.png" alt="3d">
+
+						<img class="" src="images/resultats/painting2.png" alt="painting">
+					</div>
+
+
+
+					<aside class="notes">
+						problème de la taille des marques posé par un artiste
+						foreshortening.
+						perspective
+					</aside>
+				</section>
+
+				<section>
+					<h3>La cohérence temporelle</h3>
+
+					<p>[Bénard et al, 2011]:</p>
+
+					<ul>
+						<li>Continuité temporelle</li>
+						<li>Cohérence du mouvement</li>
+						<li>Aspect 2D</li>
+
+
+					</ul>
+
+					<img style="width:auto; height:200px;" src="images/temporal_coherence.png" alt="triangle">
+
+					<aside class="notes">
+						problème bien poser par Pierre Bénard à partir de 3 contraintes
+						3 contraintes qui sont contradictoires
+					</aside>
+
+				</section>
+
+
+				<section>
+					<section>
+
+						<h3>Espaces de travail</h3>
+						<div class="horizontal espaces">
+							<div class="vertical fragment">
+								<p>Espace objet</p>
+								<img src="images/3dmesh.jpg" alt="3d mesh">
+							</div>
+
+							<div class="vertical fragment">
+								<p>Espace image</p>
+								<img src="images/imageSpacePixel.JPG" alt="normals">
+							</div>
+
+
+							<aside class="notes">
+								objet: a la surface de l'objet
+								image: sur les pixels de l'image
+									mais on peut dans les images avoir des informations sur l'objet
+										mais sans savoir ce qu'il se passe derrière
+							</aside>
+						</div>
+					</section>
+
+					<section>
+						<h3>G-Buffer</h3>
+
+						<div class="horizontal styles">
+							<div class="vertical">
+								<span class="captionImage">Normales</span>
+								<img src="images/splatting/normales.png" alt="normales">
+							</div>
+
+							<div class="vertical">
+								<span class="captionImage">Positions</span>
+								<img src="images/splatting/positions.png" alt="positions">
+							</div>
+
+							<div class="vertical">
+								<span class="captionImage">Profondeur</span>
+								<img src="images/splatting/profondeur.png" alt="profondeur">
+							</div>
+						</div>
+					</section>
+
+
+
+
+				</section>
+
+				<section>
+					<section>
+
+						<h3>Primitives de dessin</h3>
+
+						<div class="horizontal" style="margin-top:10%">
+							<div class="vertical fragment">
+								<span class="captionImage">A base de textures</span>
+								<img class="imageMedium" style="border:solid 1px black;" src="images/texturemapping/texture.png" alt="texture">
+								<img class="imageMedium" src="images/texturemapping/texture_mapped.png" alt="mapped">
+							</div>
+
+							<div class="vertical fragment">
+								<span class="captionImage">A base de marques</span>
+								<img style="border:solid 1px black; width: auto; height:250px;" src="images/stroke1.png" alt="stroke">
+								<img style="width: auto; height:250px" data-src="images/slide_stroke based.jpg" alt="paitning">
+							</div>
+
+
+						</div>
+						<aside class="notes">
+							cohérence mouvement: ancré sur l'objet
+							Aspect 2D: placé sur un plan 2D
+							continuité temporelle: une texture est un tout != marques
+						</aside>
+					</section>
+
+					<section>
+						<h3>Point d'ancrage</h3>
+
+						<div class="horizontal styles">
+							<div class="vertical fragment">
+								<p>Espace objet</p>
+								<img src="images/ancrageMaillage.png" alt="ancrage maillage">
+								<span class="captionImage">[Schmid et al, 2011]</span>
+							</div>
+
+							<div class="vertical fragment">
+								<p>Espace image</p>
+								<img src="images/point_distribution.png" alt="point distribution">
+							</div>
+
+						</div>
+
+					</section>
+
+
+
+				</section>
+
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step4.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step5.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step6.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+				</aside>
+			</section>
+
+			<section data-transition="none">
+				<h3>Etat de l'art</h3>
+
+				<img class="overview" src="images/stateofart/step7.png" alt="step1">
+
+				<aside class="notes">
+
+					a la fin parler que c'est 2 styles différents: Textures et Marques
+
+					texture: tendance a s'éttirer aux silhouettes
+					Marques: dépasser de l'objet, ressemble à ce que fait un artiste
+				</aside>
+			</section>
+
+			<section>
+				<h3>Notre approche</h3>
+
+				<ul>
+					<li class="fragment">Marques</li>
+					<li class="fragment">Guidées par une texture</li>
+					<li class="fragment">Espace image avec G-buffer</li>
+				</ul>
+			</section>
+
+
+			<section>
+				<h2>Étape du compositing</h2>
+
+				<ul>
+					<li>Espace image</li>
+					<li class="fragment">informations sur la géometrie déjà rendue</li>
+					<li class="fragment">peut être intégrée dans des pipelines sans structure particulière</li>
+				</ul>
+
+				<div class="horizontal styles">
+					<div class="vertical">
+						<span class="captionImage">Normales</span>
+						<img src="images/splatting/normales.png" alt="normales">
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Positions</span>
+						<img src="images/splatting/positions.png" alt="positions">
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Profondeur</span>
+						<img src="images/splatting/profondeur.png" alt="profondeur">
+					</div>
+				</div>
+
+				<aside class="notes">
+					avant de parler de notre solution
+
+					gain de temps
+
+					exemple: global illumination
+
+					utilisé dans jeux vidéo / films
+
+				</aside>
+			</section>
+
+
+			<section>
+				<h2>Vue d'ensemble</h2>
+
+				<img style="width:650px; height:auto;" src="images/Overview.png" alt="overview">
+
+				<aside class="notes">
+					expliquer chaque étape
+
+					bruit procéduraux mappé en 3D pour pouvoir guider les marques en espace image.
+
+
+				</aside>
+			</section>
+
+			<section>
+				<h2>Splatting</h2>
+
+				<img style="width:650px; height:auto;" src="images/Overview2.png" alt="overview">
+
+				<aside class="notes">
+					On commence par expliquer le splatting
+
+				</aside>
+			</section>
+
+			<section>
+				<h3>Splatting</h3>
+
+				<p>Le principe</p>
+
+				<img src="images/splatting/Splatting2.png" alt="splatting principe">
+
+				<img class="fragment" style="border:solid 1px black; position:absolute; top:20%; left:20%; width:500px; height:500px;" src="images/splatting/allpixels.png" alt="all pixels">
+
+				<aside class="notes">
+					coller des images sur l'écran
+					sur TOUS LES PIXELS
+				</aside>
+			</section>
+
+
+
+
+				<section>
+					<h2>Générateur procédural</h2>
+
+					<img style="width:650px; height:auto;" src="images/Overview3.png" alt="overview">
+
+					<aside class="notes">
+						parler de pourquoi on va avoir besoin de générateur de point
+
+					</aside>
+				</section>
+
+
+			<section>
+				<h3>Générateur procédural de points</h3>
+
+				<div class="horizontal espaces">
+					<img src="images/generation/points.png" alt="points">
+					<img src="images/generation/resultats.png" alt="results">
+				</div>
+
+
+				<aside class="notes">
+
+					point blanc controle l'opacité
+
+					parler des avantages
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Principe de calcul</h3>
+
+				<p>Utilisé par Worley [Worley, 1996]</p>
+
+				<div class="horizontal styles">
+					<img src="images/noises/worley_explain.png" alt="worley expliqué">
+
+					<ul>
+						<li class="fragment">grille 3D</li>
+						<li class="fragment">points aléatoires</li>
+						<li class="fragment">distance avec le plus proche</li>
+					</ul>
+				</div>
+
+				<aside class="notes">
+
+					expliquer que c'est la même chose avec en 3D
+
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Notre texture</h3>
+
+				<div class="horizontal">
+
+					<img style="width: 650px; height:650px;" src="images/remap/sigmoid.png" alt="sigmoid">
+				</div>
+
+
+
+				<aside class="notes">
+					re-mapping des valeurs pour pouvoir controler ça
+				</aside>
+
+			</section>
+
+
+
+			<section>
+				<h3>Notre texture</h3>
+
+
+				<p>Constance de la taille des point quand la fréquence du bruit change</p>
+
+				<video loop>
+				<source data-src="videos/fractal/frequencyChange.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
+			</section>
+
+			<section>
+				<h3>Notre texture</h3>
+
+				<p>Constance de la taille des point quand la distance à la caméra change</p>
+
+				<video loop>
+				<source data-src="videos/fractal/cameraZoom.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
+			</section>
+
+
+
+			<section>
+				<h3>Fractalisation</h3>
+
+				<div class="horizontal fractal">
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/fractal/noise_without.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+							</video>
+
+					<video loop>
+						<source data-src="videos/fractal/without.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<span class="captionImage">Sans fractalisation</span>
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/fractal/noise_with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<video loop>
+							<source data-src="videos/fractal/with.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+
+						<span class="captionImage">Avec fractalisation</span>
+					</div>
+
+
+				</div>
+			</section>
+
+
+
+			<section>
+				<h3>Fractalisation</h3>
+
+				<p>Principe</p>
+
+				<video loop>
+					<source data-src="videos/fracalisationPrincipe0.mp4" type="video/mp4">
+					Sorry, your browser doesn't support embedded videos.
+				</video>
+
+			</section>
+
+
+			<section>
+				<h2>Splatting</h2>
+
+				<img style="width:650px; height:auto;" src="images/Overview2.png" alt="overview">
+
+				<aside class="notes">
+					On commence par expliquer le splatting
+
+				</aside>
+			</section>
+
+			<section>
+				<h3>Splatting</h3>
+
+				<div class="horizontal">
+
+					<img style="border:solid black 1px; background-color: white; width: auto; height: 300px; margin-right:15px;" src="images/splatting/order-inde.png" alt="chevauchement">
+
+					<img class="fragment" style="height: 250px; width:auto;"src="images/splatting/depth_peeling.png" alt="tableau">
+
+				</div>
+
+				<aside class="notes">
+					pour avoir un style interressant
+						pas moyennage
+				</aside>
+
+			</section>
+
+
+
+			<section>
+				<h3>Mélange des marques</h3>
+
+
+				<p>Fonction "over" utilisé par [Schmid et al, 2011]</p>
+
+				<p>Soient deux fragments avec couleur et opacité: </p>
+
+				<!-- <svg class="fragment" width="400px" height="60px" >
+					<text font-size="20" x="200" y="30">$ (h_1,\alpha_1) $</text>
+				</svg> -->
+
+				<svg class="fragment" width="750px" height="60px" >
+					<text font-size="20" x="400" y="30">$  (h_1,\alpha_1) \text{ et } (h_2,\alpha_2) $</text>
+				</svg>
+
+				<svg class="fragment" width="850px" height="250px" >
+				<text font-size="22" x="425" y="125">$ (h_1,\alpha_1) \oplus (h_2,\alpha_2) =  (\frac{h_1 \alpha_1 + h_2 (1-\alpha_1) \alpha_2}{\alpha_1 + (1-\alpha_1)\alpha_2}, \alpha_1 + (1-\alpha_1)\alpha_2 ) $</text>
+				</svg>
+
+
+
+				<aside class="notes">
+					classique pour rendu a base de marque
+
+					frontToBackOver: du plus proche au plus loin
+					parler de la correction gamma sur chaque alpha
+
+
+				</aside>
+
+			</section>
+
+			<section>
+				<h2>Vue d'ensemble</h2>
+
+				<img style="width:650px; height:auto;" src="images/Overview.png" alt="overview">
+
+				<aside class="notes">
+					expliquer chaque étape
+
+					bruit procéduraux mappé en 3D pour pouvoir guider les marques en espace image.
+
+
+				</aside>
+			</section>
+
+			<section>
+				<h3>Paramêtres utilisateur</h3>
+
+				<ul>
+					<li>densité des marques</li>
+					<li>taille des zones d'ancrage</li>
+					<li>contenu des marques</li>
+					<li>taille des marques</li>
+					<li>orientation</li>
+					<li>transparence globale</li>
+				</ul>
+			</section>
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>poil</li>
+							<li>orientées avec les normales</li>
+							<li>taille petite avec variation</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/hair_splat.png" alt="hair">
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+				<aside class="notes">
+				</aside>
+
+			</section>
+
+
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>coup de pinceaux</li>
+							<li>orientées avec les tangentes</li>
+							<li>taille grande</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/paint_splat.png" alt="hair">
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="images/resultats/painting.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+				<aside class="notes">
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+					<div class="vertical resultats">
+
+						<ul>
+							<li>feuilles</li>
+							<li>orientées avec les normales</li>
+							<li>taille petite</li>
+
+						</ul>
+						<img style="margin-top: 15px;border:solid 1px black; width: 150px; height:150px;" src="images/splats/leaves3.png" alt="hair">
+					</div>
+
+					<div class="vertical">
+						<video loop>
+							<source data-src="videos/leaves02.mp4" type="video/mp4">
+								Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+				<aside class="notes">
+				</aside>
+
+			</section>
+
+			<section>
+				<h3>Résultats</h3>
+
+				<div class="horizontal">
+
+
+					<img src="images/amine_resultat.png" alt="resultat1">
+
+					<img style="margin-left:15px;" src="images/amine2.png" alt="resultat1">
+				</div>
+				<aside class="notes">
+					resultats d'Amine
+				</aside>
+
+			</section>
+
+
+
+
+			<section>
+				<h2>Limitations</h2>
+
+				<ul>
+					<li class="fragment">Aliasing</li>
+					<li class="fragment">continuité temporelle</li>
+				</ul>
+
+				<aside class="notes">
+					aliasing aux silhouttes
+
+				</aside>
+			</section>
+
+			<section>
+				<h2>Travaux futurs</h2>
+
+				<ul>
+					<li class="fragment">Objets déformables et scènes dynamiques</li>
+					<li class="fragment">Aspect des points d'ancrage</li>
+					<li class="fragment">Aspect des marques</li>
+				</ul>
+
+				<aside class="notes">
+					rappeler les contributions
+
+				</aside>
+			</section>
+
+			<section>
+				<h3>Conclusion</h3>
+
+				<div class="horizontal">
+					<div class="vertical">
+						<span class="captionImage">Fourrure en peinture digitale</span>
+						<video loop>
+						<source data-src="images/resultats/bouleFur.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Peinture au pinceaux</span>
+						<video loop>
+						<source data-src="images/resultats/painting.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+
+					<div class="vertical">
+						<span class="captionImage">Dessin à partir de feuilles</span>
+						<video loop>
+						<source data-src="images/resultats/leave1.mp4" type="video/mp4">
+							Sorry, your browser doesn't support embedded videos.
+						</video>
+					</div>
+				</div>
+
+				<aside class="notes">
+					présenter les résultats et ce qu'on voulait fire
+				</aside>
+
+			</section>
+
+
+
+
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+		<!-- <script type="text/javascript" src="plugin/fullscreen/fullscreen.js"></script> -->
+		<script type="text/javascript" src="plugin/mathsvg/math.js"></script>
+
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
