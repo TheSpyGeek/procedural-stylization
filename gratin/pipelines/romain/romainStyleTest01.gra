@@ -715,7 +715,7 @@
     <uint name="nbConnections-20-21" val="0"/>
     <bool name="nodeHasWidget-0" val="1"/>
     <IOData name="node-0">
-     <string name="filename" val="../../../../gratin-dev/trunk/build/data/objs/sphere.obj"/>
+     <string name="filename" val="../../../../gratin/data/objs/sphere.obj"/>
      <IOData name="camera">
       <int name="projType" val="0"/>
       <int name="rotType" val="0"/>
@@ -724,7 +724,7 @@
        <int name="1" val="512"/>
       </vector2i>
       <vector3f name="sceneCenter">
-       <float name="0" val="-3.03085e-05"/>
+       <float name="0" val="-3.03085e-5"/>
        <float name="1" val="-0.000244021"/>
        <float name="2" val="-0.00847389"/>
       </vector3f>
@@ -791,7 +791,7 @@
      <uint name="genericNbWidgets" val="0"/>
     </IOData>
     <IOData name="nodeWidget-0">
-     <uint name="nbChildren" val="1"/>
+     <uint name="nbChildren" val="4"/>
      <IOData name="childWidget-0">
       <bool name="trackballCameraKeyframed" val="1"/>
       <IOData name="trackballCameraAttribCurveQ">
@@ -932,6 +932,75 @@
       </IOData>
       <int name="projection" val="0"/>
       <int name="rotation" val="0"/>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-1">
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-2">
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
+      <uint name="nbChildren" val="0"/>
+     </IOData>
+     <IOData name="childWidget-3">
+      <bool name="floatAttribKeyframed" val="1"/>
+      <float name="floatAttribMinVal" val="0"/>
+      <float name="floatAttribMaxVal" val="6.28319"/>
+      <IOData name="floatAttribCurve">
+       <float name="currentVal" val="0"/>
+       <uint name="nbCurves" val="1"/>
+       <IOData name="curve-0">
+        <int name="interpType" val="0"/>
+        <int name="leftType" val="0"/>
+        <int name="rightType" val="0"/>
+        <IOData name="interpolator">
+         <uint name="nbPoints" val="1"/>
+         <uint name="nbTangents" val="0"/>
+         <vector2f name="controlPoint-0">
+          <float name="0" val="0"/>
+          <float name="1" val="0"/>
+         </vector2f>
+        </IOData>
+       </IOData>
+      </IOData>
       <uint name="nbChildren" val="0"/>
      </IOData>
     </IOData>
@@ -3224,7 +3293,7 @@
     </vector2f>
     <bool name="nodeHasWidget-18" val="1"/>
     <IOData name="node-18">
-     <string name="filename" val="../../../../../../home/vergne/projects/procedural-stylization/gratin/data/imgs/stroke_with_depth3.png"/>
+     <string name="filename" val="../../../../../vergne/projects/procedural-stylization/gratin/data/imgs/stroke_with_depth3.png"/>
      <vector2i name="size">
       <int name="0" val="512"/>
       <int name="1" val="512"/>
@@ -3317,7 +3386,7 @@
     </vector2f>
     <bool name="nodeHasWidget-20" val="1"/>
     <IOData name="node-20">
-     <string name="filename" val="../../../../../../home/vergne/projects/procedural-stylization/gratin/data/imgs/randomDots.png"/>
+     <string name="filename" val="../../../../../vergne/projects/procedural-stylization/gratin/data/imgs/randomDots.png"/>
      <vector2i name="size">
       <int name="0" val="512"/>
       <int name="1" val="512"/>
@@ -3333,7 +3402,7 @@
     </vector2f>
     <bool name="nodeHasWidget-21" val="1"/>
     <IOData name="node-21">
-     <string name="filename" val="../../../../../../home/vergne/projects/procedural-stylization/gratin/data/imgs/dot.png"/>
+     <string name="filename" val="../../../../../vergne/projects/procedural-stylization/gratin/data/imgs/dot.png"/>
      <vector2i name="size">
       <int name="0" val="512"/>
       <int name="1" val="512"/>
@@ -3348,10 +3417,10 @@
      <float name="1" val="28.16"/>
     </vector2f>
    </IOData>
-   <float name="scale" val="6.52582"/>
+   <float name="scale" val="10.5099"/>
    <vector2f name="offset">
-    <float name="0" val="2811.94"/>
-    <float name="1" val="1665.26"/>
+    <float name="0" val="-656.326"/>
+    <float name="1" val="4124.58"/>
    </vector2f>
    <IOData name="animation">
     <uint name="firstFrame" val="0"/>

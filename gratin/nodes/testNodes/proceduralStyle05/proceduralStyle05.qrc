@@ -1,6 +1,0 @@
- <!DOCTYPE RCC><RCC version="1.0">
- <qresource>
-      <file alias="CNSPLAT.vert">proceduralStyle05-splatting.vert</file>
-      <file alias="CNSPLAT.frag">proceduralStyle05-splatting.vert</file>
- </qresource>
- </RCC>
