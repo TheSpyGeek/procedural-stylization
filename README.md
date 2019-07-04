@@ -81,11 +81,11 @@ You can change the port by using ```npm start --port=8001.```
 
 # Common issues
 
-* [The pipeline does not open. The program segmentation fault.](The-pipeline-does-not-open-The-program-segmentation-fault)
+* [The pipeline does not open. The program segmentation fault.](#the-pipeline-does-not-open-the-program-segmentation-fault)
 
 ## The pipeline does not open. The program segmentation fault.
 
-Check if you have added the path to the compiled nodes (Tools >> Manage node paths...) See [section procedural nodes](#Compile-procedural-node)
+Check if you have added the path to the compiled nodes (Tools >> Manage node paths...) See [section procedural nodes](#compile-procedural-node)
 
 ## There is nothing displayed in all the nodes of the pipeline.
 
@@ -93,4 +93,4 @@ You have to load in the first node 'AdvancedGBuffers' of models. You have some m
 
 ## The last node of the pipeline 'stylization_vX' does not display anything.
 
-Check if you have changed the path of your shader in the ```stylization_vX..cpp``` to your path (as in the [section Compile procedural node](#Compile-procedural-node))
+Check if you have changed the path of your shader in the ```stylization_vX..cpp``` to your path (as in the [section Compile procedural node](#compile-procedural-node))
