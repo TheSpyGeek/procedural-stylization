@@ -14,12 +14,15 @@ This repository is about non-photorealistic rendering. Our goal was to stylize 3
 * ```rapport``` report files
 * ```Resultats``` somes results of our technique
 
-# Build gratin:
+
+# Compile
+
+## Build gratin:
 * install qt5, eigen and openexr libs
 * get source code: ```svn checkout https://scm.gforge.inria.fr/anonscm/svn/gratin/trunk```
 * ```cd trunk && mkdir build && cd build && cmake .. && make```
 
-# Compile procedural node
+## Compile procedural node
 * edit ```gratin/nodes/proceduralStyle/CMakeLists.txt```
 * modify the path so that it links to your gratin build directory
 * edit QString  of the node contained in the file <stylization_vX.cpp> to your path to this node
@@ -43,8 +46,12 @@ cmake .. && make
 * test hair rendering: ```gratin/pipelines/romain/bouleDePoils01.gra```
 
 
+## Models and splats
+
 * the splats used are in the folder: ```gratin/data/imgs/```
-* the models used are in the folder: ```gratin/data/models/``` but you can use your owns
+* the models used are in the folder: ```gratin/data/models/```
+
+**but you can use your owns**
 
 
 # Presentation use
@@ -70,3 +77,18 @@ cmake .. && make
 You can change the port by using ```npm start --port=8001.```
 
 6. In the slides press 's' to display presentator view
+
+
+# Common issues
+
+## The pipeline does not open. The program segmentation fault.
+
+Check if you have added the path to the compiled nodes (Tools >> Manage node paths...) See [section procedural nodes](#Compile-procedural-node)
+
+## There is nothing displayed in all the nodes of the pipeline.
+
+You have to load in the first node 'AdvancedGBuffers' of models. You have some models in the folder  ```gratin/data/models/```
+
+## The last node of the pipeline 'stylization_vX' does not display anything.
+
+Check if you have changed the path of your shader in the ```stylization_vX..cpp``` to your path (as in the [section Compile procedural node](#Compile-procedural-node))
