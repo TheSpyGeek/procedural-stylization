@@ -81,6 +81,8 @@ You can change the port by using ```npm start --port=8001.```
 
 # Common issues
 
+* [The pipeline does not open. The program segmentation fault.](The-pipeline-does-not-open-The-program-segmentation-fault)
+
 ## The pipeline does not open. The program segmentation fault.
 
 Check if you have added the path to the compiled nodes (Tools >> Manage node paths...) See [section procedural nodes](#Compile-procedural-node)
