@@ -41,10 +41,24 @@ cmake .. && make
 
 # Examples
 
-* pipeline with all function usefull: ```gratin/pipelines/romain/romainCleanPipeline01.gra```
-* with the fractal noise ```gratin/pipelines/romain/romain-fractalization.gra```
-* test hair rendering: ```gratin/pipelines/romain/bouleDePoils01.gra```
+* pipeline with all function usefull: ```gratin/pipelines/template/template1.gra```
 
+![](notes/pipelineExplain.png)
+
+### G-Buffer
+As input, there is the G-buffer containing the matrices of the camera, the positions, the normals, the tangents, the depth.
+
+
+### Color Map
+We can compute the color map. In our case, we use a simple shading and then with procedurals noises we modify it in inserting some variations.   
+
+### Anchor points
+
+The anchor points are computed in a node called "FractalizedWorley". In the example, we apply some variation to adapt these anchor points according to the normals of the object.
+
+### Splat
+
+The splat can be a 2d image loaded from the computer or it can be rendered as a texture. We use then a mipmap to avoid aliasing problem during the stylization.
 
 ## Models and splats
 
